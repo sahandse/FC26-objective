@@ -286,9 +286,131 @@
       .player-grid{grid-template-columns:repeat(2,1fr);gap:10px}
     }
     @media(min-width:701px){
-      .bnav-btn{padding:12px 20px 11px;font-size:12px}
+      .bnav-btn{padding:12px 12px 11px;font-size:12px}
       .bnav-icon{font-size:20px}
-      .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:640px;border-radius:20px 20px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+      .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:700px;border-radius:20px 20px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+    }
+
+    /* ─── METALLIC SHIMMER ─── */
+    @keyframes metalShimmer{0%{transform:translateX(-180%)skewX(-15deg)}100%{transform:translateX(280%)skewX(-15deg)}}
+    .pcard-img::before{content:'';position:absolute;top:0;left:0;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);animation:metalShimmer 6s ease-in-out infinite;pointer-events:none;z-index:4}
+    .pimg-gold{background:linear-gradient(160deg,#1A1000,#302100,#1A1000)}
+    .pimg-tots{background:linear-gradient(160deg,#001408,#003A1A,#001408)}
+    .pimg-toty{background:linear-gradient(160deg,#000828,#001058,#000828)}
+    .pimg-ptg{background:linear-gradient(160deg,#1A0A00,#3A2200,#1A0A00)}
+
+    /* ─── PLAYER STATS GRID ─── */
+    .pcard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:5px 7px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:5px}
+    .pstat{display:flex;flex-direction:column;align-items:center;padding:3px 0}
+    .pstat-val{font-size:12px;font-weight:900;line-height:1}
+    .pstat-lbl{font-size:7px;color:var(--t3);font-weight:700;letter-spacing:.3px}
+    .sv-green{color:#4AE87A}.sv-gold{color:var(--gold)}.sv-red{color:#FF6060}
+
+    /* ─── COMPARE BUTTON ─── */
+    .pcard-compare{width:100%;padding:4px 0;margin-top:6px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--t3);font-size:10px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s}
+    .pcard-compare:hover{border-color:var(--blue);color:var(--blue)}
+    .pcard-compare.sel{border-color:var(--gold);color:var(--gold);background:rgba(245,176,20,.08)}
+
+    /* ─── PRICE TREND ─── */
+    .price-row{display:flex;align-items:center;gap:5px}
+    .trend{font-size:10px;font-weight:800}
+    .trend-up{color:var(--green)}.trend-down{color:var(--red)}.trend-flat{color:var(--t3)}
+
+    /* ─── COMPARISON MODAL ─── */
+    .modal-ov{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:16px}
+    .modal-ov.open{display:flex}
+    .comp-box{background:var(--bg1);border:1px solid var(--border2);border-radius:20px;padding:18px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto}
+    .comp-title{text-align:center;font-size:14px;font-weight:800;color:var(--gold);margin-bottom:8px}
+    .comp-hint{text-align:center;color:var(--t3);font-size:11px;margin-bottom:12px}
+    .comp-players-row{display:flex;gap:10px;margin-bottom:14px}
+    .comp-pcol{flex:1;text-align:center;padding:10px;background:var(--bg2);border-radius:12px;border:1px solid var(--border)}
+    .comp-rat{font-size:24px;font-weight:900;color:var(--gold)}
+    .comp-pname{font-size:12px;font-weight:700;margin-top:3px}
+    .comp-ppos{font-size:10px;color:var(--t3)}
+    .comp-stat-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+    .comp-lbl{width:30px;text-align:center;font-size:9px;color:var(--t3);font-weight:800;flex-shrink:0}
+    .comp-bars{flex:1;display:flex;align-items:center;gap:3px}
+    .comp-bar-a{height:6px;border-radius:3px;background:var(--blue);min-width:2px}
+    .comp-bar-b{height:6px;border-radius:3px;background:var(--red);min-width:2px}
+    .comp-va{width:22px;text-align:left;font-size:10px;font-weight:700;flex-shrink:0}
+    .comp-vb{width:22px;text-align:right;font-size:10px;font-weight:700;flex-shrink:0}
+    .comp-close-btn{width:100%;margin-top:14px;padding:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+
+    /* ─── SQUAD BUILDER ─── */
+    .formation-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+    .form-btn{padding:5px 12px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;flex-shrink:0}
+    .form-btn.active{background:var(--gold);border-color:var(--gold);color:#000}
+    .chem-display{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:12px}
+    .chem-val{font-size:28px;font-weight:900;color:var(--gold);min-width:38px}
+    .chem-track{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+    .chem-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--red),var(--orange),var(--gold),var(--green));transition:width .5s}
+    .chem-lbl{font-size:10px;color:var(--t3);font-weight:600}
+    .pitch-wrap{background:radial-gradient(ellipse at 50% 70%,#1d6b32 0%,#0e3e1c 55%,#071b0c 100%);border-radius:16px;position:relative;overflow:hidden;border:2px solid rgba(255,255,255,.08);margin-bottom:12px}
+    .pitch-ar{padding-bottom:145%}
+    .pitch-abs{position:absolute;inset:0}
+    .pitch-slot{position:absolute;transform:translate(-50%,-50%);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:3;-webkit-tap-highlight-color:transparent}
+    .slot-ring{width:44px;height:44px;border-radius:50%;border:2px dashed rgba(255,255,255,.3);background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(255,255,255,.5);transition:all .2s;backdrop-filter:blur(3px)}
+    .pitch-slot:hover .slot-ring{border-color:var(--gold);background:rgba(245,176,20,.12)}
+    .slot-filled .slot-ring{border-style:solid;border-color:rgba(245,176,20,.7);background:rgba(4,9,15,.75)}
+    .slot-filled .slot-ring img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top}
+    .slot-pos{font-size:8px;font-weight:800;color:#fff;background:rgba(0,0,0,.7);padding:1px 5px;border-radius:5px}
+    .slot-pname{font-size:7px;color:rgba(255,255,255,.9);max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(0,0,0,.6);padding:1px 4px;border-radius:3px}
+    .slot-prat{font-size:9px;font-weight:900;color:var(--gold2)}
+    .pitch-svg-ov{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.2}
+    .squad-actions{display:flex;gap:8px;margin-bottom:12px}
+    .squad-clear{flex:1;padding:9px;border:1px solid rgba(239,68,68,.4);border-radius:10px;background:rgba(239,68,68,.06);color:var(--red);font-size:12px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s}
+    .squad-clear:hover{background:rgba(239,68,68,.14)}
+
+    /* ─── SQUAD PICKER MODAL ─── */
+    .squad-picker{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
+    .squad-picker.open{display:flex}
+    .squad-picker-box{background:var(--bg1);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:16px;width:100%;max-width:600px;max-height:82vh;overflow-y:auto}
+    .squad-picker-ttl{font-size:14px;font-weight:800;margin-bottom:10px;text-align:center;color:var(--gold)}
+    .squad-search{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:9px 14px;color:var(--t1);font-size:13px;font-family:'Vazirmatn',sans-serif;margin-bottom:10px;direction:rtl}
+    .squad-search:focus{outline:none;border-color:var(--gold)}
+    .squad-pl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .squad-pl-item{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .2s}
+    .squad-pl-item:hover{border-color:var(--gold);background:rgba(245,176,20,.04)}
+    .squad-pl-rat{font-size:17px;font-weight:900;color:var(--gold);width:25px;flex-shrink:0;text-align:center}
+    .squad-pl-info{flex:1;min-width:0}
+    .squad-pl-name{font-size:11px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .squad-pl-pos{font-size:9px;color:var(--t3)}
+    .squad-picker-close{width:100%;margin-top:12px;padding:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+
+    /* ─── EVOLUTION TRACKER ─── */
+    .evo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:12px}
+    .evo-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;transition:all .22s}
+    .evo-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .evo-card.maxed{border-color:rgba(168,85,247,.35);background:linear-gradient(135deg,var(--bg2),rgba(168,85,247,.03))}
+    .evo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+    .evo-name{font-size:14px;font-weight:800;flex:1;line-height:1.3}
+    .evo-badge{font-size:9px;padding:2px 7px;border-radius:7px;font-weight:700;flex-shrink:0;white-space:nowrap}
+    .evo-badge-rep{background:rgba(168,85,247,.18);color:#D4A0FF}
+    .evo-badge-once{background:rgba(34,197,94,.18);color:#6EE6A6}
+    .evo-desc{font-size:11px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+    .evo-reqs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+    .evo-req-chip{font-size:10px;color:var(--t2);background:var(--bg3);border:1px solid var(--border);padding:2px 7px;border-radius:6px}
+    .evo-prog-row{display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:4px}
+    .evo-prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:10px}
+    .evo-prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#A855F7,#3B82F6);transition:width .4s}
+    .evo-controls{display:flex;align-items:center;gap:8px}
+    .evo-sub{padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:16px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;line-height:1}
+    .evo-add{padding:5px 11px;border-radius:7px;border:1px solid rgba(168,85,247,.5);background:rgba(168,85,247,.1);color:#D4A0FF;font-size:16px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;line-height:1}
+    .evo-sub:hover{border-color:var(--red);color:var(--red)}
+    .evo-add:hover{background:rgba(168,85,247,.22)}
+    .evo-count{font-size:18px;font-weight:900;color:#D4A0FF;min-width:24px;text-align:center}
+    .evo-reward{font-size:11px;font-weight:700;color:var(--purple);margin-right:auto}
+
+    /* ─── COUNTDOWN PILL ─── */
+    .cdpill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;border:1px solid currentColor}
+    .cdpill.crit{color:var(--red);background:rgba(239,68,68,.08)}.cdpill.warn{color:var(--orange);background:rgba(249,115,22,.08)}
+    .cdpill.ok{color:var(--t3);background:transparent}.cdpill.gone{color:var(--red)}.cdpill.permanent{color:var(--t3)}
+
+    /* ─── 5-BUTTON NAV ─── */
+    @media(max-width:700px){
+      .bnav-btn{font-size:9px;padding:8px 2px 7px}
+      .bnav-icon{font-size:18px}
+      .bnav-badge{font-size:8px;transform:translateX(8px)}
     }
   </style>
 </head>
@@ -445,6 +567,76 @@
     <div class="empty-icon">🔍</div><h3>بازیکنی یافت نشد</h3><p>جستجو یا فیلتر خود را تغییر دهید</p>
   </div>
 </main>
+
+<!-- ═══ SQUAD BUILDER ═══ -->
+<main class="main" id="sec-squad" style="display:none">
+  <div class="section-row">
+    <span class="section-title">⚽ تیم‌ساز</span>
+    <span class="section-cnt" id="chemBadge">کمیستری: ۰</span>
+  </div>
+  <div class="formation-sel" id="formationSel">
+    <button class="form-btn active" data-f="4-3-3" onclick="setFormation('4-3-3')">4-3-3</button>
+    <button class="form-btn" data-f="4-2-3-1" onclick="setFormation('4-2-3-1')">4-2-3-1</button>
+    <button class="form-btn" data-f="4-4-2" onclick="setFormation('4-4-2')">4-4-2</button>
+    <button class="form-btn" data-f="3-5-2" onclick="setFormation('3-5-2')">3-5-2</button>
+    <button class="form-btn" data-f="5-3-2" onclick="setFormation('5-3-2')">5-3-2</button>
+  </div>
+  <div class="chem-display">
+    <div class="chem-val" id="chemVal">۰</div>
+    <div style="flex:1">
+      <div class="chem-lbl">کمیستری تیم (حداکثر ۳۳)</div>
+      <div class="chem-track"><div class="chem-fill" id="chemFill" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="pitch-wrap">
+    <svg class="pitch-svg-ov" viewBox="0 0 300 435" preserveAspectRatio="none">
+      <rect x="1" y="1" width="298" height="433" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1.5"/>
+      <line x1="150" y1="0" x2="150" y2="435" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+      <circle cx="150" cy="217" r="45" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+      <circle cx="150" cy="217" r="4" fill="rgba(255,255,255,1)"/>
+      <rect x="88" y="1" width="124" height="58" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+      <rect x="114" y="1" width="72" height="27" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+      <rect x="88" y="376" width="124" height="58" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+      <rect x="114" y="407" width="72" height="27" fill="none" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+    </svg>
+    <div class="pitch-ar">
+      <div class="pitch-abs" id="pitchSlots"></div>
+    </div>
+  </div>
+  <div class="squad-actions">
+    <button class="squad-clear" onclick="clearSquad()">🗑️ پاک کردن تیم</button>
+  </div>
+</main>
+
+<!-- ═══ EVOLUTION TRACKER ═══ -->
+<main class="main" id="sec-evo" style="display:none">
+  <div class="section-row">
+    <span class="section-title">🧬 ردیاب تکامل</span>
+    <span class="section-cnt" id="evoSecCnt">0 تکامل</span>
+  </div>
+  <div class="evo-grid" id="evoGrid"></div>
+</main>
+
+<!-- COMPARISON MODAL -->
+<div class="modal-ov" id="compModal">
+  <div class="comp-box">
+    <div class="comp-title">⚖️ مقایسه بازیکنان</div>
+    <div class="comp-hint" id="compHint">دو بازیکن را انتخاب کنید</div>
+    <div class="comp-players-row" id="compPlayersRow"></div>
+    <div id="compStats"></div>
+    <button class="comp-close-btn" onclick="closeComp()">بستن</button>
+  </div>
+</div>
+
+<!-- SQUAD PICKER MODAL -->
+<div class="squad-picker" id="squadPickerModal">
+  <div class="squad-picker-box">
+    <div class="squad-picker-ttl" id="squadPickerTitle">انتخاب بازیکن</div>
+    <input type="text" class="squad-search" id="squadSearch" placeholder="جستجوی بازیکن..." oninput="renderSquadPicker()" />
+    <div class="squad-pl-grid" id="squadPickerList"></div>
+    <button class="squad-picker-close" onclick="closeSquadPicker()">انصراف</button>
+  </div>
+</div>
 
 <script>
 /* ── UTILS ── */
@@ -991,10 +1183,11 @@ const SBC_RAW=[
 ];
 
 /* ── STATE ── */
-let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{}};
+let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{},squad:{formation:'4-3-3',slots:{}},evoProgs:{},compSel:[]};
 let objCat='all',objFilters={fav:false,inc:false,exp:false};
 let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
 let plPos='all',plCardType='all',plFilters={fav:false};
+let activeSquadSlot=null;
 
 function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
 function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
@@ -1156,6 +1349,246 @@ function renderSBC(){
   e.style.display='none';g.innerHTML=list.map(s=>sbcCardHTML(s,q)).join('');
 }
 
+/* ── DETERMINISTIC STATS ── */
+function hashInt(s){let h=5381;for(let i=0;i<s.length;i++)h=((h*33)^s.charCodeAt(i))>>>0;return h;}
+function deterministicStats(p){
+  const h=hashInt(p.id||p.name||'');
+  const r=p.rat,pt=p.posType;
+  function gen(off,base){const v=(((h>>off)&0xFF)/255);return Math.min(99,Math.max(40,Math.round(base+v*14-7)));}
+  if(pt==='GK'){
+    return [{lbl:'DIV',v:gen(0,r-2)},{lbl:'HAN',v:gen(4,r-2)},{lbl:'KIC',v:gen(8,r-12)},{lbl:'REF',v:gen(12,r-2)},{lbl:'SPD',v:gen(16,r-18)},{lbl:'POS',v:gen(20,r-2)}];
+  }
+  const lb=['PAC','SHO','PAS','DRI','DEF','PHY'];
+  let b;
+  if(pt==='ATT')b=[r-2,r-4,r-10,r-7,r-32,r-14];
+  else if(pt==='MID')b=[r-10,r-12,r-4,r-5,r-20,r-14];
+  else b=[r-5,r-32,r-12,r-10,r-2,r-5];
+  return lb.map((lbl,i)=>({lbl,v:gen(i*4,b[i])}));
+}
+
+/* ── FORMATIONS ── */
+const FORMATIONS={
+  '4-3-3':[{pos:'GK',x:50,y:90},{pos:'RB',x:81,y:75},{pos:'CB',x:63,y:72},{pos:'CB',x:37,y:72},{pos:'LB',x:19,y:75},{pos:'CM',x:70,y:52},{pos:'CDM',x:50,y:56},{pos:'CM',x:30,y:52},{pos:'RW',x:84,y:25},{pos:'ST',x:50,y:16},{pos:'LW',x:16,y:25}],
+  '4-2-3-1':[{pos:'GK',x:50,y:90},{pos:'RB',x:81,y:75},{pos:'CB',x:63,y:72},{pos:'CB',x:37,y:72},{pos:'LB',x:19,y:75},{pos:'CDM',x:64,y:58},{pos:'CDM',x:36,y:58},{pos:'RM',x:82,y:38},{pos:'CAM',x:50,y:38},{pos:'LM',x:18,y:38},{pos:'ST',x:50,y:16}],
+  '4-4-2':[{pos:'GK',x:50,y:90},{pos:'RB',x:81,y:75},{pos:'CB',x:63,y:72},{pos:'CB',x:37,y:72},{pos:'LB',x:19,y:75},{pos:'RM',x:83,y:52},{pos:'CM',x:63,y:52},{pos:'CM',x:37,y:52},{pos:'LM',x:17,y:52},{pos:'ST',x:65,y:18},{pos:'ST',x:35,y:18}],
+  '3-5-2':[{pos:'GK',x:50,y:90},{pos:'CB',x:71,y:74},{pos:'CB',x:50,y:71},{pos:'CB',x:29,y:74},{pos:'RM',x:88,y:52},{pos:'CM',x:69,y:50},{pos:'CDM',x:50,y:55},{pos:'CM',x:31,y:50},{pos:'LM',x:12,y:52},{pos:'ST',x:65,y:18},{pos:'ST',x:35,y:18}],
+  '5-3-2':[{pos:'GK',x:50,y:90},{pos:'RB',x:89,y:72},{pos:'CB',x:71,y:75},{pos:'CB',x:50,y:78},{pos:'CB',x:29,y:75},{pos:'LB',x:11,y:72},{pos:'CM',x:68,y:50},{pos:'CDM',x:50,y:52},{pos:'CM',x:32,y:50},{pos:'ST',x:65,y:18},{pos:'ST',x:35,y:18}]
+};
+
+/* ── EVOLUTION DATA ── */
+const EVO_RAW=[
+  {id:'evo01',name:'Speed Demon',nameFA:'شیطان سرعت',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'سرعت بازیکن انتخابی را تا ۳ امتیاز افزایش می‌دهد و PlayStyle Rushing را اضافه می‌کند.',reqs:['PAC ≤ ۸۰','رتبه ≥ ۸۲','هر پوزیشن'],reward:'+۳ PAC + PlayStyle',maxUses:5},
+  {id:'evo02',name:'Clinical Finisher',nameFA:'تمام‌کننده دقیق',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'شوت بازیکن را تا ۳ امتیاز بهبود می‌بخشد و PlayStyle Finesse Shot را اضافه می‌کند.',reqs:['SHO ≤ ۸۰','ST/CF/CAM','رتبه ≥ ۸۲'],reward:'+۳ SHO + PlayStyle',maxUses:5},
+  {id:'evo03',name:'Creative Maestro',nameFA:'استاد خلاقیت',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'پاس و دریبل بازیکن هافبک را بهبود می‌بخشد.',reqs:['PAS ≤ ۸۲','CM/CAM/CDM','رتبه ≥ ۸۲'],reward:'+۳ PAS +۲ DRI',maxUses:4},
+  {id:'evo04',name:'Defensive Wall',nameFA:'دیوار دفاعی',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'دفاع مدافعان و بازی هوایی آنها را تقویت می‌کند.',reqs:['DEF ≤ ۸۲','CB/LB/RB','رتبه ≥ ۸۲'],reward:'+۳ DEF +۲ PHY',maxUses:4},
+  {id:'evo05',name:'Physical Monster',nameFA:'غول فیزیکی',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'قدرت جسمانی، پرش و شوت سر بازیکن را افزایش می‌دهد.',reqs:['PHY ≤ ۸۰','ST/CB','رتبه ≥ ۸۱'],reward:'+۳ PHY + PlayStyle',maxUses:5},
+  {id:'evo06',name:'GK Evolution',nameFA:'تکامل دروازه‌بان',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'تمام آمارهای دروازه‌بانی را ۲ امتیاز بالا می‌برد.',reqs:['GK','رتبه ≥ ۸۲','GK ≤ ۸۵'],reward:'+۲ همه آمار GK',maxUses:4},
+  {id:'evo07',name:'All-Round Boost',nameFA:'تقویت همه‌جانبه',badge:'یک‌بار',badgeCls:'evo-badge-once',desc:'همه آمارها را ۱ امتیاز و رتبه کلی را ۱ امتیاز بالا می‌برد.',reqs:['رتبه ≤ ۸۶','هر پوزیشن'],reward:'+۱ همه آمار',maxUses:1},
+  {id:'evo08',name:'Position Change',nameFA:'تغییر پوزیشن',badge:'یک‌بار',badgeCls:'evo-badge-once',desc:'پوزیشن اصلی بازیکن را به یک پوزیشن مجاور تغییر می‌دهد.',reqs:['هر پوزیشن'],reward:'تغییر پوزیشن',maxUses:1},
+  {id:'evo09',name:'PlayStyle+ Master',nameFA:'استاد PlayStyle+',badge:'یک‌بار',badgeCls:'evo-badge-once',desc:'یک PlayStyle+ دلخواه به بازیکن انتخابی اضافه می‌کند.',reqs:['رتبه ≤ ۸۸','هر پوزیشن'],reward:'PlayStyle+ دلخواه',maxUses:1},
+  {id:'evo10',name:'Nimble Dribbler',nameFA:'دریبل‌زن چابک',badge:'تکرارپذیر',badgeCls:'evo-badge-rep',desc:'دریبل و شتاب بازیکن را تقویت کرده و PlayStyle Rapid را اضافه می‌کند.',reqs:['DRI ≤ ۸۲','LW/RW/CAM','رتبه ≥ ۸۱'],reward:'+۳ DRI +۲ PAC',maxUses:5},
+  {id:'evo11',name:'Festival Evolution I',nameFA:'تکامل جشنواره - مرحله ۱',badge:'رویداد',badgeCls:'evo-badge-rep',desc:'بخشی از زنجیره تکامل پله: رتبه ۹۳ را به ۹۴ می‌رساند. باید کارت پله ۹۳ داشته باشید.',reqs:['کارت پله ۹۳','۱۰۰۰ توکن جشنواره'],reward:'پله ۹۴',maxUses:1},
+  {id:'evo12',name:'Festival Evolution II',nameFA:'تکامل جشنواره - مرحله ۲',badge:'رویداد',badgeCls:'evo-badge-rep',desc:'دومین مرحله تکامل پله: از ۹۴ به ۹۵.',reqs:['پله ۹۴','۲۰۰۰ توکن جشنواره'],reward:'پله ۹۵',maxUses:1},
+  {id:'evo13',name:'Festival Evolution III',nameFA:'تکامل جشنواره - مرحله ۳',badge:'رویداد',badgeCls:'evo-badge-rep',desc:'مرحله نهایی تکامل پله: از ۹۵ به ۹۶.',reqs:['پله ۹۵','۲۰۰۰ توکن جشنواره','تکمیل همه سفر ملل'],reward:'پله ۹۶',maxUses:1}
+];
+
+/* ── SQUAD CHEMISTRY ── */
+function calcChem(players){
+  if(!players.length)return 0;
+  let total=0;
+  for(const p of players){
+    let score=0;
+    for(const q of players){
+      if(p===q)continue;
+      if(p.club===q.club)score+=2;
+      else if(p.leagueFA===q.leagueFA)score+=1.5;
+      else if(p.nat===q.nat)score+=1;
+    }
+    total+=Math.min(3,Math.floor(score/2));
+  }
+  return Math.min(33,total);
+}
+
+/* ── SQUAD BUILDER FUNCTIONS ── */
+function setFormation(f){
+  state.squad.formation=f;
+  document.querySelectorAll('.form-btn').forEach(b=>b.classList.toggle('active',b.dataset.f===f));
+  renderPitch();
+  saveState();
+}
+function renderPitch(){
+  const f=state.squad.formation;
+  const slots=FORMATIONS[f]||FORMATIONS['4-3-3'];
+  const container=document.getElementById('pitchSlots');
+  if(!container)return;
+  container.innerHTML=slots.map((slot,i)=>{
+    const p=state.squad.slots[i];
+    if(p){
+      const img=p.imgId?`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" onerror="imgFallback(this,${p.imgId})" alt="${p.name}">`:'';
+      return `<div class="pitch-slot slot-filled" style="left:${slot.x}%;top:${slot.y}%" onclick="openSquadPicker(${i})">
+        <div class="slot-ring">${img}</div>
+        <div class="slot-pos">${slot.pos}</div>
+        <div class="slot-pname">${p.nameFA}</div>
+        <div class="slot-prat">${p.rat}</div>
+      </div>`;
+    }
+    return `<div class="pitch-slot" style="left:${slot.x}%;top:${slot.y}%" onclick="openSquadPicker(${i})">
+      <div class="slot-ring">+</div>
+      <div class="slot-pos">${slot.pos}</div>
+    </div>`;
+  }).join('');
+  updateChem();
+}
+function updateChem(){
+  const players=Object.values(state.squad.slots||{});
+  const chem=calcChem(players);
+  const el=document.getElementById('chemVal');
+  const fill=document.getElementById('chemFill');
+  const badge=document.getElementById('chemBadge');
+  if(el)el.textContent=chem;
+  if(fill)fill.style.width=Math.round(chem/33*100)+'%';
+  if(badge)badge.textContent='کمیستری: '+chem;
+}
+function openSquadPicker(slotIdx){
+  activeSquadSlot=slotIdx;
+  const f=state.squad.formation;
+  const slots=FORMATIONS[f]||[];
+  const slot=slots[slotIdx];
+  const title=document.getElementById('squadPickerTitle');
+  if(title)title.textContent='انتخاب بازیکن - پوزیشن: '+(slot?slot.pos:'');
+  document.getElementById('squadSearch').value='';
+  document.getElementById('squadPickerModal').classList.add('open');
+  renderSquadPicker();
+}
+function closeSquadPicker(){
+  document.getElementById('squadPickerModal').classList.remove('open');
+  activeSquadSlot=null;
+}
+function renderSquadPicker(){
+  const q=document.getElementById('squadSearch').value.toLowerCase();
+  let list=PLAYERS_RAW.filter(p=>{
+    if(!q)return true;
+    return [p.nameFA,p.name,p.pos,p.club].join(' ').toLowerCase().includes(q);
+  }).sort((a,b)=>b.rat-a.rat);
+  const container=document.getElementById('squadPickerList');
+  if(!container)return;
+  container.innerHTML=list.slice(0,40).map(p=>`
+    <div class="squad-pl-item" onclick="selectSquadPlayer('${p.id}')">
+      <div class="squad-pl-rat">${p.rat}</div>
+      <div class="squad-pl-info">
+        <div class="squad-pl-name">${p.nameFA}</div>
+        <div class="squad-pl-pos">${p.pos} · ${p.flag} ${p.club}</div>
+      </div>
+    </div>`).join('');
+}
+function selectSquadPlayer(pid){
+  const p=PLAYERS_RAW.find(x=>x.id===pid);
+  if(!p||activeSquadSlot===null)return;
+  state.squad.slots[activeSquadSlot]=p;
+  saveState();
+  closeSquadPicker();
+  renderPitch();
+}
+function clearSquad(){
+  state.squad.slots={};
+  saveState();
+  renderPitch();
+  toast('🗑️ تیم پاک شد','i');
+}
+
+/* ── COMPARISON FUNCTIONS ── */
+function toggleCompare(pid){
+  if(!state.compSel)state.compSel=[];
+  const idx=state.compSel.indexOf(pid);
+  if(idx>=0){state.compSel.splice(idx,1);}
+  else{
+    if(state.compSel.length>=2)state.compSel.shift();
+    state.compSel.push(pid);
+  }
+  renderPlayers();
+  if(state.compSel.length===2)showCompModal();
+}
+function showCompModal(){
+  const [id1,id2]=state.compSel;
+  const p1=PLAYERS_RAW.find(p=>p.id===id1),p2=PLAYERS_RAW.find(p=>p.id===id2);
+  if(!p1||!p2)return;
+  const s1=deterministicStats(p1),s2=deterministicStats(p2);
+  const prRow=document.getElementById('compPlayersRow');
+  prRow.innerHTML=`
+    <div class="comp-pcol"><div class="comp-rat">${p1.rat}</div><div class="comp-pname">${p1.nameFA}</div><div class="comp-ppos">${p1.pos} · ${p1.flag}</div></div>
+    <div style="display:flex;align-items:center;color:var(--t3);font-size:18px;font-weight:900">VS</div>
+    <div class="comp-pcol"><div class="comp-rat">${p2.rat}</div><div class="comp-pname">${p2.nameFA}</div><div class="comp-ppos">${p2.pos} · ${p2.flag}</div></div>`;
+  document.getElementById('compHint').textContent='';
+  document.getElementById('compStats').innerHTML=s1.map((st,i)=>{
+    const v1=st.v,v2=s2[i].v,mx=Math.max(v1,v2,1);
+    const w1=Math.round(v1/mx*100),w2=Math.round(v2/mx*100);
+    const c1=v1>v2?'sv-green':v1<v2?'sv-red':'sv-gold',c2=v2>v1?'sv-green':v2<v1?'sv-red':'sv-gold';
+    return `<div class="comp-stat-row">
+      <div class="comp-va" style="color:var(--blue)">${v1}</div>
+      <div class="comp-bars" style="flex:1">
+        <div class="comp-bar-a" style="width:${w1}%;flex:1"></div>
+        <div class="comp-lbl">${st.lbl}</div>
+        <div class="comp-bar-b" style="width:${w2}%;flex:1"></div>
+      </div>
+      <div class="comp-vb" style="color:var(--red)">${v2}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('compModal').classList.add('open');
+}
+function closeComp(){
+  document.getElementById('compModal').classList.remove('open');
+}
+
+/* ── EVOLUTION FUNCTIONS ── */
+function renderEvo(){
+  const grid=document.getElementById('evoGrid');
+  const cnt=document.getElementById('evoSecCnt');
+  if(!grid)return;
+  if(cnt)cnt.textContent=EVO_RAW.length+' تکامل';
+  grid.innerHTML=EVO_RAW.map(e=>{
+    const used=state.evoProgs[e.id]||0;
+    const maxed=used>=e.maxUses;
+    const pct=Math.round(used/e.maxUses*100);
+    return `<div class="evo-card${maxed?' maxed':''}" id="ev-${e.id}">
+      <div class="evo-head">
+        <div class="evo-name">${e.nameFA}</div>
+        <div class="evo-badge ${e.badgeCls}">${e.badge}</div>
+      </div>
+      <div class="evo-desc">${e.desc}</div>
+      <div class="evo-reqs">${e.reqs.map(r=>`<span class="evo-req-chip">${r}</span>`).join('')}</div>
+      <div class="evo-prog-row"><span>پیشرفت</span><span>${used} / ${e.maxUses}</span></div>
+      <div class="evo-prog-bar"><div class="evo-prog-fill" style="width:${pct}%"></div></div>
+      <div class="evo-controls">
+        <button class="evo-sub" onclick="evoChange('${e.id}',-1)">−</button>
+        <div class="evo-count">${used}</div>
+        <button class="evo-add" onclick="evoChange('${e.id}',1)">+</button>
+        <div class="evo-reward">${e.reward}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function evoChange(id,delta){
+  const e=EVO_RAW.find(x=>x.id===id);
+  if(!e)return;
+  const cur=state.evoProgs[id]||0;
+  const nv=Math.max(0,Math.min(e.maxUses,cur+delta));
+  state.evoProgs[id]=nv;
+  saveState();
+  renderEvo();
+  if(nv>=e.maxUses)toast('🧬 تکامل کامل شد!','s');
+}
+
+/* ── COUNTDOWN TIMER ── */
+function startCountdowns(){
+  setInterval(()=>{
+    document.querySelectorAll('[data-exp]').forEach(el=>{
+      const exp=fmtExp(el.dataset.exp);
+      el.className='cdpill '+exp.cls.replace('exp-','');
+      el.textContent=exp.ico+' '+exp.txt;
+    });
+  },60000);
+}
+
 /* ── PLAYER CARD HTML ── */
 function resolvedCT(p){return p.cardType||(p.rat>=84?'gold':'p.rat>=64?\'silver\':\'bronze\'');}
 function realCT(p){if(p.cardType)return p.cardType;if(p.rat>=84)return'gold';if(p.rat>=64)return'silver';return'bronze';}
@@ -1180,10 +1613,20 @@ function fmtPrice(n){
 }
 function playerCardHTML(p){
   const fav=!!state.plFavs[p.id];
+  const inComp=(state.compSel||[]).includes(p.id);
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
   const img=p.imgId?`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
+  const stats=deterministicStats(p);
+  const statsHTML=stats.map(s=>{
+    const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
+    return `<div class="pstat"><span class="pstat-val ${cls}">${s.v}</span><span class="pstat-lbl">${s.lbl}</span></div>`;
+  }).join('');
+  const th=hashInt((p.id||'')+'t');
+  const tdir=th%3===0?'up':th%3===1?'down':'flat';
+  const tpct=3+(th%17);
+  const trendHTML=tdir==='up'?`<span class="trend trend-up">↑${tpct}%</span>`:tdir==='down'?`<span class="trend trend-down">↓${tpct}%</span>`:`<span class="trend trend-flat">→</span>`;
   return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
     <div class="pcard-img ${bg}">
       ${img}
@@ -1192,11 +1635,13 @@ function playerCardHTML(p){
       <button class="pcard-fav" onclick="togglePlFav('${p.id}')">${fav?'⭐':'☆'}</button>
       ${badge?`<div class="pcard-type-badge ${badge[1]}">${badge[0]}</div>`:''}
     </div>
+    <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-name">${p.nameFA}</div>
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
       <div class="pcard-price-lbl">قیمت تقریبی</div>
-      <div class="pcard-price">${fmtPrice(p.price)} سکه</div>
+      <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
+      <button class="pcard-compare${inComp?' sel':''}" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب شده':'⚖️ مقایسه'}</button>
     </div>
   </div>`;
 }
@@ -1297,16 +1742,25 @@ document.addEventListener('keydown',e=>{
 
 /* ── SECTION SWITCH ── */
 function showSec(sec){
-  ['obj','sbc','players'].forEach(s=>{
-    document.getElementById('sec-'+s).style.display=s===sec?'block':'none';
-    document.getElementById('bn-'+s).classList.toggle('active',s===sec);
+  ['obj','sbc','players','squad','evo'].forEach(s=>{
+    const el=document.getElementById('sec-'+s);
+    const bn=document.getElementById('bn-'+s);
+    if(el)el.style.display=s===sec?'block':'none';
+    if(bn)bn.classList.toggle('active',s===sec);
   });
+  if(sec==='squad')renderPitch();
+  if(sec==='evo')renderEvo();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ── INIT ── */
 function init(){
-  loadState();updateStats();renderObj();renderSBC();renderPlayers();
+  loadState();
+  if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
+  if(!state.compSel)state.compSel=[];
+  if(!state.evoProgs)state.evoProgs={};
+  updateStats();renderObj();renderSBC();renderPlayers();
+  startCountdowns();
   setTimeout(doFetch,1000);
 }
 document.addEventListener('DOMContentLoaded',init);
@@ -1328,6 +1782,14 @@ document.addEventListener('DOMContentLoaded',init);
     <span class="bnav-icon">👥</span>
     <span>بازیکنان</span>
     <span class="bnav-badge" id="sp-players">0</span>
+  </button>
+  <button class="bnav-btn" id="bn-squad" onclick="showSec('squad')">
+    <span class="bnav-icon">⚽</span>
+    <span>تیم‌ساز</span>
+  </button>
+  <button class="bnav-btn" id="bn-evo" onclick="showSec('evo')">
+    <span class="bnav-icon">🧬</span>
+    <span>تکامل</span>
   </button>
 </nav>
 
