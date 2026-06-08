@@ -227,18 +227,49 @@
     mark.hl{background:rgba(245,176,20,.3);border-radius:2px;padding:0 2px;color:inherit}
 
     /* body padding for bottom nav */
-    body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+    body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+
+    /* ── PLAYERS SECTION ── */
+    .player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+    .pcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .22s;position:relative}
+    .pcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.6)}
+    .pcard.fav{border-color:rgba(245,176,20,.35)}
+    .pcard-img{position:relative;height:150px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+    .pimg-gold{background:linear-gradient(160deg,#1E1400,#2E2000)}
+    .pimg-tots{background:linear-gradient(160deg,#001A08,#003015)}
+    .pimg-special{background:linear-gradient(160deg,#130030,#240055)}
+    .pimg-toty{background:linear-gradient(160deg,#001030,#001E5A)}
+    .pimg-silver{background:linear-gradient(160deg,#181818,#282828)}
+    .pcard-img img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:145px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 8px rgba(0,0,0,.7))}
+    .pcard-rat{position:absolute;top:7px;right:9px;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9);line-height:1}
+    .pcard-posb{position:absolute;top:32px;right:10px;font-size:10px;font-weight:700;color:rgba(255,255,255,.7)}
+    .pcard-fav{position:absolute;top:6px;left:6px;background:none;border:none;cursor:pointer;font-size:17px;line-height:1;transition:transform .15s;-webkit-tap-highlight-color:transparent}
+    .pcard-fav:hover{transform:scale(1.25)}
+    .pcard-body{padding:10px 11px 12px}
+    .pcard-name{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pcard-club{font-size:11px;color:var(--t3);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pcard-price-lbl{font-size:9px;color:var(--t3);margin-bottom:1px}
+    .pcard-price{font-size:15px;font-weight:900;color:var(--gold)}
+    .pcard-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;margin-bottom:5px}
+
+    /* player section filter chips */
+    .pos-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;margin-bottom:12px;scrollbar-width:none}
+    .pos-tabs::-webkit-scrollbar{display:none}
+    .pos-tab{padding:6px 14px;border-radius:18px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Vazirmatn',sans-serif;flex-shrink:0}
+    .pos-tab:hover{border-color:var(--border2);color:var(--t1)}
+    .pos-tab.active{background:var(--gold);border-color:var(--gold);color:#000}
 
     @media(max-width:700px){
       .main{padding:12px 10px 16px}
       .grid{grid-template-columns:1fr}
       .logo-title{font-size:15px}
       .status-pill span:last-child{display:none}
+      .player-grid{grid-template-columns:repeat(2,1fr);gap:10px}
     }
     @media(min-width:701px){
-      .bnav-btn{padding:12px 24px 11px;font-size:12px}
+      .bnav-btn{padding:12px 20px 11px;font-size:12px}
       .bnav-icon{font-size:20px}
-      .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:500px;border-radius:20px 20px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+      .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:640px;border-radius:20px 20px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
     }
   </style>
 </head>
@@ -352,6 +383,38 @@
   </div>
 </main>
 
+<!-- ═══ PLAYERS SECTION ═══ -->
+<main class="main" id="sec-players" style="display:none">
+  <div class="search-wrap">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="plSearch" placeholder="جستجو: نام، باشگاه، ملیت، لیگ..." oninput="renderPlayers()" />
+  </div>
+  <div class="pos-tabs" id="posTabs">
+    <button class="pos-tab active" data-pos="all" onclick="setPos('all')">همه</button>
+    <button class="pos-tab" data-pos="ATT" onclick="setPos('ATT')">⚽ مهاجم</button>
+    <button class="pos-tab" data-pos="MID" onclick="setPos('MID')">🔄 هافبک</button>
+    <button class="pos-tab" data-pos="DEF" onclick="setPos('DEF')">🛡️ مدافع</button>
+    <button class="pos-tab" data-pos="GK" onclick="setPos('GK')">🧤 دروازه‌بان</button>
+  </div>
+  <div class="filter-row">
+    <button class="f-btn" id="pfb-fav" onclick="togglePF('fav')">⭐ علاقه‌مندی‌ها</button>
+    <select class="sort-sel" id="plSort" onchange="renderPlayers()">
+      <option value="rat">امتیاز: بالاترین</option>
+      <option value="price-h">قیمت: بالاترین</option>
+      <option value="price-l">قیمت: کمترین</option>
+      <option value="az">نام: الفبا</option>
+    </select>
+  </div>
+  <div class="section-row">
+    <span class="section-title" id="plSecTitle">همه بازیکنان</span>
+    <span class="section-cnt" id="plSecCnt"></span>
+  </div>
+  <div class="player-grid" id="plGrid"></div>
+  <div class="empty" id="plEmpty" style="display:none">
+    <div class="empty-icon">🔍</div><h3>بازیکنی یافت نشد</h3><p>جستجو یا فیلتر خود را تغییر دهید</p>
+  </div>
+</main>
+
 <script>
 /* ── UTILS ── */
 function daysFromNow(d){return new Date(Date.now()+d*864e5).toISOString();}
@@ -396,8 +459,70 @@ const PIMG={
   'Ederson':212835,'Trent Alexander-Arnold':220834,'Declan Rice':239904,
   'Martin Ødegaard':231680,'William Saliba':258128,'Achraf Hakimi':232464,
   'Marquinhos':176580,'Gianluigi Donnarumma':167495,'Eduardo Camavinga':263516,
-  'Phil Foden':222038,'Gabriel Martinelli':253819
+  'Phil Foden':222038,'Gabriel Martinelli':253819,
+  'Son Heung-min':236524,'Toni Kroos':182521,'Federico Valverde':233872,
+  'Bernardo Silva':211117,'Ruben Dias':238815,'Antoine Griezmann':194765,
+  'Cole Palmer':246469,'Florian Wirtz':258070,'Rodrygo':263529,
+  'Alexander Isak':253842,'Christopher Nkunku':248004,'Bruno Guimarães':248792,
+  'Granit Xhaka':193080,'Ferran Torres':254292,'Lionel Messi':158023,
+  'Dani Carvajal':178603,'Casemiro':200145,'Reece James':249710,
+  'Joao Cancelo':210035,'Leroy Sane':213559,'Kingsley Coman':207907,
+  'Niclas Füllkrug':208277,'Jonathan Tah':221458,'Sergio Ramos':199736
 };
+
+/* ── PLAYERS DATA ── */
+const PLAYERS_RAW=[
+  {id:'pl01',name:'Erling Haaland',nameFA:'اِرلینگ هالاند',rat:97,pos:'ST',posType:'ATT',nat:'نروژ',flag:'🇳🇴',club:'Man City',leagueFA:'لیگ برتر',price:245000,imgId:239085,sp:false},
+  {id:'pl02',name:'Kylian Mbappé',nameFA:'کیلیان امباپه',rat:97,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Real Madrid',leagueFA:'لالیگا',price:280000,imgId:231747,sp:false},
+  {id:'pl03',name:'Vinicius Jr',nameFA:'وینیسیوس جونیور',rat:95,pos:'LW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Real Madrid',leagueFA:'لالیگا',price:180000,imgId:270566,sp:false},
+  {id:'pl04',name:'Jude Bellingham',nameFA:'جود بلینگهام',rat:96,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Real Madrid',leagueFA:'لالیگا',price:220000,imgId:237692,sp:false},
+  {id:'pl05',name:'Rodri',nameFA:'رودری',rat:93,pos:'CDM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Man City',leagueFA:'لیگ برتر',price:155000,imgId:231323,sp:false},
+  {id:'pl06',name:'Lamine Yamal',nameFA:'لامین یامال',rat:92,pos:'RW',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:145000,imgId:263631,sp:false},
+  {id:'pl07',name:'Mohamed Salah',nameFA:'محمد صلاح',rat:91,pos:'RW',posType:'ATT',nat:'مصر',flag:'🇪🇬',club:'Liverpool',leagueFA:'لیگ برتر',price:115000,imgId:209331,sp:false},
+  {id:'pl08',name:'Pedri',nameFA:'پدری',rat:91,pos:'CM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:100000,imgId:231683,sp:false},
+  {id:'pl09',name:'Jamal Musiala',nameFA:'جمال موزیالا',rat:91,pos:'CAM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:105000,imgId:258751,sp:false},
+  {id:'pl10',name:'Florian Wirtz',nameFA:'فلوریان ویرتز',rat:89,pos:'CAM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:72000,imgId:258070,sp:false},
+  {id:'pl11',name:'Kevin De Bruyne',nameFA:'کوین دو بروین',rat:92,pos:'CM',posType:'MID',nat:'بلژیک',flag:'🇧🇪',club:'Man City',leagueFA:'لیگ برتر',price:120000,imgId:192985,sp:false},
+  {id:'pl12',name:'Phil Foden',nameFA:'فیل فودن',rat:90,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Man City',leagueFA:'لیگ برتر',price:82000,imgId:222038,sp:false},
+  {id:'pl13',name:'Bukayo Saka',nameFA:'بوکایو ساکا',rat:89,pos:'RW',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Arsenal',leagueFA:'لیگ برتر',price:68000,imgId:246669,sp:false},
+  {id:'pl14',name:'Martin Ødegaard',nameFA:'مارتین اودگارد',rat:89,pos:'CAM',posType:'MID',nat:'نروژ',flag:'🇳🇴',club:'Arsenal',leagueFA:'لیگ برتر',price:72000,imgId:231680,sp:false},
+  {id:'pl15',name:'Toni Kroos',nameFA:'تونی کروس',rat:91,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Real Madrid',leagueFA:'لالیگا',price:95000,imgId:182521,sp:false},
+  {id:'pl16',name:'Cole Palmer',nameFA:'کول پالمر',rat:88,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Chelsea',leagueFA:'لیگ برتر',price:62000,imgId:246469,sp:false},
+  {id:'pl17',name:'Kvaratskhelia',nameFA:'کواراتسخلیا',rat:88,pos:'LW',posType:'ATT',nat:'گرجستان',flag:'🇬🇪',club:'PSG',leagueFA:'لیگ ۱',price:55000,imgId:244726,sp:false},
+  {id:'pl18',name:'Rafael Leão',nameFA:'رافائل لِئائو',rat:88,pos:'LW',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'AC Milan',leagueFA:'سری‌آ',price:52000,imgId:244722,sp:false},
+  {id:'pl19',name:'Xavi Simons',nameFA:'زاوی سیمونز',rat:88,pos:'CAM',posType:'MID',nat:'هلند',flag:'🇳🇱',club:'PSG',leagueFA:'لیگ ۱',price:52000,imgId:257799,sp:false},
+  {id:'pl20',name:'Ousmane Dembélé',nameFA:'اوسمان دومبله',rat:87,pos:'RW',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'PSG',leagueFA:'لیگ ۱',price:42000,imgId:231443,sp:false},
+  {id:'pl21',name:'Son Heung-min',nameFA:'سون هیونگ-مین',rat:88,pos:'LW',posType:'ATT',nat:'کره جنوبی',flag:'🇰🇷',club:'Tottenham',leagueFA:'لیگ برتر',price:48000,imgId:236524,sp:false},
+  {id:'pl22',name:'Federico Valverde',nameFA:'فدریکو والورده',rat:88,pos:'CM',posType:'MID',nat:'اروگوئه',flag:'🇺🇾',club:'Real Madrid',leagueFA:'لالیگا',price:55000,imgId:233872,sp:false},
+  {id:'pl23',name:'Bernardo Silva',nameFA:'برناردو سیلوا',rat:89,pos:'CM',posType:'MID',nat:'پرتغال',flag:'🇵🇹',club:'Man City',leagueFA:'لیگ برتر',price:70000,imgId:211117,sp:false},
+  {id:'pl24',name:'Declan Rice',nameFA:'دکلان رایس',rat:87,pos:'CDM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Arsenal',leagueFA:'لیگ برتر',price:42000,imgId:239904,sp:false},
+  {id:'pl25',name:'Joshua Kimmich',nameFA:'یوشوا کیمیش',rat:89,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:68000,imgId:203460,sp:false},
+  {id:'pl26',name:'Bruno Fernandes',nameFA:'برونو فرناندز',rat:88,pos:'CAM',posType:'MID',nat:'پرتغال',flag:'🇵🇹',club:'Man Utd',leagueFA:'لیگ برتر',price:48000,imgId:212198,sp:false},
+  {id:'pl27',name:'Eduardo Camavinga',nameFA:'ادواردو کاماوینگا',rat:86,pos:'CM',posType:'MID',nat:'فرانسه',flag:'🇫🇷',club:'Real Madrid',leagueFA:'لالیگا',price:32000,imgId:263516,sp:false},
+  {id:'pl28',name:'Antoine Griezmann',nameFA:'آنتوان گریزمان',rat:88,pos:'CF',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Atlético Madrid',leagueFA:'لالیگا',price:52000,imgId:194765,sp:false},
+  {id:'pl29',name:'Rodrygo',nameFA:'رودریگو',rat:86,pos:'RW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Real Madrid',leagueFA:'لالیگا',price:35000,imgId:263529,sp:false},
+  {id:'pl30',name:'Alexander Isak',nameFA:'الکساندر ایساک',rat:87,pos:'ST',posType:'ATT',nat:'سوئد',flag:'🇸🇪',club:'Newcastle',leagueFA:'لیگ برتر',price:42000,imgId:253842,sp:false},
+  {id:'pl31',name:'Christopher Nkunku',nameFA:'کریستوفر نکونکو',rat:86,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Chelsea',leagueFA:'لیگ برتر',price:28000,imgId:248004,sp:false},
+  {id:'pl32',name:'Marcus Rashford',nameFA:'مارکوس رشفورد',rat:86,pos:'LW',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Man Utd',leagueFA:'لیگ برتر',price:28000,imgId:221015,sp:false},
+  {id:'pl33',name:'Diogo Jota',nameFA:'دیوگو ژوتا',rat:85,pos:'LW',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'Liverpool',leagueFA:'لیگ برتر',price:22000,imgId:243276,sp:false},
+  {id:'pl34',name:'Gabriel Martinelli',nameFA:'گابریل مارتینلی',rat:85,pos:'LW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Arsenal',leagueFA:'لیگ برتر',price:21000,imgId:253819,sp:false},
+  {id:'pl35',name:'Theo Hernandez',nameFA:'تئو اِرناندز',rat:87,pos:'LB',posType:'DEF',nat:'فرانسه',flag:'🇫🇷',club:'AC Milan',leagueFA:'سری‌آ',price:46000,imgId:239109,sp:false},
+  {id:'pl36',name:'Trent Alexander-Arnold',nameFA:'ترنت الکساندر-آرنولد',rat:87,pos:'RB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Real Madrid',leagueFA:'لالیگا',price:52000,imgId:220834,sp:false},
+  {id:'pl37',name:'Achraf Hakimi',nameFA:'اشرف حکیمی',rat:87,pos:'RB',posType:'DEF',nat:'مراکش',flag:'🇲🇦',club:'PSG',leagueFA:'لیگ ۱',price:48000,imgId:232464,sp:false},
+  {id:'pl38',name:'Virgil van Dijk',nameFA:'ویرجیل فان‌دایک',rat:90,pos:'CB',posType:'DEF',nat:'هلند',flag:'🇳🇱',club:'Liverpool',leagueFA:'لیگ برتر',price:75000,imgId:203376,sp:false},
+  {id:'pl39',name:'William Saliba',nameFA:'ویلیام سالیبا',rat:88,pos:'CB',posType:'DEF',nat:'فرانسه',flag:'🇫🇷',club:'Arsenal',leagueFA:'لیگ برتر',price:55000,imgId:258128,sp:false},
+  {id:'pl40',name:'Ruben Dias',nameFA:'روبن دیاش',rat:88,pos:'CB',posType:'DEF',nat:'پرتغال',flag:'🇵🇹',club:'Man City',leagueFA:'لیگ برتر',price:50000,imgId:238815,sp:false},
+  {id:'pl41',name:'Marquinhos',nameFA:'مارکینیوس',rat:88,pos:'CB',posType:'DEF',nat:'برزیل',flag:'🇧🇷',club:'PSG',leagueFA:'لیگ ۱',price:45000,imgId:176580,sp:false},
+  {id:'pl42',name:'Gianluigi Donnarumma',nameFA:'جانلویجی دوناروما',rat:91,pos:'GK',posType:'GK',nat:'ایتالیا',flag:'🇮🇹',club:'PSG',leagueFA:'لیگ ۱',price:88000,imgId:167495,sp:false},
+  {id:'pl43',name:'Alisson',nameFA:'آلیسون',rat:91,pos:'GK',posType:'GK',nat:'برزیل',flag:'🇧🇷',club:'Liverpool',leagueFA:'لیگ برتر',price:90000,imgId:212831,sp:false},
+  {id:'pl44',name:'Ederson',nameFA:'ادرسون',rat:90,pos:'GK',posType:'GK',nat:'برزیل',flag:'🇧🇷',club:'Man City',leagueFA:'لیگ برتر',price:72000,imgId:212835,sp:false},
+  {id:'pl45',name:'Bruno Guimarães',nameFA:'برونو گیمارائش',rat:87,pos:'CDM',posType:'MID',nat:'برزیل',flag:'🇧🇷',club:'Newcastle',leagueFA:'لیگ برتر',price:45000,imgId:248792,sp:false},
+  {id:'pl46',name:'Dani Carvajal',nameFA:'دانی کارواخال',rat:87,pos:'RB',posType:'DEF',nat:'اسپانیا',flag:'🇪🇸',club:'Real Madrid',leagueFA:'لالیگا',price:42000,imgId:178603,sp:false},
+  {id:'pl47',name:'Harry Kane',nameFA:'هری کین',rat:92,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:78000,imgId:202126,sp:false},
+  {id:'pl48',name:'Robert Lewandowski',nameFA:'رابرت لواندوفسکی',rat:90,pos:'ST',posType:'ATT',nat:'لهستان',flag:'🇵🇱',club:'Barcelona',leagueFA:'لالیگا',price:45000,imgId:188545,sp:false},
+  {id:'pl49',name:'Ferran Torres',nameFA:'فران تورس',rat:84,pos:'LW',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:14000,imgId:254292,sp:false},
+  {id:'pl50',name:'Granit Xhaka',nameFA:'گرانیت ژاکا',rat:85,pos:'CM',posType:'MID',nat:'سوئیس',flag:'🇨🇭',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:18000,imgId:193080,sp:false}
+];
 
 function playerFUT(name,rat,pos,sp,big){
   const id=PIMG[name];
@@ -720,9 +845,10 @@ const SBC_RAW=[
 ];
 
 /* ── STATE ── */
-let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{}};
+let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{}};
 let objCat='all',objFilters={fav:false,inc:false,exp:false};
 let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
+let plPos='all',plFilters={fav:false};
 
 function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
 function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
@@ -884,11 +1010,69 @@ function renderSBC(){
   e.style.display='none';g.innerHTML=list.map(s=>sbcCardHTML(s,q)).join('');
 }
 
+/* ── PLAYER CARD HTML ── */
+function pcardImgCls(rat,sp){
+  if(sp)return'pimg-special';
+  if(rat>=94)return'pimg-tots';
+  if(rat>=84)return'pimg-gold';
+  return'pimg-silver';
+}
+function fmtPrice(n){
+  if(n>=1000000)return(n/1000000).toFixed(1).replace('.0','')+'M';
+  if(n>=1000)return Math.round(n/1000)+'K';
+  return n.toString();
+}
+function playerCardHTML(p){
+  const fav=!!state.plFavs[p.id];
+  const bg=pcardImgCls(p.rat,p.sp);
+  const img=`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`;
+  return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
+    <div class="pcard-img ${bg}">
+      ${img}
+      <div class="pcard-rat">${p.rat}</div>
+      <div class="pcard-posb">${p.pos}</div>
+      <button class="pcard-fav" onclick="togglePlFav('${p.id}')">${fav?'⭐':'☆'}</button>
+    </div>
+    <div class="pcard-body">
+      <div class="pcard-name">${p.nameFA}</div>
+      <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
+      <div class="pcard-price-lbl">قیمت تقریبی</div>
+      <div class="pcard-price">${fmtPrice(p.price)} سکه</div>
+    </div>
+  </div>`;
+}
+
+/* ── RENDER PLAYERS ── */
+function renderPlayers(){
+  const q=document.getElementById('plSearch').value.toLowerCase().trim();
+  const srt=document.getElementById('plSort').value;
+  let list=PLAYERS_RAW.filter(p=>{
+    if(plPos!=='all'&&p.posType!==plPos)return false;
+    if(plFilters.fav&&!state.plFavs[p.id])return false;
+    if(q){const hay=[p.nameFA,p.name,p.club,p.nat,p.leagueFA,p.pos].join(' ').toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+  if(srt==='rat')list.sort((a,b)=>b.rat-a.rat);
+  else if(srt==='price-h')list.sort((a,b)=>b.price-a.price);
+  else if(srt==='price-l')list.sort((a,b)=>a.price-b.price);
+  else if(srt==='az')list.sort((a,b)=>a.nameFA.localeCompare(b.nameFA,'fa'));
+  const titles={all:'همه بازیکنان',ATT:'مهاجمان',MID:'هافبک‌ها',DEF:'مدافعان',GK:'دروازه‌بانان'};
+  document.getElementById('plSecTitle').textContent=titles[plPos]||'همه بازیکنان';
+  document.getElementById('plSecCnt').textContent=list.length+' بازیکن';
+  const g=document.getElementById('plGrid'),e=document.getElementById('plEmpty');
+  if(!list.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';g.innerHTML=list.map(playerCardHTML).join('');
+}
+
+function setPos(pos){plPos=pos;document.querySelectorAll('#posTabs .pos-tab').forEach(t=>t.classList.toggle('active',t.dataset.pos===pos));renderPlayers();}
+function togglePF(f){plFilters[f]=!plFilters[f];document.getElementById('pfb-'+f).classList.toggle('active',plFilters[f]);renderPlayers();}
+function togglePlFav(id){state.plFavs[id]=!state.plFavs[id];saveState();updateStats();renderPlayers();toast(state.plFavs[id]?'⭐ اضافه شد':'☆ حذف شد','i');}
+
 /* ── STATS ── */
 function updateStats(){
   const ot=OBJ_RAW.length,od=Object.values(state.objDone).filter(Boolean).length;
   const st=SBC_RAW.length,sd=Object.values(state.sbcDone).filter(Boolean).length;
-  const fav=Object.values(state.objFavs).filter(Boolean).length+Object.values(state.sbcFavs).filter(Boolean).length;
+  const fav=Object.values(state.objFavs).filter(Boolean).length+Object.values(state.sbcFavs).filter(Boolean).length+Object.values(state.plFavs||{}).filter(Boolean).length;
   const now=Date.now(),exp=OBJ_RAW.filter(o=>{if(!o.exp)return false;const d=new Date(o.exp)-now;return d>0&&d<864e5;}).length;
   document.getElementById('sTotal').textContent=ot;
   document.getElementById('sDone').textContent=od;
@@ -898,6 +1082,7 @@ function updateStats(){
   document.getElementById('sExpiring').textContent=exp;
   document.getElementById('sp-obj').textContent=ot;
   document.getElementById('sp-sbc').textContent=st;
+  document.getElementById('sp-players').textContent=PLAYERS_RAW.length;
   ['all','weekly','daily','milestone','event','seasonal','league'].forEach(c=>{
     const el=document.getElementById('ocn-'+c);if(el)el.textContent=c==='all'?ot:OBJ_RAW.filter(o=>o.cat===c).length;
   });
@@ -951,7 +1136,7 @@ document.addEventListener('keydown',e=>{
 
 /* ── SECTION SWITCH ── */
 function showSec(sec){
-  ['obj','sbc'].forEach(s=>{
+  ['obj','sbc','players'].forEach(s=>{
     document.getElementById('sec-'+s).style.display=s===sec?'block':'none';
     document.getElementById('bn-'+s).classList.toggle('active',s===sec);
   });
@@ -960,7 +1145,7 @@ function showSec(sec){
 
 /* ── INIT ── */
 function init(){
-  loadState();updateStats();renderObj();renderSBC();
+  loadState();updateStats();renderObj();renderSBC();renderPlayers();
   setTimeout(doFetch,1000);
 }
 document.addEventListener('DOMContentLoaded',init);
@@ -977,6 +1162,11 @@ document.addEventListener('DOMContentLoaded',init);
     <span class="bnav-icon">⚗️</span>
     <span>SBC</span>
     <span class="bnav-badge" id="sp-sbc">0</span>
+  </button>
+  <button class="bnav-btn" id="bn-players" onclick="showSec('players')">
+    <span class="bnav-icon">👥</span>
+    <span>بازیکنان</span>
+    <span class="bnav-badge" id="sp-players">0</span>
   </button>
 </nav>
 
