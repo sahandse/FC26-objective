@@ -406,6 +406,81 @@
     .cdpill.crit{color:var(--red);background:rgba(239,68,68,.08)}.cdpill.warn{color:var(--orange);background:rgba(249,115,22,.08)}
     .cdpill.ok{color:var(--t3);background:transparent}.cdpill.gone{color:var(--red)}.cdpill.permanent{color:var(--t3)}
 
+    /* ─── ADVANCED STAT FILTER ─── */
+    .adv-toggle{padding:6px 12px;border-radius:18px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;display:flex;align-items:center;gap:5px;flex-shrink:0}
+    .adv-toggle.active{background:rgba(168,85,247,.1);border-color:var(--purple);color:#D4A0FF}
+    .adv-panel{display:none;background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px}
+    .adv-panel.open{display:block}
+    .adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 16px}
+    .adv-row{display:flex;flex-direction:column;gap:4px}
+    .adv-lbl{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--t2)}
+    .adv-lbl b{color:var(--gold);font-size:10px;font-weight:900}
+    input[type=range].adv-range{width:100%;accent-color:var(--gold);cursor:pointer;height:3px}
+    .adv-reset{width:100%;margin-top:10px;padding:6px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--t3);font-size:11px;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+
+    /* ─── WATCHLIST ─── */
+    .wl-btn-card{width:100%;padding:4px 0;margin-top:4px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--t3);font-size:10px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s}
+    .wl-btn-card:hover{border-color:var(--teal);color:var(--teal)}
+    .wl-btn-card.in-wl{border-color:var(--teal);color:var(--teal);background:rgba(20,184,166,.08)}
+    .wl-section{margin-top:10px}
+    .wl-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;transition:all .2s}
+    .wl-row:hover{border-color:var(--border2)}
+    .wl-rat{font-size:18px;font-weight:900;color:var(--gold);width:28px;flex-shrink:0;text-align:center}
+    .wl-info{flex:1;min-width:0}
+    .wl-name{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .wl-sub{font-size:11px;color:var(--t3);margin-top:1px}
+    .wl-spark{width:60px;height:26px;flex-shrink:0}
+    .wl-price-col{text-align:left;flex-shrink:0;min-width:52px}
+    .wl-price{font-size:13px;font-weight:900;color:var(--gold)}
+    .wl-trend{font-size:10px;font-weight:700;margin-top:2px}
+    .wl-del{background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;padding:4px;transition:color .2s;flex-shrink:0}
+    .wl-del:hover{color:var(--red)}
+
+    /* ─── PLAYSTYLE GUIDE ─── */
+    .ps-overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px}
+    .ps-overlay.open{display:flex}
+    .ps-box{background:var(--bg1);border:1px solid var(--border2);border-radius:20px;padding:18px;max-width:620px;width:100%;margin:auto}
+    .ps-title{text-align:center;font-size:15px;font-weight:800;color:var(--gold);margin-bottom:6px}
+    .ps-sub{text-align:center;font-size:11px;color:var(--t3);margin-bottom:14px}
+    .ps-sec{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+    .ps-sec:last-of-type{border-bottom:none;margin-bottom:0}
+    .ps-pos-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .ps-pos-name{font-size:13px;font-weight:800;color:var(--t1)}
+    .ps-pos-tag{font-size:10px;background:rgba(245,176,20,.12);color:var(--gold);padding:2px 8px;border-radius:7px;font-weight:700}
+    .ps-roles{font-size:10px;color:var(--t3);margin-bottom:7px}
+    .ps-chips{display:flex;flex-wrap:wrap;gap:5px}
+    .ps-chip-plus{font-size:11px;padding:3px 10px;border-radius:8px;font-weight:700;background:rgba(245,176,20,.15);border:1px solid rgba(245,176,20,.35);color:var(--gold2)}
+    .ps-chip-reg{font-size:11px;padding:3px 10px;border-radius:8px;font-weight:600;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.28);color:#6EE6A6}
+    .ps-close{width:100%;margin-top:14px;padding:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+
+    /* ─── DRAFT SIMULATOR ─── */
+    .draft-btn{display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:12px;border:1px solid var(--gold);background:rgba(245,176,20,.08);color:var(--gold);font-size:13px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;flex:1;justify-content:center}
+    .draft-btn:hover{background:rgba(245,176,20,.18)}
+    .draft-overlay{position:fixed;inset:0;z-index:500;background:var(--bg0);display:none;flex-direction:column;overflow-y:auto}
+    .draft-overlay.open{display:flex}
+    .draft-hd{background:linear-gradient(180deg,var(--bg1) 0%,rgba(11,18,32,0) 100%);padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2}
+    .draft-hd-title{font-size:16px;font-weight:900;color:var(--gold)}
+    .draft-hd-prog{font-size:12px;color:var(--t3)}
+    .draft-close-btn{background:none;border:1px solid var(--border);border-radius:8px;color:var(--t2);font-size:12px;font-weight:700;padding:6px 12px;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+    .draft-body{flex:1;padding:0 16px 20px;max-width:800px;margin:0 auto;width:100%}
+    .draft-slot-title{text-align:center;margin-bottom:14px}
+    .draft-slot-pos{font-size:24px;font-weight:900;color:var(--gold)}
+    .draft-slot-lbl{font-size:12px;color:var(--t3);margin-bottom:4px}
+    .draft-choices{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+    .draft-choice-wrap{cursor:pointer;transition:transform .15s}
+    .draft-choice-wrap:hover{transform:translateY(-4px)}
+    .draft-choice-wrap:hover .pcard{border-color:var(--gold);box-shadow:0 8px 24px rgba(245,176,20,.25)}
+    .draft-result{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px}
+    .draft-res-item{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:9px}
+    .draft-res-rat{font-size:16px;font-weight:900;color:var(--gold);width:24px;flex-shrink:0}
+    .draft-res-name{font-size:11px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .draft-res-pos{font-size:9px;color:var(--t3)}
+    .draft-restart{width:100%;padding:11px;border:1px solid var(--gold);border-radius:12px;background:rgba(245,176,20,.1);color:var(--gold);font-size:14px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+    .draft-summary{text-align:center;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin-bottom:14px}
+    .draft-sum-rat{font-size:32px;font-weight:900;color:var(--gold)}
+    .draft-sum-lbl{font-size:11px;color:var(--t3)}
+    .draft-sum-chem{font-size:15px;font-weight:700;color:var(--green);margin-top:6px}
+
     /* ─── 5-BUTTON NAV ─── */
     @media(max-width:700px){
       .bnav-btn{font-size:9px;padding:8px 2px 7px}
@@ -551,12 +626,20 @@
   </div>
   <div class="filter-row">
     <button class="f-btn" id="pfb-fav" onclick="togglePF('fav')">⭐ علاقه‌مندی‌ها</button>
+    <button class="f-btn" id="pfb-wl" onclick="togglePF('wl')">👁️ واچ‌لیست <span id="wl-cnt"></span></button>
+    <button class="adv-toggle" id="advToggleBtn" onclick="toggleAdvFilter()">🎛️ فیلتر آمار</button>
+    <button class="adv-toggle" onclick="showPlayStyleGuide()" style="border-color:rgba(59,130,246,.4);color:#7EB8FF">🎮 PlayStyle</button>
     <select class="sort-sel" id="plSort" onchange="renderPlayers()">
       <option value="rat">امتیاز: بالاترین</option>
       <option value="price-h">قیمت: بالاترین</option>
       <option value="price-l">قیمت: کمترین</option>
       <option value="az">نام: الفبا</option>
     </select>
+  </div>
+  <!-- ADVANCED STAT FILTER PANEL -->
+  <div class="adv-panel" id="advPanel">
+    <div class="adv-grid" id="advGrid"></div>
+    <button class="adv-reset" onclick="resetAdvFilter()">↺ بازنشانی فیلترها</button>
   </div>
   <div class="section-row">
     <span class="section-title" id="plSecTitle">همه بازیکنان</span>
@@ -565,6 +648,14 @@
   <div class="player-grid" id="plGrid"></div>
   <div class="empty" id="plEmpty" style="display:none">
     <div class="empty-icon">🔍</div><h3>بازیکنی یافت نشد</h3><p>جستجو یا فیلتر خود را تغییر دهید</p>
+  </div>
+  <!-- WATCHLIST SECTION (shown when wl filter active) -->
+  <div class="wl-section" id="wlSection" style="display:none">
+    <div class="section-row" style="margin-top:10px">
+      <span class="section-title">👁️ واچ‌لیست من</span>
+      <span class="section-cnt" id="wlSecCnt"></span>
+    </div>
+    <div id="wlContent"></div>
   </div>
 </main>
 
@@ -604,6 +695,7 @@
     </div>
   </div>
   <div class="squad-actions">
+    <button class="draft-btn" onclick="startDraft()">🎲 شبیه‌ساز درافت</button>
     <button class="squad-clear" onclick="clearSquad()">🗑️ پاک کردن تیم</button>
   </div>
 </main>
@@ -616,6 +708,28 @@
   </div>
   <div class="evo-grid" id="evoGrid"></div>
 </main>
+
+<!-- PLAYSTYLE GUIDE OVERLAY -->
+<div class="ps-overlay" id="psOverlay">
+  <div class="ps-box">
+    <div class="ps-title">🎮 راهنمای PlayStyle+ در FC26</div>
+    <div class="ps-sub">PlayStyle+ (طلایی) = ۲ برابر تأثیر | PlayStyle (سبز) = تأثیر عادی</div>
+    <div id="psContent"></div>
+    <button class="ps-close" onclick="closePlayStyleGuide()">بستن</button>
+  </div>
+</div>
+
+<!-- DRAFT OVERLAY -->
+<div class="draft-overlay" id="draftOverlay">
+  <div class="draft-hd">
+    <div>
+      <div class="draft-hd-title">🎲 شبیه‌ساز درافت FUT</div>
+      <div class="draft-hd-prog" id="draftProg">موقعیت ۱ از ۱۱</div>
+    </div>
+    <button class="draft-close-btn" onclick="closeDraft()">✕ بستن</button>
+  </div>
+  <div class="draft-body" id="draftBody"></div>
+</div>
 
 <!-- COMPARISON MODAL -->
 <div class="modal-ov" id="compModal">
@@ -1183,11 +1297,14 @@ const SBC_RAW=[
 ];
 
 /* ── STATE ── */
-let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{},squad:{formation:'4-3-3',slots:{}},evoProgs:{},compSel:[]};
+let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{},watchlist:{},squad:{formation:'4-3-3',slots:{}},evoProgs:{},compSel:[]};
 let objCat='all',objFilters={fav:false,inc:false,exp:false};
 let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
-let plPos='all',plCardType='all',plFilters={fav:false};
+let plPos='all',plCardType='all',plFilters={fav:false,wl:false};
 let activeSquadSlot=null;
+let advF={pac:0,sho:0,pas:0,dri:0,def:0,phy:0};
+let draftState={picks:{},slot:0};
+const DRAFT_SLOTS=[{pos:'GK',type:'GK'},{pos:'RB',type:'DEF'},{pos:'CB',type:'DEF'},{pos:'CB',type:'DEF'},{pos:'LB',type:'DEF'},{pos:'CDM',type:'MID'},{pos:'CM',type:'MID'},{pos:'CAM',type:'MID'},{pos:'RW',type:'ATT'},{pos:'ST',type:'ATT'},{pos:'LW',type:'ATT'}];
 
 function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
 function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
@@ -1391,6 +1508,194 @@ const EVO_RAW=[
   {id:'evo12',name:'Festival Evolution II',nameFA:'تکامل جشنواره - مرحله ۲',badge:'رویداد',badgeCls:'evo-badge-rep',desc:'دومین مرحله تکامل پله: از ۹۴ به ۹۵.',reqs:['پله ۹۴','۲۰۰۰ توکن جشنواره'],reward:'پله ۹۵',maxUses:1},
   {id:'evo13',name:'Festival Evolution III',nameFA:'تکامل جشنواره - مرحله ۳',badge:'رویداد',badgeCls:'evo-badge-rep',desc:'مرحله نهایی تکامل پله: از ۹۵ به ۹۶.',reqs:['پله ۹۵','۲۰۰۰ توکن جشنواره','تکمیل همه سفر ملل'],reward:'پله ۹۶',maxUses:1}
 ];
+
+/* ── ADVANCED STAT FILTER ── */
+const ADV_STATS=['pac','sho','pas','dri','def','phy'];
+const ADV_LABELS={pac:'PAC سرعت',sho:'SHO شوت',pas:'PAS پاس',dri:'DRI دریبل',def:'DEF دفاع',phy:'PHY فیزیک'};
+function buildAdvGrid(){
+  const grid=document.getElementById('advGrid');
+  if(!grid)return;
+  grid.innerHTML=ADV_STATS.map(s=>`
+    <div class="adv-row">
+      <div class="adv-lbl"><span>${ADV_LABELS[s]}</span><b id="adv-v-${s}">${advF[s]||0}+</b></div>
+      <input type="range" class="adv-range" id="adv-r-${s}" min="0" max="99" value="${advF[s]||0}" oninput="onAdvRange('${s}',this.value)">
+    </div>`).join('');
+}
+function onAdvRange(stat,val){
+  advF[stat]=parseInt(val);
+  const lbl=document.getElementById('adv-v-'+stat);
+  if(lbl)lbl.textContent=val+'+';
+  renderPlayers();
+}
+function toggleAdvFilter(){
+  const panel=document.getElementById('advPanel');
+  const btn=document.getElementById('advToggleBtn');
+  const isOpen=panel.classList.contains('open');
+  panel.classList.toggle('open',!isOpen);
+  btn.classList.toggle('active',!isOpen);
+  if(!isOpen)buildAdvGrid();
+}
+function resetAdvFilter(){
+  ADV_STATS.forEach(s=>{
+    advF[s]=0;
+    const r=document.getElementById('adv-r-'+s);if(r)r.value=0;
+    const v=document.getElementById('adv-v-'+s);if(v)v.textContent='0+';
+  });
+  renderPlayers();
+}
+
+/* ── WATCHLIST ── */
+function toggleWatchlist(pid){
+  if(!state.watchlist)state.watchlist={};
+  state.watchlist[pid]=!state.watchlist[pid];
+  saveState();
+  const cnt=Object.values(state.watchlist).filter(Boolean).length;
+  const el=document.getElementById('wl-cnt');if(el)el.textContent=cnt||'';
+  document.getElementById('pfb-wl').classList.toggle('active',plFilters.wl);
+  renderPlayers();
+  renderWatchlist();
+  toast(state.watchlist[pid]?'👁️ به واچ‌لیست اضافه شد':'👁️ از واچ‌لیست حذف شد','i');
+}
+function renderWatchlist(){
+  const wl=PLAYERS_RAW.filter(p=>state.watchlist&&state.watchlist[p.id]);
+  const cnt=document.getElementById('wlSecCnt');
+  const sec=document.getElementById('wlSection');
+  const wlCntEl=document.getElementById('wl-cnt');
+  if(wlCntEl)wlCntEl.textContent=wl.length||'';
+  if(plFilters.wl){
+    if(sec)sec.style.display='block';
+    if(cnt)cnt.textContent=wl.length+' بازیکن';
+    const container=document.getElementById('wlContent');
+    if(!container)return;
+    if(!wl.length){
+      container.innerHTML=`<div class="empty"><div class="empty-icon">👁️</div><h3>واچ‌لیست خالی است</h3><p>دکمه 👁️ پایین کارت بازیکنان را بزنید</p></div>`;
+      return;
+    }
+    container.innerHTML=wl.map(p=>{
+      const th=hashInt((p.id||'')+'spark');
+      const prices=Array.from({length:7},(_,i)=>{const h2=hashInt(p.id+i);return Math.round(p.price*(0.88+(h2%240)/1000));});
+      const mn=Math.min(...prices),mx=Math.max(...prices);
+      const pts=prices.map((v,i)=>`${i*10},${24-((v-mn)/((mx-mn)||1))*22}`).join(' ');
+      const tdir=th%3===0?'up':th%3===1?'down':'flat';
+      const tpct=3+(th%17);
+      const tCls=tdir==='up'?'trend-up':tdir==='down'?'trend-down':'trend-flat';
+      const tTxt=tdir==='up'?`↑${tpct}%`:tdir==='down'?`↓${tpct}%`:'→';
+      return `<div class="wl-row">
+        <div class="wl-rat">${p.rat}</div>
+        <div class="wl-info">
+          <div class="wl-name">${p.nameFA}</div>
+          <div class="wl-sub">${p.flag} ${p.club} · ${p.pos}</div>
+        </div>
+        <svg class="wl-spark" viewBox="0 0 60 26" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="wl-price-col">
+          <div class="wl-price">${fmtPrice(p.price)}</div>
+          <div class="wl-trend ${tCls}">${tTxt}</div>
+        </div>
+        <button class="wl-del" onclick="toggleWatchlist('${p.id}')">✕</button>
+      </div>`;
+    }).join('');
+  } else {
+    if(sec)sec.style.display='none';
+  }
+}
+
+/* ── PLAYSTYLE GUIDE ── */
+const PS_DATA=[
+  {pos:'ST / CF', icon:'⚽',roles:'Advanced Forward • Poacher • Target Forward',
+   plus:['Finesse Shot+','Power Header+'],reg:['Power Shot','First Touch','Technical','Trivela','Chip Shot','Dead Ball']},
+  {pos:'LW / RW', icon:'🏃',roles:'Winger • Inside Forward • Wide Midfielder',
+   plus:['Speed Dribble+','Rapid+'],reg:['Trickster','First Touch','Technical','Finesse Shot','Whipped Pass','Incisive Pass']},
+  {pos:'CAM', icon:'🔮',roles:'Playmaker • Shadow Striker • Half Winger',
+   plus:['Technical+','First Touch+'],reg:['Whipped Pass','Finesse Shot','Incisive Pass','Trickster','Long Ball Pass']},
+  {pos:'CM / CDM', icon:'⚡',roles:'Box-to-Box • Deep-Lying Playmaker • Holding',
+   plus:['Whipped Pass+','Long Ball Pass+'],reg:['Press Proven','Anticipate','Intercept','Technical','Incisive Pass']},
+  {pos:'LB / RB', icon:'🛡️',roles:'Attacking Full Back • Wingback • Full Back',
+   plus:['Crosser+','Rapid+'],reg:['First Touch','Incisive Pass','Long Throw','Trickster','Anticipate']},
+  {pos:'CB', icon:'🏰',roles:'Central Defender • Ball-Playing CB • Stopper',
+   plus:['Anticipate+','Intercept+'],reg:['Aerial','Block','Slide Tackle','Long Ball Pass','Bruiser']},
+  {pos:'GK', icon:'🧤',roles:'Goalkeeper • Sweeper Keeper',
+   plus:['Far Reach+','Rush Out+'],reg:['Deflector','Footwork','Aerial','Far Throw']}
+];
+function showPlayStyleGuide(){
+  const c=document.getElementById('psContent');
+  if(c&&!c.innerHTML){
+    c.innerHTML=PS_DATA.map(p=>`
+      <div class="ps-sec">
+        <div class="ps-pos-hd">
+          <span style="font-size:18px">${p.icon}</span>
+          <span class="ps-pos-name">${p.pos}</span>
+        </div>
+        <div class="ps-roles">${p.roles}</div>
+        <div class="ps-chips">
+          ${p.plus.map(x=>`<span class="ps-chip-plus">★ ${x}</span>`).join('')}
+          ${p.reg.map(x=>`<span class="ps-chip-reg">${x}</span>`).join('')}
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('psOverlay').classList.add('open');
+}
+function closePlayStyleGuide(){document.getElementById('psOverlay').classList.remove('open');}
+
+/* ── DRAFT SIMULATOR ── */
+function startDraft(){
+  draftState={picks:{},slot:0};
+  document.getElementById('draftOverlay').classList.add('open');
+  renderDraftSlot();
+}
+function closeDraft(){document.getElementById('draftOverlay').classList.remove('open');}
+function renderDraftSlot(){
+  const body=document.getElementById('draftBody');
+  const progEl=document.getElementById('draftProg');
+  if(!body)return;
+  const done=draftState.slot>=DRAFT_SLOTS.length;
+  if(progEl)progEl.textContent=done?'تیم کامل شد ✓':`موقعیت ${draftState.slot+1} از ${DRAFT_SLOTS.length}`;
+  if(done){
+    const picks=Object.values(draftState.picks);
+    const chem=calcChem(picks);
+    const avg=picks.length?Math.round(picks.reduce((s,p)=>s+p.rat,0)/picks.length):0;
+    body.innerHTML=`
+      <div class="draft-summary">
+        <div class="draft-sum-rat">${avg}</div>
+        <div class="draft-sum-lbl">میانگین رتبه تیم</div>
+        <div class="draft-sum-chem">⚗️ کمیستری: ${chem} / 33</div>
+      </div>
+      <div class="draft-result">${picks.map(p=>`
+        <div class="draft-res-item">
+          <div class="draft-res-rat">${p.rat}</div>
+          <div><div class="draft-res-name">${p.nameFA}</div><div class="draft-res-pos">${p.pos}</div></div>
+        </div>`).join('')}</div>
+      <button class="draft-restart" onclick="startDraft()">🔄 درافت جدید</button>`;
+    return;
+  }
+  const slot=DRAFT_SLOTS[draftState.slot];
+  const seed=hashInt(slot.pos+draftState.slot+(Date.now()%9999).toString());
+  const already=new Set(Object.values(draftState.picks).map(p=>p.id));
+  let pool=PLAYERS_RAW.filter(p=>{
+    if(already.has(p.id))return false;
+    if(slot.type==='GK')return p.posType==='GK';
+    return p.posType===slot.type;
+  }).sort((a,b)=>(hashInt(a.id+seed)%10000)-(hashInt(b.id+seed)%10000)).slice(0,5);
+  body.innerHTML=`
+    <div class="draft-slot-title">
+      <div class="draft-slot-lbl">موقعیت ${draftState.slot+1}: انتخاب بازیکن</div>
+      <div class="draft-slot-pos">${slot.pos}</div>
+    </div>
+    <div class="draft-choices" id="draftChoices">
+      ${pool.map(p=>`
+        <div class="draft-choice-wrap" onclick="pickDraftPlayer('${p.id}')">
+          ${playerCardHTML(p)}
+        </div>`).join('')}
+    </div>`;
+}
+function pickDraftPlayer(pid){
+  const p=PLAYERS_RAW.find(x=>x.id===pid);
+  if(!p)return;
+  draftState.picks[draftState.slot]=p;
+  draftState.slot++;
+  renderDraftSlot();
+}
 
 /* ── SQUAD CHEMISTRY ── */
 function calcChem(players){
@@ -1614,6 +1919,7 @@ function fmtPrice(n){
 function playerCardHTML(p){
   const fav=!!state.plFavs[p.id];
   const inComp=(state.compSel||[]).includes(p.id);
+  const inWl=!!(state.watchlist&&state.watchlist[p.id]);
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
@@ -1641,7 +1947,10 @@ function playerCardHTML(p){
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
       <div class="pcard-price-lbl">قیمت تقریبی</div>
       <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
-      <button class="pcard-compare${inComp?' sel':''}" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب شده':'⚖️ مقایسه'}</button>
+      <div style="display:flex;gap:5px;margin-top:6px">
+        <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
+        <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
+      </div>
     </div>
   </div>`;
 }
@@ -1650,11 +1959,18 @@ function playerCardHTML(p){
 function renderPlayers(){
   const q=document.getElementById('plSearch').value.toLowerCase().trim();
   const srt=document.getElementById('plSort').value;
+  const advActive=ADV_STATS.some(s=>advF[s]>0);
   let list=PLAYERS_RAW.filter(p=>{
     if(plPos!=='all'&&p.posType!==plPos)return false;
     if(plCardType!=='all'&&realCT(p)!==plCardType)return false;
     if(plFilters.fav&&!state.plFavs[p.id])return false;
+    if(plFilters.wl&&!(state.watchlist&&state.watchlist[p.id]))return false;
     if(q){const hay=[p.nameFA,p.name,p.club,p.nat,p.leagueFA,p.pos].join(' ').toLowerCase();if(!hay.includes(q))return false;}
+    if(advActive){
+      const stats=deterministicStats(p);
+      const sm={};stats.forEach(s=>sm[s.lbl.toLowerCase()]=s.v);
+      for(const k of ADV_STATS){if(advF[k]>0&&(sm[k]||0)<advF[k])return false;}
+    }
     return true;
   });
   if(srt==='rat')list.sort((a,b)=>b.rat-a.rat);
@@ -1665,13 +1981,26 @@ function renderPlayers(){
   document.getElementById('plSecTitle').textContent=titles[plPos]||'همه بازیکنان';
   document.getElementById('plSecCnt').textContent=list.length+' بازیکن';
   const g=document.getElementById('plGrid'),e=document.getElementById('plEmpty');
+  // Watchlist mode: show watchlist section, hide regular grid
+  const wlSec=document.getElementById('wlSection');
+  if(plFilters.wl){
+    g.innerHTML='';e.style.display='none';
+    renderWatchlist();
+    return;
+  }
+  if(wlSec)wlSec.style.display='none';
   if(!list.length){g.innerHTML='';e.style.display='block';return;}
   e.style.display='none';g.innerHTML=list.map(playerCardHTML).join('');
 }
 
 function setPos(pos){plPos=pos;document.querySelectorAll('#posTabs .pos-tab').forEach(t=>t.classList.toggle('active',t.dataset.pos===pos));renderPlayers();}
 function setCardType(ct){plCardType=ct;document.querySelectorAll('#cardTypeTabs .ctype-tab').forEach(t=>t.classList.toggle('active',t.dataset.ct===ct));renderPlayers();}
-function togglePF(f){plFilters[f]=!plFilters[f];document.getElementById('pfb-'+f).classList.toggle('active',plFilters[f]);renderPlayers();}
+function togglePF(f){
+  plFilters[f]=!plFilters[f];
+  document.getElementById('pfb-'+f).classList.toggle('active',plFilters[f]);
+  renderPlayers();
+  if(f==='wl')renderWatchlist();
+}
 function togglePlFav(id){state.plFavs[id]=!state.plFavs[id];saveState();updateStats();renderPlayers();toast(state.plFavs[id]?'⭐ اضافه شد':'☆ حذف شد','i');}
 
 /* ── STATS ── */
@@ -1759,6 +2088,10 @@ function init(){
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
   if(!state.evoProgs)state.evoProgs={};
+  if(!state.watchlist)state.watchlist={};
+  // Init watchlist badge count
+  const wlN=Object.values(state.watchlist).filter(Boolean).length;
+  const wlEl=document.getElementById('wl-cnt');if(wlEl&&wlN)wlEl.textContent=wlN;
   updateStats();renderObj();renderSBC();renderPlayers();
   startCountdowns();
   setTimeout(doFetch,1000);
