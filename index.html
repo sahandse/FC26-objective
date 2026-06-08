@@ -54,7 +54,7 @@
     .v-gold{color:var(--gold)} .v-green{color:var(--green)} .v-blue{color:var(--blue)} .v-orange{color:var(--orange)}
 
     /* SECTION NAV */
-    .sec-nav{display:flex;background:var(--bg1);border-bottom:2px solid var(--border);position:sticky;top:67px;z-index:49}
+    .sec-nav{display:flex;background:var(--bg1);border-bottom:2px solid var(--border);position:sticky;top:var(--header-h,96px);z-index:49}
     .sec-btn{flex:1;max-width:220px;padding:13px 24px;background:none;border:none;border-bottom:3px solid transparent;color:var(--t2);font-size:14px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:-2px}
     .sec-btn:hover{color:var(--t1);background:rgba(255,255,255,.03)}
     .sec-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
@@ -962,8 +962,14 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ── INIT ── */
+function fixSecNavTop(){
+  const h=document.querySelector('.header').offsetHeight;
+  document.documentElement.style.setProperty('--header-h',h+'px');
+}
 function init(){
   loadState();updateStats();renderObj();renderSBC();
+  fixSecNavTop();
+  window.addEventListener('resize',fixSecNavTop);
   setTimeout(doFetch,1000);
 }
 document.addEventListener('DOMContentLoaded',init);
