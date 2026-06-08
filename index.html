@@ -481,6 +481,36 @@
     .draft-sum-lbl{font-size:11px;color:var(--t3)}
     .draft-sum-chem{font-size:15px;font-weight:700;color:var(--green);margin-top:6px}
 
+    /* ─── SBC SOLVER ─── */
+    .solver-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;border:1px solid rgba(168,85,247,.4);background:rgba(168,85,247,.08);color:#D4A0FF;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .solver-btn:hover{background:rgba(168,85,247,.18);border-color:#A855F7}
+    .solver-modal{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center}
+    .solver-modal.open{display:flex}
+    .solver-box{background:var(--bg1);border:1px solid var(--border2);border-top-left-radius:20px;border-top-right-radius:20px;padding:16px;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+    .solver-title{font-size:14px;font-weight:800;color:#D4A0FF;text-align:center}
+    .solver-sub{font-size:11px;color:var(--t3);text-align:center}
+    .solver-summary{display:flex;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;align-items:center;justify-content:space-around;flex-wrap:wrap}
+    .slv-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+    .slv-stat-val{font-size:18px;font-weight:900}
+    .slv-stat-lbl{font-size:9px;color:var(--t3);white-space:nowrap}
+    .slv-green{color:var(--green)} .slv-purple{color:#D4A0FF} .slv-gold{color:var(--gold)} .slv-red{color:var(--red)}
+    .solver-chem-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--t2)}
+    .solver-chem-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex:1}
+    .solver-chem-fill{height:100%;background:var(--green);border-radius:2px;transition:width .5s}
+    .solver-players{display:flex;flex-direction:column;gap:5px}
+    .slv-player{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);transition:all .2s}
+    .slv-player.owned{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.06)}
+    .slv-player.need-buy{border-color:rgba(239,68,68,.2)}
+    .slv-rat{font-size:14px;font-weight:900;color:var(--gold);width:26px;text-align:center;flex-shrink:0}
+    .slv-info{flex:1;min-width:0}
+    .slv-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .slv-club{font-size:10px;color:var(--t3)}
+    .slv-price{font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:44px;text-align:left}
+    .slv-price.zero{color:var(--green)}
+    .own-toggle{padding:4px 9px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:10px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .own-toggle.is-owned{background:rgba(34,197,94,.12);border-color:var(--green);color:var(--green)}
+    .solver-close{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+
     /* ─── 5-BUTTON NAV ─── */
     @media(max-width:700px){
       .bnav-btn{font-size:9px;padding:8px 2px 7px}
@@ -749,6 +779,22 @@
     <input type="text" class="squad-search" id="squadSearch" placeholder="جستجوی بازیکن..." oninput="renderSquadPicker()" />
     <div class="squad-pl-grid" id="squadPickerList"></div>
     <button class="squad-picker-close" onclick="closeSquadPicker()">انصراف</button>
+  </div>
+</div>
+
+<!-- SBC SOLVER MODAL -->
+<div class="solver-modal" id="solverModal">
+  <div class="solver-box">
+    <div class="solver-title" id="solverTitle">🧮 حل‌کننده SBC</div>
+    <div class="solver-sub">بازیکنانی که دارید را علامت بزنید تا هزینه واقعی محاسبه شود</div>
+    <div class="solver-summary" id="solverSummary"></div>
+    <div class="solver-chem-row">
+      <span id="solverChemLbl">⚗️ کمیستری</span>
+      <div class="solver-chem-bar"><div class="solver-chem-fill" id="solverChemFill" style="width:0%"></div></div>
+      <span id="solverChemVal">- / 33</span>
+    </div>
+    <div class="solver-players" id="solverPlayers"></div>
+    <button class="solver-close" onclick="closeSolver()">بستن</button>
   </div>
 </div>
 
@@ -1297,7 +1343,7 @@ const SBC_RAW=[
 ];
 
 /* ── STATE ── */
-let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{},watchlist:{},squad:{formation:'4-3-3',slots:{}},evoProgs:{},compSel:[]};
+let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{},watchlist:{},squad:{formation:'4-3-3',slots:{}},evoProgs:{},compSel:[],owned:{}};
 let objCat='all',objFilters={fav:false,inc:false,exp:false};
 let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
 let plPos='all',plCardType='all',plFilters={fav:false,wl:false};
@@ -1411,12 +1457,96 @@ function sbcCardHTML(s,q){
         <div class="expiry ${exp.cls}"><span>${exp.ico}</span><span>${exp.txt}</span></div>
         ${s.costFA?`<div class="sbc-cost-pill">💰 ${s.costFA}</div>`:''}
       </div>
-      <button class="done-btn ${done?'checked':''}" onclick="toggleSBCDone('${s.id}')">${done?'✓ تکمیل شد':'○ علامت‌گذاری'}</button>
+      <div style="display:flex;gap:6px">
+        <button class="solver-btn" onclick="openSolver('${s.id}')">🧮 حل کن</button>
+        <button class="done-btn ${done?'checked':''}" onclick="toggleSBCDone('${s.id}')">${done?'✓ تکمیل':'○ علامت'}</button>
+      </div>
     </div>
   </div>`;
 }
 
 function toggleGuide(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+/* ── SBC SOLVER ── */
+const SBC_META={
+  sbc01:{rat:86,chem:22,league:null,n:11},
+  sbc02:{rat:83,chem:22,league:'سری‌آ',n:11},
+  sbc03:{rat:85,chem:23,league:'لیگ برتر',n:11},
+  sbc04:{rat:84,chem:23,league:'لیگ برتر',n:11},
+  sbc05:{rat:87,chem:20,league:null,n:11},
+  sbc06:{rat:83,chem:23,league:'لیگ برتر',n:11},
+  sbc07:{rat:84,chem:0,league:null,n:10},
+  sbc08:{rat:75,chem:20,league:null,n:11},
+  sbc09:{rat:78,chem:23,league:'لیگ برتر',n:11},
+  sbc10:{rat:78,chem:23,league:'لالیگا',n:11},
+  sbc11:{rat:76,chem:18,league:null,n:11},
+  sbc12:{rat:82,chem:22,league:'بوندسلیگا',n:11},
+  sbc13:{rat:82,chem:22,league:'سری‌آ',n:11},
+  sbc14:{rat:81,chem:22,league:'لیگ ۱',n:11},
+  sbc15:{rat:86,chem:22,league:null,n:11}
+};
+let solverSbcId=null;
+
+function openSolver(sbcId){
+  solverSbcId=sbcId;
+  const s=SBC_RAW.find(x=>x.id===sbcId);
+  if(!s)return;
+  if(!state.owned)state.owned={};
+  document.getElementById('solverTitle').textContent='🧮 '+s.nameFA;
+  document.getElementById('solverModal').classList.add('open');
+  renderSolver();
+}
+function closeSolver(){document.getElementById('solverModal').classList.remove('open');solverSbcId=null;}
+function toggleOwned(pid){
+  if(!state.owned)state.owned={};
+  state.owned[pid]=!state.owned[pid];
+  saveState();
+  renderSolver();
+}
+function renderSolver(){
+  const meta=SBC_META[solverSbcId];
+  if(!meta)return;
+  if(!state.owned)state.owned={};
+  let pool=PLAYERS_RAW.filter(p=>{
+    if(p.rat<meta.rat)return false;
+    if(meta.league&&p.leagueFA!==meta.league)return false;
+    return true;
+  });
+  pool.sort((a,b)=>{
+    const ao=!!state.owned[a.id],bo=!!state.owned[b.id];
+    if(ao!==bo)return ao?-1:1;
+    return a.price-b.price;
+  });
+  const squad=pool.slice(0,meta.n);
+  const ownedCount=squad.filter(p=>state.owned[p.id]).length;
+  const buyPlayers=squad.filter(p=>!state.owned[p.id]);
+  const buyCost=buyPlayers.reduce((s,p)=>s+p.price,0);
+  const chem=calcChem(squad);
+  document.getElementById('solverChemLbl').textContent='⚗️ کمیستری: '+chem;
+  document.getElementById('solverChemVal').textContent=chem+' / 33';
+  document.getElementById('solverChemFill').style.width=Math.round(chem/33*100)+'%';
+  document.getElementById('solverSummary').innerHTML=`
+    <div class="slv-stat"><div class="slv-stat-val slv-green">${ownedCount}</div><div class="slv-stat-lbl">دارید</div></div>
+    <div class="slv-stat"><div class="slv-stat-val slv-red">${buyPlayers.length}</div><div class="slv-stat-lbl">نیاز خرید</div></div>
+    <div class="slv-stat"><div class="slv-stat-val slv-gold">${fmtPrice(buyCost)}</div><div class="slv-stat-lbl">هزینه تخمینی</div></div>
+    <div class="slv-stat"><div class="slv-stat-val slv-purple">${squad.length}</div><div class="slv-stat-lbl">بازیکن</div></div>`;
+  if(!squad.length){
+    document.getElementById('solverPlayers').innerHTML=`<div style="text-align:center;padding:30px;color:var(--t3)">بازیکن کافی در دیتابیس یافت نشد</div>`;
+    return;
+  }
+  document.getElementById('solverPlayers').innerHTML=squad.map(p=>{
+    const isOwned=!!state.owned[p.id];
+    return `<div class="slv-player ${isOwned?'owned':'need-buy'}">
+      <div class="slv-rat">${p.rat}</div>
+      <div class="slv-info">
+        <div class="slv-name">${p.nameFA}</div>
+        <div class="slv-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
+      </div>
+      <div class="slv-price ${isOwned?'zero':''}">${isOwned?'✓ موجود':fmtPrice(p.price)}</div>
+      <button class="own-toggle ${isOwned?'is-owned':''}" onclick="toggleOwned('${p.id}')">${isOwned?'✓ دارم':'دارم؟'}</button>
+    </div>`;
+  }).join('');
+}
 
 /* ── RENDER OBJECTIVES ── */
 function renderObj(){
