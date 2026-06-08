@@ -481,6 +481,97 @@
     .draft-sum-lbl{font-size:11px;color:var(--t3)}
     .draft-sum-chem{font-size:15px;font-weight:700;color:var(--green);margin-top:6px}
 
+    /* ─── GAMES SECTION ─── */
+    .game-tabs{display:flex;gap:7px;margin-bottom:14px;overflow-x:auto;padding-bottom:3px}
+    .game-tab{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .game-tab.active{background:var(--gold);border-color:var(--gold);color:#000}
+    .game-sec{display:none}
+    .game-sec.active{display:block}
+    /* GTP */
+    .gtp-score{display:flex;justify-content:space-around;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:10px;margin-bottom:12px;text-align:center}
+    .gtp-sv{font-size:20px;font-weight:900}
+    .gtp-sl{font-size:10px;color:var(--t3);margin-top:2px}
+    .gtp-hint{text-align:center;font-size:11px;color:var(--t2);margin-bottom:12px;padding:8px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px}
+    .gtp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+    .gtp-stat{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center}
+    .gtp-stat-v{font-size:22px;font-weight:900;color:var(--gold)}
+    .gtp-stat-l{font-size:9px;color:var(--t3);margin-top:1px}
+    .gtp-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+    .gtp-opt{padding:11px 8px;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--t1);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif;text-align:center}
+    .gtp-opt:hover:not([disabled]){border-color:var(--gold)}
+    .gtp-opt.ok{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green)}
+    .gtp-opt.ng{background:rgba(239,68,68,.12);border-color:var(--red);color:var(--red)}
+    .game-next{width:100%;padding:11px;border:1px solid var(--gold);border-radius:10px;background:rgba(245,176,20,.1);color:var(--gold);font-size:13px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif}
+    /* HOL */
+    .hol-arena{display:grid;grid-template-columns:1fr 28px 1fr;gap:8px;align-items:center;margin-bottom:12px}
+    .hol-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s}
+    .hol-card:hover:not(.done){border-color:var(--gold);transform:translateY(-2px)}
+    .hol-card.win{border-color:var(--green);background:rgba(34,197,94,.08)}
+    .hol-card.lose{border-color:var(--red);background:rgba(239,68,68,.06)}
+    .hol-rat{font-size:26px;font-weight:900;color:var(--gold)}
+    .hol-name{font-size:11px;font-weight:700;margin:4px 0 2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .hol-pos{font-size:9px;color:var(--t3)}
+    .hol-price{font-size:13px;font-weight:900;margin-top:8px;min-height:18px;color:var(--gold)}
+    .hol-vs{font-size:14px;font-weight:900;color:var(--t3);text-align:center}
+    /* PACK SIMULATOR */
+    .pack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:9px;margin-bottom:12px}
+    .pack-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center;cursor:pointer;transition:all .2s}
+    .pack-item:hover{border-color:var(--gold);transform:translateY(-2px)}
+    .pack-icon{font-size:24px;margin-bottom:5px}
+    .pack-iname{font-size:11px;font-weight:700;color:var(--t1);margin-bottom:2px}
+    .pack-icost{font-size:10px;color:var(--gold)}
+    .pack-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:7px;margin-bottom:12px}
+    .pcard-flip{perspective:700px;height:118px}
+    .pcard-flip-inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+    .pcard-flip.done .pcard-flip-inner{transform:rotateY(180deg)}
+    .pcard-f,.pcard-b{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+    .pcard-f{background:linear-gradient(135deg,var(--bg3),var(--border2))}
+    .pcard-f-ico{font-size:28px}
+    .pcard-b{transform:rotateY(180deg);flex-direction:column;gap:3px;padding:5px}
+    .pack-b-rat{font-size:17px;font-weight:900;color:var(--gold)}
+    .pack-b-name{font-size:9px;font-weight:700;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;padding:0 2px}
+    .pack-b-pos{font-size:8px;color:var(--t3)}
+    /* CARD CREATOR */
+    .cc-overlay{position:fixed;inset:0;z-index:450;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:14px}
+    .cc-overlay.open{display:flex}
+    .cc-box{background:var(--bg1);border:1px solid var(--border2);border-radius:18px;padding:16px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+    .cc-head{font-size:14px;font-weight:800;color:var(--gold);text-align:center}
+    .cc-body{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:460px){.cc-body{grid-template-columns:1fr}}
+    .cc-form{display:flex;flex-direction:column;gap:7px}
+    .cc-field label{font-size:10px;color:var(--t3);display:block;margin-bottom:2px}
+    .cc-inp{width:100%;padding:7px 9px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--t1);font-size:12px;font-family:'Vazirmatn',sans-serif;direction:rtl}
+    .cc-inp:focus{outline:none;border-color:var(--gold)}
+    .cc-prev{display:flex;align-items:center;justify-content:center;padding:10px 0;transform:scale(1.2);transform-origin:center}
+    .cc-close{width:100%;padding:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif;margin-top:4px}
+    /* UPGRADE HUB */
+    .upg-tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:3px}
+    .upg-tab{padding:5px 13px;border-radius:18px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Vazirmatn',sans-serif;flex-shrink:0}
+    .upg-tab.active{background:rgba(20,184,166,.12);border-color:var(--teal);color:var(--teal)}
+    .upg-list{display:flex;flex-direction:column;gap:7px}
+    .upg-row{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:9px 10px}
+    .upg-row.hot{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.04)}
+    .upg-side{flex:1;text-align:center}
+    .upg-rat{font-size:20px;font-weight:900}
+    .upg-rl{font-size:8px;color:var(--t3);margin-top:1px}
+    .upg-mid{text-align:center;flex-shrink:0;min-width:80px}
+    .upg-arr{font-size:16px;color:var(--gold)}
+    .upg-pname{font-size:10px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80px}
+    .upg-tag{display:inline-block;font-size:8px;font-weight:700;padding:2px 5px;border-radius:5px;margin-top:2px}
+    .upg-tag-hot{background:rgba(34,197,94,.15);color:var(--green)}
+    .upg-tag-done{background:rgba(59,130,246,.15);color:#7EB8FF}
+    .upg-pills{display:flex;gap:3px;justify-content:center;margin-top:3px;flex-wrap:wrap}
+    .upg-pill{font-size:8px;font-weight:700;padding:1px 4px;border-radius:4px;background:var(--bg3)}
+    /* EVO CHAIN RANKING */
+    .evo-sec-hd{font-size:12px;font-weight:700;color:var(--t2);padding:12px 0 8px;border-top:1px solid var(--border);margin-top:12px;display:flex;align-items:center;gap:6px}
+    .evo-rank-list{display:flex;flex-direction:column;gap:6px}
+    .evo-rank-row{display:flex;align-items:center;gap:9px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:9px 10px}
+    .evo-rn{width:20px;font-size:13px;font-weight:900;text-align:center;flex-shrink:0}
+    .evo-ri{flex:1;min-width:0}
+    .evo-rname{font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .evo-rmeta{font-size:9px;color:var(--t3);margin-top:2px}
+    .evo-rxp{font-size:11px;font-weight:900;color:#D4A0FF;flex-shrink:0;white-space:nowrap}
+
     /* ─── SBC SOLVER ─── */
     .solver-btn{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;border:1px solid rgba(168,85,247,.4);background:rgba(168,85,247,.08);color:#D4A0FF;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
     .solver-btn:hover{background:rgba(168,85,247,.18);border-color:#A855F7}
@@ -659,6 +750,7 @@
     <button class="f-btn" id="pfb-wl" onclick="togglePF('wl')">👁️ واچ‌لیست <span id="wl-cnt"></span></button>
     <button class="adv-toggle" id="advToggleBtn" onclick="toggleAdvFilter()">🎛️ فیلتر آمار</button>
     <button class="adv-toggle" onclick="showPlayStyleGuide()" style="border-color:rgba(59,130,246,.4);color:#7EB8FF">🎮 PlayStyle</button>
+    <button class="adv-toggle" onclick="openCC()" style="border-color:rgba(245,176,20,.4);color:var(--gold)">🃏 ساخت کارت</button>
     <select class="sort-sel" id="plSort" onchange="renderPlayers()">
       <option value="rat">امتیاز: بالاترین</option>
       <option value="price-h">قیمت: بالاترین</option>
@@ -737,6 +829,52 @@
     <span class="section-cnt" id="evoSecCnt">0 تکامل</span>
   </div>
   <div class="evo-grid" id="evoGrid"></div>
+  <!-- UPGRADE HUB (N) -->
+  <div class="evo-sec-hd">🔄 هاب ارتقاء بازیکنان</div>
+  <div class="upg-tabs">
+    <button class="upg-tab active" data-f="all" onclick="setUpgFilter('all')">همه</button>
+    <button class="upg-tab" data-f="pending" onclick="setUpgFilter('pending')">⏳ در انتظار</button>
+    <button class="upg-tab" data-f="recent" onclick="setUpgFilter('recent')">✅ اخیراً ارتقاء</button>
+  </div>
+  <div class="upg-list" id="upgList"></div>
+  <!-- EVO CHAIN (P) -->
+  <div class="evo-sec-hd">🏆 بهترین ترتیب تکامل (بر اساس اولویت)</div>
+  <div class="evo-rank-list" id="evoChainList"></div>
+</main>
+
+<!-- ═══ GAMES SECTION ═══ -->
+<main class="main" id="sec-games" style="display:none">
+  <div class="section-row">
+    <span class="section-title">🎲 بازی‌ها و سرگرمی</span>
+  </div>
+  <div class="game-tabs">
+    <button class="game-tab active" onclick="setGameTab('gtp')">🎮 بازیکن کیه؟</button>
+    <button class="game-tab" onclick="setGameTab('hol')">⬆️ گران‌تره؟</button>
+    <button class="game-tab" onclick="setGameTab('pack')">📦 شبیه‌ساز پاکت</button>
+  </div>
+  <!-- A: Guess The Player -->
+  <div class="game-sec active" id="gs-gtp">
+    <div class="gtp-score">
+      <div><div class="gtp-sv v-gold" id="gtpScore">۰</div><div class="gtp-sl">امتیاز</div></div>
+      <div><div class="gtp-sv" style="color:#D4A0FF" id="gtpBest">۰</div><div class="gtp-sl">بهترین</div></div>
+      <div><div class="gtp-sv v-green" id="gtpStreak">۰</div><div class="gtp-sl">زنجیره</div></div>
+    </div>
+    <div id="gtpBody"></div>
+  </div>
+  <!-- B: Higher or Lower -->
+  <div class="game-sec" id="gs-hol">
+    <div class="gtp-score">
+      <div><div class="gtp-sv v-gold" id="holScore">۰</div><div class="gtp-sl">امتیاز</div></div>
+      <div><div class="gtp-sv" style="color:#D4A0FF" id="holBest">۰</div><div class="gtp-sl">بهترین</div></div>
+      <div><div class="gtp-sv v-green" id="holStreak">۰</div><div class="gtp-sl">زنجیره</div></div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:12px;padding:7px;background:var(--bg3);border-radius:8px">کدام بازیکن قیمت بالاتری دارد؟ روی کارت کلیک کن</div>
+    <div id="holBody"></div>
+  </div>
+  <!-- D: Pack Simulator -->
+  <div class="game-sec" id="gs-pack">
+    <div id="packBody"></div>
+  </div>
 </main>
 
 <!-- PLAYSTYLE GUIDE OVERLAY -->
@@ -779,6 +917,37 @@
     <input type="text" class="squad-search" id="squadSearch" placeholder="جستجوی بازیکن..." oninput="renderSquadPicker()" />
     <div class="squad-pl-grid" id="squadPickerList"></div>
     <button class="squad-picker-close" onclick="closeSquadPicker()">انصراف</button>
+  </div>
+</div>
+
+<!-- CARD CREATOR OVERLAY (C) -->
+<div class="cc-overlay" id="ccOverlay">
+  <div class="cc-box">
+    <div class="cc-head">🃏 ساخت کارت FUT اختصاصی</div>
+    <div class="cc-body">
+      <div class="cc-form">
+        <div class="cc-field"><label>نام بازیکن (فارسی)</label><input class="cc-inp" id="ccName" placeholder="مثلاً: علی دایی" oninput="renderCC()"/></div>
+        <div class="cc-field"><label>امتیاز (۱-۹۹)</label><input class="cc-inp" id="ccRat" type="number" min="1" max="99" value="90" oninput="renderCC()"/></div>
+        <div class="cc-field"><label>پوزیشن</label>
+          <select class="cc-inp" id="ccPos" onchange="renderCC()">
+            <option>ST</option><option>CF</option><option>LW</option><option>RW</option><option>CAM</option>
+            <option>CM</option><option>CDM</option><option>LM</option><option>RM</option>
+            <option>LB</option><option>RB</option><option>CB</option><option>GK</option>
+          </select>
+        </div>
+        <div class="cc-field"><label>پرچم (ایموجی)</label><input class="cc-inp" id="ccFlag" placeholder="🇮🇷" value="🇮🇷" oninput="renderCC()"/></div>
+        <div class="cc-field"><label>باشگاه</label><input class="cc-inp" id="ccClub" placeholder="Persepolis FC" oninput="renderCC()"/></div>
+        <div class="cc-field"><label>نوع کارت</label>
+          <select class="cc-inp" id="ccType" onchange="renderCC()">
+            <option value="gold">طلایی Gold</option><option value="tots">TOTS</option>
+            <option value="toty">TOTY</option><option value="hero">Hero</option>
+            <option value="special">Special</option><option value="silver">نقره‌ای</option>
+          </select>
+        </div>
+      </div>
+      <div class="cc-prev" id="ccPreview"></div>
+    </div>
+    <button class="cc-close" onclick="closeCC()">بستن</button>
   </div>
 </div>
 
@@ -2200,15 +2369,258 @@ document.addEventListener('keydown',e=>{
 });
 
 /* ── SECTION SWITCH ── */
+/* ── GAMES: SHARED ── */
+let activeGameTab='gtp';
+function setGameTab(t){
+  activeGameTab=t;
+  document.querySelectorAll('.game-tab').forEach((b,i)=>b.classList.toggle('active',['gtp','hol','pack'][i]===t));
+  document.querySelectorAll('.game-sec').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('gs-'+t);if(el)el.classList.add('active');
+  renderActiveGame();
+}
+function renderActiveGame(){
+  if(activeGameTab==='gtp')initGTP();
+  else if(activeGameTab==='hol')renderHOL();
+  else if(activeGameTab==='pack')renderPackBody();
+}
+
+/* ── FEATURE A: GUESS THE PLAYER ── */
+let gtpState={score:0,streak:0,best:0,round:0,answered:false,correct:null};
+function initGTP(){
+  gtpState.answered=false;
+  const seed=hashInt('gtp'+gtpState.round+(Date.now()%9999).toString());
+  const pool=[...PLAYERS_RAW].sort((a,b)=>(hashInt(a.id+seed)%9999)-(hashInt(b.id+seed)%9999));
+  gtpState.correct=pool[0];
+  const wrongs=pool.slice(1,4);
+  const opts=[gtpState.correct,...wrongs].sort((a,b)=>(hashInt(a.id+'ord'+seed)%9)-(hashInt(b.id+'ord'+seed)%9));
+  const p=gtpState.correct;
+  const stats=deterministicStats(p);
+  const posN={ATT:'مهاجم',MID:'هافبک',DEF:'مدافع',GK:'دروازه‌بان'};
+  document.getElementById('gtpBody').innerHTML=`
+    <div class="gtp-hint">📍 ${posN[p.posType]||p.posType} · ${p.flag} · ${p.leagueFA}</div>
+    <div class="gtp-stats">${stats.map(s=>`<div class="gtp-stat"><div class="gtp-stat-v">${s.v}</div><div class="gtp-stat-l">${s.lbl}</div></div>`).join('')}</div>
+    <div class="gtp-opts">${opts.map(o=>`<button class="gtp-opt" id="gopt-${o.id}" onclick="answerGTP('${o.id}')">${o.nameFA}</button>`).join('')}</div>
+    <button class="game-next" id="gtpNext" style="display:none" onclick="nextGTP()">سوال بعدی ←</button>`;
+}
+function answerGTP(pid){
+  if(gtpState.answered)return;
+  gtpState.answered=true;
+  const ok=pid===gtpState.correct.id;
+  document.querySelectorAll('.gtp-opt').forEach(b=>{
+    const id=b.id.replace('gopt-','');
+    if(id===gtpState.correct.id)b.classList.add('ok');
+    else if(id===pid&&!ok)b.classList.add('ng');
+    b.disabled=true;
+  });
+  if(ok){gtpState.score++;gtpState.streak++;if(gtpState.streak>gtpState.best)gtpState.best=gtpState.streak;toast('✅ درست! +۱','s');}
+  else{gtpState.streak=0;toast('❌ '+gtpState.correct.nameFA,'e');}
+  document.getElementById('gtpScore').textContent=gtpState.score;
+  document.getElementById('gtpBest').textContent=gtpState.best;
+  document.getElementById('gtpStreak').textContent=gtpState.streak;
+  const nx=document.getElementById('gtpNext');if(nx)nx.style.display='block';
+}
+function nextGTP(){gtpState.round++;initGTP();}
+
+/* ── FEATURE B: HIGHER OR LOWER ── */
+let holState={score:0,streak:0,best:0,round:0,answered:false,pA:null,pB:null};
+function initHOL(){
+  holState.answered=false;
+  const seed=hashInt('hol'+holState.round+(Date.now()%9999).toString());
+  const pool=[...PLAYERS_RAW].sort((a,b)=>(hashInt(a.id+seed)%9999)-(hashInt(b.id+seed)%9999));
+  holState.pA=pool[0];holState.pB=pool[1];
+  renderHOL();
+}
+function renderHOL(){
+  const a=holState.pA,b=holState.pB;if(!a||!b)return;
+  const ans=holState.answered;
+  const aWin=a.price>=b.price;
+  document.getElementById('holBody').innerHTML=`
+    <div class="hol-arena">
+      <div class="hol-card${ans?(aWin?' win':' lose'):''}" onclick="answerHOL('a')">
+        <div class="hol-rat">${a.rat}</div><div class="hol-name">${a.nameFA}</div>
+        <div class="hol-pos">${a.pos} · ${a.flag}</div>
+        <div class="hol-price">${ans?fmtPrice(a.price)+' سکه':'❓'}</div>
+      </div>
+      <div class="hol-vs">VS</div>
+      <div class="hol-card${ans?(!aWin?' win':' lose'):''}" onclick="answerHOL('b')">
+        <div class="hol-rat">${b.rat}</div><div class="hol-name">${b.nameFA}</div>
+        <div class="hol-pos">${b.pos} · ${b.flag}</div>
+        <div class="hol-price">${ans?fmtPrice(b.price)+' سکه':'❓'}</div>
+      </div>
+    </div>
+    ${ans?`<button class="game-next" onclick="holState.round++;initHOL()">دور بعد ←</button>`:''}`;
+}
+function answerHOL(pick){
+  if(holState.answered)return;
+  holState.answered=true;
+  const ok=(pick==='a'&&holState.pA.price>=holState.pB.price)||(pick==='b'&&holState.pB.price>=holState.pA.price);
+  if(ok){holState.score++;holState.streak++;if(holState.streak>holState.best)holState.best=holState.streak;toast('✅ درست!','s');}
+  else{holState.streak=0;toast('❌ اشتباه!','e');}
+  document.getElementById('holScore').textContent=holState.score;
+  document.getElementById('holBest').textContent=holState.best;
+  document.getElementById('holStreak').textContent=holState.streak;
+  renderHOL();
+}
+
+/* ── FEATURE C: CARD CREATOR ── */
+function openCC(){document.getElementById('ccOverlay').classList.add('open');renderCC();}
+function closeCC(){document.getElementById('ccOverlay').classList.remove('open');}
+function renderCC(){
+  const name=document.getElementById('ccName').value||'بازیکن شما';
+  const rat=Math.min(99,Math.max(1,parseInt(document.getElementById('ccRat').value)||90));
+  const pos=document.getElementById('ccPos').value||'ST';
+  const flag=document.getElementById('ccFlag').value||'🏳️';
+  const club=document.getElementById('ccClub').value||'باشگاه شما';
+  const type=document.getElementById('ccType').value||'gold';
+  const posTypeMap={ST:'ATT',CF:'ATT',LW:'ATT',RW:'ATT',CAM:'MID',CM:'MID',CDM:'MID',LM:'MID',RM:'MID',LB:'DEF',RB:'DEF',CB:'DEF',GK:'GK'};
+  const fp={id:'cc'+name,name,nameFA:name,rat,pos,posType:posTypeMap[pos]||'ATT',flag,club,leagueFA:'',cardType:type,imgId:null,price:0};
+  const stats=deterministicStats(fp);
+  const statsHTML=stats.map(s=>{const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';return`<div class="pstat"><span class="pstat-val ${cls}">${s.v}</span><span class="pstat-lbl">${s.lbl}</span></div>`;}).join('');
+  const bg=pcardImgCls(fp);const badge=CT_BADGE[type];
+  document.getElementById('ccPreview').innerHTML=`
+    <div class="pcard" style="width:148px;cursor:default">
+      <div class="pcard-img ${bg}">
+        <div class="pcard-rat">${rat}</div><div class="pcard-posb">${pos}</div>
+        ${badge?`<div class="pcard-type-badge ${badge[1]}">${badge[0]}</div>`:''}
+      </div>
+      <div class="pcard-stats">${statsHTML}</div>
+      <div class="pcard-body">
+        <div class="pcard-name">${name}</div>
+        <div class="pcard-club">${flag} ${club}</div>
+      </div>
+    </div>`;
+}
+
+/* ── FEATURE D: PACK SIMULATOR ── */
+const PACKS=[
+  {id:'gold',icon:'📦',nameFA:'Gold Pack',cost:'5,000',n:10,minRat:75},
+  {id:'rare-gold',icon:'🎁',nameFA:'Rare Gold Pack',cost:'7,500',n:12,minRat:78},
+  {id:'prime-players',icon:'🏅',nameFA:'Prime Gold Players',cost:'15,000',n:12,minRat:82},
+  {id:'mega',icon:'💎',nameFA:'Mega Pack',cost:'35,000',n:15,minRat:75},
+  {id:'ultimate',icon:'🌟',nameFA:'Ultimate Pack',cost:'150,000',n:12,minRat:86},
+];
+let packOpened=false,packCards=[],packPack=null;
+function renderPackBody(){
+  const el=document.getElementById('packBody');if(!el)return;
+  if(packOpened){
+    el.innerHTML=`
+      <button class="game-next" style="margin-bottom:10px" onclick="packOpened=false;renderPackBody()">← انتخاب پاکت دیگر</button>
+      <div style="text-align:center;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:10px">${packPack.nameFA} — ${packCards.length} کارت</div>
+      <div class="pack-cards">${packCards.map((p,i)=>`
+        <div class="pcard-flip" id="pf-${i}">
+          <div class="pcard-flip-inner">
+            <div class="pcard-f"><div class="pcard-f-ico">❓</div></div>
+            <div class="pcard-b ${pcardImgCls(p)}">
+              <div class="pack-b-rat">${p.rat}</div>
+              <div class="pack-b-name">${p.nameFA}</div>
+              <div class="pack-b-pos">${p.pos}</div>
+            </div>
+          </div>
+        </div>`).join('')}
+      </div>
+      <button class="game-next" onclick="flipAllPack()">🎴 برگردان همه کارت‌ها</button>`;
+  }else{
+    el.innerHTML=`
+      <div style="font-size:11px;color:var(--t3);margin-bottom:10px">پاکت مورد نظر را انتخاب کنید:</div>
+      <div class="pack-grid">${PACKS.map(pk=>`
+        <div class="pack-item" onclick="doOpenPack('${pk.id}')">
+          <div class="pack-icon">${pk.icon}</div>
+          <div class="pack-iname">${pk.nameFA}</div>
+          <div class="pack-icost">💰 ${pk.cost}</div>
+        </div>`).join('')}
+      </div>`;
+  }
+}
+function doOpenPack(pid){
+  packPack=PACKS.find(p=>p.id===pid);if(!packPack)return;
+  const seed=hashInt(pid+(Date.now()%999999).toString());
+  let pool=[...PLAYERS_RAW].filter(p=>p.rat>=packPack.minRat).sort((a,b)=>(hashInt(a.id+seed)%9999)-(hashInt(b.id+seed)%9999));
+  if(pool.length<packPack.n)pool=[...PLAYERS_RAW].sort((a,b)=>(hashInt(a.id+seed)%9999)-(hashInt(b.id+seed)%9999));
+  packCards=pool.slice(0,packPack.n);
+  packOpened=true;renderPackBody();
+}
+function flipAllPack(){
+  let d=0;document.querySelectorAll('.pcard-flip').forEach(c=>{setTimeout(()=>c.classList.add('done'),d);d+=80;});
+}
+
+/* ── FEATURE N: UPGRADE HUB ── */
+let upgFilter='all';
+function setUpgFilter(f){
+  upgFilter=f;
+  document.querySelectorAll('.upg-tab').forEach(t=>t.classList.toggle('active',t.dataset.f===f));
+  renderUpgHub();
+}
+function renderUpgHub(){
+  const el=document.getElementById('upgList');if(!el)return;
+  const posN={ATT:'مهاجم',MID:'هافبک',DEF:'مدافع',GK:'دروازه‌بان'};
+  let players=[...PLAYERS_RAW].filter(p=>{
+    const h=hashInt(p.id+'upg2');
+    if(upgFilter==='pending')return h%5===0;
+    if(upgFilter==='recent')return h%5===1;
+    return h%5<=1;
+  }).slice(0,18);
+  if(!players.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--t3)">بازیکنی یافت نشد</div>`;return;}
+  el.innerHTML=players.map(p=>{
+    const h=hashInt(p.id+'upg2');
+    const isPending=h%5===0;
+    const boost=isPending?2:1;
+    const after={...p,rat:Math.min(99,p.rat+boost)};
+    const bs=deterministicStats(p),as=deterministicStats(after);
+    return `<div class="upg-row ${isPending?'hot':''}">
+      <div class="upg-side">
+        <div class="upg-rat" style="color:var(--t2)">${p.rat}</div>
+        <div class="upg-rl">قبل</div>
+        <div class="upg-pills">${bs.slice(0,3).map(s=>`<span class="upg-pill">${s.lbl} ${s.v}</span>`).join('')}</div>
+      </div>
+      <div class="upg-mid">
+        <div class="upg-arr">→</div>
+        <div class="upg-pname">${p.nameFA}</div>
+        <div class="upg-tag ${isPending?'upg-tag-hot':'upg-tag-done'}">${isPending?'در انتظار':'اخیراً'}</div>
+        <div style="font-size:8px;color:var(--t3);margin-top:2px">${p.flag} ${posN[p.posType]||p.posType}</div>
+      </div>
+      <div class="upg-side">
+        <div class="upg-rat" style="color:var(--gold)">${after.rat}</div>
+        <div class="upg-rl">بعد</div>
+        <div class="upg-pills">${as.slice(0,3).map(s=>`<span class="upg-pill" style="color:var(--gold)">${s.lbl} ${s.v}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── FEATURE P: EVO CHAIN RANKING ── */
+function renderEvoChain(){
+  const el=document.getElementById('evoChainList');if(!el)return;
+  const tierScore={rep:5,once:3,event:1};
+  const sorted=[...EVO_RAW].map(e=>{
+    const used=state.evoProgs[e.id]||0;
+    const remaining=Math.max(0,e.maxUses-used);
+    const tier=e.badgeCls.includes('rep')?5:e.badgeCls.includes('once')?3:1;
+    const score=remaining*tier;
+    return{...e,remaining,score};
+  }).filter(e=>e.remaining>0).sort((a,b)=>b.score-a.score);
+  if(!sorted.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--green)">🎉 همه تکامل‌ها کامل شده!</div>`;return;}
+  const medals=['🥇','🥈','🥉'];
+  el.innerHTML=sorted.map((e,i)=>`
+    <div class="evo-rank-row">
+      <div class="evo-rn">${medals[i]||'#'+(i+1)}</div>
+      <div class="evo-ri">
+        <div class="evo-rname">${e.nameFA}</div>
+        <div class="evo-rmeta">${e.remaining} بار باقی‌مانده · ${e.badge} · ${e.reward}</div>
+      </div>
+      <div class="evo-rxp">اولویت ${e.score}</div>
+    </div>`).join('');
+}
+
 function showSec(sec){
-  ['obj','sbc','players','squad','evo'].forEach(s=>{
+  ['obj','sbc','players','squad','evo','games'].forEach(s=>{
     const el=document.getElementById('sec-'+s);
     const bn=document.getElementById('bn-'+s);
     if(el)el.style.display=s===sec?'block':'none';
     if(bn)bn.classList.toggle('active',s===sec);
   });
   if(sec==='squad')renderPitch();
-  if(sec==='evo')renderEvo();
+  if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
+  if(sec==='games'){renderActiveGame();}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -2222,8 +2634,10 @@ function init(){
   // Init watchlist badge count
   const wlN=Object.values(state.watchlist).filter(Boolean).length;
   const wlEl=document.getElementById('wl-cnt');if(wlEl&&wlN)wlEl.textContent=wlN;
+  if(!state.owned)state.owned={};
   updateStats();renderObj();renderSBC();renderPlayers();
   startCountdowns();
+  initGTP();initHOL();renderPackBody();
   setTimeout(doFetch,1000);
 }
 document.addEventListener('DOMContentLoaded',init);
@@ -2253,6 +2667,10 @@ document.addEventListener('DOMContentLoaded',init);
   <button class="bnav-btn" id="bn-evo" onclick="showSec('evo')">
     <span class="bnav-icon">🧬</span>
     <span>تکامل</span>
+  </button>
+  <button class="bnav-btn" id="bn-games" onclick="showSec('games')">
+    <span class="bnav-icon">🎲</span>
+    <span>بازی</span>
   </button>
 </nav>
 
