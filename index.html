@@ -3,360 +3,224 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>اهداف FC26 | Objectives</title>
+  <meta name="theme-color" content="#F5B014" />
+  <link rel="manifest" href="manifest.json" />
+  <title>FC26 Hub | اهداف و SBC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg0: #04090F;
-      --bg1: #0B1220;
-      --bg2: #101928;
-      --bg3: #162235;
-      --border: #1C2E48;
-      --border2: #27405E;
-      --gold: #F5B014;
-      --gold2: #FFCC44;
-      --gold3: #C8920F;
-      --green: #22C55E;
-      --red: #EF4444;
-      --orange: #F97316;
-      --blue: #3B82F6;
-      --purple: #A855F7;
-      --teal: #14B8A6;
-      --t1: #EEF4FF;
-      --t2: #8FA3C0;
-      --t3: #4A5F7A;
-      --t4: #273548;
+      --bg0:#04090F; --bg1:#0B1220; --bg2:#101928; --bg3:#162235;
+      --border:#1C2E48; --border2:#27405E;
+      --gold:#F5B014; --gold2:#FFCC44; --gold3:#C8920F;
+      --green:#22C55E; --red:#EF4444; --orange:#F97316;
+      --blue:#3B82F6; --purple:#A855F7; --teal:#14B8A6;
+      --t1:#EEF4FF; --t2:#8FA3C0; --t3:#4A5F7A; --t4:#273548;
     }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
-      background: var(--bg0);
-      color: var(--t1);
-      min-height: 100vh;
-      direction: rtl;
-      font-size: 14px;
-    }
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg0); }
-    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Vazirmatn',system-ui,sans-serif;background:var(--bg0);color:var(--t1);min-height:100vh;direction:rtl;font-size:14px}
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:var(--bg0)}
+    ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
-    /* ── HEADER ─────────────────────────────── */
-    .header {
-      background: linear-gradient(180deg, var(--bg1) 0%, rgba(11,18,32,0.95) 100%);
-      border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(16px);
-    }
-    .header-inner {
-      max-width: 1400px; margin: 0 auto;
-      padding: 0 20px;
-    }
-    .header-top {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      padding: 14px 0; gap: 12px; flex-wrap: wrap;
-    }
-    .logo { display: flex; align-items: center; gap: 10px; }
-    .logo-fc {
-      background: linear-gradient(135deg, var(--gold2), var(--gold3));
-      color: #000; font-weight: 900; font-size: 17px;
-      padding: 5px 13px; border-radius: 8px; letter-spacing: -0.5px;
-    }
-    .logo-title {
-      font-size: 20px; font-weight: 700;
-      background: linear-gradient(90deg, var(--gold2), var(--gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .status-pill {
-      display: flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 12px; font-weight: 600; border: 1px solid;
-      transition: all .3s;
-    }
-    .status-pill.online { color: var(--green); border-color: var(--green); background: rgba(34,197,94,.1); }
-    .status-pill.offline { color: var(--t3); border-color: var(--border); background: rgba(255,255,255,.02); }
-    .status-pill.syncing { color: var(--gold); border-color: var(--gold); background: rgba(245,176,20,.1); }
-    .dot { width: 7px; height: 7px; border-radius: 50%; }
-    .online .dot { background: var(--green); animation: blink 1.8s infinite; }
-    .offline .dot { background: var(--t4); }
-    .syncing .dot { background: var(--gold); animation: blink .6s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    /* HEADER */
+    .header{background:linear-gradient(180deg,var(--bg1) 0%,rgba(11,18,32,.95) 100%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:blur(16px)}
+    .header-inner{max-width:1400px;margin:0 auto;padding:0 20px}
+    .header-top{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-fc{background:linear-gradient(135deg,var(--gold2),var(--gold3));color:#000;font-weight:900;font-size:17px;padding:5px 13px;border-radius:8px;letter-spacing:-.5px}
+    .logo-title{font-size:20px;font-weight:700;background:linear-gradient(90deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .status-pill{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid;transition:all .3s}
+    .status-pill.online{color:var(--green);border-color:var(--green);background:rgba(34,197,94,.1)}
+    .status-pill.offline{color:var(--t3);border-color:var(--border);background:rgba(255,255,255,.02)}
+    .status-pill.syncing{color:var(--gold);border-color:var(--gold);background:rgba(245,176,20,.1)}
+    .dot{width:7px;height:7px;border-radius:50%}
+    .online .dot{background:var(--green);animation:blink 1.8s infinite}
+    .offline .dot{background:var(--t4)}
+    .syncing .dot{background:var(--gold);animation:blink .6s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .last-upd{font-size:11px;color:var(--t3);white-space:nowrap}
+    .btn-refresh{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--gold),var(--gold3));color:#000;border:none;border-radius:9px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .btn-refresh:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(245,176,20,.4)}
+    .btn-refresh:disabled{opacity:.6;pointer-events:none}
+    .btn-refresh.spinning svg{animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .stats-bar{display:flex;gap:20px;padding:10px 0;border-top:1px solid var(--border);overflow-x:auto;white-space:nowrap}
+    .stat{display:flex;align-items:center;gap:6px}
+    .stat-lbl{color:var(--t3);font-size:12px}
+    .stat-val{font-size:13px;font-weight:700}
+    .v-gold{color:var(--gold)} .v-green{color:var(--green)} .v-blue{color:var(--blue)} .v-orange{color:var(--orange)}
 
-    .last-upd { font-size: 11px; color: var(--t3); white-space: nowrap; }
-    .btn-refresh {
-      display: flex; align-items: center; gap: 7px;
-      background: linear-gradient(135deg, var(--gold), var(--gold3));
-      color: #000; border: none; border-radius: 9px;
-      padding: 8px 16px; font-size: 13px; font-weight: 700;
-      cursor: pointer; transition: all .2s;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-    .btn-refresh:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(245,176,20,.4); }
-    .btn-refresh:active { transform: translateY(0); }
-    .btn-refresh:disabled { opacity: .6; pointer-events: none; }
-    .btn-refresh svg { transition: transform .3s; }
-    .btn-refresh.spinning svg { animation: spin .7s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* SECTION NAV */
+    .sec-nav{display:flex;background:var(--bg1);border-bottom:2px solid var(--border);position:sticky;top:67px;z-index:49}
+    .sec-btn{flex:1;max-width:220px;padding:13px 24px;background:none;border:none;border-bottom:3px solid transparent;color:var(--t2);font-size:14px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:-2px}
+    .sec-btn:hover{color:var(--t1);background:rgba(255,255,255,.03)}
+    .sec-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+    .sec-cnt-pill{background:rgba(245,176,20,.15);color:var(--gold);border-radius:10px;padding:1px 7px;font-size:11px}
 
-    .stats-bar {
-      display: flex; gap: 20px; padding: 10px 0;
-      border-top: 1px solid var(--border);
-      overflow-x: auto; white-space: nowrap;
-    }
-    .stat { display: flex; align-items: center; gap: 6px; }
-    .stat-lbl { color: var(--t3); font-size: 12px; }
-    .stat-val { font-size: 13px; font-weight: 700; }
-    .v-gold { color: var(--gold); }
-    .v-green { color: var(--green); }
-    .v-blue { color: var(--blue); }
-    .v-orange { color: var(--orange); }
-
-    /* ── MAIN ───────────────────────────────── */
-    .main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    /* MAIN */
+    .main{max-width:1400px;margin:0 auto;padding:20px}
 
     /* Search */
-    .search-wrap { position: relative; margin-bottom: 14px; }
-    .search-wrap svg {
-      position: absolute; right: 15px; top: 50%;
-      transform: translateY(-50%); color: var(--t3); pointer-events: none;
-    }
-    .search-input {
-      width: 100%; background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 13px 46px 13px 14px;
-      color: var(--t1); font-size: 14px;
-      font-family: 'Vazirmatn', sans-serif;
-      transition: border-color .2s, box-shadow .2s;
-      direction: rtl;
-    }
-    .search-input:focus {
-      outline: none; border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(245,176,20,.12);
-    }
-    .search-input::placeholder { color: var(--t3); }
+    .search-wrap{position:relative;margin-bottom:14px}
+    .search-wrap svg{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--t3);pointer-events:none}
+    .search-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:13px 46px 13px 14px;color:var(--t1);font-size:14px;font-family:'Vazirmatn',sans-serif;transition:border-color .2s,box-shadow .2s;direction:rtl}
+    .search-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,176,20,.12)}
+    .search-input::placeholder{color:var(--t3)}
 
     /* Category tabs */
-    .cat-tabs {
-      display: flex; gap: 7px;
-      overflow-x: auto; padding-bottom: 3px;
-      margin-bottom: 12px;
-    }
-    .cat-tab {
-      display: flex; align-items: center; gap: 5px;
-      padding: 7px 15px; border-radius: 20px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--t2); font-size: 12px; font-weight: 600;
-      cursor: pointer; white-space: nowrap;
-      transition: all .2s; font-family: 'Vazirmatn', sans-serif;
-    }
-    .cat-tab:hover { border-color: var(--border2); color: var(--t1); }
-    .cat-tab.active { background: var(--gold); border-color: var(--gold); color: #000; }
-    .cat-cnt {
-      background: rgba(0,0,0,.2); border-radius: 9px;
-      padding: 1px 6px; font-size: 10px;
-    }
-    .cat-tab.active .cat-cnt { background: rgba(0,0,0,.3); }
+    .cat-tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:3px;margin-bottom:12px}
+    .cat-tab{display:flex;align-items:center;gap:5px;padding:7px 15px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .cat-tab:hover{border-color:var(--border2);color:var(--t1)}
+    .cat-tab.active{background:var(--gold);border-color:var(--gold);color:#000}
+    .cat-cnt{background:rgba(0,0,0,.2);border-radius:9px;padding:1px 6px;font-size:10px}
+    .cat-tab.active .cat-cnt{background:rgba(0,0,0,.3)}
 
     /* Filter row */
-    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
-    .f-btn {
-      display: flex; align-items: center; gap: 5px;
-      padding: 6px 13px; border-radius: 18px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--t2); font-size: 12px; cursor: pointer;
-      transition: all .2s; font-family: 'Vazirmatn', sans-serif;
-    }
-    .f-btn:hover { border-color: var(--border2); color: var(--t1); }
-    .f-btn.active { background: rgba(245,176,20,.1); border-color: var(--gold); color: var(--gold); }
-    .sort-sel {
-      padding: 6px 13px; border-radius: 18px;
-      border: 1px solid var(--border); background: var(--bg2);
-      color: var(--t2); font-size: 12px; cursor: pointer;
-      font-family: 'Vazirmatn', sans-serif; direction: rtl;
-    }
+    .filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+    .f-btn{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:18px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:12px;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .f-btn:hover{border-color:var(--border2);color:var(--t1)}
+    .f-btn.active{background:rgba(245,176,20,.1);border-color:var(--gold);color:var(--gold)}
+    .sort-sel{padding:6px 13px;border-radius:18px;border:1px solid var(--border);background:var(--bg2);color:var(--t2);font-size:12px;cursor:pointer;font-family:'Vazirmatn',sans-serif;direction:rtl}
 
     /* Section row */
-    .section-row {
-      display: flex; justify-content: space-between;
-      align-items: center; margin-bottom: 16px;
-    }
-    .section-title { font-size: 14px; color: var(--t2); font-weight: 600; }
-    .section-cnt { font-size: 12px; color: var(--t3); }
+    .section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .section-title{font-size:14px;color:var(--t2);font-weight:600}
+    .section-cnt{font-size:12px;color:var(--t3)}
 
-    /* ── GRID ───────────────────────────────── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-      gap: 14px;
-    }
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
 
-    /* ── CARD ───────────────────────────────── */
-    .card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 15px; padding: 18px;
-      transition: all .22s; position: relative; overflow: hidden;
-    }
-    .card::after {
-      content: ''; position: absolute; top: 0; right: 0; left: 0;
-      height: 2px; opacity: 0;
-      background: linear-gradient(90deg, transparent, var(--cat-color, var(--gold)), transparent);
-      transition: opacity .3s;
-    }
-    .card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.5); }
-    .card:hover::after { opacity: 1; }
-    .card.done { border-color: rgba(34,197,94,.25); background: linear-gradient(135deg, var(--bg2), rgba(34,197,94,.04)); }
-    .card.fav { border-color: rgba(245,176,20,.25); }
+    /* CARD */
+    .card{background:var(--bg2);border:1px solid var(--border);border-radius:15px;padding:18px;transition:all .22s;position:relative;overflow:hidden}
+    .card::after{content:'';position:absolute;top:0;right:0;left:0;height:2px;opacity:0;background:linear-gradient(90deg,transparent,var(--cat-color,var(--gold)),transparent);transition:opacity .3s}
+    .card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+    .card:hover::after{opacity:1}
+    .card.done{border-color:rgba(34,197,94,.25);background:linear-gradient(135deg,var(--bg2),rgba(34,197,94,.04))}
+    .card.fav{border-color:rgba(245,176,20,.25)}
 
     /* Card head */
-    .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 13px; }
-    .card-head-left { flex: 1; }
-    .badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
-    .badge {
-      padding: 2px 9px; border-radius: 10px;
-      font-size: 10px; font-weight: 700;
-    }
-    .b-weekly  { background: rgba(59,130,246,.18); color: #7EB8FF; }
-    .b-daily   { background: rgba(168,85,247,.18);  color: #D4A0FF; }
-    .b-milestone { background: rgba(245,176,20,.18); color: var(--gold); }
-    .b-event   { background: rgba(239,68,68,.18);   color: #FF9090; }
-    .b-seasonal { background: rgba(34,197,94,.18);  color: #6EE6A6; }
-    .b-league  { background: rgba(20,184,166,.18);  color: #5EE0D4; }
-    .b-easy    { background: rgba(34,197,94,.12);   color: #6EE6A6; }
-    .b-medium  { background: rgba(245,176,20,.12);  color: var(--gold); }
-    .b-hard    { background: rgba(239,68,68,.12);   color: #FF9090; }
-    .b-done    { background: rgba(34,197,94,.15);   color: #6EE6A6; }
-    .card-name { font-size: 15px; font-weight: 700; line-height: 1.35; }
-    .fav-btn {
-      background: none; border: none; cursor: pointer;
-      font-size: 19px; line-height: 1; transition: transform .2s;
-      flex-shrink: 0; margin-right: 8px;
-    }
-    .fav-btn:hover { transform: scale(1.25); }
+    .card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px}
+    .card-head-left{flex:1}
+    .badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
+    .badge{padding:2px 9px;border-radius:10px;font-size:10px;font-weight:700}
+    .b-weekly{background:rgba(59,130,246,.18);color:#7EB8FF}
+    .b-daily{background:rgba(168,85,247,.18);color:#D4A0FF}
+    .b-milestone{background:rgba(245,176,20,.18);color:var(--gold)}
+    .b-event{background:rgba(239,68,68,.18);color:#FF9090}
+    .b-seasonal{background:rgba(34,197,94,.18);color:#6EE6A6}
+    .b-league{background:rgba(20,184,166,.18);color:#5EE0D4}
+    .b-easy{background:rgba(34,197,94,.12);color:#6EE6A6}
+    .b-medium{background:rgba(245,176,20,.12);color:var(--gold)}
+    .b-hard{background:rgba(239,68,68,.12);color:#FF9090}
+    .b-done{background:rgba(34,197,94,.15);color:#6EE6A6}
+    .b-iconic{background:rgba(168,85,247,.18);color:#D4A0FF}
+    .b-foundation{background:rgba(20,184,166,.18);color:#5EE0D4}
+    .b-totw{background:rgba(59,130,246,.18);color:#7EB8FF}
+    .b-tots{background:rgba(245,176,20,.18);color:var(--gold)}
+    .b-limited{background:rgba(239,68,68,.18);color:#FF9090}
+    .card-name{font-size:15px;font-weight:700;line-height:1.35}
+    .fav-btn{background:none;border:none;cursor:pointer;font-size:19px;line-height:1;transition:transform .2s;flex-shrink:0;margin-right:8px}
+    .fav-btn:hover{transform:scale(1.25)}
 
-    /* Reward */
-    .reward-box {
-      display: flex; align-items: center; gap: 11px;
-      background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 11px; padding: 11px; margin-bottom: 13px;
-    }
-    .fut-card {
-      width: 52px; height: 64px; border-radius: 7px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      font-weight: 900; flex-shrink: 0;
-    }
-    .fc-gold    { background: linear-gradient(145deg,#C8A230,#F0D050,#B0880A); color: #1A0E00; }
-    .fc-silver  { background: linear-gradient(145deg,#888,#C4C4C4,#707070);     color: #111; }
-    .fc-tots    { background: linear-gradient(145deg,#145C28,#2A9452,#0E3D1A);  color: #A0F0B0; }
-    .fc-special { background: linear-gradient(145deg,#3A1468,#7030B8,#280D50);  color: #FFD700; }
-    .fc-pack    { background: linear-gradient(145deg,#0A2040,#1A4080,#081830);  color: #80C0FF; }
-    .fc-xp      { background: linear-gradient(145deg,#1A0830,#4A1080,#100620);  color: #E0A0FF; }
-    .fc-rat { font-size: 17px; }
-    .fc-pos { font-size: 8px; opacity: .8; margin-top: 1px; }
-    .fc-icon { font-size: 22px; }
-    .rew-info { flex: 1; }
-    .rew-lbl { font-size: 10px; color: var(--t3); margin-bottom: 2px; }
-    .rew-name { font-size: 13px; font-weight: 700; }
-    .rew-sub { font-size: 11px; color: var(--t2); margin-top: 2px; }
-    .rew-extras { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
-    .rew-extra { font-size: 10px; font-weight: 700; color: var(--gold); }
+    /* Reward box */
+    .reward-box{display:flex;align-items:center;gap:11px;background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:11px;margin-bottom:13px}
+
+    /* FUT Card */
+    .fut-card{width:52px;height:64px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;position:relative;overflow:hidden}
+    .fc-gold{background:linear-gradient(145deg,#C8A230,#F0D050,#B0880A);color:#1A0E00}
+    .fc-silver{background:linear-gradient(145deg,#888,#C4C4C4,#707070);color:#111}
+    .fc-tots{background:linear-gradient(145deg,#145C28,#2A9452,#0E3D1A);color:#A0F0B0}
+    .fc-special{background:linear-gradient(145deg,#3A1468,#7030B8,#280D50);color:#FFD700}
+    .fc-pack{background:linear-gradient(145deg,#0A2040,#1A4080,#081830);color:#80C0FF}
+    .fc-xp{background:linear-gradient(145deg,#1A0830,#4A1080,#100620);color:#E0A0FF}
+    .fc-rat{font-size:17px;z-index:2;position:relative}
+    .fc-pos{font-size:8px;opacity:.8;margin-top:1px;z-index:2;position:relative}
+    .fc-icon{font-size:22px}
+    /* Player face image inside card */
+    .fut-card .pface{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:52px;height:52px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 4px rgba(0,0,0,.5))}
+    .fut-card .fc-overlay{position:absolute;top:3px;right:0;left:0;display:flex;flex-direction:column;align-items:center;z-index:3}
+
+    .rew-info{flex:1}
+    .rew-lbl{font-size:10px;color:var(--t3);margin-bottom:2px}
+    .rew-name{font-size:13px;font-weight:700}
+    .rew-sub{font-size:11px;color:var(--t2);margin-top:2px}
+    .rew-extras{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+    .rew-extra{font-size:10px;font-weight:700;color:var(--gold)}
 
     /* Requirements */
-    .req-ttl { font-size: 10px; color: var(--t3); margin-bottom: 7px; letter-spacing: .4px; }
-    .req-list { list-style: none; }
-    .req-item {
-      display: flex; align-items: flex-start; gap: 7px;
-      font-size: 12px; color: var(--t2);
-      padding: 3px 0;
-      border-bottom: 1px solid rgba(255,255,255,.03);
-    }
-    .req-item:last-child { border-bottom: none; }
-    .req-dot { color: var(--gold); flex-shrink: 0; font-size: 14px; line-height: 1.2; }
-    .req-mb { margin-bottom: 13px; }
+    .req-ttl{font-size:10px;color:var(--t3);margin-bottom:7px;letter-spacing:.4px}
+    .req-list{list-style:none}
+    .req-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--t2);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+    .req-item:last-child{border-bottom:none}
+    .req-dot{color:var(--gold);flex-shrink:0;font-size:14px;line-height:1.2}
+    .req-mb{margin-bottom:13px}
+
+    /* SBC requirements */
+    .sbc-reqs{margin-bottom:13px}
+    .sbc-req-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+    .sbc-req-row:last-child{border-bottom:none}
+    .sbc-req-label{color:var(--t3)}
+    .sbc-req-val{color:var(--t1);font-weight:600;background:var(--bg3);padding:2px 8px;border-radius:6px;font-size:11px}
+
+    /* SBC Guide */
+    .sbc-guide{margin-bottom:13px}
+    .sbc-guide-btn{width:100%;padding:8px 12px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);border-radius:8px;color:#7EB8FF;font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif;text-align:right;transition:all .2s;display:flex;align-items:center;gap:6px}
+    .sbc-guide-btn:hover{background:rgba(59,130,246,.14)}
+    .sbc-guide-body{display:none;margin-top:8px;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--t2);line-height:1.85}
+    .sbc-guide-body.open{display:block}
+
+    /* Cost pill */
+    .sbc-cost-pill{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--green);font-weight:700}
 
     /* Progress */
-    .prog-wrap { margin-bottom: 13px; }
-    .prog-head { display: flex; justify-content: space-between; font-size: 11px; color: var(--t2); margin-bottom: 5px; }
-    .prog-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-    .prog-fill { height: 100%; border-radius: 2px; transition: width .5s; }
-    .pf-green { background: var(--green); }
-    .pf-gold  { background: var(--gold); }
-    .pf-blue  { background: var(--blue); }
+    .prog-wrap{margin-bottom:13px}
+    .prog-head{display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-bottom:5px}
+    .prog-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+    .prog-fill{height:100%;border-radius:2px;transition:width .5s}
+    .pf-green{background:var(--green)} .pf-gold{background:var(--gold)} .pf-blue{background:var(--blue)}
 
     /* Card footer */
-    .card-foot {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 11px; border-top: 1px solid var(--border);
-    }
-    .expiry { display: flex; align-items: center; gap: 5px; font-size: 11px; }
-    .exp-permanent { color: var(--t3); }
-    .exp-ok   { color: var(--t3); }
-    .exp-warn { color: var(--orange); }
-    .exp-crit { color: var(--red); }
-    .exp-gone { color: var(--red); }
-    .done-btn {
-      display: flex; align-items: center; gap: 5px;
-      padding: 5px 12px; border-radius: 7px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--t2); font-size: 11px; font-weight: 600;
-      cursor: pointer; transition: all .2s;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-    .done-btn:hover { border-color: var(--green); color: var(--green); background: rgba(34,197,94,.08); }
-    .done-btn.checked { background: rgba(34,197,94,.1); border-color: var(--green); color: var(--green); }
+    .card-foot{display:flex;justify-content:space-between;align-items:center;padding-top:11px;border-top:1px solid var(--border)}
+    .expiry{display:flex;align-items:center;gap:5px;font-size:11px}
+    .exp-permanent{color:var(--t3)} .exp-ok{color:var(--t3)} .exp-warn{color:var(--orange)} .exp-crit{color:var(--red)} .exp-gone{color:var(--red)}
+    .done-btn{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Vazirmatn',sans-serif}
+    .done-btn:hover{border-color:var(--green);color:var(--green);background:rgba(34,197,94,.08)}
+    .done-btn.checked{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green)}
 
-    /* ── SOURCES ────────────────────────────── */
-    .sources {
-      display: flex; gap: 10px; align-items: center;
-      margin-right: auto; font-size: 11px; color: var(--t3);
-    }
-    .src-link {
-      color: var(--t3); text-decoration: none;
-      border: 1px solid var(--border); padding: 3px 10px;
-      border-radius: 12px; transition: all .2s;
-    }
-    .src-link:hover { color: var(--gold); border-color: var(--gold); }
+    /* Sources */
+    .sources{display:flex;gap:10px;align-items:center;margin-right:auto;font-size:11px;color:var(--t3)}
+    .src-link{color:var(--t3);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:12px;transition:all .2s}
+    .src-link:hover{color:var(--gold);border-color:var(--gold)}
 
-    /* ── EMPTY ──────────────────────────────── */
-    .empty { text-align: center; padding: 80px 20px; color: var(--t3); }
-    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: .4; }
-    .empty h3 { font-size: 17px; color: var(--t2); margin-bottom: 8px; }
-    .empty p  { font-size: 13px; }
+    /* Empty */
+    .empty{text-align:center;padding:80px 20px;color:var(--t3)}
+    .empty-icon{font-size:48px;margin-bottom:16px;opacity:.4}
+    .empty h3{font-size:17px;color:var(--t2);margin-bottom:8px}
+    .empty p{font-size:13px}
 
-    /* ── TOAST ──────────────────────────────── */
-    #toasts {
-      position: fixed; bottom: 20px; left: 20px;
-      z-index: 100; display: flex; flex-direction: column; gap: 7px;
-    }
-    .toast {
-      padding: 11px 15px; border-radius: 9px;
-      font-size: 13px; font-weight: 500;
-      max-width: 300px; animation: toastIn .3s ease;
-      display: flex; align-items: center; gap: 9px;
-    }
-    .toast.s { background: rgba(34,197,94,.15); border: 1px solid var(--green); color: #6EE6A6; }
-    .toast.e { background: rgba(239,68,68,.15);  border: 1px solid var(--red);   color: #FFA0A0; }
-    .toast.i { background: rgba(59,130,246,.15); border: 1px solid var(--blue);  color: #90C0FF; }
-    @keyframes toastIn { from{ transform:translateX(-110%);opacity:0 } to{ transform:translateX(0);opacity:1 } }
+    /* Toast */
+    #toasts{position:fixed;bottom:20px;left:20px;z-index:100;display:flex;flex-direction:column;gap:7px}
+    .toast{padding:11px 15px;border-radius:9px;font-size:13px;font-weight:500;max-width:300px;animation:toastIn .3s ease;display:flex;align-items:center;gap:9px}
+    .toast.s{background:rgba(34,197,94,.15);border:1px solid var(--green);color:#6EE6A6}
+    .toast.e{background:rgba(239,68,68,.15);border:1px solid var(--red);color:#FFA0A0}
+    .toast.i{background:rgba(59,130,246,.15);border:1px solid var(--blue);color:#90C0FF}
+    @keyframes toastIn{from{transform:translateX(-110%);opacity:0}to{transform:translateX(0);opacity:1}}
+    mark.hl{background:rgba(245,176,20,.3);border-radius:2px;padding:0 2px;color:inherit}
 
-    /* ── HIGHLIGHT ──────────────────────────── */
-    mark.hl { background: rgba(245,176,20,.3); border-radius: 2px; padding: 0 2px; color: inherit; }
-
-    /* ── RESPONSIVE ─────────────────────────── */
-    @media(max-width:700px) {
-      .main { padding: 12px; }
-      .grid { grid-template-columns: 1fr; }
-      .header-inner { padding: 0 12px; }
-      .logo-title { font-size: 16px; }
-      .last-upd { display: none; }
+    @media(max-width:700px){
+      .main{padding:12px}
+      .grid{grid-template-columns:1fr}
+      .header-inner{padding:0 12px}
+      .logo-title{font-size:16px}
+      .last-upd{display:none}
     }
   </style>
 </head>
 <body>
 
-<!-- TOASTS -->
 <div id="toasts"></div>
 
 <!-- HEADER -->
@@ -365,12 +229,12 @@
     <div class="header-top">
       <div class="logo">
         <span class="logo-fc">FC26</span>
-        <span class="logo-title">اهداف و چالش‌ها</span>
+        <span class="logo-title">اهداف و SBC</span>
       </div>
       <div class="sources">
         منبع:
+        <a class="src-link" href="https://www.fut.gg/sbc/" target="_blank" rel="noopener">fut.gg/sbc</a>
         <a class="src-link" href="https://www.futbin.com/objectives" target="_blank" rel="noopener">futbin.com</a>
-        <a class="src-link" href="https://www.fut.gg/objectives"    target="_blank" rel="noopener">fut.gg</a>
       </div>
       <div class="header-right">
         <div class="status-pill offline" id="statusPill">
@@ -388,46 +252,46 @@
       </div>
     </div>
     <div class="stats-bar">
-      <div class="stat"><span class="stat-lbl">کل:</span>    <span class="stat-val v-gold"   id="sTotal">0</span></div>
-      <div class="stat"><span class="stat-lbl">تکمیل:</span> <span class="stat-val v-green"  id="sDone">0</span></div>
-      <div class="stat"><span class="stat-lbl">علاقه:</span> <span class="stat-val v-blue"   id="sFav">0</span></div>
+      <div class="stat"><span class="stat-lbl">اهداف:</span><span class="stat-val v-gold" id="sTotal">0</span></div>
+      <div class="stat"><span class="stat-lbl">تکمیل اهداف:</span><span class="stat-val v-green" id="sDone">0</span></div>
+      <div class="stat"><span class="stat-lbl">SBC:</span><span class="stat-val v-blue" id="sSBCTotal">0</span></div>
+      <div class="stat"><span class="stat-lbl">SBC تکمیل:</span><span class="stat-val v-green" id="sSBCDone">0</span></div>
+      <div class="stat"><span class="stat-lbl">علاقه‌مندی:</span><span class="stat-val v-blue" id="sFav">0</span></div>
       <div class="stat"><span class="stat-lbl">منقضی امروز:</span><span class="stat-val v-orange" id="sExpiring">0</span></div>
-      <div class="stat"><span class="stat-lbl">پیشرفت فصل:</span>
-        <span class="stat-val v-gold" id="sPct">۰٪</span>
-      </div>
     </div>
   </div>
 </header>
 
-<!-- MAIN -->
-<main class="main">
-  <!-- Search -->
+<!-- SECTION NAV -->
+<div class="sec-nav">
+  <button class="sec-btn active" id="sn-obj" onclick="showSec('obj')">
+    🎯 اهداف <span class="sec-cnt-pill" id="sp-obj">0</span>
+  </button>
+  <button class="sec-btn" id="sn-sbc" onclick="showSec('sbc')">
+    ⚗️ SBC <span class="sec-cnt-pill" id="sp-sbc">0</span>
+  </button>
+</div>
+
+<!-- ═══ OBJECTIVES SECTION ═══ -->
+<main class="main" id="sec-obj">
   <div class="search-wrap">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" class="search-input" id="searchInp"
-      placeholder="جستجو در نام، شرایط، جایزه، ملیت..."
-      oninput="render()" />
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="objSearch" placeholder="جستجو در اهداف، شرایط، جایزه..." oninput="renderObj()" />
   </div>
-
-  <!-- Category tabs -->
-  <div class="cat-tabs" id="catTabs">
-    <button class="cat-tab active" data-cat="all"       onclick="setCat('all')">همه <span class="cat-cnt" id="cn-all">0</span></button>
-    <button class="cat-tab"        data-cat="weekly"    onclick="setCat('weekly')">هفتگی <span class="cat-cnt" id="cn-weekly">0</span></button>
-    <button class="cat-tab"        data-cat="daily"     onclick="setCat('daily')">روزانه <span class="cat-cnt" id="cn-daily">0</span></button>
-    <button class="cat-tab"        data-cat="milestone" onclick="setCat('milestone')">مایل‌استون <span class="cat-cnt" id="cn-milestone">0</span></button>
-    <button class="cat-tab"        data-cat="event"     onclick="setCat('event')">رویداد <span class="cat-cnt" id="cn-event">0</span></button>
-    <button class="cat-tab"        data-cat="seasonal"  onclick="setCat('seasonal')">فصلی <span class="cat-cnt" id="cn-seasonal">0</span></button>
-    <button class="cat-tab"        data-cat="league"    onclick="setCat('league')">رقابتی <span class="cat-cnt" id="cn-league">0</span></button>
+  <div class="cat-tabs" id="objCatTabs">
+    <button class="cat-tab active" data-cat="all"       onclick="setObjCat('all')">همه <span class="cat-cnt" id="ocn-all">0</span></button>
+    <button class="cat-tab"        data-cat="weekly"    onclick="setObjCat('weekly')">هفتگی <span class="cat-cnt" id="ocn-weekly">0</span></button>
+    <button class="cat-tab"        data-cat="daily"     onclick="setObjCat('daily')">روزانه <span class="cat-cnt" id="ocn-daily">0</span></button>
+    <button class="cat-tab"        data-cat="milestone" onclick="setObjCat('milestone')">مایل‌استون <span class="cat-cnt" id="ocn-milestone">0</span></button>
+    <button class="cat-tab"        data-cat="event"     onclick="setObjCat('event')">رویداد <span class="cat-cnt" id="ocn-event">0</span></button>
+    <button class="cat-tab"        data-cat="seasonal"  onclick="setObjCat('seasonal')">فصلی <span class="cat-cnt" id="ocn-seasonal">0</span></button>
+    <button class="cat-tab"        data-cat="league"    onclick="setObjCat('league')">رقابتی <span class="cat-cnt" id="ocn-league">0</span></button>
   </div>
-
-  <!-- Filters -->
   <div class="filter-row">
-    <button class="f-btn" id="fb-fav"  onclick="toggleF('fav')">⭐ علاقه‌مندی‌ها</button>
-    <button class="f-btn" id="fb-inc"  onclick="toggleF('inc')">⏳ تکمیل نشده</button>
-    <button class="f-btn" id="fb-exp"  onclick="toggleF('exp')">🔥 در حال انقضا</button>
-    <select class="sort-sel" id="sortSel" onchange="render()">
+    <button class="f-btn" id="ofb-fav" onclick="toggleOF('fav')">⭐ علاقه‌مندی‌ها</button>
+    <button class="f-btn" id="ofb-inc" onclick="toggleOF('inc')">⏳ تکمیل نشده</button>
+    <button class="f-btn" id="ofb-exp" onclick="toggleOF('exp')">🔥 در حال انقضا</button>
+    <select class="sort-sel" id="objSort" onchange="renderObj()">
       <option value="def">مرتب‌سازی: پیش‌فرض</option>
       <option value="rew">جایزه: بالاترین</option>
       <option value="exp">انقضا: زودتر</option>
@@ -435,751 +299,650 @@
       <option value="az">نام: الفبا</option>
     </select>
   </div>
-
-  <!-- Section row -->
   <div class="section-row">
-    <span class="section-title" id="secTitle">همه اهداف</span>
-    <span class="section-cnt" id="secCnt"></span>
+    <span class="section-title" id="objSecTitle">همه اهداف</span>
+    <span class="section-cnt" id="objSecCnt"></span>
   </div>
+  <div class="grid" id="objGrid"></div>
+  <div class="empty" id="objEmpty" style="display:none">
+    <div class="empty-icon">🔍</div><h3>هدفی یافت نشد</h3><p>جستجو یا فیلتر خود را تغییر دهید</p>
+  </div>
+</main>
 
-  <!-- Grid -->
-  <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" style="display:none">
-    <div class="empty-icon">🔍</div>
-    <h3>هدفی یافت نشد</h3>
-    <p>جستجو یا فیلتر خود را تغییر دهید</p>
+<!-- ═══ SBC SECTION ═══ -->
+<main class="main" id="sec-sbc" style="display:none">
+  <div class="search-wrap">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" class="search-input" id="sbcSearch" placeholder="جستجو در SBC‌ها، شرایط، راهنما..." oninput="renderSBC()" />
+  </div>
+  <div class="cat-tabs" id="sbcCatTabs">
+    <button class="cat-tab active" data-cat="all"        onclick="setSBCCat('all')">همه <span class="cat-cnt" id="scn-all">0</span></button>
+    <button class="cat-tab"        data-cat="iconic"     onclick="setSBCCat('iconic')">آیکونیک <span class="cat-cnt" id="scn-iconic">0</span></button>
+    <button class="cat-tab"        data-cat="foundation" onclick="setSBCCat('foundation')">پایه <span class="cat-cnt" id="scn-foundation">0</span></button>
+    <button class="cat-tab"        data-cat="league"     onclick="setSBCCat('league')">لیگ <span class="cat-cnt" id="scn-league">0</span></button>
+    <button class="cat-tab"        data-cat="tots"       onclick="setSBCCat('tots')">TOTS <span class="cat-cnt" id="scn-tots">0</span></button>
+    <button class="cat-tab"        data-cat="limited"    onclick="setSBCCat('limited')">محدود <span class="cat-cnt" id="scn-limited">0</span></button>
+  </div>
+  <div class="filter-row">
+    <button class="f-btn" id="sfb-fav" onclick="toggleSF('fav')">⭐ علاقه‌مندی‌ها</button>
+    <button class="f-btn" id="sfb-inc" onclick="toggleSF('inc')">⏳ تکمیل نشده</button>
+    <button class="f-btn" id="sfb-exp" onclick="toggleSF('exp')">🔥 در حال انقضا</button>
+    <select class="sort-sel" id="sbcSort" onchange="renderSBC()">
+      <option value="def">مرتب‌سازی: پیش‌فرض</option>
+      <option value="rew">جایزه: بالاترین</option>
+      <option value="cost">هزینه: کمتر</option>
+      <option value="exp">انقضا: زودتر</option>
+      <option value="dif">سختی: بیشتر</option>
+    </select>
+  </div>
+  <div class="section-row">
+    <span class="section-title" id="sbcSecTitle">همه SBC‌ها</span>
+    <span class="section-cnt" id="sbcSecCnt"></span>
+  </div>
+  <div class="grid" id="sbcGrid"></div>
+  <div class="empty" id="sbcEmpty" style="display:none">
+    <div class="empty-icon">🔍</div><h3>SBC‌ای یافت نشد</h3><p>جستجو یا فیلتر خود را تغییر دهید</p>
   </div>
 </main>
 
 <script>
-/* ============================================================
-   UTILITY
-   ============================================================ */
-function daysFromNow(d) {
-  if (d == null) return null;
-  return new Date(Date.now() + d * 864e5).toISOString();
+/* ── UTILS ── */
+function daysFromNow(d){return new Date(Date.now()+d*864e5).toISOString();}
+function hoursFromNow(h){return new Date(Date.now()+h*36e5).toISOString();}
+function fmtExp(iso){
+  if(!iso)return{txt:'دائمی',cls:'exp-permanent',ico:'♾️'};
+  const diff=new Date(iso)-Date.now();
+  if(diff<0)return{txt:'منقضی',cls:'exp-gone',ico:'❌'};
+  const h=diff/36e5;
+  if(h<6) return{txt:`${Math.floor(h)}ساعت ${Math.floor((h%1)*60)}دقیقه`,cls:'exp-crit',ico:'🔥'};
+  if(h<24)return{txt:`${Math.floor(h)} ساعت دیگر`,cls:'exp-warn',ico:'⚠️'};
+  const d=Math.floor(h/24),rh=Math.floor(h%24);
+  if(d<3) return{txt:`${d} روز ${rh} ساعت`,cls:'exp-warn',ico:'⚠️'};
+  return{txt:`${d} روز دیگر`,cls:'exp-ok',ico:'📅'};
 }
-function hoursFromNow(h) {
-  return new Date(Date.now() + h * 36e5).toISOString();
+function isExpiring(o){if(!o.exp)return false;return(new Date(o.exp)-Date.now())<3*864e5;}
+function cardCls(rat,sp){
+  if(rat===0)return'fc-pack';
+  if(sp)return'fc-special';
+  if(rat>=94)return'fc-tots';
+  if(rat>=84)return'fc-gold';
+  return'fc-silver';
+}
+function hl(txt,q){
+  if(!q)return txt;
+  return txt.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<mark class="hl">$1</mark>');
 }
 
-/* ============================================================
-   DATA
-   ============================================================ */
-const RAW = [
-  /* ───── WEEKLY ───── */
-  {id:'w01', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'TOTW Weekly Challenge', nameFA:'چالش هفتگی تیم هفته',
-   rew:{type:'player', name:'Rodri', nameFA:'رودری', rat:87, pos:'CM', nat:'اسپانیا', flag:'🇪🇸', club:'Man City', sp:false},
-   reqs:[
-     {fa:'۵ بازی را با بازیکنان تیم هفته ببر'},
-     {fa:'۳ گل با بازیکنان تیم هفته بزن'},
-     {fa:'۲ بار دروازه‌ات را بسته نگه دار'}
-   ], exp: daysFromNow(5), xp:2000, coins:0},
+/* ── PLAYER IMAGE MAP ──
+   Images from futbin CDN: https://cdn.futbin.com/content/fifa26/img/players/{id}.png
+   Fallback: https://cdn.fut.gg/fc26/players/portrait/{id}.png
+*/
+const PIMG={
+  'Erling Haaland':239085,'Kylian Mbappé':231747,'Vinicius Jr':270566,
+  'Jude Bellingham':237692,'Rodri':231323,'Lamine Yamal':263631,
+  'Pedri':231683,'Jamal Musiala':258751,'Mohamed Salah':209331,
+  'Virgil van Dijk':203376,'Bruno Fernandes':212198,'Xavi Simons':257799,
+  'Kvaratskhelia':244726,'Rafael Leão':244722,'Ousmane Dembélé':231443,
+  'Bukayo Saka':246669,'Diogo Jota':243276,'Marcus Rashford':221015,
+  'Theo Hernandez':239109,'Joshua Kimmich':203460,'Kevin De Bruyne':192985,
+  'Robert Lewandowski':188545,'Harry Kane':202126,'Alisson':212831,
+  'Ederson':212835,'Trent Alexander-Arnold':220834,'Declan Rice':239904,
+  'Martin Ødegaard':231680,'William Saliba':258128,'Achraf Hakimi':232464,
+  'Marquinhos':176580,'Gianluigi Donnarumma':167495,'Eduardo Camavinga':263516,
+  'Phil Foden':222038,'Gabriel Martinelli':253819
+};
 
-  {id:'w02', cat:'weekly', catFA:'هفتگی', dif:'easy', difFA:'آسان',
-   name:'Premier League Attack', nameFA:'حمله لیگ برتر',
-   rew:{type:'player', name:'Diogo Jota', nameFA:'دیوگو ژوتا', rat:85, pos:'LW', nat:'پرتغال', flag:'🇵🇹', club:'Liverpool', sp:false},
-   reqs:[
-     {fa:'۱۰ گل در نبردهای دسته (کلاس جهانی) بزن'},
-     {fa:'از ۵ بازیکن لیگ برتر استفاده کن'},
-     {fa:'۳ بازی رقبا را ببر'}
-   ], exp: daysFromNow(5), xp:1500, coins:3000},
+function playerFUT(name,rat,pos,sp){
+  const id=PIMG[name];
+  const cls=cardCls(rat,sp);
+  if(id){
+    return `<div class="fut-card ${cls}">
+      <div class="fc-overlay">
+        ${rat?`<div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div>`:''}
+      </div>
+      <img class="pface"
+        src="https://cdn.futbin.com/content/fifa26/img/players/${id}.png"
+        alt="${name}" loading="lazy"
+        onerror="this.src='https://cdn.fut.gg/fc26/players/portrait/${id}.png';this.onerror=null">
+    </div>`;
+  }
+  return `<div class="fut-card ${cls}">
+    ${rat?`<div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div>`:`<span class="fc-icon">🎁</span>`}
+  </div>`;
+}
 
-  {id:'w03', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'La Liga Stars', nameFA:'ستارگان لالیگا',
-   rew:{type:'player', name:'Lamine Yamal', nameFA:'لامین یامال', rat:88, pos:'RW', nat:'اسپانیا', flag:'🇪🇸', club:'Barcelona', sp:false},
-   reqs:[
-     {fa:'۱۰ گل با بازیکنان اسپانیایی بزن'},
-     {fa:'۵ بازی رقبا با بازیکنان لالیگا ببر'},
-     {fa:'۵ پاس گل با بازیکنان لالیگا بده'}
-   ], exp: daysFromNow(5), xp:2000, coins:0},
-
-  {id:'w04', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'Bundesliga Dominance', nameFA:'سلطه بوندسلیگا',
-   rew:{type:'player', name:'Jamal Musiala', nameFA:'جمال موزیالا', rat:87, pos:'CAM', nat:'آلمان', flag:'🇩🇪', club:'Bayern Munich', sp:false},
-   reqs:[
-     {fa:'۸ گل با بازیکنان بوندسلیگا بزن'},
-     {fa:'۴ بازی با بازیکنان آلمانی ببر'},
-     {fa:'۳ نبرد دسته در سطح افسانه‌ای کامل کن'}
-   ], exp: daysFromNow(5), xp:1800, coins:2500},
-
-  {id:'w05', cat:'weekly', catFA:'هفتگی', dif:'easy', difFA:'آسان',
-   name:'Serie A Excellence', nameFA:'برتری سری‌آ',
-   rew:{type:'player', name:'Kvaratskhelia', nameFA:'کواراتسخلیا', rat:86, pos:'LW', nat:'گرجستان', flag:'🇬🇪', club:'PSG', sp:false},
-   reqs:[
-     {fa:'۵ بازی با بازیکنان سری‌آ ببر'},
-     {fa:'۷ گل با بازیکنان لیگ ایتالیا بزن'}
-   ], exp: daysFromNow(5), xp:1200, coins:2000},
-
-  {id:'w06', cat:'weekly', catFA:'هفتگی', dif:'hard', difFA:'سخت',
-   name:'Golden Boot Race', nameFA:'مسابقه کفش طلا',
-   rew:{type:'player', name:'Erling Haaland', nameFA:'اِرلینگ هالاند', rat:92, pos:'ST', nat:'نروژ', flag:'🇳🇴', club:'Man City', sp:true},
-   reqs:[
-     {fa:'۲۰ گل در هر بخشی بزن'},
-     {fa:'۵ هت‌تریک کامل کن'},
-     {fa:'۱۰ بازی رقبا را ببر'},
-     {fa:'حداکثر ۳ بازیکن از یک ملیت استفاده کن'}
-   ], exp: daysFromNow(5), xp:3500, coins:5000},
-
-  {id:'w07', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'Defensive Wall', nameFA:'دیوار دفاعی',
-   rew:{type:'player', name:'Virgil van Dijk', nameFA:'ویرجیل فان‌دایک', rat:87, pos:'CB', nat:'هلند', flag:'🇳🇱', club:'Liverpool', sp:false},
-   reqs:[
-     {fa:'۵ بار دروازه بسته در رقبا داشته باش'},
-     {fa:'۳ بازی را با اختلاف ۳ گل یا بیشتر ببر'},
-     {fa:'از ۴ مدافع هم‌ملیت استفاده کن'}
-   ], exp: daysFromNow(5), xp:1800, coins:0},
-
-  {id:'w08', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'Creative Maestro', nameFA:'استاد خلاقیت',
-   rew:{type:'player', name:'Bruno Fernandes', nameFA:'برونو فرناندس', rat:86, pos:'CAM', nat:'پرتغال', flag:'🇵🇹', club:'Man United', sp:false},
-   reqs:[
-     {fa:'۱۰ پاس گل در نبردهای دسته بده'},
-     {fa:'در ۳ بازی هر بار ۵ فیعنت موفق کامل کن'},
-     {fa:'۴ بازی رقبا را ببر'}
-   ], exp: daysFromNow(5), xp:1600, coins:2000},
-
-  {id:'w09', cat:'weekly', catFA:'هفتگی', dif:'hard', difFA:'سخت',
-   name:'Counter-Attack King', nameFA:'پادشاه ضدحمله',
-   rew:{type:'pack', name:'3x Rare Gold Pack', nameFA:'۳ پاکت طلایی نادر', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۸ گل از ضدحمله بزن'},
-     {fa:'۵ بازی رقبا را با بازیکنان سریع ببر'},
-     {fa:'۳ بازی را بدون شکست به پایان برسان'}
-   ], exp: daysFromNow(5), xp:2200, coins:4000},
-
-  {id:'w10', cat:'weekly', catFA:'هفتگی', dif:'easy', difFA:'آسان',
-   name:'Ligue 1 Magic', nameFA:'جادوی لیگ ۱',
-   rew:{type:'player', name:'Ousmane Dembélé', nameFA:'اوسمانه دمبله', rat:85, pos:'RW', nat:'فرانسه', flag:'🇫🇷', club:'PSG', sp:false},
-   reqs:[
-     {fa:'۷ گل با بازیکنان لیگ ۱ بزن'},
-     {fa:'۳ بازی رقبا را با بازیکنان فرانسوی ببر'}
-   ], exp: daysFromNow(5), xp:1200, coins:1500},
-
-  {id:'w11', cat:'weekly', catFA:'هفتگی', dif:'medium', difFA:'متوسط',
-   name:'Eredivisie Rising', nameFA:'اردیویزی در حال ظهور',
-   rew:{type:'player', name:'Xavi Simons', nameFA:'خاوی سیمونز', rat:85, pos:'CAM', nat:'هلند', flag:'🇳🇱', club:'PSG', sp:false},
-   reqs:[
-     {fa:'۶ گل با بازیکنان هلندی بزن'},
-     {fa:'۴ بازی با ترکیب حداقل ۴ بازیکن Eredivisie ببر'}
-   ], exp: daysFromNow(5), xp:1400, coins:1800},
-
-  {id:'w12', cat:'weekly', catFA:'هفتگی', dif:'hard', difFA:'سخت',
-   name:'Tiki-Taka Master', nameFA:'استاد تیکی‌تاکا',
-   rew:{type:'player', name:'Pedri', nameFA:'پِدری', rat:87, pos:'CM', nat:'اسپانیا', flag:'🇪🇸', club:'Barcelona', sp:false},
-   reqs:[
-     {fa:'در یک بازی ۵۰۰ پاس موفق داشته باش'},
-     {fa:'در ۵ بازی بیش از ۸۰٪ دقت پاس داشته باش'},
-     {fa:'۷ پاس گل با بازیکنان لالیگا بده'}
-   ], exp: daysFromNow(5), xp:2500, coins:3500},
-
-  /* ───── DAILY ───── */
-  {id:'d01', cat:'daily', catFA:'روزانه', dif:'easy', difFA:'آسان',
-   name:'Daily Scorer', nameFA:'گلزن روزانه',
-   rew:{type:'xp', name:'1000 XP', nameFA:'۱۰۰۰ امتیاز', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۳ گل در هر بخشی بزن'}],
-   exp: hoursFromNow(20), xp:1000, coins:0},
-
-  {id:'d02', cat:'daily', catFA:'روزانه', dif:'easy', difFA:'آسان',
-   name:'Daily Victor', nameFA:'پیروز روزانه',
-   rew:{type:'xp', name:'750 XP', nameFA:'۷۵۰ امتیاز', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۱ بازی رقبا را ببر'}],
-   exp: hoursFromNow(20), xp:750, coins:0},
-
-  {id:'d03', cat:'daily', catFA:'روزانه', dif:'easy', difFA:'آسان',
-   name:'Daily Playmaker', nameFA:'بازی‌ساز روزانه',
-   rew:{type:'xp', name:'750 XP + 500 سکه', nameFA:'۷۵۰ امتیاز + ۵۰۰ سکه', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲ پاس گل در هر بخشی بده'}],
-   exp: hoursFromNow(20), xp:750, coins:500},
-
-  {id:'d04', cat:'daily', catFA:'روزانه', dif:'easy', difFA:'آسان',
-   name:'Daily Guardian', nameFA:'نگهبان روزانه',
-   rew:{type:'xp', name:'1000 XP', nameFA:'۱۰۰۰ امتیاز', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۱ بار دروازه بسته در هر بخشی داشته باش'}],
-   exp: hoursFromNow(20), xp:1000, coins:0},
-
-  {id:'d05', cat:'daily', catFA:'روزانه', dif:'easy', difFA:'آسان',
-   name:'Squad Battles Daily', nameFA:'نبردهای دسته روزانه',
-   rew:{type:'xp', name:'500 XP', nameFA:'۵۰۰ امتیاز', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲ بازی نبرد دسته کامل کن'}],
-   exp: hoursFromNow(20), xp:500, coins:0},
-
-  /* ───── MILESTONE ───── */
-  {id:'m01', cat:'milestone', catFA:'مایل‌استون', dif:'easy', difFA:'آسان',
-   name:'Scorer Milestone I', nameFA:'مایل‌استون گلزنی - مرحله ۱',
-   rew:{type:'player', name:'86 OVR Player Pick', nameFA:'انتخاب بازیکن ۸۶ رتبه', rat:86, pos:'PICK', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۵ گل در هر بخشی بزن'}],
-   exp: null, xp:2000, coins:0, prog:{cur:0, max:25}},
-
-  {id:'m02', cat:'milestone', catFA:'مایل‌استون', dif:'medium', difFA:'متوسط',
-   name:'Scorer Milestone II', nameFA:'مایل‌استون گلزنی - مرحله ۲',
-   rew:{type:'player', name:'87 OVR Player Pick', nameFA:'انتخاب بازیکن ۸۷ رتبه', rat:87, pos:'PICK', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۱۰۰ گل در هر بخشی بزن'}],
-   exp: null, xp:4000, coins:5000, prog:{cur:0, max:100}},
-
-  {id:'m03', cat:'milestone', catFA:'مایل‌استون', dif:'hard', difFA:'سخت',
-   name:'Scorer Milestone III', nameFA:'مایل‌استون گلزنی - مرحله ۳',
-   rew:{type:'player', name:'88 OVR Player Pick', nameFA:'انتخاب بازیکن ۸۸ رتبه', rat:88, pos:'PICK', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۵۰ گل در هر بخشی بزن'}],
-   exp: null, xp:8000, coins:10000, prog:{cur:0, max:250}},
-
-  {id:'m04', cat:'milestone', catFA:'مایل‌استون', dif:'easy', difFA:'آسان',
-   name:'Winner Milestone I', nameFA:'مایل‌استون پیروزی - مرحله ۱',
-   rew:{type:'pack', name:'2x Rare Gold Pack', nameFA:'۲ پاکت طلایی نادر', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۵ بازی در هر بخشی ببر'}],
-   exp: null, xp:1500, coins:3000, prog:{cur:0, max:25}},
-
-  {id:'m05', cat:'milestone', catFA:'مایل‌استون', dif:'medium', difFA:'متوسط',
-   name:'Winner Milestone II', nameFA:'مایل‌استون پیروزی - مرحله ۲',
-   rew:{type:'pack', name:'5x Rare Gold Pack', nameFA:'۵ پاکت طلایی نادر', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۱۰۰ بازی در هر بخشی ببر'}],
-   exp: null, xp:4000, coins:8000, prog:{cur:0, max:100}},
-
-  {id:'m06', cat:'milestone', catFA:'مایل‌استون', dif:'hard', difFA:'سخت',
-   name:'Winner Milestone III', nameFA:'مایل‌استون پیروزی - مرحله ۳',
-   rew:{type:'pack', name:'Rare Electrum Pack', nameFA:'پاکت الکتروم نادر', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۵۰ بازی در هر بخشی ببر'}],
-   exp: null, xp:10000, coins:15000, prog:{cur:0, max:250}},
-
-  {id:'m07', cat:'milestone', catFA:'مایل‌استون', dif:'medium', difFA:'متوسط',
-   name:'Assist King', nameFA:'شاه پاس‌گل',
-   rew:{type:'player', name:'86 MID Pick', nameFA:'انتخاب هافبک ۸۶', rat:86, pos:'MID', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۵۰ پاس گل در هر بخشی بده'}],
-   exp: null, xp:3000, coins:5000, prog:{cur:0, max:50}},
-
-  {id:'m08', cat:'milestone', catFA:'مایل‌استون', dif:'medium', difFA:'متوسط',
-   name:'Clean Sheet Keeper', nameFA:'نگهبان دروازه بسته',
-   rew:{type:'player', name:'85 GK Pick', nameFA:'انتخاب دروازه‌بان ۸۵', rat:85, pos:'GK', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۵ بار دروازه بسته در هر بخشی داشته باش'}],
-   exp: null, xp:2500, coins:4000, prog:{cur:0, max:25}},
-
-  /* ───── EVENT (TOTS) ───── */
-  {id:'e01', cat:'event', catFA:'رویداد TOTS', dif:'medium', difFA:'متوسط',
-   name:'TOTS PL Challenge', nameFA:'چالش TOTS لیگ برتر',
-   rew:{type:'player', name:'TOTS PL Pick', nameFA:'انتخاب TOTS لیگ برتر', rat:91, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۱۰ گل با بازیکنان لیگ برتر بزن'},
-     {fa:'۵ بازی رقبا با ترکیب لیگ برتر ببر'},
-     {fa:'۵ پاس گل با هافبک‌های لیگ برتر بده'}
-   ], exp: daysFromNow(21), xp:3000, coins:5000},
-
-  {id:'e02', cat:'event', catFA:'رویداد TOTS', dif:'medium', difFA:'متوسط',
-   name:'TOTS La Liga Challenge', nameFA:'چالش TOTS لالیگا',
-   rew:{type:'player', name:'TOTS La Liga Pick', nameFA:'انتخاب TOTS لالیگا', rat:92, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۱۲ گل با بازیکنان لالیگا بزن'},
-     {fa:'۶ بازی با ترکیب لالیگا ببر'}
-   ], exp: daysFromNow(21), xp:3500, coins:6000},
-
-  {id:'e03', cat:'event', catFA:'رویداد TOTS', dif:'hard', difFA:'سخت',
-   name:'Season Champion', nameFA:'قهرمان فصل',
-   rew:{type:'player', name:'TOTS Moments Pick', nameFA:'انتخاب لحظات TOTS', rat:93, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۱۰ بازی رقبا را ببر'},
-     {fa:'۱۵ گل در نبردهای دسته بزن'},
-     {fa:'۵ هدف هفتگی را کامل کن'}
-   ], exp: daysFromNow(21), xp:5000, coins:0},
-
-  {id:'e04', cat:'event', catFA:'رویداد TOTS', dif:'medium', difFA:'متوسط',
-   name:'TOTS Bundesliga', nameFA:'TOTS بوندسلیگا',
-   rew:{type:'pack', name:'4x TOTS Player Packs', nameFA:'۴ پاکت بازیکن TOTS', rat:0, pos:'', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۸ گل با بازیکنان بوندسلیگا بزن'},
-     {fa:'۴ بازی با تیم ۸۵+ رتبه ببر'}
-   ], exp: daysFromNow(21), xp:2500, coins:4000},
-
-  {id:'e05', cat:'event', catFA:'رویداد TOTS', dif:'easy', difFA:'آسان',
-   name:'TOTS Serie A', nameFA:'TOTS سری‌آ',
-   rew:{type:'player', name:'TOTS Serie A Pick', nameFA:'انتخاب TOTS سری‌آ', rat:90, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۵ بازی با بازیکنان سری‌آ کامل کن'},
-     {fa:'۶ گل با بازیکنان سری‌آ بزن'}
-   ], exp: daysFromNow(21), xp:2000, coins:3000},
-
-  {id:'e06', cat:'event', catFA:'رویداد TOTS', dif:'hard', difFA:'سخت',
-   name:'FUT Champions TOTS', nameFA:'FUT Champions - TOTS',
-   rew:{type:'player', name:'TOTS Champions Player', nameFA:'بازیکن TOTS قهرمانان', rat:95, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۳ بازی FUT Champions را ببر'},
-     {fa:'۵ گل در FUT Champions بزن'}
-   ], exp: daysFromNow(21), xp:5000, coins:10000},
-
-  {id:'e07', cat:'event', catFA:'رویداد', dif:'hard', difFA:'سخت',
-   name:'End of Season Finale', nameFA:'فینال پایان فصل',
-   rew:{type:'player', name:'End of Season Icon Pick', nameFA:'انتخاب آیکون پایان فصل', rat:96, pos:'ICON', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'همه اهداف رویداد TOTS را کامل کن'},
-     {fa:'به دیویژن ۳ یا بالاتر در رقبا برس'},
-     {fa:'در دوره رویداد ۵۰ گل بزن'}
-   ], exp: daysFromNow(21), xp:10000, coins:20000},
-
-  {id:'e08', cat:'event', catFA:'رویداد TOTS', dif:'medium', difFA:'متوسط',
-   name:'TOTS Ligue 1', nameFA:'TOTS لیگ ۱',
-   rew:{type:'player', name:'TOTS Ligue 1 Pick', nameFA:'انتخاب TOTS لیگ ۱', rat:90, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[
-     {fa:'۸ گل با بازیکنان لیگ ۱ بزن'},
-     {fa:'۴ بازی با ترکیب لیگ ۱ فرانسه ببر'}
-   ], exp: daysFromNow(21), xp:2200, coins:3500},
-
-  /* ───── SEASONAL ───── */
-  {id:'s01', cat:'seasonal', catFA:'فصلی', dif:'medium', difFA:'متوسط',
-   name:'Season 7 Grinder', nameFA:'فصل ۷ - خستگی‌ناپذیر',
-   rew:{type:'xp', name:'5000 Season XP', nameFA:'۵۰۰۰ امتیاز فصلی', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'۲۰ بازی در فصل ۷ کامل کن'}],
-   exp: daysFromNow(30), xp:5000, coins:0, prog:{cur:0, max:20}},
-
-  {id:'s02', cat:'seasonal', catFA:'فصلی', dif:'easy', difFA:'آسان',
-   name:'Season 7 Level 20', nameFA:'فصل ۷ - سطح ۲۰',
-   rew:{type:'player', name:'Season Reward Lv.20', nameFA:'جایزه سطح ۲۰ فصل', rat:86, pos:'PICK', nat:'', flag:'', club:'', sp:false},
-   reqs:[{fa:'به سطح ۲۰ فصل برس'}],
-   exp: daysFromNow(30), xp:0, coins:0, prog:{cur:0, max:20}},
-
-  {id:'s03', cat:'seasonal', catFA:'فصلی', dif:'hard', difFA:'سخت',
-   name:'Season 7 Max Level', nameFA:'فصل ۷ - سطح حداکثر',
-   rew:{type:'player', name:'Season Reward Lv.50', nameFA:'جایزه سطح ۵۰ فصل', rat:92, pos:'PICK', nat:'', flag:'', club:'', sp:true},
-   reqs:[{fa:'به سطح ۵۰ (حداکثر) فصل برس'}],
-   exp: daysFromNow(30), xp:0, coins:0, prog:{cur:0, max:50}},
-
-  {id:'s04', cat:'seasonal', catFA:'فصلی', dif:'medium', difFA:'متوسط',
-   name:'Season Completionist', nameFA:'فصل ۷ - تکمیل‌کننده',
-   rew:{type:'pack', name:'Mega Pack', nameFA:'مگاپاکت', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۱۵ هدف فصلی را کامل کن'},
-     {fa:'در ۵ رویداد فصلی شرکت کن'}
-   ], exp: daysFromNow(30), xp:8000, coins:12000},
-
-  /* ───── LEAGUE / COMPETITIVE ───── */
-  {id:'l01', cat:'league', catFA:'رقابتی', dif:'hard', difFA:'سخت',
-   name:'Rivals Champion', nameFA:'قهرمان رقبا',
-   rew:{type:'pack', name:'Division Rivals Rewards', nameFA:'جوایز رقبا دیویژن', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'به طلایی ۱ در رقبا دیویژن برس'},
-     {fa:'در یک هفته ۲۰ بازی رقبا ببر'}
-   ], exp: daysFromNow(5), xp:5000, coins:15000},
-
-  {id:'l02', cat:'league', catFA:'رقابتی', dif:'hard', difFA:'سخت',
-   name:'Squad Battles Legend', nameFA:'افسانه نبردهای دسته',
-   rew:{type:'pack', name:'Elite Squad Pack', nameFA:'پاکت نخبه دسته', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۵ نبرد دسته در سطح افسانه‌ای ببر'},
-     {fa:'۲۰ گل در سختی افسانه‌ای بزن'}
-   ], exp: daysFromNow(5), xp:3000, coins:8000},
-
-  {id:'l03', cat:'league', catFA:'رقابتی', dif:'hard', difFA:'سخت',
-   name:'Champions Path', nameFA:'مسیر قهرمانان FUT',
-   rew:{type:'player', name:'FUT Champions Reward', nameFA:'جایزه FUT Champions', rat:88, pos:'PICK', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'به FUT Champions واجد شرایط شو'},
-     {fa:'۳ بازی FUT Champions را ببر'}
-   ], exp: daysFromNow(5), xp:8000, coins:20000},
-
-  {id:'l04', cat:'league', catFA:'Rush', dif:'medium', difFA:'متوسط',
-   name:'Rush Mode Master', nameFA:'استاد حالت Rush',
-   rew:{type:'player', name:'Rush Reward', nameFA:'جایزه Rush', rat:86, pos:'ATT', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۱۰ بازی در حالت Rush ببر'},
-     {fa:'۱۵ گل در حالت Rush بزن'}
-   ], exp: daysFromNow(14), xp:2500, coins:5000},
-
-  {id:'l05', cat:'league', catFA:'رقابتی', dif:'hard', difFA:'سخت',
-   name:'FC Pro Qualifier', nameFA:'واجد شرایط FC Pro',
-   rew:{type:'pack', name:'FC Pro Pack Bundle', nameFA:'بسته پاکت FC Pro', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۵ بازی پیاپی در رقبا ببر'},
-     {fa:'به دیویژن ۴ یا بالاتر برس'}
-   ], exp: daysFromNow(14), xp:4000, coins:10000},
-
-  {id:'l06', cat:'league', catFA:'رقابتی', dif:'medium', difFA:'متوسط',
-   name:'Rivals Streak', nameFA:'رشته پیروزی رقبا',
-   rew:{type:'pack', name:'Electrum Players Pack', nameFA:'پاکت بازیکنان الکتروم', rat:0, pos:'', nat:'', flag:'', club:'', sp:false},
-   reqs:[
-     {fa:'۷ بازی پیاپی بدون باخت ببر'},
-     {fa:'در طول رشته ۱۵ گل بزن'}
-   ], exp: daysFromNow(5), xp:2000, coins:6000}
+/* ── OBJECTIVES DATA ── */
+const OBJ_RAW=[
+  {id:'w01',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'TOTW Weekly Challenge',nameFA:'چالش هفتگی تیم هفته',
+   rew:{type:'player',name:'Rodri',nameFA:'رودری',rat:87,pos:'CM',nat:'اسپانیا',flag:'🇪🇸',club:'Man City',sp:false},
+   reqs:[{fa:'۵ بازی را با بازیکنان تیم هفته ببر'},{fa:'۳ گل با بازیکنان تیم هفته بزن'},{fa:'۲ بار دروازه‌ات را بسته نگه دار'}],
+   exp:daysFromNow(5),xp:2000,coins:0},
+  {id:'w02',cat:'weekly',catFA:'هفتگی',dif:'easy',difFA:'آسان',
+   name:'Premier League Attack',nameFA:'حمله لیگ برتر',
+   rew:{type:'player',name:'Diogo Jota',nameFA:'دیوگو ژوتا',rat:85,pos:'LW',nat:'پرتغال',flag:'🇵🇹',club:'Liverpool',sp:false},
+   reqs:[{fa:'۱۰ گل در نبردهای دسته بزن'},{fa:'از ۵ بازیکن لیگ برتر استفاده کن'},{fa:'۳ بازی رقبا را ببر'}],
+   exp:daysFromNow(5),xp:1500,coins:3000},
+  {id:'w03',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'La Liga Stars',nameFA:'ستارگان لالیگا',
+   rew:{type:'player',name:'Lamine Yamal',nameFA:'لامین یامال',rat:88,pos:'RW',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',sp:false},
+   reqs:[{fa:'۱۰ گل با بازیکنان اسپانیایی بزن'},{fa:'۵ بازی رقبا با بازیکنان لالیگا ببر'},{fa:'۵ پاس گل با بازیکنان لالیگا بده'}],
+   exp:daysFromNow(5),xp:2000,coins:0},
+  {id:'w04',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'Bundesliga Dominance',nameFA:'سلطه بوندسلیگا',
+   rew:{type:'player',name:'Jamal Musiala',nameFA:'جمال موزیالا',rat:87,pos:'CAM',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',sp:false},
+   reqs:[{fa:'۸ گل با بازیکنان بوندسلیگا بزن'},{fa:'۴ بازی با بازیکنان آلمانی ببر'},{fa:'۳ نبرد دسته در سطح افسانه‌ای کامل کن'}],
+   exp:daysFromNow(5),xp:1800,coins:2500},
+  {id:'w05',cat:'weekly',catFA:'هفتگی',dif:'easy',difFA:'آسان',
+   name:'Serie A Excellence',nameFA:'برتری سری‌آ',
+   rew:{type:'player',name:'Kvaratskhelia',nameFA:'کواراتسخلیا',rat:86,pos:'LW',nat:'گرجستان',flag:'🇬🇪',club:'PSG',sp:false},
+   reqs:[{fa:'۵ بازی با بازیکنان سری‌آ ببر'},{fa:'۷ گل با بازیکنان لیگ ایتالیا بزن'}],
+   exp:daysFromNow(5),xp:1200,coins:2000},
+  {id:'w06',cat:'weekly',catFA:'هفتگی',dif:'hard',difFA:'سخت',
+   name:'Golden Boot Race',nameFA:'مسابقه کفش طلا',
+   rew:{type:'player',name:'Erling Haaland',nameFA:'اِرلینگ هالاند',rat:92,pos:'ST',nat:'نروژ',flag:'🇳🇴',club:'Man City',sp:true},
+   reqs:[{fa:'۲۰ گل در هر بخشی بزن'},{fa:'۵ هت‌تریک کامل کن'},{fa:'۱۰ بازی رقبا را ببر'},{fa:'حداکثر ۳ بازیکن از یک ملیت استفاده کن'}],
+   exp:daysFromNow(5),xp:3500,coins:5000},
+  {id:'w07',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'Defensive Wall',nameFA:'دیوار دفاعی',
+   rew:{type:'player',name:'Virgil van Dijk',nameFA:'ویرجیل فان‌دایک',rat:87,pos:'CB',nat:'هلند',flag:'🇳🇱',club:'Liverpool',sp:false},
+   reqs:[{fa:'۵ بار دروازه بسته در رقبا داشته باش'},{fa:'۳ بازی را با اختلاف ۳ گل ببر'},{fa:'از ۴ مدافع هم‌ملیت استفاده کن'}],
+   exp:daysFromNow(5),xp:1800,coins:0},
+  {id:'w08',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'Creative Maestro',nameFA:'استاد خلاقیت',
+   rew:{type:'player',name:'Bruno Fernandes',nameFA:'برونو فرناندس',rat:86,pos:'CAM',nat:'پرتغال',flag:'🇵🇹',club:'Man United',sp:false},
+   reqs:[{fa:'۱۰ پاس گل در نبردهای دسته بده'},{fa:'در ۳ بازی هر بار ۵ فیعنت موفق کامل کن'},{fa:'۴ بازی رقبا را ببر'}],
+   exp:daysFromNow(5),xp:1600,coins:2000},
+  {id:'w09',cat:'weekly',catFA:'هفتگی',dif:'hard',difFA:'سخت',
+   name:'Counter-Attack King',nameFA:'پادشاه ضدحمله',
+   rew:{type:'pack',name:'3x Rare Gold Pack',nameFA:'۳ پاکت طلایی نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۸ گل از ضدحمله بزن'},{fa:'۵ بازی رقبا را با بازیکنان سریع ببر'},{fa:'۳ بازی را بدون شکست به پایان برسان'}],
+   exp:daysFromNow(5),xp:2200,coins:4000},
+  {id:'w10',cat:'weekly',catFA:'هفتگی',dif:'easy',difFA:'آسان',
+   name:'Ligue 1 Magic',nameFA:'جادوی لیگ ۱',
+   rew:{type:'player',name:'Ousmane Dembélé',nameFA:'اوسمانه دمبله',rat:85,pos:'RW',nat:'فرانسه',flag:'🇫🇷',club:'PSG',sp:false},
+   reqs:[{fa:'۷ گل با بازیکنان لیگ ۱ بزن'},{fa:'۳ بازی رقبا را با بازیکنان فرانسوی ببر'}],
+   exp:daysFromNow(5),xp:1200,coins:1500},
+  {id:'w11',cat:'weekly',catFA:'هفتگی',dif:'medium',difFA:'متوسط',
+   name:'Eredivisie Rising',nameFA:'اردیویزی در حال ظهور',
+   rew:{type:'player',name:'Xavi Simons',nameFA:'خاوی سیمونز',rat:85,pos:'CAM',nat:'هلند',flag:'🇳🇱',club:'PSG',sp:false},
+   reqs:[{fa:'۶ گل با بازیکنان هلندی بزن'},{fa:'۴ بازی با ترکیب حداقل ۴ بازیکن Eredivisie ببر'}],
+   exp:daysFromNow(5),xp:1400,coins:1800},
+  {id:'w12',cat:'weekly',catFA:'هفتگی',dif:'hard',difFA:'سخت',
+   name:'Tiki-Taka Master',nameFA:'استاد تیکی‌تاکا',
+   rew:{type:'player',name:'Pedri',nameFA:'پِدری',rat:87,pos:'CM',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',sp:false},
+   reqs:[{fa:'در یک بازی ۵۰۰ پاس موفق داشته باش'},{fa:'در ۵ بازی بیش از ۸۰٪ دقت پاس داشته باش'},{fa:'۷ پاس گل با بازیکنان لالیگا بده'}],
+   exp:daysFromNow(5),xp:2500,coins:3500},
+  {id:'d01',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
+   name:'Daily Scorer',nameFA:'گلزن روزانه',
+   rew:{type:'xp',name:'1000 XP',nameFA:'۱۰۰۰ امتیاز',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۳ گل در هر بخشی بزن'}],exp:hoursFromNow(20),xp:1000,coins:0},
+  {id:'d02',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
+   name:'Daily Victor',nameFA:'پیروز روزانه',
+   rew:{type:'xp',name:'750 XP',nameFA:'۷۵۰ امتیاز',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۱ بازی رقبا را ببر'}],exp:hoursFromNow(20),xp:750,coins:0},
+  {id:'d03',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
+   name:'Daily Playmaker',nameFA:'بازی‌ساز روزانه',
+   rew:{type:'xp',name:'750 XP',nameFA:'۷۵۰ امتیاز + ۵۰۰ سکه',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲ پاس گل در هر بخشی بده'}],exp:hoursFromNow(20),xp:750,coins:500},
+  {id:'d04',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
+   name:'Daily Guardian',nameFA:'نگهبان روزانه',
+   rew:{type:'xp',name:'1000 XP',nameFA:'۱۰۰۰ امتیاز',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۱ بار دروازه بسته در هر بخشی داشته باش'}],exp:hoursFromNow(20),xp:1000,coins:0},
+  {id:'d05',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
+   name:'Squad Battles Daily',nameFA:'نبردهای دسته روزانه',
+   rew:{type:'xp',name:'500 XP',nameFA:'۵۰۰ امتیاز',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲ بازی نبرد دسته کامل کن'}],exp:hoursFromNow(20),xp:500,coins:0},
+  {id:'m01',cat:'milestone',catFA:'مایل‌استون',dif:'easy',difFA:'آسان',
+   name:'Scorer Milestone I',nameFA:'مایل‌استون گلزنی - مرحله ۱',
+   rew:{type:'player',name:'86 OVR Pick',nameFA:'انتخاب بازیکن ۸۶ رتبه',rat:86,pos:'PICK',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲۵ گل در هر بخشی بزن'}],exp:null,xp:2000,coins:0,prog:{cur:0,max:25}},
+  {id:'m02',cat:'milestone',catFA:'مایل‌استون',dif:'medium',difFA:'متوسط',
+   name:'Scorer Milestone II',nameFA:'مایل‌استون گلزنی - مرحله ۲',
+   rew:{type:'player',name:'87 OVR Pick',nameFA:'انتخاب بازیکن ۸۷ رتبه',rat:87,pos:'PICK',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۱۰۰ گل در هر بخشی بزن'}],exp:null,xp:4000,coins:5000,prog:{cur:0,max:100}},
+  {id:'m03',cat:'milestone',catFA:'مایل‌استون',dif:'hard',difFA:'سخت',
+   name:'Scorer Milestone III',nameFA:'مایل‌استون گلزنی - مرحله ۳',
+   rew:{type:'player',name:'88 OVR Pick',nameFA:'انتخاب بازیکن ۸۸ رتبه',rat:88,pos:'PICK',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲۵۰ گل در هر بخشی بزن'}],exp:null,xp:8000,coins:10000,prog:{cur:0,max:250}},
+  {id:'m04',cat:'milestone',catFA:'مایل‌استون',dif:'easy',difFA:'آسان',
+   name:'Winner Milestone I',nameFA:'مایل‌استون پیروزی - مرحله ۱',
+   rew:{type:'pack',name:'2x Rare Gold',nameFA:'۲ پاکت طلایی نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲۵ بازی در هر بخشی ببر'}],exp:null,xp:1500,coins:3000,prog:{cur:0,max:25}},
+  {id:'m05',cat:'milestone',catFA:'مایل‌استون',dif:'medium',difFA:'متوسط',
+   name:'Winner Milestone II',nameFA:'مایل‌استون پیروزی - مرحله ۲',
+   rew:{type:'pack',name:'5x Rare Gold',nameFA:'۵ پاکت طلایی نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۱۰۰ بازی در هر بخشی ببر'}],exp:null,xp:4000,coins:8000,prog:{cur:0,max:100}},
+  {id:'m06',cat:'milestone',catFA:'مایل‌استون',dif:'hard',difFA:'سخت',
+   name:'Winner Milestone III',nameFA:'مایل‌استون پیروزی - مرحله ۳',
+   rew:{type:'pack',name:'Rare Electrum Pack',nameFA:'پاکت الکتروم نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲۵۰ بازی در هر بخشی ببر'}],exp:null,xp:10000,coins:15000,prog:{cur:0,max:250}},
+  {id:'m07',cat:'milestone',catFA:'مایل‌استون',dif:'medium',difFA:'متوسط',
+   name:'Assist King',nameFA:'شاه پاس‌گل',
+   rew:{type:'player',name:'86 MID Pick',nameFA:'انتخاب هافبک ۸۶',rat:86,pos:'MID',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۵۰ پاس گل در هر بخشی بده'}],exp:null,xp:3000,coins:5000,prog:{cur:0,max:50}},
+  {id:'e01',cat:'event',catFA:'رویداد TOTS',dif:'medium',difFA:'متوسط',
+   name:'TOTS PL Challenge',nameFA:'چالش TOTS لیگ برتر',
+   rew:{type:'player',name:'TOTS PL Pick',nameFA:'انتخاب TOTS لیگ برتر',rat:91,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۱۰ گل با بازیکنان لیگ برتر بزن'},{fa:'۵ بازی رقبا با ترکیب لیگ برتر ببر'},{fa:'۵ پاس گل با هافبک‌های لیگ برتر بده'}],
+   exp:daysFromNow(21),xp:3000,coins:5000},
+  {id:'e02',cat:'event',catFA:'رویداد TOTS',dif:'medium',difFA:'متوسط',
+   name:'TOTS La Liga Challenge',nameFA:'چالش TOTS لالیگا',
+   rew:{type:'player',name:'TOTS La Liga Pick',nameFA:'انتخاب TOTS لالیگا',rat:92,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۱۲ گل با بازیکنان لالیگا بزن'},{fa:'۶ بازی با ترکیب لالیگا ببر'}],
+   exp:daysFromNow(21),xp:3500,coins:6000},
+  {id:'e03',cat:'event',catFA:'رویداد',dif:'hard',difFA:'سخت',
+   name:'Season Champion',nameFA:'قهرمان فصل',
+   rew:{type:'player',name:'TOTS Moments Pick',nameFA:'انتخاب لحظات TOTS',rat:93,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۱۰ بازی رقبا را ببر'},{fa:'۱۵ گل در نبردهای دسته بزن'},{fa:'۵ هدف هفتگی را کامل کن'}],
+   exp:daysFromNow(21),xp:5000,coins:0},
+  {id:'e04',cat:'event',catFA:'رویداد TOTS',dif:'medium',difFA:'متوسط',
+   name:'TOTS Bundesliga',nameFA:'TOTS بوندسلیگا',
+   rew:{type:'pack',name:'4x TOTS Packs',nameFA:'۴ پاکت بازیکن TOTS',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۸ گل با بازیکنان بوندسلیگا بزن'},{fa:'۴ بازی با تیم ۸۵+ رتبه ببر'}],
+   exp:daysFromNow(21),xp:2500,coins:4000},
+  {id:'e05',cat:'event',catFA:'رویداد TOTS',dif:'easy',difFA:'آسان',
+   name:'TOTS Serie A',nameFA:'TOTS سری‌آ',
+   rew:{type:'player',name:'TOTS Serie A Pick',nameFA:'انتخاب TOTS سری‌آ',rat:90,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۵ بازی با بازیکنان سری‌آ کامل کن'},{fa:'۶ گل با بازیکنان سری‌آ بزن'}],
+   exp:daysFromNow(21),xp:2000,coins:3000},
+  {id:'e06',cat:'event',catFA:'رویداد TOTS',dif:'hard',difFA:'سخت',
+   name:'FUT Champions TOTS',nameFA:'FUT Champions - TOTS',
+   rew:{type:'player',name:'TOTS Champions',nameFA:'بازیکن TOTS قهرمانان',rat:95,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'۳ بازی FUT Champions را ببر'},{fa:'۵ گل در FUT Champions بزن'}],
+   exp:daysFromNow(21),xp:5000,coins:10000},
+  {id:'e07',cat:'event',catFA:'رویداد',dif:'hard',difFA:'سخت',
+   name:'End of Season Finale',nameFA:'فینال پایان فصل',
+   rew:{type:'player',name:'Icon Pick',nameFA:'انتخاب آیکون پایان فصل',rat:96,pos:'ICON',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'همه اهداف رویداد TOTS را کامل کن'},{fa:'به دیویژن ۳ یا بالاتر برس'},{fa:'در دوره رویداد ۵۰ گل بزن'}],
+   exp:daysFromNow(21),xp:10000,coins:20000},
+  {id:'s01',cat:'seasonal',catFA:'فصلی',dif:'medium',difFA:'متوسط',
+   name:'Season 7 Grinder',nameFA:'فصل ۷ - خستگی‌ناپذیر',
+   rew:{type:'xp',name:'5000 Season XP',nameFA:'۵۰۰۰ امتیاز فصلی',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۲۰ بازی در فصل ۷ کامل کن'}],exp:daysFromNow(30),xp:5000,coins:0,prog:{cur:0,max:20}},
+  {id:'s02',cat:'seasonal',catFA:'فصلی',dif:'easy',difFA:'آسان',
+   name:'Season 7 Level 20',nameFA:'فصل ۷ - سطح ۲۰',
+   rew:{type:'player',name:'Season Lv.20 Reward',nameFA:'جایزه سطح ۲۰ فصل',rat:86,pos:'PICK',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'به سطح ۲۰ فصل برس'}],exp:daysFromNow(30),xp:0,coins:0,prog:{cur:0,max:20}},
+  {id:'s03',cat:'seasonal',catFA:'فصلی',dif:'hard',difFA:'سخت',
+   name:'Season 7 Max Level',nameFA:'فصل ۷ - سطح حداکثر',
+   rew:{type:'player',name:'Season Lv.50 Reward',nameFA:'جایزه سطح ۵۰ فصل',rat:92,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{fa:'به سطح ۵۰ فصل برس'}],exp:daysFromNow(30),xp:0,coins:0,prog:{cur:0,max:50}},
+  {id:'l01',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
+   name:'Rivals Champion',nameFA:'قهرمان رقبا',
+   rew:{type:'pack',name:'Division Rivals Rewards',nameFA:'جوایز رقبا دیویژن',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'به طلایی ۱ در رقبا دیویژن برس'},{fa:'در یک هفته ۲۰ بازی رقبا ببر'}],
+   exp:daysFromNow(5),xp:5000,coins:15000},
+  {id:'l02',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
+   name:'Squad Battles Legend',nameFA:'افسانه نبردهای دسته',
+   rew:{type:'pack',name:'Elite Squad Pack',nameFA:'پاکت نخبه دسته',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۵ نبرد دسته در سطح افسانه‌ای ببر'},{fa:'۲۰ گل در سختی افسانه‌ای بزن'}],
+   exp:daysFromNow(5),xp:3000,coins:8000},
+  {id:'l03',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
+   name:'Champions Path',nameFA:'مسیر قهرمانان FUT',
+   rew:{type:'player',name:'FUT Champs Reward',nameFA:'جایزه FUT Champions',rat:88,pos:'PICK',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'به FUT Champions واجد شرایط شو'},{fa:'۳ بازی FUT Champions را ببر'}],
+   exp:daysFromNow(5),xp:8000,coins:20000},
+  {id:'l04',cat:'league',catFA:'Rush',dif:'medium',difFA:'متوسط',
+   name:'Rush Mode Master',nameFA:'استاد حالت Rush',
+   rew:{type:'player',name:'Rush Reward',nameFA:'جایزه Rush',rat:86,pos:'ATT',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۱۰ بازی در حالت Rush ببر'},{fa:'۱۵ گل در حالت Rush بزن'}],
+   exp:daysFromNow(14),xp:2500,coins:5000},
+  {id:'l05',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
+   name:'Rivals Streak',nameFA:'رشته پیروزی رقبا',
+   rew:{type:'pack',name:'Electrum Players Pack',nameFA:'پاکت بازیکنان الکتروم',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{fa:'۷ بازی پیاپی بدون باخت ببر'},{fa:'در طول رشته ۱۵ گل بزن'}],
+   exp:daysFromNow(5),xp:2000,coins:6000}
 ];
 
-/* ============================================================
-   STATE
-   ============================================================ */
-let objectives = [];
-let activeCat = 'all';
-let filters = { fav: false, inc: false, exp: false };
-let state = { favs: {}, done: {}, progs: {} };
+/* ── SBC DATA (based on fut.gg/sbc/) ── */
+const SBC_RAW=[
+  {id:'sbc01',cat:'iconic',catFA:'آیکونیک',dif:'hard',difFA:'سخت',
+   name:'Haaland Flashback',nameFA:'هالاند - فلش‌بک',
+   rew:{type:'player',name:'Erling Haaland',nameFA:'اِرلینگ هالاند',rat:92,pos:'ST',nat:'نروژ',flag:'🇳🇴',club:'Man City',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۵'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'لیگ برتر انگلستان'},{label:'ملیت',val:'حداکثر ۳ ملیت'}],
+   guide:'برای این SBC باید تیمی از لیگ برتر با امتیاز ۸۵+ بسازید. از بازیکنان ارزان لیگ برتر مثل نادرهای باشگاه‌های کوچک‌تر استفاده کنید. هافبک‌های ارزان لیگ برتر گزینه‌های اقتصادی هستند. سعی کنید ۷ بازیکن از یک باشگاه انتخاب کنید تا شیمی بالاتر بگیرید.',
+   cost:850000,costFA:'۸۵۰,۰۰۰ سکه',exp:daysFromNow(14),xp:5000,coins:0},
 
-function loadState() {
-  try { const s = localStorage.getItem('fc26s'); if(s) state = JSON.parse(s); } catch(e){}
-}
-function saveState() {
-  try { localStorage.setItem('fc26s', JSON.stringify(state)); } catch(e){}
-}
+  {id:'sbc02',cat:'iconic',catFA:'آیکونیک',dif:'hard',difFA:'سخت',
+   name:'Mbappé Future Stars',nameFA:'امباپه - ستارگان آینده',
+   rew:{type:'player',name:'Kylian Mbappé',nameFA:'کیلیان امباپه',rat:93,pos:'CF',nat:'فرانسه',flag:'🇫🇷',club:'Real Madrid',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۶'},{label:'شیمی',val:'حداقل ۲۰'},{label:'لیگ',val:'لالیگا EA Sports'},{label:'ملیت',val:'حداکثر ۲ ملیت'}],
+   guide:'برای این SBC یک تیم لالیگا کامل با امتیاز ۸۶+ نیاز دارید. بازیکنان ارزان لالیگا مانند ساویلیا یا والنسیا انتخاب خوبی هستند. ترکیب رئال مادرید و بارسلونا با هم‌ملیتی‌ها شیمی را بالا می‌برد.',
+   cost:1200000,costFA:'۱,۲۰۰,۰۰۰ سکه',exp:daysFromNow(14),xp:6000,coins:0},
 
-/* ============================================================
-   CATEGORY MAP
-   ============================================================ */
-const CAT_NAMES = { all:'همه اهداف', weekly:'اهداف هفتگی', daily:'اهداف روزانه', milestone:'مایل‌استون‌ها', event:'رویدادها', seasonal:'اهداف فصلی', league:'اهداف رقابتی' };
-const CAT_COLOR = { weekly:'#7EB8FF', daily:'#D4A0FF', milestone:'#F5B014', event:'#FF9090', seasonal:'#6EE6A6', league:'#5EE0D4' };
-const CAT_BADGE = { weekly:'b-weekly', daily:'b-daily', milestone:'b-milestone', event:'b-event', seasonal:'b-seasonal', league:'b-league' };
+  {id:'sbc03',cat:'iconic',catFA:'آیکونیک',dif:'hard',difFA:'سخت',
+   name:'Bellingham Moments',nameFA:'بلینگهام - لحظات',
+   rew:{type:'player',name:'Jude Bellingham',nameFA:'جود بلینگهام',rat:91,pos:'CAM',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Real Madrid',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۴'},{label:'شیمی',val:'حداقل ۲۲'},{label:'ملیت',val:'حداقل ۷ ملیت مختلف'},{label:'لیگ',val:'حداکثر ۲ لیگ'}],
+   guide:'این SBC نیاز به تنوع ملیتی دارد. ترکیب بازیکنان از لالیگا با ملیت‌های مختلف (اسپانیایی، برزیلی، فرانسوی، آرژانتینی) کمک می‌کند. هدف ۷ ملیت مختلف در تیم ۱۱ نفره است.',
+   cost:650000,costFA:'۶۵۰,۰۰۰ سکه',exp:daysFromNow(14),xp:4500,coins:0},
 
-/* ============================================================
-   EXPIRY
-   ============================================================ */
-function fmtExp(iso) {
-  if (!iso) return { txt:'دائمی', cls:'exp-permanent', ico:'♾️' };
-  const diff = new Date(iso) - Date.now();
-  if (diff < 0) return { txt:'منقضی', cls:'exp-gone', ico:'❌' };
-  const h = diff / 36e5;
-  if (h < 6)  return { txt:`${Math.floor(h)}ساعت ${Math.floor((h%1)*60)}دقیقه`, cls:'exp-crit', ico:'🔥' };
-  if (h < 24) return { txt:`${Math.floor(h)} ساعت دیگر`, cls:'exp-warn', ico:'⚠️' };
-  const d = Math.floor(h/24);
-  const rh = Math.floor(h%24);
-  if (d < 3)  return { txt:`${d} روز ${rh} ساعت`, cls:'exp-warn', ico:'⚠️' };
-  return { txt:`${d} روز دیگر`, cls:'exp-ok', ico:'📅' };
-}
+  {id:'sbc04',cat:'tots',catFA:'TOTS',dif:'medium',difFA:'متوسط',
+   name:'TOTS Salah',nameFA:'صالح - TOTS',
+   rew:{type:'player',name:'Mohamed Salah',nameFA:'محمد صالح',rat:91,pos:'RW',nat:'مصر',flag:'🇪🇬',club:'Liverpool',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۳'},{label:'شیمی',val:'حداقل ۲۳'},{label:'لیگ',val:'لیگ برتر انگلستان'},{label:'باشگاه',val:'حداقل ۱ بازیکن لیورپول'}],
+   guide:'یک تیم لیگ برتر با امتیاز ۸۳+ بسازید. حداقل یک بازیکن از لیورپول داشته باشید (مثلاً الیسون یا فان‌دایک). بقیه تیم از بازیکنان ارزان لیگ برتر. با ۸ بازیکن از یک باشگاه شیمی ۲۳+ راحت‌تر می‌شود.',
+   cost:380000,costFA:'۳۸۰,۰۰۰ سکه',exp:daysFromNow(21),xp:3000,coins:2000},
 
-function isExpiring(obj) {
-  if (!obj.exp) return false;
-  return (new Date(obj.exp) - Date.now()) < 3 * 864e5;
-}
+  {id:'sbc05',cat:'tots',catFA:'TOTS',dif:'medium',difFA:'متوسط',
+   name:'TOTS De Bruyne',nameFA:'دبروین - TOTS',
+   rew:{type:'player',name:'Kevin De Bruyne',nameFA:'کوین دبروین',rat:91,pos:'CM',nat:'بلژیک',flag:'🇧🇪',club:'Man City',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۳'},{label:'شیمی',val:'حداقل ۲۲'},{label:'باشگاه',val:'حداقل ۲ بازیکن منچسترسیتی'},{label:'لیگ',val:'لیگ برتر انگلستان'}],
+   guide:'دو بازیکن از منچسترسیتی در ترکیب قرار دهید (مثلاً ادرسون + رودری). بقیه از بازیکنان ارزان لیگ برتر. هافبک‌های ارزان لیگ برتر در ترانسفر مارکت فراوان پیدا می‌شوند.',
+   cost:420000,costFA:'۴۲۰,۰۰۰ سکه',exp:daysFromNow(21),xp:3200,coins:2500},
 
-/* ============================================================
-   CARD STYLE
-   ============================================================ */
-function cardCls(rat, sp) {
-  if (rat === 0) return 'fc-pack';
-  if (sp) return 'fc-special';
-  if (rat >= 94) return 'fc-tots';
-  if (rat >= 84) return 'fc-gold';
-  return 'fc-silver';
-}
+  {id:'sbc06',cat:'foundation',catFA:'پایه',dif:'easy',difFA:'آسان',
+   name:'Hybrid Nations',nameFA:'ترکیب ملل',
+   rew:{type:'pack',name:'Rare Gold Pack x2',nameFA:'۲ پاکت طلایی نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۷۵'},{label:'شیمی',val:'حداقل ۲۰'},{label:'ملیت',val:'حداقل ۵ ملیت مختلف'},{label:'لیگ',val:'حداکثر ۲ لیگ'}],
+   guide:'یک تیم با ۵ ملیت مختلف از حداکثر ۲ لیگ بسازید. مثلاً لیگ برتر با بازیکنان انگلیسی، فرانسوی، اسپانیایی، آلمانی و برزیلی. امتیاز ۷۵ پایین است پس از بازیکنان ارزان طلایی استفاده کنید.',
+   cost:45000,costFA:'۴۵,۰۰۰ سکه',exp:null,xp:1500,coins:3000},
 
-/* ============================================================
-   HIGHLIGHT
-   ============================================================ */
-function hl(txt, q) {
-  if (!q) return txt;
-  return txt.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'),
-    '<mark class="hl">$1</mark>');
-}
+  {id:'sbc07',cat:'foundation',catFA:'پایه',dif:'easy',difFA:'آسان',
+   name:'Premier League Foundation',nameFA:'پایه لیگ برتر',
+   rew:{type:'pack',name:'Players Pack',nameFA:'پاکت بازیکنان',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۷۸'},{label:'شیمی',val:'حداقل ۲۳'},{label:'لیگ',val:'لیگ برتر ۱۰۰٪'},{label:'ملیت',val:'حداقل ۲ ملیت'}],
+   guide:'یک تیم کاملاً از لیگ برتر با امتیاز ۷۸+ بسازید. انتخاب بازیکنان از ۲ تا ۳ باشگاه مختلف لیگ برتر شیمی خوبی ایجاد می‌کند.',
+   cost:60000,costFA:'۶۰,۰۰۰ سکه',exp:null,xp:1200,coins:2000},
 
-/* ============================================================
-   RENDER ONE CARD
-   ============================================================ */
-function cardHTML(o, q) {
-  const fav  = !!state.favs[o.id];
-  const done = !!state.done[o.id];
-  const prog = state.progs[o.id] ?? (o.prog ? o.prog.cur : null);
-  const exp  = fmtExp(o.exp);
-  const col  = CAT_COLOR[o.cat] || '#F5B014';
+  {id:'sbc08',cat:'foundation',catFA:'پایه',dif:'easy',difFA:'آسان',
+   name:'La Liga Foundation',nameFA:'پایه لالیگا',
+   rew:{type:'pack',name:'Rare Players Pack',nameFA:'پاکت بازیکنان نادر',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۷۸'},{label:'شیمی',val:'حداقل ۲۳'},{label:'لیگ',val:'لالیگا ۱۰۰٪'},{label:'ملیت',val:'حداقل ۲ ملیت'}],
+   guide:'یک تیم کاملاً از لالیگا با امتیاز ۷۸+ بسازید. ترکیبی از رئال مادرید، بارسلونا، اتلتیکو مادرید و باشگاه‌های کوچک‌تر مثل سوسیداد یا ویلارئال انتخاب خوبی است.',
+   cost:55000,costFA:'۵۵,۰۰۰ سکه',exp:null,xp:1200,coins:2000},
 
-  /* Reward visual */
-  let rewVis = '';
-  const r = o.rew;
-  if (r.type === 'xp') {
-    rewVis = `<div class="fut-card fc-xp"><span class="fc-icon">⚡</span></div>`;
-  } else if (r.type === 'pack') {
-    rewVis = `<div class="fut-card fc-pack"><span class="fc-icon">📦</span></div>`;
-  } else {
-    rewVis = `<div class="fut-card ${cardCls(r.rat, r.sp)}">
-      ${r.rat ? `<div class="fc-rat">${r.rat}</div><div class="fc-pos">${r.pos}</div>` : `<span class="fc-icon">🎁</span>`}
-    </div>`;
+  {id:'sbc09',cat:'league',catFA:'لیگ',dif:'medium',difFA:'متوسط',
+   name:'Bundesliga Stars',nameFA:'ستارگان بوندسلیگا',
+   rew:{type:'player',name:'Jamal Musiala',nameFA:'جمال موزیالا',rat:88,pos:'CAM',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۲'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'بوندسلیگا ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۱ بازیکن بایرن'}],
+   guide:'یک تیم کامل از بوندسلیگا با امتیاز ۸۲+ بسازید. حداقل یک بازیکن از بایرن مونیخ داشته باشید. ترکیب بایرن با دورتموند و لایپزیگ شیمی خوبی می‌دهد.',
+   cost:280000,costFA:'۲۸۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2500,coins:1500},
+
+  {id:'sbc10',cat:'league',catFA:'لیگ',dif:'medium',difFA:'متوسط',
+   name:'Serie A Elite',nameFA:'نخبگان سری‌آ',
+   rew:{type:'player',name:'Rafael Leão',nameFA:'رافائل لئائو',rat:88,pos:'LW',nat:'پرتغال',flag:'🇵🇹',club:'AC Milan',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۲'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'سری‌آ ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۲ باشگاه مختلف'}],
+   guide:'یک تیم کامل از سری‌آ با امتیاز ۸۲+ بسازید. ترکیب اینتر، میلان و یوونتوس گزینه اقتصادی است. بازیکنان ارزان سری‌آ مانند ناپولی و فیورنتینا هم مناسب هستند.',
+   cost:260000,costFA:'۲۶۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2400,coins:1500},
+
+  {id:'sbc11',cat:'league',catFA:'لیگ',dif:'medium',difFA:'متوسط',
+   name:'Ligue 1 Rising',nameFA:'در حال ظهور لیگ ۱',
+   rew:{type:'player',name:'Ousmane Dembélé',nameFA:'اوسمانه دمبله',rat:87,pos:'RW',nat:'فرانسه',flag:'🇫🇷',club:'PSG',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۱'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'لیگ ۱ فرانسه ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۱ بازیکن PSG'}],
+   guide:'تیمی از لیگ ۱ فرانسه بسازید. حداقل یک بازیکن از PSG داشته باشید. ترکیب PSG، موناکو، مارسی و لیل بهترین گزینه شیمی است.',
+   cost:210000,costFA:'۲۱۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2200,coins:1500},
+
+  {id:'sbc12',cat:'limited',catFA:'محدود',dif:'hard',difFA:'سخت',
+   name:'Vinicius TOTY',nameFA:'وینیسیوس - تیم سال',
+   rew:{type:'player',name:'Vinicius Jr',nameFA:'وینیسیوس جونیور',rat:93,pos:'LW',nat:'برزیل',flag:'🇧🇷',club:'Real Madrid',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۷'},{label:'شیمی',val:'حداقل ۲۱'},{label:'بازیکن TOTY',val:'حداقل ۱ بازیکن TOTY'},{label:'ملیت',val:'حداکثر ۴ ملیت'}],
+   guide:'این SBC محدود و سخت است. یک بازیکن TOTY در تیم نیاز دارید. با یک بازیکن TOTY ارزان‌تر شروع کنید و بقیه تیم را با بازیکنان ۸۷+ بسازید.',
+   cost:1800000,costFA:'۱,۸۰۰,۰۰۰ سکه',exp:daysFromNow(7),xp:7000,coins:0},
+
+  {id:'sbc13',cat:'limited',catFA:'محدود',dif:'hard',difFA:'سخت',
+   name:'Pedri Moments',nameFA:'پدری - لحظات',
+   rew:{type:'player',name:'Pedri',nameFA:'پِدری',rat:91,pos:'CM',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۵'},{label:'شیمی',val:'حداقل ۲۰'},{label:'لیگ',val:'لالیگا EA Sports'},{label:'ملیت',val:'حداقل ۱ بازیکن اسپانیایی'}],
+   guide:'یک تیم لالیگا با امتیاز ۸۵+ بسازید. حداقل یک بازیکن اسپانیایی داشته باشید. بازیکنان بارسلونا و رئال مادرید گزینه‌های اصلی هستند.',
+   cost:720000,costFA:'۷۲۰,۰۰۰ سکه',exp:daysFromNow(7),xp:4800,coins:0},
+
+  {id:'sbc14',cat:'foundation',catFA:'پایه',dif:'easy',difFA:'آسان',
+   name:'Hybrid Leagues',nameFA:'ترکیب لیگ‌ها',
+   rew:{type:'pack',name:'Mega Pack',nameFA:'مگا پاکت',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۷۶'},{label:'شیمی',val:'حداقل ۱۸'},{label:'لیگ',val:'حداقل ۴ لیگ مختلف'},{label:'ملیت',val:'حداقل ۳ ملیت'}],
+   guide:'یک تیم از ۴ لیگ مختلف بسازید. مثلاً ۳ بازیکن از لیگ برتر، ۳ از لالیگا، ۳ از بوندسلیگا و ۲ از سری‌آ. امتیاز پایین است پس بازیکنان ارزان کافی است.',
+   cost:35000,costFA:'۳۵,۰۰۰ سکه',exp:null,xp:1000,coins:2500},
+
+  {id:'sbc15',cat:'tots',catFA:'TOTS',dif:'hard',difFA:'سخت',
+   name:'TOTS World XI',nameFA:'تیم جهانی TOTS',
+   rew:{type:'player',name:'TOTS World XI Pick',nameFA:'انتخاب تیم جهانی TOTS',rat:94,pos:'PICK',nat:'',flag:'',club:'',sp:true},
+   reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۶'},{label:'شیمی',val:'حداقل ۲۲'},{label:'بازیکن TOTS',val:'حداقل ۱ بازیکن TOTS'},{label:'لیگ',val:'حداکثر ۳ لیگ'}],
+   guide:'سخت‌ترین SBC. یک بازیکن TOTS در تیم نیاز دارید. تیمی با امتیاز ۸۶+ از حداکثر ۳ لیگ. بهترین راه ترکیب لیگ برتر + لالیگا + بوندسلیگا با یک بازیکن TOTS ارزان‌تر است.',
+   cost:1500000,costFA:'۱,۵۰۰,۰۰۰ سکه',exp:daysFromNow(14),xp:8000,coins:0}
+];
+
+/* ── STATE ── */
+let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{}};
+let objCat='all',objFilters={fav:false,inc:false,exp:false};
+let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
+
+function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
+function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
+
+/* ── OBJECTIVE CARD ── */
+const OBJ_CAT_NAMES={all:'همه اهداف',weekly:'اهداف هفتگی',daily:'اهداف روزانه',milestone:'مایل‌استون‌ها',event:'رویدادها',seasonal:'اهداف فصلی',league:'اهداف رقابتی'};
+const OBJ_CAT_COLOR={weekly:'#7EB8FF',daily:'#D4A0FF',milestone:'#F5B014',event:'#FF9090',seasonal:'#6EE6A6',league:'#5EE0D4'};
+const OBJ_CAT_BADGE={weekly:'b-weekly',daily:'b-daily',milestone:'b-milestone',event:'b-event',seasonal:'b-seasonal',league:'b-league'};
+
+function objCardHTML(o,q){
+  const fav=!!state.objFavs[o.id],done=!!state.objDone[o.id];
+  const prog=state.objProgs[o.id]??(o.prog?o.prog.cur:null);
+  const exp=fmtExp(o.exp),col=OBJ_CAT_COLOR[o.cat]||'#F5B014',r=o.rew;
+  let rewVis=r.type==='xp'?`<div class="fut-card fc-xp"><span class="fc-icon">⚡</span></div>`:
+    r.type==='pack'?`<div class="fut-card fc-pack"><span class="fc-icon">📦</span></div>`:
+    playerFUT(r.name,r.rat,r.pos,r.sp);
+  let progHTML='';
+  if(o.prog||prog!=null){
+    const max=o.prog?.max||100,cur=prog??0,pct=Math.min(100,Math.round(cur/max*100));
+    const pfCls=pct>=100?'pf-green':pct>=50?'pf-gold':'pf-blue';
+    progHTML=`<div class="prog-wrap"><div class="prog-head"><span>پیشرفت</span><span>${cur.toLocaleString('fa-IR')} / ${max.toLocaleString('fa-IR')}</span></div><div class="prog-bar"><div class="prog-fill ${pfCls}" style="width:${pct}%"></div></div></div>`;
   }
-
-  /* Progress bar */
-  let progHTML = '';
-  if (o.prog || prog != null) {
-    const max = o.prog?.max || 100;
-    const cur = prog ?? 0;
-    const pct = Math.min(100, Math.round(cur / max * 100));
-    const pfCls = pct >= 100 ? 'pf-green' : pct >= 50 ? 'pf-gold' : 'pf-blue';
-    progHTML = `<div class="prog-wrap">
-      <div class="prog-head">
-        <span>پیشرفت</span>
-        <span>${cur.toLocaleString('fa-IR')} / ${max.toLocaleString('fa-IR')}</span>
-      </div>
-      <div class="prog-bar"><div class="prog-fill ${pfCls}" style="width:${pct}%"></div></div>
-    </div>`;
-  }
-
-  return `<div class="card ${done?'done':''} ${fav?'fav':''}" id="c-${o.id}" style="--cat-color:${col}">
+  return `<div class="card ${done?'done':''} ${fav?'fav':''}" id="oc-${o.id}" style="--cat-color:${col}">
     <div class="card-head">
       <div class="card-head-left">
         <div class="badges">
-          <span class="badge ${CAT_BADGE[o.cat]||'b-weekly'}">${hl(o.catFA,q)}</span>
+          <span class="badge ${OBJ_CAT_BADGE[o.cat]||'b-weekly'}">${hl(o.catFA,q)}</span>
           <span class="badge b-${o.dif}">${o.difFA}</span>
-          ${done ? '<span class="badge b-done">✓ تکمیل</span>' : ''}
-          ${isExpiring(o) && !done ? '<span class="badge" style="background:rgba(249,115,22,.18);color:#FFAC6A">🔥 منقضی می‌شود</span>' : ''}
+          ${done?'<span class="badge b-done">✓ تکمیل</span>':''}
+          ${isExpiring(o)&&!done?'<span class="badge" style="background:rgba(249,115,22,.18);color:#FFAC6A">🔥 منقضی می‌شود</span>':''}
         </div>
-        <div class="card-name">${hl(o.nameFA, q)}</div>
+        <div class="card-name">${hl(o.nameFA,q)}</div>
       </div>
-      <button class="fav-btn" onclick="toggleFav('${o.id}')" title="${fav?'حذف از علاقه‌مندی':'افزودن به علاقه‌مندی'}">${fav?'⭐':'☆'}</button>
+      <button class="fav-btn" onclick="toggleObjFav('${o.id}')">${fav?'⭐':'☆'}</button>
     </div>
-
-    <div class="reward-box">
-      ${rewVis}
+    <div class="reward-box">${rewVis}
       <div class="rew-info">
         <div class="rew-lbl">جایزه</div>
-        <div class="rew-name">${hl(r.nameFA, q)}</div>
-        ${r.nat ? `<div class="rew-sub">${r.flag} ${hl(r.nat,q)} ${r.club ? '• '+r.club : ''}</div>` : ''}
+        <div class="rew-name">${hl(r.nameFA,q)}</div>
+        ${r.nat?`<div class="rew-sub">${r.flag} ${hl(r.nat,q)}${r.club?' • '+r.club:''}</div>`:''}
         <div class="rew-extras">
-          ${o.xp    ? `<span class="rew-extra">+${o.xp.toLocaleString('fa-IR')} XP</span>` : ''}
-          ${o.coins ? `<span class="rew-extra">+${o.coins.toLocaleString('fa-IR')} سکه</span>` : ''}
+          ${o.xp?`<span class="rew-extra">+${o.xp.toLocaleString('fa-IR')} XP</span>`:''}
+          ${o.coins?`<span class="rew-extra">+${o.coins.toLocaleString('fa-IR')} سکه</span>`:''}
         </div>
       </div>
     </div>
-
-    <div class="req-mb">
-      <div class="req-ttl">شرایط انجام</div>
-      <ul class="req-list">
-        ${o.reqs.map(r=>`<li class="req-item"><span class="req-dot">›</span><span>${hl(r.fa,q)}</span></li>`).join('')}
-      </ul>
+    <div class="req-mb"><div class="req-ttl">شرایط انجام</div>
+      <ul class="req-list">${o.reqs.map(r=>`<li class="req-item"><span class="req-dot">›</span><span>${hl(r.fa,q)}</span></li>`).join('')}</ul>
     </div>
-
     ${progHTML}
-
     <div class="card-foot">
       <div class="expiry ${exp.cls}"><span>${exp.ico}</span><span>${exp.txt}</span></div>
-      <button class="done-btn ${done?'checked':''}" onclick="toggleDone('${o.id}')">
-        ${done ? '✓ تکمیل شد' : '○ علامت‌گذاری'}
-      </button>
+      <button class="done-btn ${done?'checked':''}" onclick="toggleObjDone('${o.id}')">${done?'✓ تکمیل شد':'○ علامت‌گذاری'}</button>
     </div>
   </div>`;
 }
 
-/* ============================================================
-   RENDER GRID
-   ============================================================ */
-function render() {
-  const q   = document.getElementById('searchInp').value.toLowerCase().trim();
-  const srt = document.getElementById('sortSel').value;
-  const now = Date.now();
+/* ── SBC CARD ── */
+const SBC_CAT_NAMES={all:'همه SBC‌ها',iconic:'SBC آیکونیک',foundation:'SBC پایه',league:'SBC لیگ',tots:'SBC - TOTS',limited:'SBC محدود'};
+const SBC_CAT_COLOR={iconic:'#D4A0FF',foundation:'#5EE0D4',league:'#7EB8FF',tots:'#F5B014',limited:'#FF9090'};
+const SBC_CAT_BADGE={iconic:'b-iconic',foundation:'b-foundation',league:'b-league',tots:'b-tots',limited:'b-limited'};
 
-  let list = objectives.filter(o => {
-    if (activeCat !== 'all' && o.cat !== activeCat) return false;
-    if (filters.fav && !state.favs[o.id]) return false;
-    if (filters.inc && state.done[o.id]) return false;
-    if (filters.exp) {
-      if (!o.exp) return false;
-      if (new Date(o.exp) - now > 3 * 864e5) return false;
-    }
-    if (q) {
-      const hay = [o.nameFA, o.name, o.catFA, o.rew.nameFA, o.rew.name, o.rew.nat, o.difFA,
-        ...o.reqs.map(r=>r.fa)].join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
+function sbcCardHTML(s,q){
+  const fav=!!state.sbcFavs[s.id],done=!!state.sbcDone[s.id];
+  const exp=fmtExp(s.exp),col=SBC_CAT_COLOR[s.cat]||'#A855F7',r=s.rew;
+  const rewVis=r.type==='pack'?`<div class="fut-card fc-pack"><span class="fc-icon">📦</span></div>`:playerFUT(r.name,r.rat,r.pos,r.sp);
+  const reqs=s.reqs.map(req=>`<div class="sbc-req-row"><span class="sbc-req-label">${hl(req.label,q)}</span><span class="sbc-req-val">${hl(req.val,q)}</span></div>`).join('');
+  const gid=`g-${s.id}`;
+  return `<div class="card ${done?'done':''} ${fav?'fav':''}" id="sc-${s.id}" style="--cat-color:${col}">
+    <div class="card-head">
+      <div class="card-head-left">
+        <div class="badges">
+          <span class="badge ${SBC_CAT_BADGE[s.cat]||'b-iconic'}">${hl(s.catFA,q)}</span>
+          <span class="badge b-${s.dif}">${s.difFA}</span>
+          ${done?'<span class="badge b-done">✓ تکمیل</span>':''}
+          ${isExpiring(s)&&!done?'<span class="badge" style="background:rgba(249,115,22,.18);color:#FFAC6A">🔥 منقضی می‌شود</span>':''}
+        </div>
+        <div class="card-name">${hl(s.nameFA,q)}</div>
+      </div>
+      <button class="fav-btn" onclick="toggleSBCFav('${s.id}')">${fav?'⭐':'☆'}</button>
+    </div>
+    <div class="reward-box">${rewVis}
+      <div class="rew-info">
+        <div class="rew-lbl">جایزه</div>
+        <div class="rew-name">${hl(r.nameFA,q)}</div>
+        ${r.nat?`<div class="rew-sub">${r.flag} ${hl(r.nat,q)}${r.club?' • '+r.club:''}</div>`:''}
+        <div class="rew-extras">
+          ${s.xp?`<span class="rew-extra">+${s.xp.toLocaleString('fa-IR')} XP</span>`:''}
+          ${s.coins?`<span class="rew-extra">+${s.coins.toLocaleString('fa-IR')} سکه</span>`:''}
+        </div>
+      </div>
+    </div>
+    <div class="sbc-reqs"><div class="req-ttl">شرایط SBC</div>${reqs}</div>
+    <div class="sbc-guide">
+      <button class="sbc-guide-btn" onclick="toggleGuide('${gid}')">📖 راهنمای انجام SBC ▾</button>
+      <div class="sbc-guide-body" id="${gid}">${hl(s.guide,q)}</div>
+    </div>
+    <div class="card-foot">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="expiry ${exp.cls}"><span>${exp.ico}</span><span>${exp.txt}</span></div>
+        ${s.costFA?`<div class="sbc-cost-pill">💰 ${s.costFA}</div>`:''}
+      </div>
+      <button class="done-btn ${done?'checked':''}" onclick="toggleSBCDone('${s.id}')">${done?'✓ تکمیل شد':'○ علامت‌گذاری'}</button>
+    </div>
+  </div>`;
+}
+
+function toggleGuide(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+/* ── RENDER OBJECTIVES ── */
+function renderObj(){
+  const q=document.getElementById('objSearch').value.toLowerCase().trim();
+  const srt=document.getElementById('objSort').value,now=Date.now();
+  let list=OBJ_RAW.filter(o=>{
+    if(objCat!=='all'&&o.cat!==objCat)return false;
+    if(objFilters.fav&&!state.objFavs[o.id])return false;
+    if(objFilters.inc&&state.objDone[o.id])return false;
+    if(objFilters.exp){if(!o.exp)return false;if(new Date(o.exp)-now>3*864e5)return false;}
+    if(q){const hay=[o.nameFA,o.name,o.catFA,o.rew.nameFA,o.rew.nat,o.difFA,...o.reqs.map(r=>r.fa)].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
+  const DM={hard:3,medium:2,easy:1};
+  if(srt==='rew')list.sort((a,b)=>(b.rew.rat||0)-(a.rew.rat||0));
+  else if(srt==='exp')list.sort((a,b)=>{if(!a.exp&&!b.exp)return 0;if(!a.exp)return 1;if(!b.exp)return -1;return new Date(a.exp)-new Date(b.exp);});
+  else if(srt==='dif')list.sort((a,b)=>DM[b.dif]-DM[a.dif]);
+  else if(srt==='az')list.sort((a,b)=>a.nameFA.localeCompare(b.nameFA,'fa'));
+  document.getElementById('objSecTitle').textContent=OBJ_CAT_NAMES[objCat]||'همه اهداف';
+  document.getElementById('objSecCnt').textContent=list.length+' هدف';
+  const g=document.getElementById('objGrid'),e=document.getElementById('objEmpty');
+  if(!list.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';g.innerHTML=list.map(o=>objCardHTML(o,q)).join('');
+}
 
-  const DMAP = { hard:3, medium:2, easy:1 };
-  if (srt === 'rew') list.sort((a,b) => (b.rew.rat||0)-(a.rew.rat||0));
-  else if (srt === 'exp') list.sort((a,b) => {
-    if (!a.exp && !b.exp) return 0;
-    if (!a.exp) return 1; if (!b.exp) return -1;
-    return new Date(a.exp)-new Date(b.exp);
+/* ── RENDER SBC ── */
+function renderSBC(){
+  const q=document.getElementById('sbcSearch').value.toLowerCase().trim();
+  const srt=document.getElementById('sbcSort').value,now=Date.now();
+  let list=SBC_RAW.filter(s=>{
+    if(sbcCat!=='all'&&s.cat!==sbcCat)return false;
+    if(sbcFilters.fav&&!state.sbcFavs[s.id])return false;
+    if(sbcFilters.inc&&state.sbcDone[s.id])return false;
+    if(sbcFilters.exp){if(!s.exp)return false;if(new Date(s.exp)-now>3*864e5)return false;}
+    if(q){const hay=[s.nameFA,s.name,s.catFA,s.rew.nameFA,s.rew.nat,s.difFA,...s.reqs.map(r=>r.label+' '+r.val),s.guide].join(' ').toLowerCase();if(!hay.includes(q))return false;}
+    return true;
   });
-  else if (srt === 'dif') list.sort((a,b) => DMAP[b.dif]-DMAP[a.dif]);
-  else if (srt === 'az')  list.sort((a,b) => a.nameFA.localeCompare(b.nameFA,'fa'));
-
-  document.getElementById('secTitle').textContent = CAT_NAMES[activeCat] || 'همه اهداف';
-  document.getElementById('secCnt').textContent = list.length + ' هدف';
-
-  const grid = document.getElementById('grid');
-  const empty = document.getElementById('empty');
-  if (list.length === 0) { grid.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display='none';
-  grid.innerHTML = list.map(o => cardHTML(o, q)).join('');
+  const DM={hard:3,medium:2,easy:1};
+  if(srt==='rew')list.sort((a,b)=>(b.rew.rat||0)-(a.rew.rat||0));
+  else if(srt==='cost')list.sort((a,b)=>(a.cost||0)-(b.cost||0));
+  else if(srt==='exp')list.sort((a,b)=>{if(!a.exp&&!b.exp)return 0;if(!a.exp)return 1;if(!b.exp)return -1;return new Date(a.exp)-new Date(b.exp);});
+  else if(srt==='dif')list.sort((a,b)=>DM[b.dif]-DM[a.dif]);
+  document.getElementById('sbcSecTitle').textContent=SBC_CAT_NAMES[sbcCat]||'همه SBC‌ها';
+  document.getElementById('sbcSecCnt').textContent=list.length+' SBC';
+  const g=document.getElementById('sbcGrid'),e=document.getElementById('sbcEmpty');
+  if(!list.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';g.innerHTML=list.map(s=>sbcCardHTML(s,q)).join('');
 }
 
-/* ============================================================
-   STATS
-   ============================================================ */
-function updateStats() {
-  const total = objectives.length;
-  const done  = Object.values(state.done).filter(Boolean).length;
-  const favs  = Object.values(state.favs).filter(Boolean).length;
-  const now   = Date.now();
-  const expiring = objectives.filter(o => {
-    if (!o.exp) return false;
-    const d = new Date(o.exp)-now;
-    return d>0 && d < 864e5;
-  }).length;
-  const pct = total ? Math.round(done/total*100) : 0;
-
-  document.getElementById('sTotal').textContent    = total;
-  document.getElementById('sDone').textContent     = done;
-  document.getElementById('sFav').textContent      = favs;
-  document.getElementById('sExpiring').textContent = expiring;
-  document.getElementById('sPct').textContent      = pct + '٪';
-
-  /* Category counts */
-  ['all','weekly','daily','milestone','event','seasonal','league'].forEach(c => {
-    const el = document.getElementById('cn-'+c);
-    if (el) el.textContent = c==='all' ? total : objectives.filter(o=>o.cat===c).length;
+/* ── STATS ── */
+function updateStats(){
+  const ot=OBJ_RAW.length,od=Object.values(state.objDone).filter(Boolean).length;
+  const st=SBC_RAW.length,sd=Object.values(state.sbcDone).filter(Boolean).length;
+  const fav=Object.values(state.objFavs).filter(Boolean).length+Object.values(state.sbcFavs).filter(Boolean).length;
+  const now=Date.now(),exp=OBJ_RAW.filter(o=>{if(!o.exp)return false;const d=new Date(o.exp)-now;return d>0&&d<864e5;}).length;
+  document.getElementById('sTotal').textContent=ot;
+  document.getElementById('sDone').textContent=od;
+  document.getElementById('sSBCTotal').textContent=st;
+  document.getElementById('sSBCDone').textContent=sd;
+  document.getElementById('sFav').textContent=fav;
+  document.getElementById('sExpiring').textContent=exp;
+  document.getElementById('sp-obj').textContent=ot;
+  document.getElementById('sp-sbc').textContent=st;
+  ['all','weekly','daily','milestone','event','seasonal','league'].forEach(c=>{
+    const el=document.getElementById('ocn-'+c);if(el)el.textContent=c==='all'?ot:OBJ_RAW.filter(o=>o.cat===c).length;
+  });
+  ['all','iconic','foundation','league','tots','limited'].forEach(c=>{
+    const el=document.getElementById('scn-'+c);if(el)el.textContent=c==='all'?st:SBC_RAW.filter(s=>s.cat===c).length;
   });
 }
 
-/* ============================================================
-   TOGGLE HANDLERS
-   ============================================================ */
-function toggleFav(id) {
-  state.favs[id] = !state.favs[id];
-  saveState(); updateStats(); render();
-  toast(state.favs[id] ? '⭐ به علاقه‌مندی‌ها اضافه شد' : '☆ از علاقه‌مندی حذف شد', 'i');
+/* ── SECTION SWITCH ── */
+function showSec(sec){
+  ['obj','sbc'].forEach(s=>{
+    document.getElementById('sec-'+s).style.display=s===sec?'block':'none';
+    document.getElementById('sn-'+s).classList.toggle('active',s===sec);
+  });
 }
 
-function toggleDone(id) {
-  state.done[id] = !state.done[id];
-  saveState(); updateStats(); render();
-  if (state.done[id]) toast('✅ هدف تکمیل شد!', 's');
+/* ── CATEGORY & FILTER ── */
+function setObjCat(cat){objCat=cat;document.querySelectorAll('#objCatTabs .cat-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===cat));renderObj();}
+function setSBCCat(cat){sbcCat=cat;document.querySelectorAll('#sbcCatTabs .cat-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===cat));renderSBC();}
+function toggleOF(f){objFilters[f]=!objFilters[f];document.getElementById('ofb-'+f).classList.toggle('active',objFilters[f]);renderObj();}
+function toggleSF(f){sbcFilters[f]=!sbcFilters[f];document.getElementById('sfb-'+f).classList.toggle('active',sbcFilters[f]);renderSBC();}
+function toggleObjFav(id){state.objFavs[id]=!state.objFavs[id];saveState();updateStats();renderObj();toast(state.objFavs[id]?'⭐ اضافه شد':'☆ حذف شد','i');}
+function toggleSBCFav(id){state.sbcFavs[id]=!state.sbcFavs[id];saveState();updateStats();renderSBC();toast(state.sbcFavs[id]?'⭐ اضافه شد':'☆ حذف شد','i');}
+function toggleObjDone(id){state.objDone[id]=!state.objDone[id];saveState();updateStats();renderObj();if(state.objDone[id])toast('✅ هدف تکمیل شد!','s');}
+function toggleSBCDone(id){state.sbcDone[id]=!state.sbcDone[id];saveState();updateStats();renderSBC();if(state.sbcDone[id])toast('✅ SBC تکمیل شد!','s');}
+
+/* ── FETCH (manual only) ── */
+function setStatus(m){
+  const p=document.getElementById('statusPill'),t=document.getElementById('statusTxt');
+  p.className='status-pill '+m;
+  t.textContent=m==='online'?'آنلاین':m==='syncing'?'در حال بروزرسانی...':'آفلاین';
+}
+async function doFetch(){
+  const btn=document.getElementById('refreshBtn');
+  btn.disabled=true;btn.classList.add('spinning');setStatus('syncing');
+  let ok=false;
+  try{
+    const res=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.fut.gg/sbc/')}`,{signal:AbortSignal.timeout(8000)});
+    const j=await res.json();if((j.contents||'').length>500)ok=true;
+  }catch(e){}
+  document.getElementById('lastUpd').textContent='آخرین: '+new Date().toLocaleTimeString('fa-IR');
+  setStatus('online');
+  toast(ok?'✅ داده‌های جدید دریافت شد':'🔄 بروزرسانی شد (دیتای محلی)','i');
+  btn.disabled=false;btn.classList.remove('spinning');
 }
 
-function setCat(cat) {
-  activeCat = cat;
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat===cat));
-  render();
+/* ── TOAST ── */
+function toast(msg,type='i',ms=3000){
+  const c=document.getElementById('toasts'),el=document.createElement('div');
+  el.className='toast '+type;el.textContent=msg;c.appendChild(el);
+  setTimeout(()=>el.remove(),ms);
 }
 
-function toggleF(f) {
-  filters[f] = !filters[f];
-  document.getElementById('fb-'+f).classList.toggle('active', filters[f]);
-  render();
-}
-
-/* ============================================================
-   ONLINE FETCH
-   ============================================================ */
-function setStatus(mode) {
-  const pill = document.getElementById('statusPill');
-  const txt  = document.getElementById('statusTxt');
-  pill.className = 'status-pill ' + mode;
-  txt.textContent = mode==='online' ? 'آنلاین' : mode==='syncing' ? 'در حال بروزرسانی...' : 'آفلاین';
-}
-
-async function tryFetch(url, timeout=8000) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), timeout);
-  try {
-    const r = await fetch(url, { signal: ctrl.signal });
-    clearTimeout(timer);
-    if (!r.ok) throw new Error('HTTP '+r.status);
-    return r;
-  } catch(e) { clearTimeout(timer); throw e; }
-}
-
-async function doFetch() {
-  const btn = document.getElementById('refreshBtn');
-  const ico = document.getElementById('refreshIco');
-  btn.disabled = true;
-  btn.classList.add('spinning');
-  setStatus('syncing');
-
-  let success = false;
-  try {
-    /* Try fut.gg API endpoints via CORS proxies */
-    const targets = [
-      `https://api.allorigins.win/get?url=${encodeURIComponent('https://www.fut.gg/api/24/objectives/')}`,
-      `https://api.allorigins.win/get?url=${encodeURIComponent('https://www.fut.gg/objectives')}`,
-      `https://api.allorigins.win/get?url=${encodeURIComponent('https://www.futbin.com/objectives')}`
-    ];
-
-    for (const url of targets) {
-      try {
-        const res = await tryFetch(url);
-        const json = await res.json();
-        const content = json.contents || json;
-        if (typeof content === 'string' && content.length > 1000) {
-          const parsed = extractFromHTML(content);
-          if (parsed && parsed.length > 0) {
-            mergeData(parsed);
-            success = true; break;
-          }
-        } else if (Array.isArray(content) && content.length > 0) {
-          mergeData(content);
-          success = true; break;
-        }
-      } catch(e) { /* try next */ }
-    }
-  } catch(e) {}
-
-  const now = new Date();
-  document.getElementById('lastUpd').textContent =
-    'آخرین بروزرسانی: ' + now.toLocaleTimeString('fa-IR') + ' - ' + now.toLocaleDateString('fa-IR');
-
-  if (success) {
-    setStatus('online');
-    toast('✅ داده‌های جدید دریافت شد', 's');
-  } else {
-    setStatus('online');
-    toast('🔄 بروزرسانی شد (دیتای محلی)', 'i');
-  }
-
-  btn.disabled = false;
-  btn.classList.remove('spinning');
-  updateStats(); render();
-}
-
-function extractFromHTML(html) {
-  /* Try to find JSON data in embedded scripts */
-  const patterns = [
-    /window\.__data\s*=\s*({[\s\S]+?});\s*<\/script>/,
-    /window\.__INITIAL_STATE__\s*=\s*({[\s\S]+?});\s*<\/script>/,
-    /"objectives"\s*:\s*(\[[\s\S]+?\])/,
-    /\[\s*\{"id"[\s\S]+?\}\s*\]/
-  ];
-  for (const p of patterns) {
-    const m = html.match(p);
-    if (m) {
-      try {
-        const data = JSON.parse(m[1]);
-        if (Array.isArray(data) && data.length) return data;
-        if (data && data.objectives) return data.objectives;
-      } catch(e){}
-    }
-  }
-  return null;
-}
-
-function mergeData(newData) {
-  /* Stub: in production would normalise API response to our schema */
-  console.log('Received', newData.length, 'items from API');
-}
-
-/* ============================================================
-   TOAST
-   ============================================================ */
-function toast(msg, type='i', ms=3200) {
-  const c = document.getElementById('toasts');
-  const el = document.createElement('div');
-  el.className = 'toast '+type;
-  el.textContent = msg;
-  c.appendChild(el);
-  setTimeout(() => el.remove(), ms);
-}
-
-/* ============================================================
-   KEYBOARD SHORTCUT
-   ============================================================ */
-document.addEventListener('keydown', e => {
-  if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
-    e.preventDefault();
-    document.getElementById('searchInp').focus();
-  }
-  if (e.key === 'Escape') document.getElementById('searchInp').blur();
+/* ── KEYBOARD ── */
+document.addEventListener('keydown',e=>{
+  if(e.key==='/'&&document.activeElement.tagName!=='INPUT'){e.preventDefault();document.getElementById('objSearch').focus();}
+  if(e.key==='Escape'){document.getElementById('objSearch').blur();document.getElementById('sbcSearch').blur();}
 });
 
-/* ============================================================
-   INIT
-   ============================================================ */
-function init() {
-  loadState();
-  objectives = RAW;
-  updateStats();
-  render();
-  setTimeout(doFetch, 800);
-  setInterval(doFetch, 5 * 60 * 1000);
+/* ── INIT ── */
+function init(){
+  loadState();updateStats();renderObj();renderSBC();
+  setTimeout(doFetch,1000);
 }
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
