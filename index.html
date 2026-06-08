@@ -235,29 +235,46 @@
     .pcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.6)}
     .pcard.fav{border-color:rgba(245,176,20,.35)}
     .pcard-img{position:relative;height:150px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
-    .pimg-gold{background:linear-gradient(160deg,#1E1400,#2E2000)}
-    .pimg-tots{background:linear-gradient(160deg,#001A08,#003015)}
-    .pimg-special{background:linear-gradient(160deg,#130030,#240055)}
-    .pimg-toty{background:linear-gradient(160deg,#001030,#001E5A)}
-    .pimg-silver{background:linear-gradient(160deg,#181818,#282828)}
+    /* card type backgrounds */
+    .pimg-gold{background:linear-gradient(160deg,#1E1400,#342200)}
+    .pimg-silver{background:linear-gradient(160deg,#181820,#282835)}
+    .pimg-bronze{background:linear-gradient(160deg,#1A0C00,#2E1500)}
+    .pimg-tots{background:linear-gradient(160deg,#001A08,#003A18)}
+    .pimg-toty{background:linear-gradient(160deg,#000A30,#001A60)}
+    .pimg-hero{background:linear-gradient(160deg,#200010,#420028)}
+    .pimg-special{background:linear-gradient(160deg,#150030,#2D0060)}
+    .pimg-fut{background:linear-gradient(160deg,#001828,#003050)}
     .pcard-img img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:145px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 8px rgba(0,0,0,.7))}
     .pcard-rat{position:absolute;top:7px;right:9px;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9);line-height:1}
     .pcard-posb{position:absolute;top:32px;right:10px;font-size:10px;font-weight:700;color:rgba(255,255,255,.7)}
     .pcard-fav{position:absolute;top:6px;left:6px;background:none;border:none;cursor:pointer;font-size:17px;line-height:1;transition:transform .15s;-webkit-tap-highlight-color:transparent}
     .pcard-fav:hover{transform:scale(1.25)}
+    .pcard-type-badge{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);backdrop-filter:blur(4px);border-radius:5px;padding:1px 6px;font-size:8px;font-weight:900;letter-spacing:.6px;white-space:nowrap}
+    .pbt-tots{color:#4AE87A} .pbt-toty{color:#7EB8FF} .pbt-hero{color:#FF80C0} .pbt-special{color:#C080FF} .pbt-fut{color:#80D8FF}
     .pcard-body{padding:10px 11px 12px}
     .pcard-name{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .pcard-club{font-size:11px;color:var(--t3);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .pcard-price-lbl{font-size:9px;color:var(--t3);margin-bottom:1px}
     .pcard-price{font-size:15px;font-weight:900;color:var(--gold)}
-    .pcard-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:9px;font-weight:700;margin-bottom:5px}
 
     /* player section filter chips */
-    .pos-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;margin-bottom:12px;scrollbar-width:none}
+    .pos-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;margin-bottom:8px;scrollbar-width:none}
     .pos-tabs::-webkit-scrollbar{display:none}
     .pos-tab{padding:6px 14px;border-radius:18px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Vazirmatn',sans-serif;flex-shrink:0}
     .pos-tab:hover{border-color:var(--border2);color:var(--t1)}
     .pos-tab.active{background:var(--gold);border-color:var(--gold);color:#000}
+    /* card type tabs — distinct colors */
+    .ctype-tab{padding:5px 12px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Vazirmatn',sans-serif;flex-shrink:0}
+    .ctype-tab:hover{color:var(--t1)}
+    .ctype-tab.ct-all.active{background:var(--gold);border-color:var(--gold);color:#000}
+    .ctype-tab.ct-gold.active{background:#C8A230;border-color:#C8A230;color:#000}
+    .ctype-tab.ct-silver.active{background:#888;border-color:#888;color:#000}
+    .ctype-tab.ct-bronze.active{background:#8B4513;border-color:#8B4513;color:#fff}
+    .ctype-tab.ct-tots.active{background:#1A7A3C;border-color:#1A7A3C;color:#A0FFB8}
+    .ctype-tab.ct-toty.active{background:#0A2070;border-color:#0A2070;color:#7EB8FF}
+    .ctype-tab.ct-hero.active{background:#4A0030;border-color:#6A0040;color:#FF80C0}
+    .ctype-tab.ct-special.active{background:#350070;border-color:#5000A0;color:#C080FF}
+    .ctype-tab.ct-fut.active{background:#003060;border-color:#004A90;color:#80D8FF}
 
     @media(max-width:700px){
       .main{padding:12px 10px 16px}
@@ -396,6 +413,17 @@
     <button class="pos-tab" data-pos="DEF" onclick="setPos('DEF')">🛡️ مدافع</button>
     <button class="pos-tab" data-pos="GK" onclick="setPos('GK')">🧤 دروازه‌بان</button>
   </div>
+  <div class="pos-tabs" id="cardTypeTabs" style="margin-bottom:12px">
+    <button class="ctype-tab ct-all active" data-ct="all" onclick="setCardType('all')">همه</button>
+    <button class="ctype-tab ct-gold" data-ct="gold" onclick="setCardType('gold')">🥇 گلد</button>
+    <button class="ctype-tab ct-silver" data-ct="silver" onclick="setCardType('silver')">🥈 سیلور</button>
+    <button class="ctype-tab ct-bronze" data-ct="bronze" onclick="setCardType('bronze')">🥉 برنز</button>
+    <button class="ctype-tab ct-tots" data-ct="tots" onclick="setCardType('tots')">🌟 TOTS</button>
+    <button class="ctype-tab ct-toty" data-ct="toty" onclick="setCardType('toty')">🏆 TOTY</button>
+    <button class="ctype-tab ct-hero" data-ct="hero" onclick="setCardType('hero')">⚡ Hero</button>
+    <button class="ctype-tab ct-special" data-ct="special" onclick="setCardType('special')">💎 Special</button>
+    <button class="ctype-tab ct-fut" data-ct="fut" onclick="setCardType('fut')">🔮 FUT Born</button>
+  </div>
   <div class="filter-row">
     <button class="f-btn" id="pfb-fav" onclick="togglePF('fav')">⭐ علاقه‌مندی‌ها</button>
     <select class="sort-sel" id="plSort" onchange="renderPlayers()">
@@ -521,7 +549,114 @@ const PLAYERS_RAW=[
   {id:'pl47',name:'Harry Kane',nameFA:'هری کین',rat:92,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:78000,imgId:202126,sp:false},
   {id:'pl48',name:'Robert Lewandowski',nameFA:'رابرت لواندوفسکی',rat:90,pos:'ST',posType:'ATT',nat:'لهستان',flag:'🇵🇱',club:'Barcelona',leagueFA:'لالیگا',price:45000,imgId:188545,sp:false},
   {id:'pl49',name:'Ferran Torres',nameFA:'فران تورس',rat:84,pos:'LW',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:14000,imgId:254292,sp:false},
-  {id:'pl50',name:'Granit Xhaka',nameFA:'گرانیت ژاکا',rat:85,pos:'CM',posType:'MID',nat:'سوئیس',flag:'🇨🇭',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:18000,imgId:193080,sp:false}
+  {id:'pl50',name:'Granit Xhaka',nameFA:'گرانیت ژاکا',rat:85,pos:'CM',posType:'MID',nat:'سوئیس',flag:'🇨🇭',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:18000,imgId:193080,sp:false},
+
+  /* ── TOTS SPECIAL CARDS ── */
+  {id:'pl51',name:'Erling Haaland TOTS',nameFA:'هالاند TOTS',rat:99,pos:'ST',posType:'ATT',nat:'نروژ',flag:'🇳🇴',club:'Man City',leagueFA:'لیگ برتر',price:2800000,imgId:239085,sp:true,cardType:'tots'},
+  {id:'pl52',name:'Mohamed Salah TOTS',nameFA:'صلاح TOTS',rat:98,pos:'RW',posType:'ATT',nat:'مصر',flag:'🇪🇬',club:'Liverpool',leagueFA:'لیگ برتر',price:1800000,imgId:209331,sp:true,cardType:'tots'},
+  {id:'pl53',name:'Pedri TOTS',nameFA:'پدری TOTS',rat:97,pos:'CM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:1200000,imgId:231683,sp:true,cardType:'tots'},
+  {id:'pl54',name:'Jamal Musiala TOTS',nameFA:'موزیالا TOTS',rat:97,pos:'CAM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:1100000,imgId:258751,sp:true,cardType:'tots'},
+  {id:'pl55',name:'Bukayo Saka TOTS',nameFA:'ساکا TOTS',rat:96,pos:'RW',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Arsenal',leagueFA:'لیگ برتر',price:950000,imgId:246669,sp:true,cardType:'tots'},
+  {id:'pl56',name:'Harry Kane TOTS',nameFA:'هری کین TOTS',rat:99,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:850000,imgId:202126,sp:true,cardType:'tots'},
+  {id:'pl57',name:'Achraf Hakimi TOTS',nameFA:'حکیمی TOTS',rat:97,pos:'RB',posType:'DEF',nat:'مراکش',flag:'🇲🇦',club:'PSG',leagueFA:'لیگ ۱',price:600000,imgId:232464,sp:true,cardType:'tots'},
+  {id:'pl58',name:'Theo Hernandez TOTS',nameFA:'اِرناندز TOTS',rat:96,pos:'LB',posType:'DEF',nat:'فرانسه',flag:'🇫🇷',club:'AC Milan',leagueFA:'سری‌آ',price:520000,imgId:239109,sp:true,cardType:'tots'},
+
+  /* ── TOTY CARDS ── */
+  {id:'pl59',name:'Kylian Mbappé TOTY',nameFA:'امباپه TOTY',rat:99,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Real Madrid',leagueFA:'لالیگا',price:3200000,imgId:231747,sp:true,cardType:'toty'},
+  {id:'pl60',name:'Vinicius Jr TOTY',nameFA:'وینیسیوس TOTY',rat:98,pos:'LW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Real Madrid',leagueFA:'لالیگا',price:2500000,imgId:270566,sp:true,cardType:'toty'},
+  {id:'pl61',name:'Jude Bellingham TOTY',nameFA:'بلینگهام TOTY',rat:98,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Real Madrid',leagueFA:'لالیگا',price:2200000,imgId:237692,sp:true,cardType:'toty'},
+  {id:'pl62',name:'Rodri TOTY',nameFA:'رودری TOTY',rat:97,pos:'CDM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Man City',leagueFA:'لیگ برتر',price:1800000,imgId:231323,sp:true,cardType:'toty'},
+  {id:'pl63',name:'Virgil van Dijk TOTY',nameFA:'فان‌دایک TOTY',rat:97,pos:'CB',posType:'DEF',nat:'هلند',flag:'🇳🇱',club:'Liverpool',leagueFA:'لیگ برتر',price:1400000,imgId:203376,sp:true,cardType:'toty'},
+  {id:'pl64',name:'Alisson TOTY',nameFA:'آلیسون TOTY',rat:97,pos:'GK',posType:'GK',nat:'برزیل',flag:'🇧🇷',club:'Liverpool',leagueFA:'لیگ برتر',price:1300000,imgId:212831,sp:true,cardType:'toty'},
+
+  /* ── HERO CARDS ── */
+  {id:'pl65',name:'Lionel Messi Hero',nameFA:'مسی Hero',rat:90,pos:'CAM',posType:'ATT',nat:'آرژانتین',flag:'🇦🇷',club:'Inter Miami',leagueFA:'MLS',price:90000,imgId:158023,sp:true,cardType:'hero'},
+  {id:'pl66',name:'Neymar Hero',nameFA:'نیمار Hero',rat:87,pos:'LW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Al-Hilal',leagueFA:'لیگ عربستان',price:45000,imgId:190871,sp:true,cardType:'hero'},
+  {id:'pl67',name:'Karim Benzema Hero',nameFA:'بنزما Hero',rat:88,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Al-Ittihad',leagueFA:'لیگ عربستان',price:52000,imgId:165153,sp:true,cardType:'hero'},
+  {id:'pl68',name:'Lamine Yamal Hero',nameFA:'یامال Hero',rat:95,pos:'RW',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:680000,imgId:263631,sp:true,cardType:'hero'},
+
+  /* ── FUT BORN CARDS ── */
+  {id:'pl69',name:'Florian Wirtz FUT Born',nameFA:'ویرتز FUT Born',rat:92,pos:'CAM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:280000,imgId:258070,sp:true,cardType:'fut'},
+  {id:'pl70',name:'Cole Palmer FUT Born',nameFA:'پالمر FUT Born',rat:91,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Chelsea',leagueFA:'لیگ برتر',price:240000,imgId:246469,sp:true,cardType:'fut'},
+  {id:'pl71',name:'Xavi Simons FUT Born',nameFA:'سیمونز FUT Born',rat:91,pos:'CAM',posType:'MID',nat:'هلند',flag:'🇳🇱',club:'PSG',leagueFA:'لیگ ۱',price:220000,imgId:257799,sp:true,cardType:'fut'},
+  {id:'pl72',name:'Rodrygo FUT Born',nameFA:'رودریگو FUT Born',rat:89,pos:'RW',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Real Madrid',leagueFA:'لالیگا',price:120000,imgId:263529,sp:true,cardType:'fut'},
+
+  /* ── SPECIAL CARDS ── */
+  {id:'pl73',name:'Cristiano Ronaldo Special',nameFA:'رونالدو Special',rat:88,pos:'ST',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'Al-Nassr',leagueFA:'لیگ عربستان',price:62000,imgId:20801,sp:true,cardType:'special'},
+  {id:'pl74',name:'Kevin De Bruyne Special',nameFA:'دو بروین Special',rat:95,pos:'CM',posType:'MID',nat:'بلژیک',flag:'🇧🇪',club:'Man City',leagueFA:'لیگ برتر',price:750000,imgId:192985,sp:true,cardType:'special'},
+  {id:'pl75',name:'Kvaratskhelia Special',nameFA:'کواراتسخلیا Special',rat:92,pos:'LW',posType:'ATT',nat:'گرجستان',flag:'🇬🇪',club:'PSG',leagueFA:'لیگ ۱',price:290000,imgId:244726,sp:true,cardType:'special'},
+
+  /* ── ADDITIONAL GOLD PLAYERS ── */
+  /* Premier League */
+  {id:'pl76',name:'Ollie Watkins',nameFA:'اولی واتکینز',rat:87,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Aston Villa',leagueFA:'لیگ برتر',price:42000,imgId:236595,sp:false},
+  {id:'pl77',name:'Emiliano Martínez',nameFA:'امیلیانو مارتینز',rat:88,pos:'GK',posType:'GK',nat:'آرژانتین',flag:'🇦🇷',club:'Aston Villa',leagueFA:'لیگ برتر',price:55000,imgId:222349,sp:false},
+  {id:'pl78',name:'Eberechi Eze',nameFA:'ابِرِچی ازه',rat:85,pos:'CAM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Crystal Palace',leagueFA:'لیگ برتر',price:22000,imgId:243271,sp:false},
+  {id:'pl79',name:'Jarrod Bowen',nameFA:'جارود بوئن',rat:84,pos:'RW',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'West Ham',leagueFA:'لیگ برتر',price:16000,imgId:229169,sp:false},
+  {id:'pl80',name:'Michael Olise',nameFA:'مایکل اولیز',rat:85,pos:'RW',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:25000,imgId:249956,sp:false},
+  {id:'pl81',name:'Casemiro',nameFA:'کازمیرو',rat:87,pos:'CDM',posType:'MID',nat:'برزیل',flag:'🇧🇷',club:'Man Utd',leagueFA:'لیگ برتر',price:35000,imgId:200145,sp:false},
+  {id:'pl82',name:'Lisandro Martínez',nameFA:'لیساندرو مارتینز',rat:85,pos:'CB',posType:'DEF',nat:'آرژانتین',flag:'🇦🇷',club:'Man Utd',leagueFA:'لیگ برتر',price:22000,imgId:246672,sp:false},
+  {id:'pl83',name:'Nick Pope',nameFA:'نیک پوپ',rat:84,pos:'GK',posType:'GK',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Newcastle',leagueFA:'لیگ برتر',price:15000,imgId:205600,sp:false},
+  {id:'pl84',name:'Trent Alexander-Arnold',nameFA:'الکساندر-آرنولد',rat:87,pos:'RB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Real Madrid',leagueFA:'لالیگا',price:52000,imgId:220834,sp:false},
+  /* La Liga */
+  {id:'pl85',name:'Luka Modrić',nameFA:'لوکا مودریچ',rat:88,pos:'CM',posType:'MID',nat:'کرواسی',flag:'🇭🇷',club:'Real Madrid',leagueFA:'لالیگا',price:55000,imgId:177003,sp:false},
+  {id:'pl86',name:'Thibaut Courtois',nameFA:'تیبو کورتوا',rat:91,pos:'GK',posType:'GK',nat:'بلژیک',flag:'🇧🇪',club:'Real Madrid',leagueFA:'لالیگا',price:95000,imgId:193169,sp:false},
+  {id:'pl87',name:'Gavi',nameFA:'گاوی',rat:87,pos:'CM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:45000,imgId:263685,sp:false},
+  {id:'pl88',name:'Jan Oblak',nameFA:'یان اوبلاک',rat:91,pos:'GK',posType:'GK',nat:'اسلوونی',flag:'🇸🇮',club:'Atlético Madrid',leagueFA:'لالیگا',price:90000,imgId:200487,sp:false},
+  {id:'pl89',name:'Take Kubo',nameFA:'تاکه کوبو',rat:85,pos:'RW',posType:'ATT',nat:'ژاپن',flag:'🇯🇵',club:'Real Sociedad',leagueFA:'لالیگا',price:20000,imgId:246191,sp:false},
+  {id:'pl90',name:'Aurélien Tchouaméni',nameFA:'اورلیان چوامنی',rat:86,pos:'CDM',posType:'MID',nat:'فرانسه',flag:'🇫🇷',club:'Real Madrid',leagueFA:'لالیگا',price:32000,imgId:263490,sp:false},
+  {id:'pl91',name:'Antonio Rüdiger',nameFA:'آنتونیو رودیگر',rat:86,pos:'CB',posType:'DEF',nat:'آلمان',flag:'🇩🇪',club:'Real Madrid',leagueFA:'لالیگا',price:30000,imgId:188350,sp:false},
+  {id:'pl92',name:'David Alaba',nameFA:'داوید آلابا',rat:87,pos:'CB',posType:'DEF',nat:'اتریش',flag:'🇦🇹',club:'Real Madrid',leagueFA:'لالیگا',price:40000,imgId:193669,sp:false},
+  /* Bundesliga */
+  {id:'pl93',name:'Thomas Müller',nameFA:'توماس مولر',rat:87,pos:'CF',posType:'ATT',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:35000,imgId:189596,sp:false},
+  {id:'pl94',name:'Serge Gnabry',nameFA:'سرژ نابری',rat:85,pos:'RW',posType:'ATT',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:20000,imgId:218350,sp:false},
+  {id:'pl95',name:'Alejandro Grimaldo',nameFA:'الخاندرو گریمالدو',rat:85,pos:'LB',posType:'DEF',nat:'اسپانیا',flag:'🇪🇸',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:22000,imgId:229490,sp:false},
+  {id:'pl96',name:'Mats Hummels',nameFA:'ماتز هومِلز',rat:84,pos:'CB',posType:'DEF',nat:'آلمان',flag:'🇩🇪',club:'Borussia Dortmund',leagueFA:'بوندسلیگا',price:14000,imgId:173890,sp:false},
+  {id:'pl97',name:'Julian Brandt',nameFA:'یولیان برانت',rat:84,pos:'CAM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Borussia Dortmund',leagueFA:'بوندسلیگا',price:16000,imgId:233837,sp:false},
+  {id:'pl98',name:'Karim Adeyemi',nameFA:'کریم آدِیِمی',rat:83,pos:'LW',posType:'ATT',nat:'آلمان',flag:'🇩🇪',club:'Borussia Dortmund',leagueFA:'بوندسلیگا',price:13000,imgId:263549,sp:false},
+  {id:'pl99',name:'Victor Boniface',nameFA:'ویکتور بونیفاس',rat:84,pos:'ST',posType:'ATT',nat:'نیجریه',flag:'🇳🇬',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:15000,imgId:266607,sp:false},
+  /* Serie A */
+  {id:'pl100',name:'Lautaro Martínez',nameFA:'لائوتارو مارتینز',rat:88,pos:'ST',posType:'ATT',nat:'آرژانتین',flag:'🇦🇷',club:'Inter Milan',leagueFA:'سری‌آ',price:55000,imgId:208690,sp:false},
+  {id:'pl101',name:'Nicolò Barella',nameFA:'نیکولو بارِلا',rat:87,pos:'CM',posType:'MID',nat:'ایتالیا',flag:'🇮🇹',club:'Inter Milan',leagueFA:'سری‌آ',price:45000,imgId:232672,sp:false},
+  {id:'pl102',name:'Marcus Thuram',nameFA:'مارکوس تورام',rat:85,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Inter Milan',leagueFA:'سری‌آ',price:22000,imgId:264553,sp:false},
+  {id:'pl103',name:'Dušan Vlahović',nameFA:'دوشان ولاهوویچ',rat:86,pos:'ST',posType:'ATT',nat:'صربستان',flag:'🇷🇸',club:'Juventus',leagueFA:'سری‌آ',price:30000,imgId:254640,sp:false},
+  {id:'pl104',name:'Paulo Dybala',nameFA:'پائولو دیبالا',rat:86,pos:'CF',posType:'ATT',nat:'آرژانتین',flag:'🇦🇷',club:'Roma',leagueFA:'سری‌آ',price:30000,imgId:198001,sp:false},
+  {id:'pl105',name:'Victor Osimhen',nameFA:'ویکتور اوسیمهن',rat:88,pos:'ST',posType:'ATT',nat:'نیجریه',flag:'🇳🇬',club:'Galatasaray',leagueFA:'سوپر لیگ',price:58000,imgId:240395,sp:false},
+  {id:'pl106',name:'Mike Maignan',nameFA:'مایک مانیان',rat:88,pos:'GK',posType:'GK',nat:'فرانسه',flag:'🇫🇷',club:'AC Milan',leagueFA:'سری‌آ',price:50000,imgId:222028,sp:false},
+  {id:'pl107',name:'Federico Chiesa',nameFA:'فدریکو کیئزا',rat:84,pos:'RW',posType:'ATT',nat:'ایتالیا',flag:'🇮🇹',club:'Liverpool',leagueFA:'لیگ برتر',price:16000,imgId:235714,sp:false},
+  /* Ligue 1 */
+  {id:'pl108',name:'Warren Zaïre-Emery',nameFA:'وارن زائر-امری',rat:85,pos:'CM',posType:'MID',nat:'فرانسه',flag:'🇫🇷',club:'PSG',leagueFA:'لیگ ۱',price:22000,imgId:272336,sp:false},
+  {id:'pl109',name:'Désiré Doué',nameFA:'دزیره دوئه',rat:83,pos:'LW',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'PSG',leagueFA:'لیگ ۱',price:13000,imgId:272337,sp:false},
+  /* Saudi Pro League */
+  {id:'pl110',name:'Cristiano Ronaldo',nameFA:'کریستیانو رونالدو',rat:88,pos:'ST',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'Al-Nassr',leagueFA:'لیگ عربستان',price:62000,imgId:20801,sp:false},
+  {id:'pl111',name:'N\'Golo Kanté',nameFA:'انگولو کانته',rat:86,pos:'CDM',posType:'MID',nat:'فرانسه',flag:'🇫🇷',club:'Al-Ittihad',leagueFA:'لیگ عربستان',price:30000,imgId:215914,sp:false},
+  {id:'pl112',name:'Roberto Firmino',nameFA:'روبرتو فیرمینو',rat:83,pos:'ST',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Al-Ahli',leagueFA:'لیگ عربستان',price:12000,imgId:200104,sp:false},
+  {id:'pl113',name:'Ruben Neves',nameFA:'روبن نِوِز',rat:85,pos:'CDM',posType:'MID',nat:'پرتغال',flag:'🇵🇹',club:'Al-Hilal',leagueFA:'لیگ عربستان',price:15000,imgId:217553,sp:false},
+  {id:'pl114',name:'Jordan Henderson',nameFA:'جوردن هندرسون',rat:82,pos:'CM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Al-Ettifaq',leagueFA:'لیگ عربستان',price:8000,imgId:172779,sp:false},
+
+  /* ── SILVER CARDS ── */
+  {id:'pl115',name:'Rasmus Højlund',nameFA:'راسموس هویلوند',rat:83,pos:'ST',posType:'ATT',nat:'دانمارک',flag:'🇩🇰',club:'Man Utd',leagueFA:'لیگ برتر',price:14000,imgId:261399,sp:false},
+  {id:'pl116',name:'Dominic Calvert-Lewin',nameFA:'دامینیک کالورت-لوین',rat:82,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Everton',leagueFA:'لیگ برتر',price:10000,imgId:213566,sp:false},
+  {id:'pl117',name:'Robert Andrich',nameFA:'روبرت آندریش',rat:83,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:11000,imgId:226225,sp:false},
+  {id:'pl118',name:'Fermin Lopez',nameFA:'فرمین لوپز',rat:82,pos:'CM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:12000,imgId:272339,sp:false},
+  {id:'pl119',name:'Leroy Sane',nameFA:'لِروی سانه',rat:85,pos:'LW',posType:'ATT',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:20000,imgId:213559,sp:false},
+  {id:'pl120',name:'Kingsley Coman',nameFA:'کینگزلی کومان',rat:84,pos:'LW',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:15000,imgId:207907,sp:false},
+  {id:'pl121',name:'Piero Hincapié',nameFA:'پیِرو اینکاپیه',rat:83,pos:'LB',posType:'DEF',nat:'اکوادور',flag:'🇪🇨',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:12000,imgId:266606,sp:false},
+  {id:'pl122',name:'Ruben Loftus-Cheek',nameFA:'روبن لوفتوس-چیک',rat:85,pos:'CM',posType:'MID',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'AC Milan',leagueFA:'سری‌آ',price:20000,imgId:208179,sp:false},
+  {id:'pl123',name:'Niclas Füllkrug',nameFA:'نیکلاس فولکروگ',rat:83,pos:'ST',posType:'ATT',nat:'آلمان',flag:'🇩🇪',club:'West Ham',leagueFA:'لیگ برتر',price:11000,imgId:208277,sp:false},
+  {id:'pl124',name:'Bremer',nameFA:'برِمِر',rat:85,pos:'CB',posType:'DEF',nat:'برزیل',flag:'🇧🇷',club:'Juventus',leagueFA:'سری‌آ',price:20000,imgId:248741,sp:false},
+  {id:'pl125',name:'Alessandro Bastoni',nameFA:'آلساندرو باستونی',rat:86,pos:'CB',posType:'DEF',nat:'ایتالیا',flag:'🇮🇹',club:'Inter Milan',leagueFA:'سری‌آ',price:28000,imgId:236461,sp:false},
+  {id:'pl126',name:'Reece James',nameFA:'ریس جیمز',rat:85,pos:'RB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Chelsea',leagueFA:'لیگ برتر',price:22000,imgId:249710,sp:false},
+  {id:'pl127',name:'Joao Cancelo',nameFA:'ژوائو کانسلو',rat:85,pos:'RB',posType:'DEF',nat:'پرتغال',flag:'🇵🇹',club:'Barcelona',leagueFA:'لالیگا',price:20000,imgId:210035,sp:false},
+  {id:'pl128',name:'Jonathan Tah',nameFA:'جوناتان تا',rat:84,pos:'CB',posType:'DEF',nat:'آلمان',flag:'🇩🇪',club:'Bayer Leverkusen',leagueFA:'بوندسلیگا',price:14000,imgId:221458,sp:false},
+  {id:'pl129',name:'Leon Bailey',nameFA:'لئون بِیلی',rat:84,pos:'LW',posType:'ATT',nat:'جامائیکا',flag:'🇯🇲',club:'Aston Villa',leagueFA:'لیگ برتر',price:15000,imgId:241626,sp:false},
+  {id:'pl130',name:'Alexander Isak',nameFA:'اِلکساندر ایساک',rat:87,pos:'ST',posType:'ATT',nat:'سوئد',flag:'🇸🇪',club:'Newcastle',leagueFA:'لیگ برتر',price:42000,imgId:253842,sp:false},
+
+  /* More silver */
+  {id:'pl131',name:'Amine Gouiri',nameFA:'امین گوئیری',rat:82,pos:'ST',posType:'ATT',nat:'الجزایر',flag:'🇩🇿',club:'Rennes',leagueFA:'لیگ ۱',price:10000,imgId:256380,sp:false},
+  {id:'pl132',name:'Dani Carvajal',nameFA:'دانی کارواخال',rat:87,pos:'RB',posType:'DEF',nat:'اسپانیا',flag:'🇪🇸',club:'Real Madrid',leagueFA:'لالیگا',price:42000,imgId:178603,sp:false},
+  {id:'pl133',name:'Nicolo Zaniolo',nameFA:'نیکولو زانیولو',rat:81,pos:'RW',posType:'ATT',nat:'ایتالیا',flag:'🇮🇹',club:'Aston Villa',leagueFA:'لیگ برتر',price:8000,imgId:245364,sp:false},
+  {id:'pl134',name:'Youri Tielemans',nameFA:'یوری تیِلِمانس',rat:83,pos:'CM',posType:'MID',nat:'بلژیک',flag:'🇧🇪',club:'Aston Villa',leagueFA:'لیگ برتر',price:11000,imgId:217553,sp:false},
+  {id:'pl135',name:'Ilkay Gündogan',nameFA:'ایلکای گوندوگان',rat:85,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Barcelona',leagueFA:'لالیگا',price:18000,imgId:179061,sp:false}
 ];
 
 function playerFUT(name,rat,pos,sp,big){
@@ -848,7 +983,7 @@ const SBC_RAW=[
 let state={objFavs:{},objDone:{},objProgs:{},sbcFavs:{},sbcDone:{},plFavs:{}};
 let objCat='all',objFilters={fav:false,inc:false,exp:false};
 let sbcCat='all',sbcFilters={fav:false,inc:false,exp:false};
-let plPos='all',plFilters={fav:false};
+let plPos='all',plCardType='all',plFilters={fav:false};
 
 function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
 function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
@@ -1011,27 +1146,39 @@ function renderSBC(){
 }
 
 /* ── PLAYER CARD HTML ── */
-function pcardImgCls(rat,sp){
-  if(sp)return'pimg-special';
-  if(rat>=94)return'pimg-tots';
-  if(rat>=84)return'pimg-gold';
-  return'pimg-silver';
+function resolvedCT(p){return p.cardType||(p.rat>=84?'gold':'p.rat>=64?\'silver\':\'bronze\'');}
+function realCT(p){if(p.cardType)return p.cardType;if(p.rat>=84)return'gold';if(p.rat>=64)return'silver';return'bronze';}
+function pcardImgCls(p){
+  switch(realCT(p)){
+    case'toty':return'pimg-toty';
+    case'tots':return'pimg-tots';
+    case'hero':return'pimg-hero';
+    case'special':return'pimg-special';
+    case'fut':return'pimg-fut';
+    case'bronze':return'pimg-bronze';
+    case'silver':return'pimg-silver';
+    default:return'pimg-gold';
+  }
 }
+const CT_BADGE={tots:['TOTS','pbt-tots'],toty:['TOTY','pbt-toty'],hero:['Hero','pbt-hero'],special:['Special','pbt-special'],fut:['FUT Born','pbt-fut']};
 function fmtPrice(n){
   if(n>=1000000)return(n/1000000).toFixed(1).replace('.0','')+'M';
   if(n>=1000)return Math.round(n/1000)+'K';
-  return n.toString();
+  return n.toLocaleString('fa-IR');
 }
 function playerCardHTML(p){
   const fav=!!state.plFavs[p.id];
-  const bg=pcardImgCls(p.rat,p.sp);
-  const img=`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`;
+  const bg=pcardImgCls(p);
+  const ct=realCT(p);
+  const badge=CT_BADGE[ct];
+  const img=p.imgId?`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
   return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
     <div class="pcard-img ${bg}">
       ${img}
       <div class="pcard-rat">${p.rat}</div>
       <div class="pcard-posb">${p.pos}</div>
       <button class="pcard-fav" onclick="togglePlFav('${p.id}')">${fav?'⭐':'☆'}</button>
+      ${badge?`<div class="pcard-type-badge ${badge[1]}">${badge[0]}</div>`:''}
     </div>
     <div class="pcard-body">
       <div class="pcard-name">${p.nameFA}</div>
@@ -1048,6 +1195,7 @@ function renderPlayers(){
   const srt=document.getElementById('plSort').value;
   let list=PLAYERS_RAW.filter(p=>{
     if(plPos!=='all'&&p.posType!==plPos)return false;
+    if(plCardType!=='all'&&realCT(p)!==plCardType)return false;
     if(plFilters.fav&&!state.plFavs[p.id])return false;
     if(q){const hay=[p.nameFA,p.name,p.club,p.nat,p.leagueFA,p.pos].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
@@ -1065,6 +1213,7 @@ function renderPlayers(){
 }
 
 function setPos(pos){plPos=pos;document.querySelectorAll('#posTabs .pos-tab').forEach(t=>t.classList.toggle('active',t.dataset.pos===pos));renderPlayers();}
+function setCardType(ct){plCardType=ct;document.querySelectorAll('#cardTypeTabs .ctype-tab').forEach(t=>t.classList.toggle('active',t.dataset.ct===ct));renderPlayers();}
 function togglePF(f){plFilters[f]=!plFilters[f];document.getElementById('pfb-'+f).classList.toggle('active',plFilters[f]);renderPlayers();}
 function togglePlFav(id){state.plFavs[id]=!state.plFavs[id];saveState();updateStats();renderPlayers();toast(state.plFavs[id]?'⭐ اضافه شد':'☆ حذف شد','i');}
 
