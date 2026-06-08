@@ -140,8 +140,19 @@
     .fc-pos{font-size:8px;opacity:.8;margin-top:1px;z-index:2;position:relative}
     .fc-icon{font-size:22px}
     /* Player face image inside card */
-    .fut-card .pface{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:52px;height:52px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 4px rgba(0,0,0,.5))}
+    .fut-card .pface{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;height:85%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 4px rgba(0,0,0,.5))}
     .fut-card .fc-overlay{position:absolute;top:3px;right:0;left:0;display:flex;flex-direction:column;align-items:center;z-index:3}
+    /* Big FUT card for SBC hero */
+    .fut-card.big{width:90px;height:118px;border-radius:10px}
+    .fut-card.big .fc-rat{font-size:26px}
+    .fut-card.big .fc-pos{font-size:10px}
+    .fut-card.big .fc-icon{font-size:32px}
+    /* SBC reward hero block */
+    .sbc-rew-hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px 14px;background:linear-gradient(135deg,var(--bg3),rgba(22,34,53,.9));border:1px solid var(--border);border-radius:12px;margin-bottom:13px;text-align:center;position:relative}
+    .sbc-rew-hero::before{content:'جایزه';position:absolute;top:8px;right:12px;font-size:9px;color:var(--t3);letter-spacing:.5px;font-weight:600;text-transform:uppercase}
+    .sbc-rew-hero .rew-name{font-size:15px;font-weight:800;color:var(--t1)}
+    .sbc-rew-hero .rew-sub{font-size:12px;color:var(--t2);margin-top:3px}
+    .sbc-rew-hero .rew-extras{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:5px}
 
     .rew-info{flex:1}
     .rew-lbl{font-size:10px;color:var(--t3);margin-bottom:2px}
@@ -392,9 +403,9 @@ const PIMG={
   'Phil Foden':222038,'Gabriel Martinelli':253819
 };
 
-function playerFUT(name,rat,pos,sp){
+function playerFUT(name,rat,pos,sp,big){
   const id=PIMG[name];
-  const cls=cardCls(rat,sp);
+  const cls=cardCls(rat,sp)+(big?' big':'');
   if(id){
     return `<div class="fut-card ${cls}">
       <div class="fc-overlay">
@@ -403,12 +414,21 @@ function playerFUT(name,rat,pos,sp){
       <img class="pface"
         src="https://cdn.futbin.com/content/fifa26/img/players/${id}.png"
         alt="${name}" loading="lazy"
-        onerror="this.src='https://cdn.fut.gg/fc26/players/portrait/${id}.png';this.onerror=null">
+        onerror="imgFallback(this,${id})">
     </div>`;
   }
   return `<div class="fut-card ${cls}">
     ${rat?`<div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div>`:`<span class="fc-icon">🎁</span>`}
   </div>`;
+}
+function imgFallback(el,id){
+  const urls=[
+    `https://cdn.fut.gg/fc26/players/portrait/${id}.png`,
+    `https://cdn.futbin.com/content/fifa25/img/players/${id}.png`
+  ];
+  const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
+  if(tried<urls.length){el.dataset.tried=tried+1;el.src=urls[tried];}
+  else{el.style.display='none';}
 }
 
 /* ── OBJECTIVES DATA ── */
@@ -772,7 +792,9 @@ const SBC_CAT_BADGE={iconic:'b-iconic',foundation:'b-foundation',league:'b-leagu
 function sbcCardHTML(s,q){
   const fav=!!state.sbcFavs[s.id],done=!!state.sbcDone[s.id];
   const exp=fmtExp(s.exp),col=SBC_CAT_COLOR[s.cat]||'#A855F7',r=s.rew;
-  const rewVis=r.type==='pack'?`<div class="fut-card fc-pack"><span class="fc-icon">📦</span></div>`:playerFUT(r.name,r.rat,r.pos,r.sp);
+  const bigCard=r.type==='pack'
+    ?`<div class="fut-card fc-pack big"><span class="fc-icon">📦</span></div>`
+    :playerFUT(r.name,r.rat,r.pos,r.sp,true);
   const reqs=s.reqs.map(req=>`<div class="sbc-req-row"><span class="sbc-req-label">${hl(req.label,q)}</span><span class="sbc-req-val">${hl(req.val,q)}</span></div>`).join('');
   const gid=`g-${s.id}`;
   return `<div class="card ${done?'done':''} ${fav?'fav':''}" id="sc-${s.id}" style="--cat-color:${col}">
@@ -788,12 +810,14 @@ function sbcCardHTML(s,q){
       </div>
       <button class="fav-btn" onclick="toggleSBCFav('${s.id}')">${fav?'⭐':'☆'}</button>
     </div>
-    <div class="reward-box">${rewVis}
-      <div class="rew-info">
-        <div class="rew-lbl">جایزه</div>
+    <div class="sbc-rew-hero">
+      ${bigCard}
+      <div>
         <div class="rew-name">${hl(r.nameFA,q)}</div>
         ${r.nat?`<div class="rew-sub">${r.flag} ${hl(r.nat,q)}${r.club?' • '+r.club:''}</div>`:''}
         <div class="rew-extras">
+          ${r.rat?`<span class="rew-extra">⭐ ${r.rat}</span>`:''}
+          ${r.pos?`<span class="rew-extra">${r.pos}</span>`:''}
           ${s.xp?`<span class="rew-extra">+${s.xp.toLocaleString('fa-IR')} XP</span>`:''}
           ${s.coins?`<span class="rew-extra">+${s.coins.toLocaleString('fa-IR')} سکه</span>`:''}
         </div>
