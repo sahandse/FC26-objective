@@ -230,27 +230,56 @@
     body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 
     /* ── PLAYERS SECTION ── */
-    .player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+    .player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
     .pcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .22s;position:relative}
     .pcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.6)}
     .pcard.fav{border-color:rgba(245,176,20,.35)}
-    .pcard-img{position:relative;height:150px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
-    /* card type backgrounds */
-    .pimg-gold{background:linear-gradient(160deg,#1E1400,#342200)}
-    .pimg-silver{background:linear-gradient(160deg,#181820,#282835)}
-    .pimg-bronze{background:linear-gradient(160deg,#1A0C00,#2E1500)}
-    .pimg-tots{background:linear-gradient(160deg,#001A08,#003A18)}
-    .pimg-toty{background:linear-gradient(160deg,#000A30,#001A60)}
-    .pimg-hero{background:linear-gradient(160deg,#200010,#420028)}
-    .pimg-special{background:linear-gradient(160deg,#150030,#2D0060)}
-    .pimg-fut{background:linear-gradient(160deg,#001828,#003050)}
-    .pimg-ptg{background:linear-gradient(160deg,#1A0E00,#3A2400)}
-    .pcard-img img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:145px;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 8px rgba(0,0,0,.7))}
-    .pcard-rat{position:absolute;top:7px;right:9px;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.9);line-height:1}
-    .pcard-posb{position:absolute;top:32px;right:10px;font-size:10px;font-weight:700;color:rgba(255,255,255,.7)}
-    .pcard-fav{position:absolute;top:6px;left:6px;background:none;border:none;cursor:pointer;font-size:17px;line-height:1;transition:transform .15s;-webkit-tap-highlight-color:transparent}
+    /* ── FC26-STYLE CARD UPPER ── */
+    .pcard-upper{position:relative;height:195px;overflow:hidden;display:flex;flex-direction:column}
+    .pcard-inner{display:flex;flex:1;position:relative;overflow:hidden}
+    /* card type backgrounds — authentic FC26 radial gradients */
+    .pimg-gold{background:radial-gradient(ellipse at 65% 30%,#5A3D10,#3A2508 50%,#1A1000)}
+    .pimg-silver{background:radial-gradient(ellipse at 65% 30%,#3C3C52,#28283C 50%,#141420)}
+    .pimg-bronze{background:radial-gradient(ellipse at 65% 30%,#4A2010,#301408 50%,#180800)}
+    .pimg-tots{background:radial-gradient(ellipse at 65% 30%,#005A2A,#003018 50%,#001008)}
+    .pimg-toty{background:radial-gradient(ellipse at 65% 30%,#001A78,#000E48 50%,#00051C)}
+    .pimg-hero{background:radial-gradient(ellipse at 65% 30%,#5A0032,#36001A 50%,#180008)}
+    .pimg-special{background:radial-gradient(ellipse at 65% 30%,#38005A,#200032 50%,#100018)}
+    .pimg-fut{background:radial-gradient(ellipse at 65% 30%,#003878,#002044 50%,#001020)}
+    .pimg-ptg{background:radial-gradient(ellipse at 65% 30%,#3A2800,#201600 50%,#100800)}
+    /* Left info column (OVR / POS / Flag / type) */
+    .pcard-info-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 0 0 7px;width:40px;flex-shrink:0;z-index:3}
+    .pci-rat{font-size:24px;font-weight:900;line-height:1;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+    .pci-pos{font-size:8.5px;font-weight:800;margin-top:2px;letter-spacing:.4px;color:rgba(255,255,255,.85)}
+    .pci-flag{font-size:13px;margin-top:5px;line-height:1}
+    .pci-ctype{font-size:6.5px;font-weight:900;margin-top:3px;letter-spacing:.7px;text-align:center;text-transform:uppercase}
+    /* Per-card-type accent colors for left column */
+    .pimg-gold .pci-rat,.pimg-gold .pci-pos{color:#F5D068}
+    .pimg-silver .pci-rat,.pimg-silver .pci-pos{color:#D8D8E8}
+    .pimg-bronze .pci-rat,.pimg-bronze .pci-pos{color:#E8A070}
+    .pimg-tots .pci-rat,.pimg-tots .pci-pos{color:#40E874}
+    .pimg-toty .pci-rat,.pimg-toty .pci-pos{color:#70B0FF}
+    .pimg-hero .pci-rat,.pimg-hero .pci-pos{color:#FF78B8}
+    .pimg-special .pci-rat,.pimg-special .pci-pos{color:#C070F8}
+    .pimg-fut .pci-rat,.pimg-fut .pci-pos{color:#70D0FF}
+    .pimg-ptg .pci-rat,.pimg-ptg .pci-pos{color:#FFB020}
+    /* Player photo area */
+    .pcard-photo{flex:1;position:relative;overflow:hidden}
+    .pcard-photo img{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:126px;height:182px;object-fit:contain;object-position:bottom center;filter:drop-shadow(-3px 0 10px rgba(0,0,0,.8))}
+    /* Fav button top-right */
+    .pcard-fav{position:absolute;top:6px;right:7px;background:none;border:none;cursor:pointer;font-size:16px;line-height:1;transition:transform .15s;-webkit-tap-highlight-color:transparent;z-index:5}
     .pcard-fav:hover{transform:scale(1.25)}
-    .pcard-type-badge{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);backdrop-filter:blur(4px);border-radius:5px;padding:1px 6px;font-size:8px;font-weight:900;letter-spacing:.6px;white-space:nowrap}
+    /* Name band at bottom of image area */
+    .pcard-name-band{padding:4px 6px;text-align:center;font-size:11px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.4px;border-top:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.45)}
+    .pimg-gold .pcard-name-band{color:#F5D068}
+    .pimg-silver .pcard-name-band{color:#D8D8E8}
+    .pimg-bronze .pcard-name-band{color:#E8A070}
+    .pimg-tots .pcard-name-band{color:#40E874}
+    .pimg-toty .pcard-name-band{color:#70B0FF}
+    .pimg-hero .pcard-name-band{color:#FF78B8}
+    .pimg-special .pcard-name-band{color:#C070F8}
+    .pimg-fut .pcard-name-band{color:#70D0FF}
+    .pimg-ptg .pcard-name-band{color:#FFB020}
     .pbt-tots{color:#4AE87A} .pbt-toty{color:#7EB8FF} .pbt-hero{color:#FF80C0} .pbt-special{color:#C080FF} .pbt-fut{color:#80D8FF} .pbt-ptg{color:#FFB830}
     .pcard-body{padding:10px 11px 12px}
     .pcard-name{font-size:13px;font-weight:700;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -293,17 +322,13 @@
 
     /* ─── METALLIC SHIMMER ─── */
     @keyframes metalShimmer{0%{transform:translateX(-180%)skewX(-15deg)}100%{transform:translateX(280%)skewX(-15deg)}}
-    .pcard-img::before{content:'';position:absolute;top:0;left:0;width:28%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);animation:metalShimmer 6s ease-in-out infinite;pointer-events:none;z-index:4}
-    .pimg-gold{background:linear-gradient(160deg,#1A1000,#302100,#1A1000)}
-    .pimg-tots{background:linear-gradient(160deg,#001408,#003A1A,#001408)}
-    .pimg-toty{background:linear-gradient(160deg,#000828,#001058,#000828)}
-    .pimg-ptg{background:linear-gradient(160deg,#1A0A00,#3A2200,#1A0A00)}
+    .pcard-upper::before{content:'';position:absolute;top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);animation:metalShimmer 7s ease-in-out infinite;pointer-events:none;z-index:4}
 
     /* ─── PLAYER STATS GRID ─── */
-    .pcard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:5px 7px 0;border-top:1px solid rgba(255,255,255,.07);margin-top:5px}
-    .pstat{display:flex;flex-direction:column;align-items:center;padding:3px 0}
-    .pstat-val{font-size:12px;font-weight:900;line-height:1}
-    .pstat-lbl{font-size:7px;color:var(--t3);font-weight:700;letter-spacing:.3px}
+    .pcard-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:0;padding:5px 2px 3px;border-top:1px solid rgba(255,255,255,.06);background:rgba(0,0,0,.2)}
+    .pstat{display:flex;flex-direction:column;align-items:center;padding:2px 0}
+    .pstat-val{font-size:11px;font-weight:900;line-height:1}
+    .pstat-lbl{font-size:6.5px;color:var(--t3);font-weight:700;letter-spacing:.2px}
     .sv-green{color:#4AE87A}.sv-gold{color:var(--gold)}.sv-red{color:#FF6060}
 
     /* ─── COMPARE BUTTON ─── */
@@ -1199,7 +1224,54 @@ const PLAYERS_RAW=[
   {id:'pl132',name:'Dani Carvajal',nameFA:'دانی کارواخال',rat:87,pos:'RB',posType:'DEF',nat:'اسپانیا',flag:'🇪🇸',club:'Real Madrid',leagueFA:'لالیگا',price:42000,imgId:178603,sp:false},
   {id:'pl133',name:'Nicolo Zaniolo',nameFA:'نیکولو زانیولو',rat:81,pos:'RW',posType:'ATT',nat:'ایتالیا',flag:'🇮🇹',club:'Aston Villa',leagueFA:'لیگ برتر',price:8000,imgId:245364,sp:false},
   {id:'pl134',name:'Youri Tielemans',nameFA:'یوری تیِلِمانس',rat:83,pos:'CM',posType:'MID',nat:'بلژیک',flag:'🇧🇪',club:'Aston Villa',leagueFA:'لیگ برتر',price:11000,imgId:217553,sp:false},
-  {id:'pl135',name:'Ilkay Gündogan',nameFA:'ایلکای گوندوگان',rat:85,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Barcelona',leagueFA:'لالیگا',price:18000,imgId:179061,sp:false}
+  {id:'pl135',name:'Ilkay Gündogan',nameFA:'ایلکای گوندوگان',rat:85,pos:'CM',posType:'MID',nat:'آلمان',flag:'🇩🇪',club:'Barcelona',leagueFA:'لالیگا',price:18000,imgId:179061,sp:false},
+
+  /* ── MORE PREMIER LEAGUE ── */
+  {id:'pl136',name:'Darwin Nunez',nameFA:'داروین نونز',rat:86,pos:'ST',posType:'ATT',nat:'اروگوئه',flag:'🇺🇾',club:'Liverpool',leagueFA:'لیگ برتر',price:32000,imgId:256961,sp:false},
+  {id:'pl137',name:'Alexis Mac Allister',nameFA:'الکسیس مک آلیستر',rat:86,pos:'CM',posType:'MID',nat:'آرژانتین',flag:'🇦🇷',club:'Liverpool',leagueFA:'لیگ برتر',price:30000,imgId:252971,sp:false},
+  {id:'pl138',name:'Andrew Robertson',nameFA:'اندرو رابرتسون',rat:87,pos:'LB',posType:'DEF',nat:'اسکاتلند',flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',club:'Liverpool',leagueFA:'لیگ برتر',price:42000,imgId:212622,sp:false},
+  {id:'pl139',name:'Gabriel Magalhães',nameFA:'گابریل ماگالیاش',rat:87,pos:'CB',posType:'DEF',nat:'برزیل',flag:'🇧🇷',club:'Arsenal',leagueFA:'لیگ برتر',price:42000,imgId:246187,sp:false},
+  {id:'pl140',name:'Ben White',nameFA:'بن وایت',rat:84,pos:'RB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Arsenal',leagueFA:'لیگ برتر',price:16000,imgId:241592,sp:false},
+  {id:'pl141',name:'Jordan Pickford',nameFA:'جوردن پیکفورد',rat:85,pos:'GK',posType:'GK',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Everton',leagueFA:'لیگ برتر',price:20000,imgId:213513,sp:false},
+  {id:'pl142',name:'Nicolas Jackson',nameFA:'نیکلاس جکسون',rat:83,pos:'ST',posType:'ATT',nat:'سنگال',flag:'🇸🇳',club:'Chelsea',leagueFA:'لیگ برتر',price:13000,imgId:272248,sp:false},
+  {id:'pl143',name:'Pedro Neto',nameFA:'پِدرو نِتو',rat:85,pos:'LW',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'Chelsea',leagueFA:'لیگ برتر',price:22000,imgId:248734,sp:false},
+  {id:'pl144',name:'Moises Caicedo',nameFA:'موییسز کایسِدو',rat:84,pos:'CDM',posType:'MID',nat:'اکوادور',flag:'🇪🇨',club:'Chelsea',leagueFA:'لیگ برتر',price:16000,imgId:265421,sp:false},
+  {id:'pl145',name:'Anthony Gordon',nameFA:'آنتونی گوردون',rat:85,pos:'LW',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Newcastle',leagueFA:'لیگ برتر',price:22000,imgId:257906,sp:false},
+  {id:'pl146',name:'Sandro Tonali',nameFA:'ساندرو تونالی',rat:85,pos:'CM',posType:'MID',nat:'ایتالیا',flag:'🇮🇹',club:'Newcastle',leagueFA:'لیگ برتر',price:21000,imgId:237750,sp:false},
+  {id:'pl147',name:'Thomas Partey',nameFA:'توماس پارتی',rat:84,pos:'CDM',posType:'MID',nat:'غنا',flag:'🇬🇭',club:'Arsenal',leagueFA:'لیگ برتر',price:16000,imgId:239814,sp:false},
+  {id:'pl148',name:'Gabriel Jesus',nameFA:'گابریل ژسوس',rat:84,pos:'ST',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Arsenal',leagueFA:'لیگ برتر',price:16000,imgId:246529,sp:false},
+  {id:'pl149',name:'Ivan Toney',nameFA:'ایوان تونی',rat:83,pos:'ST',posType:'ATT',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Brentford',leagueFA:'لیگ برتر',price:13000,imgId:237892,sp:false},
+  {id:'pl150',name:'Richarlison',nameFA:'ریچارلیسون',rat:83,pos:'ST',posType:'ATT',nat:'برزیل',flag:'🇧🇷',club:'Tottenham',leagueFA:'لیگ برتر',price:13000,imgId:249578,sp:false},
+  {id:'pl151',name:'Kieran Trippier',nameFA:'کیران تریپیر',rat:85,pos:'RB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Newcastle',leagueFA:'لیگ برتر',price:20000,imgId:184913,sp:false},
+  /* ── MORE LA LIGA ── */
+  {id:'pl152',name:'Marc-André ter Stegen',nameFA:'تِر اِستِگِن',rat:88,pos:'GK',posType:'GK',nat:'آلمان',flag:'🇩🇪',club:'Barcelona',leagueFA:'لالیگا',price:52000,imgId:200389,sp:false},
+  {id:'pl153',name:'Dani Olmo',nameFA:'دانی اولمو',rat:85,pos:'CAM',posType:'MID',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:23000,imgId:225732,sp:false},
+  {id:'pl154',name:'Ansu Fati',nameFA:'انسو فاتی',rat:82,pos:'LW',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'Barcelona',leagueFA:'لالیگا',price:10000,imgId:260496,sp:false},
+  {id:'pl155',name:'João Félix',nameFA:'ژوائو فلیکس',rat:84,pos:'CF',posType:'ATT',nat:'پرتغال',flag:'🇵🇹',club:'Atlético Madrid',leagueFA:'لالیگا',price:16000,imgId:244360,sp:false},
+  {id:'pl156',name:'Álvaro Morata',nameFA:'آلوارو موراتا',rat:83,pos:'ST',posType:'ATT',nat:'اسپانیا',flag:'🇪🇸',club:'AC Milan',leagueFA:'سری‌آ',price:12000,imgId:189242,sp:false},
+  /* ── MORE BUNDESLIGA ── */
+  {id:'pl157',name:'Manuel Neuer',nameFA:'مانوئل نویر',rat:88,pos:'GK',posType:'GK',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:52000,imgId:175177,sp:false},
+  {id:'pl158',name:'Alphonso Davies',nameFA:'آلفونسو دیویس',rat:87,pos:'LB',posType:'DEF',nat:'کانادا',flag:'🇨🇦',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:42000,imgId:258517,sp:false},
+  {id:'pl159',name:'Dayot Upamecano',nameFA:'دایو اوپامکانو',rat:84,pos:'CB',posType:'DEF',nat:'فرانسه',flag:'🇫🇷',club:'Bayern Munich',leagueFA:'بوندسلیگا',price:16000,imgId:241745,sp:false},
+  {id:'pl160',name:'Gregor Kobel',nameFA:'گرگور کوبل',rat:84,pos:'GK',posType:'GK',nat:'سوئیس',flag:'🇨🇭',club:'Borussia Dortmund',leagueFA:'بوندسلیگا',price:16000,imgId:240568,sp:false},
+  {id:'pl161',name:'Mykhaylo Mudryk',nameFA:'میخایلو مودریک',rat:83,pos:'LW',posType:'ATT',nat:'اوکراین',flag:'🇺🇦',club:'Chelsea',leagueFA:'لیگ برتر',price:12000,imgId:262704,sp:false},
+  /* ── MORE SERIE A ── */
+  {id:'pl162',name:'Hakan Çalhanoğlu',nameFA:'هاکان چالهانوغلو',rat:87,pos:'CDM',posType:'MID',nat:'ترکیه',flag:'🇹🇷',club:'Inter Milan',leagueFA:'سری‌آ',price:45000,imgId:199054,sp:false},
+  {id:'pl163',name:'Ademola Lookman',nameFA:'آدمولا لوکمن',rat:85,pos:'RW',posType:'ATT',nat:'نیجریه',flag:'🇳🇬',club:'Atalanta',leagueFA:'سری‌آ',price:22000,imgId:235674,sp:false},
+  {id:'pl164',name:'Mateo Retegui',nameFA:'ماتئو رِتِگی',rat:83,pos:'ST',posType:'ATT',nat:'ایتالیا',flag:'🇮🇹',club:'Atalanta',leagueFA:'سری‌آ',price:13000,imgId:269700,sp:false},
+  {id:'pl165',name:'Christian Pulisic',nameFA:'کریستین پولیسیچ',rat:85,pos:'RW',posType:'ATT',nat:'آمریکا',flag:'🇺🇸',club:'AC Milan',leagueFA:'سری‌آ',price:22000,imgId:231458,sp:false},
+  {id:'pl166',name:'Randal Kolo Muani',nameFA:'ران‌دال کولو مانی',rat:84,pos:'ST',posType:'ATT',nat:'فرانسه',flag:'🇫🇷',club:'Juventus',leagueFA:'سری‌آ',price:16000,imgId:265795,sp:false},
+  {id:'pl167',name:'Weston McKennie',nameFA:'وِستون مک‌کنی',rat:83,pos:'CM',posType:'MID',nat:'آمریکا',flag:'🇺🇸',club:'Juventus',leagueFA:'سری‌آ',price:12000,imgId:237827,sp:false},
+  /* ── MORE LIGUE 1 ── */
+  {id:'pl168',name:'Vitinha',nameFA:'ویتینیا',rat:85,pos:'CM',posType:'MID',nat:'پرتغال',flag:'🇵🇹',club:'PSG',leagueFA:'لیگ ۱',price:22000,imgId:261395,sp:false},
+  {id:'pl169',name:'João Neves',nameFA:'ژوائو نِوِز',rat:84,pos:'CDM',posType:'MID',nat:'پرتغال',flag:'🇵🇹',club:'PSG',leagueFA:'لیگ ۱',price:17000,imgId:273593,sp:false},
+  {id:'pl170',name:'Rayan Cherki',nameFA:'ریان چِرکی',rat:83,pos:'CAM',posType:'MID',nat:'فرانسه',flag:'🇫🇷',club:'PSG',leagueFA:'لیگ ۱',price:14000,imgId:263640,sp:false},
+  /* ── OTHER LEAGUES ── */
+  {id:'pl171',name:'Diogo Costa',nameFA:'دیوگو کوستا',rat:85,pos:'GK',posType:'GK',nat:'پرتغال',flag:'🇵🇹',club:'Porto',leagueFA:'پریمیرا لیگا',price:22000,imgId:261418,sp:false},
+  {id:'pl172',name:'Takehiro Tomiyasu',nameFA:'تاکِهیرو تومیاسو',rat:82,pos:'RB',posType:'DEF',nat:'ژاپن',flag:'🇯🇵',club:'Arsenal',leagueFA:'لیگ برتر',price:9000,imgId:252427,sp:false},
+  {id:'pl173',name:'Levi Colwill',nameFA:'لِوی کولویل',rat:83,pos:'CB',posType:'DEF',nat:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',club:'Chelsea',leagueFA:'لیگ برتر',price:12000,imgId:269695,sp:false},
+  {id:'pl174',name:'Malo Gusto',nameFA:'مالو گوستو',rat:83,pos:'RB',posType:'DEF',nat:'فرانسه',flag:'🇫🇷',club:'Chelsea',leagueFA:'لیگ برتر',price:12000,imgId:265796,sp:false},
+  {id:'pl175',name:'Scott McTominay',nameFA:'اسکات مک تامینِی',rat:84,pos:'CM',posType:'MID',nat:'اسکاتلند',flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',club:'Napoli',leagueFA:'سری‌آ',price:16000,imgId:221183,sp:false}
 ];
 
 function playerFUT(name,rat,pos,sp,big){
@@ -2233,16 +2305,21 @@ function playerCardHTML(p){
   const tpct=3+(th%17);
   const trendHTML=tdir==='up'?`<span class="trend trend-up">↑${tpct}%</span>`:tdir==='down'?`<span class="trend trend-down">↓${tpct}%</span>`:`<span class="trend trend-flat">→</span>`;
   return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
-    <div class="pcard-img ${bg}">
-      ${img}
-      <div class="pcard-rat">${p.rat}</div>
-      <div class="pcard-posb">${p.pos}</div>
-      <button class="pcard-fav" onclick="togglePlFav('${p.id}')">${fav?'⭐':'☆'}</button>
-      ${badge?`<div class="pcard-type-badge ${badge[1]}">${badge[0]}</div>`:''}
+    <div class="pcard-upper ${bg}">
+      <div class="pcard-inner">
+        <div class="pcard-info-col">
+          <div class="pci-rat">${p.rat}</div>
+          <div class="pci-pos">${p.pos}</div>
+          <div class="pci-flag">${p.flag}</div>
+          ${badge?`<div class="pci-ctype ${badge[1]}">${badge[0]}</div>`:''}
+        </div>
+        <div class="pcard-photo">${img}</div>
+        <button class="pcard-fav" onclick="togglePlFav('${p.id}')">${fav?'⭐':'☆'}</button>
+      </div>
+      <div class="pcard-name-band">${p.nameFA}</div>
     </div>
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
-      <div class="pcard-name">${p.nameFA}</div>
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
       <div class="pcard-price-lbl">قیمت تقریبی</div>
       <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
