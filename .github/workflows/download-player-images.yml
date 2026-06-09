@@ -83,18 +83,17 @@ jobs:
                 -H "Sec-Fetch-Mode: no-cors" \
                 -H "Sec-Fetch-Site: same-site" \
                 --compressed --max-time 15 \
-                "$URL" 2>/dev/null)
+                "$URL" 2>/dev/null || echo "000")
 
               if [ "$HTTP" = "200" ] && [ -s "$DEST" ]; then
-                # Verify it's actually a PNG (not an error HTML page)
-                if file "$DEST" | grep -q "PNG"; then
+                if file "$DEST" 2>/dev/null | grep -q "PNG"; then
                   DOWNLOADED=1
                   OK=$((OK+1))
                   echo "✓ $ID ($URL)"
                   break
                 fi
               fi
-              rm -f "$DEST"
+              rm -f "$DEST" || true
             done
 
             if [ "$DOWNLOADED" = "0" ]; then
@@ -102,7 +101,7 @@ jobs:
               echo "✗ $ID"
             fi
 
-            sleep 0.1
+            sleep 0.1 || true
           done
 
           echo ""
