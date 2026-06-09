@@ -644,6 +644,35 @@
     .own-toggle.is-owned{background:rgba(34,197,94,.12);border-color:var(--green);color:var(--green)}
     .solver-close{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;font-family:'Vazirmatn',sans-serif}
 
+    /* ─── WORLD CUP 2026 ─── */
+    .wc-conf-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;scrollbar-width:none}
+    .wc-conf-tabs::-webkit-scrollbar{display:none}
+    .wc-conf-tab{padding:5px 13px;border-radius:14px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Vazirmatn',sans-serif;flex-shrink:0;transition:all .2s}
+    .wc-conf-tab.active{background:var(--gold);border-color:var(--gold);color:#000}
+    .wc-team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+    @media(max-width:420px){.wc-team-grid{grid-template-columns:repeat(3,1fr)}}
+    .wc-team-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 5px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);cursor:pointer;font-family:'Vazirmatn',sans-serif;transition:all .2s;-webkit-tap-highlight-color:transparent}
+    .wc-team-btn:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .wc-team-btn.sel{border-color:var(--gold);background:rgba(245,176,20,.08)}
+    .wc-flag-lg{font-size:26px;line-height:1}
+    .wc-team-name{font-size:9.5px;font-weight:700;color:var(--t1);text-align:center;line-height:1.3}
+    .wc-team-ovr{font-size:9px;color:var(--gold);font-weight:800}
+    .wc-squad-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:14px}
+    .wc-back-btn{padding:5px 12px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;font-family:'Vazirmatn',sans-serif;flex-shrink:0;transition:all .2s}
+    .wc-back-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .wc-squad-flag{font-size:28px}
+    .wc-squad-name{font-size:15px;font-weight:900;flex:1}
+    .wc-squad-ovrbadge{padding:3px 10px;border-radius:10px;background:var(--gold);color:#000;font-size:13px;font-weight:900}
+    .wc-player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:9px}
+    @media(max-width:700px){.wc-player-grid{grid-template-columns:repeat(3,1fr);gap:7px}}
+    .wc-pcard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative;transition:all .18s}
+    .wc-pcard:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .wc-pcard-upper{position:relative;height:148px;overflow:hidden;display:flex;flex-direction:column}
+    .wc-pcard-body{padding:6px 7px 8px}
+    .wc-pnum{position:absolute;top:5px;right:5px;background:rgba(0,0,0,.65);border-radius:5px;padding:1px 5px;font-size:9px;font-weight:900;color:rgba(255,255,255,.7);z-index:10;line-height:1.4}
+    .wc-pname{font-size:10.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+    .wc-club{font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
     /* ─── 5-BUTTON NAV ─── */
     @media(max-width:700px){
       .bnav-btn{font-size:9px;padding:8px 2px 7px}
@@ -2696,8 +2725,713 @@ function renderEvoChain(){
     </div>`).join('');
 }
 
+/* ══════════════════════════════════════
+   WORLD CUP 2026 DATA & FUNCTIONS
+══════════════════════════════════════ */
+const WC26_TEAMS=[
+  /* CONMEBOL */
+  {id:'arg',nameFA:'آرژانتین',flag:'🇦🇷',conf:'CONMEBOL',ovr:91},
+  {id:'bra',nameFA:'برزیل',flag:'🇧🇷',conf:'CONMEBOL',ovr:88},
+  {id:'col',nameFA:'کلمبیا',flag:'🇨🇴',conf:'CONMEBOL',ovr:84},
+  {id:'uru',nameFA:'اروگوئه',flag:'🇺🇾',conf:'CONMEBOL',ovr:85},
+  {id:'ecu',nameFA:'اکوادور',flag:'🇪🇨',conf:'CONMEBOL',ovr:80},
+  {id:'ven',nameFA:'ونزوئلا',flag:'🇻🇪',conf:'CONMEBOL',ovr:78},
+  /* UEFA */
+  {id:'fra',nameFA:'فرانسه',flag:'🇫🇷',conf:'UEFA',ovr:90},
+  {id:'eng',nameFA:'انگلیس',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',conf:'UEFA',ovr:89},
+  {id:'ger',nameFA:'آلمان',flag:'🇩🇪',conf:'UEFA',ovr:88},
+  {id:'esp',nameFA:'اسپانیا',flag:'🇪🇸',conf:'UEFA',ovr:91},
+  {id:'por',nameFA:'پرتغال',flag:'🇵🇹',conf:'UEFA',ovr:89},
+  {id:'ned',nameFA:'هلند',flag:'🇳🇱',conf:'UEFA',ovr:87},
+  {id:'bel',nameFA:'بلژیک',flag:'🇧🇪',conf:'UEFA',ovr:84},
+  {id:'ita',nameFA:'ایتالیا',flag:'🇮🇹',conf:'UEFA',ovr:85},
+  {id:'cro',nameFA:'کرواسی',flag:'🇭🇷',conf:'UEFA',ovr:83},
+  {id:'sui',nameFA:'سوئیس',flag:'🇨🇭',conf:'UEFA',ovr:82},
+  {id:'den',nameFA:'دانمارک',flag:'🇩🇰',conf:'UEFA',ovr:83},
+  {id:'aut',nameFA:'اتریش',flag:'🇦🇹',conf:'UEFA',ovr:82},
+  {id:'srb',nameFA:'صربستان',flag:'🇷🇸',conf:'UEFA',ovr:82},
+  {id:'tur',nameFA:'ترکیه',flag:'🇹🇷',conf:'UEFA',ovr:82},
+  {id:'sco',nameFA:'اسکاتلند',flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',conf:'UEFA',ovr:80},
+  {id:'ukr',nameFA:'اوکراین',flag:'🇺🇦',conf:'UEFA',ovr:81},
+  /* CONCACAF */
+  {id:'usa',nameFA:'آمریکا',flag:'🇺🇸',conf:'CONCACAF',ovr:82},
+  {id:'mex',nameFA:'مکزیک',flag:'🇲🇽',conf:'CONCACAF',ovr:81},
+  {id:'can',nameFA:'کانادا',flag:'🇨🇦',conf:'CONCACAF',ovr:82},
+  {id:'crc',nameFA:'کاستاریکا',flag:'🇨🇷',conf:'CONCACAF',ovr:77},
+  {id:'jam',nameFA:'جامائیکا',flag:'🇯🇲',conf:'CONCACAF',ovr:77},
+  {id:'pan',nameFA:'پاناما',flag:'🇵🇦',conf:'CONCACAF',ovr:78},
+  /* CAF */
+  {id:'mar',nameFA:'مراکش',flag:'🇲🇦',conf:'CAF',ovr:83},
+  {id:'sen',nameFA:'سنگال',flag:'🇸🇳',conf:'CAF',ovr:83},
+  {id:'nga',nameFA:'نیجریه',flag:'🇳🇬',conf:'CAF',ovr:82},
+  {id:'civ',nameFA:'ساحل عاج',flag:'🇨🇮',conf:'CAF',ovr:82},
+  {id:'gha',nameFA:'غنا',flag:'🇬🇭',conf:'CAF',ovr:80},
+  {id:'egy',nameFA:'مصر',flag:'🇪🇬',conf:'CAF',ovr:81},
+  {id:'cmr',nameFA:'کامرون',flag:'🇨🇲',conf:'CAF',ovr:79},
+  {id:'alg',nameFA:'الجزایر',flag:'🇩🇿',conf:'CAF',ovr:79},
+  {id:'rsa',nameFA:'آفریقای جنوبی',flag:'🇿🇦',conf:'CAF',ovr:77},
+  /* AFC */
+  {id:'jpn',nameFA:'ژاپن',flag:'🇯🇵',conf:'AFC',ovr:81},
+  {id:'kor',nameFA:'کره جنوبی',flag:'🇰🇷',conf:'AFC',ovr:80},
+  {id:'ksa',nameFA:'عربستان سعودی',flag:'🇸🇦',conf:'AFC',ovr:79},
+  {id:'irn',nameFA:'ایران',flag:'🇮🇷',conf:'AFC',ovr:79},
+  {id:'aus',nameFA:'استرالیا',flag:'🇦🇺',conf:'AFC',ovr:78},
+  {id:'qat',nameFA:'قطر',flag:'🇶🇦',conf:'AFC',ovr:76},
+  {id:'irq',nameFA:'عراق',flag:'🇮🇶',conf:'AFC',ovr:76},
+  {id:'jor',nameFA:'اردن',flag:'🇯🇴',conf:'AFC',ovr:75},
+  /* OFC */
+  {id:'nzl',nameFA:'نیوزیلند',flag:'🇳🇿',conf:'OFC',ovr:74},
+  /* Playoff */
+  {id:'per',nameFA:'پرو',flag:'🇵🇪',conf:'CONMEBOL',ovr:79},
+  {id:'hon',nameFA:'هندوراس',flag:'🇭🇳',conf:'CONCACAF',ovr:76},
+];
+
+const WC26_SQUADS={
+  'arg':[
+    {name:'E. Martínez',nameFA:'امیلیانو مارتینز',rat:88,pos:'GK',num:1,club:'Aston Villa',imgId:222349},
+    {name:'Molina',nameFA:'ناهوئل مولینا',rat:83,pos:'RB',num:26,club:'Atlético Madrid'},
+    {name:'C. Romero',nameFA:'کریستیان رومرو',rat:85,pos:'CB',num:13,club:'Tottenham'},
+    {name:'L. Martínez',nameFA:'لیساندرو مارتینز',rat:85,pos:'CB',num:25,club:'Man Utd',imgId:246672},
+    {name:'Tagliafico',nameFA:'تالیافیکو',rat:82,pos:'LB',num:3,club:'Lyon'},
+    {name:'De Paul',nameFA:'رودریگو دو پائول',rat:85,pos:'CM',num:7,club:'Atlético Madrid'},
+    {name:'Paredes',nameFA:'لئاندرو پارِدِز',rat:83,pos:'CDM',num:5,club:'Roma'},
+    {name:'Mac Allister',nameFA:'الکسیس مک آلیستر',rat:86,pos:'CM',num:10,club:'Liverpool',imgId:252971},
+    {name:'E. Fernández',nameFA:'انزو فرناندز',rat:84,pos:'CM',num:24,club:'Chelsea',imgId:257592},
+    {name:'Messi',nameFA:'لیونل مسی',rat:90,pos:'RW',num:10,club:'Inter Miami',imgId:158023},
+    {name:'L. Martínez',nameFA:'لائوتارو مارتینز',rat:88,pos:'ST',num:9,club:'Inter Milan',imgId:208690},
+    {name:'Dybala',nameFA:'پائولو دیبالا',rat:86,pos:'CF',num:21,club:'Roma',imgId:198001},
+    {name:'J. Álvarez',nameFA:'خولیان آلوارز',rat:85,pos:'ST',num:22,club:'Atlético Madrid'},
+    {name:'Di María',nameFA:'آنخل دی ماریا',rat:83,pos:'LW',num:11,club:'Benfica'},
+  ],
+  'bra':[
+    {name:'Alisson',nameFA:'آلیسون',rat:91,pos:'GK',num:1,club:'Liverpool',imgId:212831},
+    {name:'Danilo',nameFA:'دانیلو',rat:83,pos:'RB',num:2,club:'Juventus'},
+    {name:'Marquinhos',nameFA:'مارکینیوس',rat:88,pos:'CB',num:4,club:'PSG',imgId:176580},
+    {name:'Gabriel',nameFA:'گابریل ماگالیاش',rat:87,pos:'CB',num:3,club:'Arsenal',imgId:246187},
+    {name:'Wendell',nameFA:'ونِدِل',rat:79,pos:'LB',num:6,club:'Porto'},
+    {name:'Casemiro',nameFA:'کازمیرو',rat:87,pos:'CDM',num:5,club:'Man Utd',imgId:200145},
+    {name:'B. Guimarães',nameFA:'برونو گیمارائش',rat:87,pos:'CM',num:8,club:'Newcastle',imgId:248792},
+    {name:'Paquetá',nameFA:'لوکاس پاکتا',rat:84,pos:'CAM',num:10,club:'West Ham'},
+    {name:'Rodrygo',nameFA:'رودریگو',rat:86,pos:'RW',num:11,club:'Real Madrid',imgId:263529},
+    {name:'Vinícius Jr',nameFA:'وینیسیوس',rat:95,pos:'LW',num:7,club:'Real Madrid',imgId:270566},
+    {name:'Richarlison',nameFA:'ریچارلیسون',rat:83,pos:'ST',num:9,club:'Tottenham',imgId:249578},
+    {name:'Endrick',nameFA:'اِندریک',rat:83,pos:'ST',num:16,club:'Real Madrid'},
+    {name:'G. Jesus',nameFA:'گابریل ژسوس',rat:84,pos:'ST',num:9,club:'Arsenal',imgId:246529},
+    {name:'Raphinha',nameFA:'رافینیا',rat:85,pos:'RW',num:19,club:'Barcelona'},
+  ],
+  'fra':[
+    {name:'Maignan',nameFA:'مایک مانیان',rat:88,pos:'GK',num:16,club:'AC Milan',imgId:222028},
+    {name:'Koundé',nameFA:'خولز کونده',rat:86,pos:'RB',num:5,club:'Barcelona'},
+    {name:'Upamecano',nameFA:'اوپامکانو',rat:84,pos:'CB',num:4,club:'Bayern Munich',imgId:241745},
+    {name:'Saliba',nameFA:'ویلیام سالیبا',rat:88,pos:'CB',num:17,club:'Arsenal',imgId:258128},
+    {name:'T. Hernandez',nameFA:'تئو اِرناندز',rat:87,pos:'LB',num:22,club:'AC Milan',imgId:239109},
+    {name:'Camavinga',nameFA:'کاماوینگا',rat:86,pos:'CM',num:8,club:'Real Madrid',imgId:263516},
+    {name:'Tchouaméni',nameFA:'چوامنی',rat:86,pos:'CDM',num:8,club:'Real Madrid'},
+    {name:'Griezmann',nameFA:'آنتوان گریزمان',rat:88,pos:'CF',num:7,club:'Atlético Madrid',imgId:194765},
+    {name:'Dembélé',nameFA:'اوسمان دومبله',rat:87,pos:'RW',num:11,club:'PSG',imgId:231443},
+    {name:'Mbappé',nameFA:'کیلیان امباپه',rat:97,pos:'ST',num:10,club:'Real Madrid',imgId:231747},
+    {name:'M. Thuram',nameFA:'مارکوس تورام',rat:85,pos:'ST',num:9,club:'Inter Milan'},
+    {name:'Kolo Muani',nameFA:'کولو مانی',rat:84,pos:'ST',num:9,club:'Juventus'},
+    {name:'K. Coman',nameFA:'کینگزلی کومان',rat:84,pos:'LW',num:14,club:'Bayern Munich',imgId:207907},
+  ],
+  'eng':[
+    {name:'Pickford',nameFA:'جوردن پیکفورد',rat:85,pos:'GK',num:1,club:'Everton',imgId:213513},
+    {name:'TAA',nameFA:'الکساندر-آرنولد',rat:87,pos:'RB',num:66,club:'Real Madrid',imgId:220834},
+    {name:'Stones',nameFA:'جان استونز',rat:85,pos:'CB',num:5,club:'Man City'},
+    {name:'Maguire',nameFA:'هری مگوایر',rat:82,pos:'CB',num:6,club:'Man Utd'},
+    {name:'L. Shaw',nameFA:'لوک شاو',rat:83,pos:'LB',num:3,club:'Man Utd'},
+    {name:'D. Rice',nameFA:'دکلان رایس',rat:87,pos:'CDM',num:41,club:'Arsenal',imgId:239904},
+    {name:'Bellingham',nameFA:'جود بلینگهام',rat:96,pos:'CAM',num:10,club:'Real Madrid',imgId:237692},
+    {name:'Foden',nameFA:'فیل فودن',rat:90,pos:'CAM',num:47,club:'Man City',imgId:222038},
+    {name:'Saka',nameFA:'بوکایو ساکا',rat:89,pos:'RW',num:7,club:'Arsenal',imgId:246669},
+    {name:'Rashford',nameFA:'مارکوس رشفورد',rat:86,pos:'LW',num:10,club:'Man Utd',imgId:221015},
+    {name:'Kane',nameFA:'هری کین',rat:92,pos:'ST',num:9,club:'Bayern Munich',imgId:202126},
+    {name:'C. Palmer',nameFA:'کول پالمر',rat:88,pos:'CAM',num:11,club:'Chelsea',imgId:246469},
+    {name:'Gordon',nameFA:'آنتونی گوردون',rat:85,pos:'LW',num:11,club:'Newcastle',imgId:257906},
+  ],
+  'ger':[
+    {name:'Neuer',nameFA:'مانوئل نویر',rat:88,pos:'GK',num:1,club:'Bayern Munich',imgId:175177},
+    {name:'Kimmich',nameFA:'یوشوا کیمیش',rat:89,pos:'CM',num:6,club:'Bayern Munich',imgId:203460},
+    {name:'Rüdiger',nameFA:'آنتونیو رودیگر',rat:86,pos:'CB',num:2,club:'Real Madrid'},
+    {name:'Tah',nameFA:'جوناتان تا',rat:84,pos:'CB',num:4,club:'Bayer Leverkusen',imgId:221458},
+    {name:'Raum',nameFA:'دیوید رائوم',rat:83,pos:'LB',num:3,club:'RB Leipzig'},
+    {name:'Kroos',nameFA:'تونی کروس',rat:91,pos:'CM',num:8,club:'Real Madrid',imgId:182521},
+    {name:'Musiala',nameFA:'جمال موزیالا',rat:91,pos:'CAM',num:10,club:'Bayern Munich',imgId:258751},
+    {name:'Wirtz',nameFA:'فلوریان ویرتز',rat:89,pos:'CAM',num:10,club:'Bayer Leverkusen',imgId:258070},
+    {name:'Sané',nameFA:'لِروی سانه',rat:85,pos:'LW',num:19,club:'Bayern Munich',imgId:213559},
+    {name:'Gnabry',nameFA:'سرژ نابری',rat:85,pos:'RW',num:7,club:'Bayern Munich',imgId:218350},
+    {name:'Kane',nameFA:'هری کین',rat:92,pos:'ST',num:9,club:'Bayern Munich',imgId:202126},
+    {name:'Müller',nameFA:'توماس مولر',rat:87,pos:'CF',num:25,club:'Bayern Munich',imgId:189596},
+    {name:'Olise',nameFA:'مایکل اولیز',rat:85,pos:'RW',num:9,club:'Bayern Munich'},
+  ],
+  'esp':[
+    {name:'Unai Simón',nameFA:'اونای سیمون',rat:84,pos:'GK',num:1,club:'Athletic Bilbao'},
+    {name:'Carvajal',nameFA:'دانی کارواخال',rat:87,pos:'RB',num:2,club:'Real Madrid',imgId:178603},
+    {name:'Laporte',nameFA:'آیمریک لاپورت',rat:85,pos:'CB',num:14,club:'Al-Nassr'},
+    {name:'Cubarsí',nameFA:'پائو کوبارسی',rat:83,pos:'CB',num:3,club:'Barcelona'},
+    {name:'Grimaldo',nameFA:'الخاندرو گریمالدو',rat:85,pos:'LB',num:3,club:'Bayer Leverkusen'},
+    {name:'Pedri',nameFA:'پدری',rat:91,pos:'CM',num:8,club:'Barcelona',imgId:231683},
+    {name:'Rodri',nameFA:'رودری',rat:93,pos:'CDM',num:16,club:'Man City',imgId:231323},
+    {name:'Fabian Ruiz',nameFA:'فابیان روئیز',rat:85,pos:'CM',num:8,club:'PSG'},
+    {name:'Yamal',nameFA:'لامین یامال',rat:92,pos:'RW',num:19,club:'Barcelona',imgId:263631},
+    {name:'N. Williams',nameFA:'نیکو ویلیامز',rat:85,pos:'LW',num:17,club:'Athletic Bilbao'},
+    {name:'Morata',nameFA:'آلوارو موراتا',rat:83,pos:'ST',num:7,club:'AC Milan',imgId:189242},
+    {name:'Gavi',nameFA:'گاوی',rat:87,pos:'CM',num:6,club:'Barcelona',imgId:263685},
+    {name:'Dani Olmo',nameFA:'دانی اولمو',rat:85,pos:'CAM',num:10,club:'Barcelona'},
+  ],
+  'por':[
+    {name:'D. Costa',nameFA:'دیوگو کوستا',rat:85,pos:'GK',num:1,club:'Porto',imgId:261418},
+    {name:'Cancelo',nameFA:'ژوائو کانسلو',rat:85,pos:'RB',num:20,club:'Barcelona',imgId:210035},
+    {name:'R. Dias',nameFA:'روبن دیاش',rat:88,pos:'CB',num:6,club:'Man City',imgId:238815},
+    {name:'Pepe',nameFA:'پِپه',rat:79,pos:'CB',num:3,club:'Porto'},
+    {name:'N. Mendes',nameFA:'نونو مِندِز',rat:83,pos:'LB',num:19,club:'PSG'},
+    {name:'B. Silva',nameFA:'برناردو سیلوا',rat:89,pos:'CM',num:10,club:'Man City',imgId:211117},
+    {name:'B. Fernandes',nameFA:'برونو فرناندز',rat:88,pos:'CAM',num:8,club:'Man Utd',imgId:212198},
+    {name:'Vitinha',nameFA:'ویتینیا',rat:85,pos:'CM',num:16,club:'PSG',imgId:261395},
+    {name:'R. Leão',nameFA:'رافائل لِئائو',rat:88,pos:'LW',num:17,club:'AC Milan',imgId:244722},
+    {name:'Ronaldo',nameFA:'کریستیانو رونالدو',rat:88,pos:'ST',num:7,club:'Al-Nassr',imgId:20801},
+    {name:'J. Félix',nameFA:'ژوائو فلیکس',rat:84,pos:'CF',num:10,club:'Atlético Madrid',imgId:244360},
+    {name:'Pedro Neto',nameFA:'پِدرو نِتو',rat:85,pos:'RW',num:11,club:'Chelsea',imgId:248734},
+    {name:'J. Neves',nameFA:'ژوائو نِوِز',rat:84,pos:'CDM',num:15,club:'PSG',imgId:273593},
+  ],
+  'ned':[
+    {name:'Verbruggen',nameFA:'بارت وربروگن',rat:82,pos:'GK',num:1,club:'Brighton'},
+    {name:'Dumfries',nameFA:'دنزل دامفریز',rat:83,pos:'RB',num:22,club:'Inter Milan'},
+    {name:'Van Dijk',nameFA:'ویرجیل فان‌دایک',rat:90,pos:'CB',num:4,club:'Liverpool',imgId:203376},
+    {name:'De Vrij',nameFA:'استفان دو فریخ',rat:83,pos:'CB',num:6,club:'Inter Milan'},
+    {name:'Nathan Aké',nameFA:'ناتان آکه',rat:83,pos:'LB',num:5,club:'Man City'},
+    {name:'X. Simons',nameFA:'زاوی سیمونز',rat:88,pos:'CAM',num:7,club:'PSG',imgId:257799},
+    {name:'F. de Jong',nameFA:'فرنکی دو یونگ',rat:86,pos:'CM',num:21,club:'Barcelona'},
+    {name:'Gravenberch',nameFA:'رایان گراونبرخ',rat:84,pos:'CM',num:34,club:'Liverpool'},
+    {name:'Gakpo',nameFA:'کودی گاکپو',rat:84,pos:'LW',num:11,club:'Liverpool'},
+    {name:'Memphis',nameFA:'ممفیس دپای',rat:83,pos:'ST',num:10,club:'Atlético Madrid'},
+    {name:'Malen',nameFA:'دونیل مالن',rat:82,pos:'RW',num:9,club:'Borussia Dortmund'},
+  ],
+  'bel':[
+    {name:'Courtois',nameFA:'تیبو کورتوا',rat:91,pos:'GK',num:1,club:'Real Madrid',imgId:193169},
+    {name:'Meunier',nameFA:'توماس مونیه',rat:82,pos:'RB',num:2,club:'Trabzonspor'},
+    {name:'Faes',nameFA:'وات فاز',rat:82,pos:'CB',num:5,club:'Leicester'},
+    {name:'Vertonghen',nameFA:'یان ورتونگن',rat:82,pos:'CB',num:5,club:'Anderlecht'},
+    {name:'Carrasco',nameFA:'یانیک کاراسکو',rat:83,pos:'LW',num:11,club:'Al-Shabab'},
+    {name:'De Bruyne',nameFA:'کوین دو بروین',rat:92,pos:'CM',num:7,club:'Man City',imgId:192985},
+    {name:'Witsel',nameFA:'اکسل ویتسل',rat:82,pos:'CDM',num:6,club:'Atlético Madrid'},
+    {name:'Tielemans',nameFA:'یوری تیِلِمانس',rat:83,pos:'CM',num:8,club:'Aston Villa',imgId:217553},
+    {name:'Doku',nameFA:'جرمی دوکو',rat:83,pos:'RW',num:11,club:'Man City'},
+    {name:'Lukaku',nameFA:'رومِلو لوکاکو',rat:85,pos:'ST',num:9,club:'Roma'},
+    {name:'Trossard',nameFA:'لئاندرو تروسار',rat:83,pos:'LW',num:19,club:'Arsenal'},
+  ],
+  'ita':[
+    {name:'Donnarumma',nameFA:'جانلویجی دوناروما',rat:91,pos:'GK',num:1,club:'PSG',imgId:167495},
+    {name:'Bastoni',nameFA:'آلساندرو باستونی',rat:86,pos:'CB',num:23,club:'Inter Milan',imgId:236461},
+    {name:'Scalvini',nameFA:'جورجیو اسکالوینی',rat:82,pos:'CB',num:3,club:'Atalanta'},
+    {name:'Dimarco',nameFA:'فدریکو دیمارکو',rat:83,pos:'LB',num:32,club:'Inter Milan'},
+    {name:'Barella',nameFA:'نیکولو بارِلا',rat:87,pos:'CM',num:18,club:'Inter Milan',imgId:232672},
+    {name:'Tonali',nameFA:'ساندرو تونالی',rat:85,pos:'CM',num:4,club:'Newcastle',imgId:237750},
+    {name:'Pellegrini',nameFA:'لورنزو پِلِگرینی',rat:83,pos:'CAM',num:10,club:'Roma'},
+    {name:'Chiesa',nameFA:'فدریکو کیئزا',rat:84,pos:'RW',num:14,club:'Liverpool',imgId:235714},
+    {name:'Retegui',nameFA:'ماتئو رِتِگی',rat:83,pos:'ST',num:9,club:'Atalanta',imgId:269700},
+    {name:'Vlahović',nameFA:'دوشان ولاهوویچ',rat:86,pos:'ST',num:9,club:'Juventus',imgId:254640},
+    {name:'Pulisic',nameFA:'کریستین پولیسیچ',rat:85,pos:'RW',num:11,club:'AC Milan',imgId:231458},
+  ],
+  'cro':[
+    {name:'Livaković',nameFA:'دومینیک لیواکوویچ',rat:84,pos:'GK',num:1,club:'Fenerbahce'},
+    {name:'Juranović',nameFA:'یوسیپ خورانوویچ',rat:81,pos:'RB',num:19,club:'Celtic'},
+    {name:'Gvardiol',nameFA:'یوشکو گواردیول',rat:85,pos:'CB',num:24,club:'Man City'},
+    {name:'Lovren',nameFA:'دیان لوورن',rat:81,pos:'CB',num:6,club:'Zenit'},
+    {name:'Perišić',nameFA:'ایوان پِریشیچ',rat:82,pos:'LW',num:4,club:'Hajduk Split'},
+    {name:'Modrić',nameFA:'لوکا مودریچ',rat:88,pos:'CM',num:10,club:'Real Madrid',imgId:177003},
+    {name:'Kovačić',nameFA:'ماتئو کوواچیچ',rat:85,pos:'CM',num:8,club:'Man City'},
+    {name:'Brozović',nameFA:'مارچلو بروزوویچ',rat:84,pos:'CDM',num:11,club:'Al-Nassr'},
+    {name:'Kramarić',nameFA:'آندرِی کراماریچ',rat:83,pos:'ST',num:9,club:'Hoffenheim'},
+    {name:'Petković',nameFA:'برونو پتکوویچ',rat:79,pos:'ST',num:16,club:'Zenit'},
+    {name:'Ivanušec',nameFA:'لوکا ایوانوشچ',rat:80,pos:'CAM',num:20,club:'Dinamo Zagreb'},
+  ],
+  'sui':[
+    {name:'Sommer',nameFA:'یان زومر',rat:84,pos:'GK',num:1,club:'Inter Milan'},
+    {name:'Widmer',nameFA:'سیلوان ویدمر',rat:80,pos:'RB',num:3,club:'Mainz'},
+    {name:'Akanji',nameFA:'مانوئل آکانجی',rat:84,pos:'CB',num:5,club:'Man City'},
+    {name:'Elvedi',nameFA:'نیکو الوِدی',rat:82,pos:'CB',num:20,club:'Borussia Monchengladbach'},
+    {name:'Rodriguez',nameFA:'ریکاردو رودریگز',rat:80,pos:'LB',num:13,club:'Torino'},
+    {name:'Xhaka',nameFA:'گرانیت ژاکا',rat:85,pos:'CM',num:10,club:'Bayer Leverkusen',imgId:193080},
+    {name:'Freuler',nameFA:'رِمو فرویلر',rat:81,pos:'CM',num:8,club:'Nottingham Forest'},
+    {name:'Shaqiri',nameFA:'خِردان شاکیری',rat:82,pos:'RW',num:23,club:'Chicago Fire'},
+    {name:'Embolo',nameFA:'بریِل امبولو',rat:80,pos:'ST',num:7,club:'Monaco'},
+    {name:'Vargas',nameFA:'روبن وارگاس',rat:80,pos:'LW',num:19,club:'Augsburg'},
+    {name:'Ndoye',nameFA:'دان ندویه',rat:80,pos:'RW',num:17,club:'Bologna'},
+  ],
+  'den':[
+    {name:'K. Schmeichel',nameFA:'کاسپر اشمایکل',rat:83,pos:'GK',num:1,club:'Anderlecht'},
+    {name:'Dalsgaard',nameFA:'هنریک دالسگارد',rat:79,pos:'RB',num:14,club:'Brentford'},
+    {name:'Kjær',nameFA:'سیمون کیر',rat:82,pos:'CB',num:4,club:'AC Milan'},
+    {name:'J. Andersen',nameFA:'یواکیم آندرسن',rat:82,pos:'CB',num:2,club:'Crystal Palace'},
+    {name:'Maehle',nameFA:'یواکیم مِله',rat:81,pos:'LB',num:5,club:'Atalanta'},
+    {name:'Eriksen',nameFA:'کریستین اریکسن',rat:84,pos:'CAM',num:10,club:'Man Utd'},
+    {name:'Hojbjerg',nameFA:'هویبیرگ',rat:83,pos:'CM',num:23,club:'Atlético Madrid'},
+    {name:'Delaney',nameFA:'توماس دِلانی',rat:82,pos:'CDM',num:8,club:'Fenerbahce'},
+    {name:'Skov Olsen',nameFA:'آندریاس اسکوو اولسن',rat:81,pos:'RW',num:16,club:'Club Brugge'},
+    {name:'Hojlund',nameFA:'راسموس هویلوند',rat:83,pos:'ST',num:9,club:'Man Utd',imgId:261399},
+    {name:'Wind',nameFA:'آندریاس ویند',rat:79,pos:'ST',num:20,club:'Wolfsburg'},
+  ],
+  'aut':[
+    {name:'Pentz',nameFA:'پاتریک پنتز',rat:79,pos:'GK',num:1,club:'Bayer Leverkusen'},
+    {name:'Lainer',nameFA:'استفان لاینر',rat:80,pos:'RB',num:3,club:'Borussia Monchengladbach'},
+    {name:'Alaba',nameFA:'داوید آلابا',rat:87,pos:'CB',num:8,club:'Real Madrid',imgId:193669},
+    {name:'Danso',nameFA:'کوین دانسو',rat:82,pos:'CB',num:5,club:'RC Lens'},
+    {name:'Mwene',nameFA:'فیلیپ مُوِنه',rat:78,pos:'LB',num:16,club:'Mainz'},
+    {name:'Sabitzer',nameFA:'مارسِل سابیتزر',rat:83,pos:'CM',num:7,club:'Man Utd'},
+    {name:'Laimer',nameFA:'کونراد لایمر',rat:83,pos:'CM',num:8,club:'Bayern Munich'},
+    {name:'Baumgartner',nameFA:'کریستوف بائومگارتنر',rat:81,pos:'CAM',num:14,club:'RB Leipzig'},
+    {name:'Arnautovic',nameFA:'مارکو آرناوتوویچ',rat:83,pos:'ST',num:9,club:'Inter Milan'},
+    {name:'Gregoritsch',nameFA:'مایکل گرگوریچ',rat:79,pos:'ST',num:11,club:'Freiburg'},
+  ],
+  'srb':[
+    {name:'Rajković',nameFA:'پِرِدراگ راجکووویچ',rat:82,pos:'GK',num:12,club:'Almeria'},
+    {name:'Milenkovic',nameFA:'نیکولا میلنکوویچ',rat:82,pos:'CB',num:4,club:'Nottingham Forest'},
+    {name:'Pavlovic',nameFA:'ستراهینیا پاولوویچ',rat:80,pos:'CB',num:5,club:'RB Salzburg'},
+    {name:'Kostić',nameFA:'فیلیپ کوستیچ',rat:82,pos:'LW',num:11,club:'Juventus'},
+    {name:'Milinkovic-Savic',nameFA:'میلینکوویچ-ساویچ',rat:84,pos:'CM',num:11,club:'Al-Hilal'},
+    {name:'Gudelj',nameFA:'نمانیا گودِلج',rat:80,pos:'CDM',num:6,club:'Sevilla'},
+    {name:'Tadić',nameFA:'دوشان تادیچ',rat:83,pos:'CAM',num:10,club:'Fenerbahce'},
+    {name:'Vlahović',nameFA:'دوشان ولاهوویچ',rat:86,pos:'ST',num:9,club:'Juventus',imgId:254640},
+    {name:'Mitrović',nameFA:'الکساندار میتروویچ',rat:83,pos:'ST',num:9,club:'Al-Hilal'},
+    {name:'Živković',nameFA:'آندریا ژیووکوویچ',rat:79,pos:'RW',num:17,club:'Benfica'},
+  ],
+  'tur':[
+    {name:'Bayindir',nameFA:'آلتای بایِندیر',rat:80,pos:'GK',num:1,club:'Man Utd'},
+    {name:'Zeki Çelik',nameFA:'زکی چِلیک',rat:81,pos:'RB',num:2,club:'Roma'},
+    {name:'Demiral',nameFA:'مِریح دِمیرال',rat:82,pos:'CB',num:3,club:'Al-Qadsiah'},
+    {name:'Kadıoğlu',nameFA:'فِردی قادی‌اوغلو',rat:81,pos:'LB',num:3,club:'Fenerbahce'},
+    {name:'Çalhanoğlu',nameFA:'هاکان چالهانوغلو',rat:87,pos:'CDM',num:8,club:'Inter Milan',imgId:199054},
+    {name:'Özcan',nameFA:'صالح اوزجان',rat:78,pos:'CM',num:22,club:'Borussia Dortmund'},
+    {name:'Güler',nameFA:'آردا گولر',rat:83,pos:'CAM',num:10,club:'Real Madrid'},
+    {name:'Aktürkoğlu',nameFA:'کِرِم آکتورکوغلو',rat:81,pos:'RW',num:11,club:'Galatasaray'},
+    {name:'Yilmaz',nameFA:'باریس یِلماز',rat:80,pos:'LW',num:9,club:'Galatasaray'},
+    {name:'Tosun',nameFA:'چنک توسون',rat:79,pos:'ST',num:9,club:'Besiktas'},
+  ],
+  'sco':[
+    {name:'Gordon',nameFA:'کریگ گوردون',rat:79,pos:'GK',num:1,club:'Hearts'},
+    {name:'Robertson',nameFA:'اندرو رابرتسون',rat:87,pos:'LB',num:3,club:'Liverpool',imgId:212622},
+    {name:'Hanley',nameFA:'گرانت هنلی',rat:78,pos:'CB',num:5,club:'Norwich'},
+    {name:'Tierney',nameFA:'کیران تیرنی',rat:82,pos:'LB',num:3,club:'Real Sociedad'},
+    {name:'McGinn',nameFA:'جان مک‌گین',rat:80,pos:'CM',num:7,club:'Aston Villa'},
+    {name:'McTominay',nameFA:'اسکات مک تامینِی',rat:84,pos:'CM',num:16,club:'Napoli',imgId:221183},
+    {name:'McGregor',nameFA:'کالم مک‌گرگور',rat:80,pos:'CM',num:8,club:'Celtic'},
+    {name:'Christie',nameFA:'رایان کریستی',rat:77,pos:'CAM',num:11,club:'Celtic'},
+    {name:'Adams',nameFA:'چه آدامز',rat:77,pos:'ST',num:9,club:'Southampton'},
+    {name:'Dykes',nameFA:'لیندون دایکز',rat:76,pos:'ST',num:12,club:'QPR'},
+  ],
+  'ukr':[
+    {name:'Lunin',nameFA:'آندری لونین',rat:82,pos:'GK',num:1,club:'Real Madrid'},
+    {name:'Zabarnyi',nameFA:'ایلیا زابارنی',rat:81,pos:'CB',num:3,club:'Bournemouth'},
+    {name:'Matviyenko',nameFA:'مکولا ماتویینکو',rat:79,pos:'CB',num:5,club:'Shakhtar'},
+    {name:'Mykolenko',nameFA:'ویتالی میکولنکو',rat:80,pos:'LB',num:3,club:'Everton'},
+    {name:'Zinchenko',nameFA:'الکساندر زینچنکو',rat:81,pos:'CM',num:35,club:'Arsenal'},
+    {name:'Malinovskyi',nameFA:'روسلان مالینوفسکی',rat:82,pos:'CM',num:8,club:'Marseille'},
+    {name:'Mudryk',nameFA:'میخایلو مودریک',rat:83,pos:'LW',num:15,club:'Chelsea',imgId:262704},
+    {name:'Tsygankov',nameFA:'ویکتور تسیگانکوف',rat:80,pos:'RW',num:17,club:'Girona'},
+    {name:'Dovbyk',nameFA:'آرتم دوبیک',rat:82,pos:'ST',num:9,club:'Roma'},
+    {name:'Yaremchuk',nameFA:'رومان یارمچوک',rat:79,pos:'ST',num:19,club:'Valencia'},
+  ],
+  'usa':[
+    {name:'Turner',nameFA:'مت ترنر',rat:79,pos:'GK',num:1,club:'Nottingham Forest'},
+    {name:'Dest',nameFA:'سرجینیو دِست',rat:81,pos:'RB',num:2,club:'PSV'},
+    {name:'Richards',nameFA:'کریس ریچاردز',rat:79,pos:'CB',num:4,club:'Crystal Palace'},
+    {name:'McKennie',nameFA:'وِستون مک‌کنی',rat:83,pos:'CM',num:8,club:'Juventus',imgId:237827},
+    {name:'T. Adams',nameFA:'تایلر آدامز',rat:82,pos:'CDM',num:4,club:'Bournemouth'},
+    {name:'Musah',nameFA:'یونوس موسا',rat:82,pos:'CM',num:6,club:'AC Milan'},
+    {name:'Pulisic',nameFA:'کریستین پولیسیچ',rat:85,pos:'RW',num:10,club:'AC Milan',imgId:231458},
+    {name:'T. Weah',nameFA:'تیموتی وی',rat:79,pos:'RW',num:21,club:'Juventus'},
+    {name:'Robinson',nameFA:'آنتوانه رابینسون',rat:81,pos:'LB',num:3,club:'Fulham'},
+    {name:'Pepi',nameFA:'ریکاردو پپی',rat:79,pos:'ST',num:9,club:'PSV'},
+    {name:'Sargent',nameFA:'جاش سارجنت',rat:79,pos:'ST',num:19,club:'Norwich'},
+  ],
+  'mex':[
+    {name:'Ochoa',nameFA:'گیِرمو اوچوا',rat:82,pos:'GK',num:13,club:'Salernitana'},
+    {name:'Sánchez',nameFA:'خورخه سانچز',rat:77,pos:'RB',num:12,club:'Ajax'},
+    {name:'Montes',nameFA:'سزار مونتس',rat:79,pos:'CB',num:3,club:'Feyenoord'},
+    {name:'Vásquez',nameFA:'یوهان واسکز',rat:77,pos:'CB',num:19,club:'Genoa'},
+    {name:'Gallardo',nameFA:'خسوس گایاردو',rat:79,pos:'LB',num:23,club:'PSG'},
+    {name:'Álvarez',nameFA:'ادسون آلوارز',rat:83,pos:'CDM',num:6,club:'West Ham'},
+    {name:'Lozano',nameFA:'ایروینگ لوزانو',rat:82,pos:'RW',num:22,club:'PSV'},
+    {name:'Guardado',nameFA:'آندرِس گواردادو',rat:80,pos:'CM',num:18,club:'Betis'},
+    {name:'Giménez',nameFA:'سانتیاگو خیمنز',rat:82,pos:'ST',num:9,club:'Feyenoord'},
+    {name:'Jiménez',nameFA:'رائول خیمنز',rat:81,pos:'ST',num:14,club:'Fulham'},
+    {name:'Vega',nameFA:'الکسیس وگا',rat:79,pos:'LW',num:11,club:'Chivas'},
+  ],
+  'can':[
+    {name:'Crépeau',nameFA:'ماکسیم کرپو',rat:79,pos:'GK',num:16,club:'LA Galaxy'},
+    {name:'Laryea',nameFA:'ریچی لاریا',rat:77,pos:'RB',num:22,club:'Nottingham Forest'},
+    {name:'Souttar',nameFA:'هری سوتار',rat:80,pos:'CB',num:6,club:'Stoke'},
+    {name:'Vitoria',nameFA:'استیون ویتوریا',rat:79,pos:'CB',num:3,club:'Estoril'},
+    {name:'Davies',nameFA:'آلفونسو دیویس',rat:87,pos:'LB',num:3,club:'Bayern Munich',imgId:258517},
+    {name:'Eustaquio',nameFA:'استفان اوستاکیو',rat:80,pos:'CM',num:7,club:'Porto'},
+    {name:'Osorio',nameFA:'جاناتان اوسوریو',rat:78,pos:'CM',num:10,club:'Toronto FC'},
+    {name:'Buchanan',nameFA:'تاژون بوکانان',rat:80,pos:'RW',num:11,club:'Villarreal'},
+    {name:'David',nameFA:'جاناتان دیوید',rat:83,pos:'ST',num:20,club:'Lille'},
+    {name:'Larin',nameFA:'سایل لارین',rat:79,pos:'ST',num:9,club:'Club Brugge'},
+    {name:'Adekugbe',nameFA:'سم آدکوگبه',rat:78,pos:'LB',num:17,club:'Hatayspor'},
+  ],
+  'mar':[
+    {name:'Bounou',nameFA:'یاسین بونو',rat:85,pos:'GK',num:1,club:'Al-Hilal'},
+    {name:'Hakimi',nameFA:'اشرف حکیمی',rat:87,pos:'RB',num:2,club:'PSG',imgId:232464},
+    {name:'Aguerd',nameFA:'نایف آگرد',rat:82,pos:'CB',num:6,club:'West Ham'},
+    {name:'Saïss',nameFA:'رومن سایس',rat:81,pos:'CB',num:5,club:'Besiktas'},
+    {name:'Mazraoui',nameFA:'نوصیر مزراوی',rat:82,pos:'RB',num:12,club:'Man Utd'},
+    {name:'Amrabat',nameFA:'صوفیان عمرابط',rat:82,pos:'CDM',num:4,club:'Man Utd'},
+    {name:'Ounahi',nameFA:'عزدین اوناحی',rat:79,pos:'CM',num:8,club:'Marseille'},
+    {name:'Ziyech',nameFA:'حکیم زیاش',rat:82,pos:'CAM',num:7,club:'Galatasaray'},
+    {name:'Boufal',nameFA:'صوفیان بوفال',rat:80,pos:'LW',num:19,club:'Southampton'},
+    {name:'En-Nesyri',nameFA:'یوسف النصیری',rat:81,pos:'ST',num:19,club:'Fenerbahce'},
+    {name:'El Khannous',nameFA:'الخنوس',rat:80,pos:'CM',num:15,club:'Leicester'},
+  ],
+  'sen':[
+    {name:'E. Mendy',nameFA:'ادوار مِندی',rat:84,pos:'GK',num:1,club:'Al-Ahli'},
+    {name:'B. Sarr',nameFA:'بونا سار',rat:79,pos:'RB',num:17,club:'Olimpique Marseille'},
+    {name:'Koulibaly',nameFA:'کالیدو کولیبالی',rat:83,pos:'CB',num:3,club:'Al-Hilal'},
+    {name:'Jakobs',nameFA:'اسماعیل ژاکوبز',rat:78,pos:'LB',num:18,club:'Monaco'},
+    {name:'I. Gueye',nameFA:'ادریسا گویه',rat:82,pos:'CDM',num:27,club:'Everton'},
+    {name:'Kouyaté',nameFA:'چِیخو کویاته',rat:80,pos:'CM',num:6,club:'Crystal Palace'},
+    {name:'Mané',nameFA:'سادیو مانه',rat:85,pos:'LW',num:10,club:'Al-Nassr'},
+    {name:'I. Sarr',nameFA:'اسماعیلا سار',rat:81,pos:'RW',num:23,club:'Crystal Palace'},
+    {name:'Dia',nameFA:'بولاییه دیا',rat:81,pos:'ST',num:9,club:'Lazio'},
+    {name:'Diatta',nameFA:'لامین دیاتا',rat:79,pos:'RW',num:19,club:'Monaco'},
+  ],
+  'nga':[
+    {name:'Uzoho',nameFA:'فرانسیس اوزوهو',rat:77,pos:'GK',num:1,club:'Omonia'},
+    {name:'Ola Aina',nameFA:'اولا اینا',rat:79,pos:'RB',num:2,club:'Nottingham Forest'},
+    {name:'Troost-Ekong',nameFA:'ترووست-اکونگ',rat:80,pos:'CB',num:5,club:'Watford'},
+    {name:'Ndidi',nameFA:'ویلفرد ندیدی',rat:82,pos:'CDM',num:25,club:'Leicester'},
+    {name:'Iwobi',nameFA:'الکس ایووبی',rat:80,pos:'CM',num:17,club:'Fulham'},
+    {name:'Chukwueze',nameFA:'سامی چوکوِزه',rat:81,pos:'RW',num:11,club:'AC Milan'},
+    {name:'Osimhen',nameFA:'ویکتور اوسیمهن',rat:88,pos:'ST',num:9,club:'Galatasaray',imgId:240395},
+    {name:'Lookman',nameFA:'آدمولا لوکمن',rat:85,pos:'RW',num:21,club:'Atalanta',imgId:235674},
+    {name:'Bassey',nameFA:'کالوین بسی',rat:79,pos:'CB',num:3,club:'Fulham'},
+    {name:'Aribo',nameFA:'جو آریبو',rat:79,pos:'CM',num:8,club:'Southampton'},
+  ],
+  'civ':[
+    {name:'Fofana',nameFA:'یاحیا فوفانا',rat:78,pos:'GK',num:16,club:'Watford'},
+    {name:'Singo',nameFA:'ویلفرید سینگو',rat:78,pos:'RB',num:2,club:'Monaco'},
+    {name:'Kessie',nameFA:'فرانک کسیه',rat:82,pos:'CM',num:5,club:'Barcelona'},
+    {name:'Sangare',nameFA:'ابراهیم سانگاره',rat:81,pos:'CDM',num:8,club:'Nottingham Forest'},
+    {name:'Zaha',nameFA:'ویلفرید زاها',rat:81,pos:'LW',num:11,club:'Galatasaray'},
+    {name:'Pepe',nameFA:'نیکولاس پپه',rat:81,pos:'RW',num:19,club:'Trabzonspor'},
+    {name:'Haller',nameFA:'سباستیان هالر',rat:79,pos:'ST',num:9,club:'Borussia Dortmund'},
+    {name:'Cornet',nameFA:'مکسوِل کورنه',rat:78,pos:'LW',num:10,club:'West Ham'},
+    {name:'Gradel',nameFA:'ماکس گرادل',rat:76,pos:'RW',num:7,club:'Sivasspor'},
+  ],
+  'gha':[
+    {name:'Wollacott',nameFA:'جوزف وولاکوت',rat:77,pos:'GK',num:23,club:'Charlton'},
+    {name:'Amartey',nameFA:'دانیل آمارتی',rat:79,pos:'CB',num:5,club:'Leicester'},
+    {name:'Djiku',nameFA:'الکساندر جیکو',rat:79,pos:'CB',num:22,club:'Strasbourg'},
+    {name:'Partey',nameFA:'توماس پارتی',rat:84,pos:'CDM',num:5,club:'Arsenal',imgId:239814},
+    {name:'Kudus',nameFA:'محمد کودوس',rat:80,pos:'CM',num:11,club:'West Ham'},
+    {name:'A. Ayew',nameFA:'آندره آیو',rat:79,pos:'CM',num:10,club:'Le Havre'},
+    {name:'Semenyo',nameFA:'آنتوان سِمِنیو',rat:80,pos:'RW',num:7,club:'Bournemouth'},
+    {name:'I. Williams',nameFA:'اینکی ویلیامز',rat:79,pos:'ST',num:19,club:'Athletic Bilbao'},
+    {name:'J. Ayew',nameFA:'جوردن آیو',rat:78,pos:'ST',num:9,club:'Le Havre'},
+  ],
+  'egy':[
+    {name:'El-Shenawy',nameFA:'محمد الشناوی',rat:79,pos:'GK',num:1,club:'Al-Ahly'},
+    {name:'Hegazi',nameFA:'احمد حجازی',rat:80,pos:'CB',num:5,club:'Al-Ittihad'},
+    {name:'Abdelmonem',nameFA:'محمد عبدالمنعم',rat:77,pos:'CB',num:4,club:'Al-Ahly'},
+    {name:'Omar Kamal',nameFA:'عمر کمال',rat:76,pos:'RB',num:13,club:'Al-Ahly'},
+    {name:'Salah',nameFA:'محمد صلاح',rat:91,pos:'RW',num:11,club:'Liverpool',imgId:209331},
+    {name:'Hamed',nameFA:'طارق حامد',rat:77,pos:'CDM',num:8,club:'Zamalek'},
+    {name:'Marmoush',nameFA:'عمر مرموش',rat:82,pos:'CAM',num:10,club:'Man City'},
+    {name:'Mostafa',nameFA:'مصطفی محمد',rat:79,pos:'ST',num:9,club:'Galatasaray'},
+  ],
+  'cmr':[
+    {name:'Onana',nameFA:'آندره اونانا',rat:83,pos:'GK',num:1,club:'Man Utd'},
+    {name:'Collins Fai',nameFA:'کالینز فای',rat:77,pos:'RB',num:2,club:'Al-Tai'},
+    {name:'Anguissa',nameFA:'آنگیسا',rat:82,pos:'CM',num:8,club:'Napoli'},
+    {name:'Hongla',nameFA:'مارتین هونگلا',rat:78,pos:'CDM',num:6,club:'Verona'},
+    {name:'Toko Ekambi',nameFA:'کارل توکو اکامبی',rat:81,pos:'LW',num:11,club:'Rennes'},
+    {name:'Aboubakar',nameFA:'وینسنت آبوباکار',rat:80,pos:'ST',num:10,club:'Al-Qadsiah'},
+    {name:'Choupo-Moting',nameFA:'چاوپو-موتینگ',rat:80,pos:'ST',num:17,club:'Eintracht Frankfurt'},
+    {name:'Nkoulou',nameFA:'نیکولا نکولو',rat:78,pos:'CB',num:5,club:'Besiktas'},
+  ],
+  'alg':[
+    {name:'M\'Bolhi',nameFA:'رایس ام‌بولهی',rat:79,pos:'GK',num:1,club:'Al-Ettifaq'},
+    {name:'Bensebaini',nameFA:'رامی بنسبینی',rat:81,pos:'LB',num:3,club:'Borussia Dortmund'},
+    {name:'Mandi',nameFA:'عیسی ماندی',rat:80,pos:'CB',num:4,club:'Villarreal'},
+    {name:'Atal',nameFA:'یوسف عطال',rat:80,pos:'RB',num:2,club:'Nice'},
+    {name:'Bentaleb',nameFA:'نبیل بنطالب',rat:79,pos:'CM',num:25,club:'Angers'},
+    {name:'Mahrez',nameFA:'ریاض محرز',rat:84,pos:'RW',num:7,club:'Al-Ahli'},
+    {name:'Brahimi',nameFA:'یاسین براهیمی',rat:78,pos:'CAM',num:19,club:'Al-Raed'},
+    {name:'Slimani',nameFA:'اسلام سلیمانی',rat:78,pos:'ST',num:9,club:'Brest'},
+    {name:'Bounedjah',nameFA:'بغداد بونجاح',rat:79,pos:'ST',num:15,club:'Al-Sadd'},
+  ],
+  'rsa':[
+    {name:'Williams',nameFA:'رونوِن ویلیامز',rat:78,pos:'GK',num:16,club:'Mamelodi Sundowns'},
+    {name:'Hlanti',nameFA:'سیفیسو هلانتی',rat:76,pos:'LB',num:3,club:'Mamelodi Sundowns'},
+    {name:'De Reuck',nameFA:'رووشین دو رائوک',rat:77,pos:'CB',num:5,club:'Mamelodi Sundowns'},
+    {name:'Baloyi',nameFA:'کیگان بالویی',rat:76,pos:'RB',num:2,club:'Mamelodi Sundowns'},
+    {name:'Mokoena',nameFA:'تبوهو موکوینا',rat:78,pos:'CM',num:10,club:'Brest'},
+    {name:'Zungu',nameFA:'بونگانی زونگو',rat:77,pos:'CM',num:5,club:'Al-Ahli'},
+    {name:'Tau',nameFA:'پرسی تاو',rat:79,pos:'LW',num:10,club:'Al-Ahly'},
+    {name:'Zwane',nameFA:'تمبا زوانه',rat:79,pos:'CAM',num:11,club:'Kaizer Chiefs'},
+    {name:'Mothiba',nameFA:'لبو موتیبا',rat:77,pos:'ST',num:9,club:'Strasbourg'},
+  ],
+  'jpn':[
+    {name:'Gonda',nameFA:'شویچی گوندا',rat:79,pos:'GK',num:12,club:'Portimonense'},
+    {name:'Sakai',nameFA:'هیروکی ساکای',rat:81,pos:'RB',num:5,club:'Vissel Kobe'},
+    {name:'Itakura',nameFA:'کو ایتاکورا',rat:81,pos:'CB',num:3,club:'Borussia Monchengladbach'},
+    {name:'Yoshida',nameFA:'مایا یوشیدا',rat:79,pos:'CB',num:22,club:'Kawasaki Frontale'},
+    {name:'Nagatomo',nameFA:'یوتو ناگاتومو',rat:79,pos:'LB',num:5,club:'FC Tokyo'},
+    {name:'W. Endo',nameFA:'واتارو اِندو',rat:82,pos:'CDM',num:6,club:'Liverpool'},
+    {name:'Kamada',nameFA:'دائیچی کامادا',rat:82,pos:'CAM',num:14,club:'Crystal Palace'},
+    {name:'Minamino',nameFA:'تاکومی مینامینو',rat:80,pos:'CM',num:10,club:'Monaco'},
+    {name:'Mitoma',nameFA:'کائورو میتوما',rat:82,pos:'LW',num:9,club:'Brighton'},
+    {name:'Doan',nameFA:'ریتسو دوان',rat:82,pos:'RW',num:18,club:'Freiburg'},
+    {name:'Tomiyasu',nameFA:'تاکِهیرو تومیاسو',rat:82,pos:'RB',num:5,club:'Arsenal',imgId:252427},
+    {name:'Furuhashi',nameFA:'کیوگو فوروهاشی',rat:79,pos:'ST',num:15,club:'Celtic'},
+  ],
+  'kor':[
+    {name:'Seung-gyu',nameFA:'کیم سونگ-گیو',rat:80,pos:'GK',num:1,club:'Vissel Kobe'},
+    {name:'Kim Min-jae',nameFA:'کیم مین-جه',rat:85,pos:'CB',num:3,club:'Bayern Munich'},
+    {name:'Kim Young-gwon',nameFA:'کیم یونگ-گوون',rat:79,pos:'CB',num:19,club:'Ulsan HD'},
+    {name:'Son Heung-min',nameFA:'سون هیونگ-مین',rat:88,pos:'LW',num:7,club:'Tottenham',imgId:236524},
+    {name:'Lee Jae-sung',nameFA:'لی جه-سونگ',rat:79,pos:'CM',num:14,club:'Mainz'},
+    {name:'Hwang In-beom',nameFA:'هوانگ این-بوم',rat:79,pos:'CM',num:16,club:'Vancouver'},
+    {name:'Kang In-lee',nameFA:'لی کانگ-این',rat:82,pos:'CAM',num:10,club:'PSG'},
+    {name:'Hwang Hee-chan',nameFA:'هوانگ هی-چان',rat:80,pos:'ST',num:11,club:'Wolves'},
+    {name:'Cho Gue-sung',nameFA:'چو گیو-سونگ',rat:79,pos:'ST',num:9,club:'Girona'},
+    {name:'Oh Hyeon-gyu',nameFA:'اوه هیون-گیو',rat:78,pos:'ST',num:17,club:'Celtic'},
+  ],
+  'ksa':[
+    {name:'Al-Owais',nameFA:'محمد العویس',rat:77,pos:'GK',num:1,club:'Al-Hilal'},
+    {name:'Abdulhamid',nameFA:'سعود عبدالحمید',rat:77,pos:'RB',num:17,club:'Roma'},
+    {name:'Al-Bulayhi',nameFA:'علی البلیهی',rat:77,pos:'LB',num:13,club:'Al-Hilal'},
+    {name:'Tambakti',nameFA:'حسن تامبکتی',rat:76,pos:'CB',num:5,club:'Al-Hilal'},
+    {name:'Al-Dawsari',nameFA:'سالم الدوسری',rat:79,pos:'LW',num:10,club:'Al-Hilal'},
+    {name:'Kanno',nameFA:'محمد کانو',rat:77,pos:'CDM',num:8,club:'Al-Shabab'},
+    {name:'Al-Najei',nameFA:'سامی النجی',rat:75,pos:'CM',num:20,club:'Al-Hilal'},
+    {name:'Al-Buraikan',nameFA:'فراس البریکان',rat:78,pos:'ST',num:19,club:'Al-Fateh'},
+    {name:'Al-Shehri',nameFA:'صالح الشهری',rat:77,pos:'ST',num:11,club:'Al-Hilal'},
+    {name:'Al-Hamdan',nameFA:'عبدالله الحمدان',rat:77,pos:'ST',num:15,club:'Al-Hilal'},
+  ],
+  'irn':[
+    {name:'Beiranvand',nameFA:'علیرضا بیرانوند',rat:80,pos:'GK',num:1,club:'Persepolis'},
+    {name:'Rezaeian',nameFA:'رضائیان',rat:77,pos:'RB',num:19,club:'Nottingham Forest'},
+    {name:'Pouraliganji',nameFA:'پورعلی گنجی',rat:79,pos:'CB',num:5,club:'Al-Wakrah'},
+    {name:'Hosseini',nameFA:'حسینی',rat:76,pos:'CB',num:3,club:'Esteghlal'},
+    {name:'Mohammadi',nameFA:'میلاد محمدی',rat:76,pos:'LB',num:3,club:'Olympiakos'},
+    {name:'Ezatolahi',nameFA:'سعید عزت‌اللهی',rat:78,pos:'CDM',num:8,club:'Vejle'},
+    {name:'Torabi',nameFA:'مهدی ترابی',rat:77,pos:'CM',num:10,club:'Al-Wehda'},
+    {name:'Taremi',nameFA:'مهدی طارمی',rat:82,pos:'ST',num:9,club:'Inter Milan'},
+    {name:'Azmoun',nameFA:'سردار آزمون',rat:81,pos:'ST',num:11,club:'Bayer Leverkusen'},
+    {name:'Jahanbakhsh',nameFA:'علیرضا جهانبخش',rat:78,pos:'RW',num:11,club:'Feyenoord'},
+    {name:'Gholizadeh',nameFA:'علی قلی‌زاده',rat:78,pos:'RW',num:7,club:'Charleroi'},
+  ],
+  'aus':[
+    {name:'M. Ryan',nameFA:'مت رایان',rat:80,pos:'GK',num:1,club:'Real Sociedad'},
+    {name:'Degenek',nameFA:'میلوس دژنک',rat:77,pos:'RB',num:6,club:'Columbus Crew'},
+    {name:'Souttar',nameFA:'هری سوتار',rat:80,pos:'CB',num:4,club:'Rangers'},
+    {name:'Rowles',nameFA:'کای رولز',rat:78,pos:'CB',num:16,club:'Girona'},
+    {name:'Behich',nameFA:'آزیز بهیچ',rat:77,pos:'LB',num:3,club:'Dundee United'},
+    {name:'Irvine',nameFA:'جکسون ایروین',rat:78,pos:'CM',num:8,club:'St Pauli'},
+    {name:'Mooy',nameFA:'آرون موی',rat:79,pos:'CM',num:13,club:'Celtic'},
+    {name:'Leckie',nameFA:'متیو لکی',rat:79,pos:'RW',num:7,club:'Melbourne City'},
+    {name:'Duke',nameFA:'میچل دیوک',rat:77,pos:'ST',num:19,club:'Urawa Red Diamonds'},
+    {name:'Boyle',nameFA:'مارتین بویل',rat:77,pos:'LW',num:23,club:'Al-Faisaly'},
+  ],
+  'qat':[
+    {name:'Barsham',nameFA:'مشعل برشام',rat:76,pos:'GK',num:1,club:'Al-Sadd'},
+    {name:'Pedro Miguel',nameFA:'پِدرو میگل',rat:74,pos:'LB',num:19,club:'Al-Duhail'},
+    {name:'Al Rawi',nameFA:'بسام الراوی',rat:73,pos:'CB',num:5,club:'Al-Sadd'},
+    {name:'Boudiaf',nameFA:'کریم بودیاف',rat:75,pos:'CDM',num:6,club:'Al-Duhail'},
+    {name:'Afif',nameFA:'اکرم عفیف',rat:79,pos:'LW',num:11,club:'Al-Sadd'},
+    {name:'Al-Haydos',nameFA:'حسن الهیدوس',rat:77,pos:'CAM',num:10,club:'Al-Sadd'},
+    {name:'Almoez Ali',nameFA:'المعز علی',rat:78,pos:'ST',num:19,club:'Al-Duhail'},
+    {name:'Muntari',nameFA:'الامین منتاری',rat:76,pos:'ST',num:13,club:'Al-Duhail'},
+  ],
+  'irq':[
+    {name:'J. Hassan',nameFA:'جلال حسن',rat:75,pos:'GK',num:1,club:'Al-Quwa'},
+    {name:'A. Ibrahim',nameFA:'احمد ابراهیم',rat:74,pos:'CB',num:5,club:'Aluminij'},
+    {name:'Ali Adnan',nameFA:'علی عدنان',rat:76,pos:'LB',num:3,club:'Lugano'},
+    {name:'Safaa Hadi',nameFA:'صفا هادی',rat:74,pos:'CDM',num:8,club:'APOEL'},
+    {name:'Ali Jasim',nameFA:'علی جاسم',rat:76,pos:'RW',num:11,club:'Al-Quwa'},
+    {name:'Ayman Hussein',nameFA:'ایمن حسین',rat:76,pos:'ST',num:9,club:'Shabab Al-Ahly'},
+    {name:'Mohanad Ali',nameFA:'مهند علی',rat:75,pos:'ST',num:17,club:'Al-Zawraa'},
+    {name:'Amjad Kalaf',nameFA:'امجد خلف',rat:73,pos:'RB',num:2,club:'Al-Quwa'},
+  ],
+  'jor':[
+    {name:'A. Shafi',nameFA:'عامر شفی',rat:76,pos:'GK',num:1,club:'Al-Wehdat'},
+    {name:'Al-Bakhit',nameFA:'یاسین البخیت',rat:74,pos:'RB',num:2,club:'Al-Faisali'},
+    {name:'Al-Tamari',nameFA:'موسی التماری',rat:76,pos:'RW',num:10,club:'Club Brugge'},
+    {name:'Al-Dardour',nameFA:'حمزه الدردور',rat:74,pos:'ST',num:9,club:'Umm Salal'},
+    {name:'Suleiman',nameFA:'موسی سلیمان',rat:73,pos:'CM',num:8,club:'Al-Wahdat'},
+    {name:'Ahmad Dabbas',nameFA:'احمد دباس',rat:73,pos:'LW',num:11,club:'Al-Faisali'},
+    {name:'Al-Naimat',nameFA:'یزن النعیمات',rat:74,pos:'ST',num:7,club:'Al-Wehdat'},
+  ],
+  'nzl':[
+    {name:'Marinovic',nameFA:'استفان مارینوویچ',rat:73,pos:'GK',num:1,club:'Vancouver'},
+    {name:'Cacace',nameFA:'لیبراتو کاکاچه',rat:77,pos:'LB',num:19,club:'Empoli'},
+    {name:'Smith',nameFA:'تامی اسمیت',rat:74,pos:'CB',num:4,club:'Stoke'},
+    {name:'Reid',nameFA:'وینستون رید',rat:73,pos:'CB',num:5,club:'Brentford'},
+    {name:'R. Thomas',nameFA:'رایان توماس',rat:76,pos:'CM',num:7,club:'PSV'},
+    {name:'Sarpreet',nameFA:'سارپریت سینگ',rat:76,pos:'CAM',num:10,club:'Jahn Regensburg'},
+    {name:'C. Wood',nameFA:'کریس وود',rat:80,pos:'ST',num:9,club:'Nottingham Forest'},
+    {name:'Bell',nameFA:'جو بل',rat:74,pos:'CM',num:8,club:'Venezia'},
+  ],
+  'per':[
+    {name:'Gallese',nameFA:'پدرو گالِسه',rat:80,pos:'GK',num:1,club:'Orlando City'},
+    {name:'Advíncula',nameFA:'لوئیس آدوینکولا',rat:81,pos:'RB',num:17,club:'Boca Juniors'},
+    {name:'Zambrano',nameFA:'کارلوس زامبرانو',rat:79,pos:'CB',num:4,club:'Boca Juniors'},
+    {name:'Tapia',nameFA:'رناتو تاپیا',rat:80,pos:'CDM',num:5,club:'Celta Vigo'},
+    {name:'Cueva',nameFA:'کریستیان کوِوا',rat:79,pos:'CAM',num:10,club:'Al-Fateh'},
+    {name:'Carrillo',nameFA:'آندره کاریلو',rat:79,pos:'RW',num:11,club:'Al-Qadsiah'},
+    {name:'Guerrero',nameFA:'پائولو گِرِرو',rat:78,pos:'ST',num:9,club:'Universidad César Vallejo'},
+    {name:'Lapadula',nameFA:'جانلوکا لاپادولا',rat:78,pos:'ST',num:21,club:'Cagliari'},
+  ],
+  'ecu':[
+    {name:'Galíndez',nameFA:'هرنان گالیندز',rat:79,pos:'GK',num:1,club:'Aucas'},
+    {name:'Piero H.',nameFA:'پیِرو اینکاپیه',rat:83,pos:'LB',num:3,club:'Bayer Leverkusen',imgId:266606},
+    {name:'Pacho',nameFA:'ویلیام پاچو',rat:79,pos:'CB',num:2,club:'Eintracht Frankfurt'},
+    {name:'Torres',nameFA:'فلیکس تورِز',rat:79,pos:'CB',num:6,club:'Salzburg'},
+    {name:'Caicedo',nameFA:'موییسز کایسِدو',rat:84,pos:'CDM',num:10,club:'Chelsea',imgId:265421},
+    {name:'Valencia',nameFA:'اِنِر والنسیا',rat:80,pos:'ST',num:13,club:'Independiente del Valle'},
+    {name:'Estrada',nameFA:'مایکل استرادا',rat:77,pos:'ST',num:7,club:'Cruz Azul'},
+    {name:'Sarmiento',nameFA:'جرمی سارمیِنتو',rat:77,pos:'CAM',num:11,club:'Brighton'},
+    {name:'Mena',nameFA:'آنخل منا',rat:78,pos:'RW',num:17,club:'Independiente del Valle'},
+  ],
+  'uru':[
+    {name:'Rochet',nameFA:'سرخیو روچت',rat:80,pos:'GK',num:1,club:'Nacional'},
+    {name:'Nández',nameFA:'ناهیتان ناندز',rat:81,pos:'RB',num:4,club:'Cagliari'},
+    {name:'R. Araujo',nameFA:'رونالد آرائوخو',rat:85,pos:'CB',num:2,club:'Barcelona'},
+    {name:'J.M. Giménez',nameFA:'خوزه ماریا خیمنز',rat:82,pos:'CB',num:2,club:'Atlético Madrid'},
+    {name:'Viña',nameFA:'ماتیاس وینیا',rat:78,pos:'LB',num:22,club:'Roma'},
+    {name:'F. Valverde',nameFA:'فدریکو والورده',rat:88,pos:'CM',num:8,club:'Real Madrid',imgId:233872},
+    {name:'Bentancur',nameFA:'رودریگو بنتانکور',rat:82,pos:'CM',num:6,club:'Tottenham'},
+    {name:'Vecino',nameFA:'ماتیاس وِچینو',rat:79,pos:'CM',num:8,club:'Lazio'},
+    {name:'Pellistri',nameFA:'فاکوندو پِلیستری',rat:78,pos:'RW',num:11,club:'Manchester Utd'},
+    {name:'L. Suárez',nameFA:'لوئیس سوارز',rat:82,pos:'ST',num:9,club:'Inter Miami'},
+    {name:'D. Núñez',nameFA:'داروین نونز',rat:86,pos:'ST',num:11,club:'Liverpool',imgId:256961},
+  ],
+  'col':[
+    {name:'Ospina',nameFA:'داوید اوسپینا',rat:82,pos:'GK',num:1,club:'Al-Qadsiah'},
+    {name:'D. Muñoz',nameFA:'دانیل مونیوز',rat:80,pos:'RB',num:12,club:'Crystal Palace'},
+    {name:'D. Sánchez',nameFA:'داوینسون سانچز',rat:82,pos:'CB',num:5,club:'Tottenham'},
+    {name:'Yerry Mina',nameFA:'یری مینا',rat:80,pos:'CB',num:13,club:'Valencia'},
+    {name:'J. Mojica',nameFA:'یوهان موهیکا',rat:78,pos:'LB',num:16,club:'Girona'},
+    {name:'R. Ríos',nameFA:'ریچارد ریوس',rat:79,pos:'CM',num:8,club:'Palmeiras'},
+    {name:'W. Barrios',nameFA:'ویلمار باریوس',rat:79,pos:'CDM',num:5,club:'Zenit'},
+    {name:'J. Rodriguez',nameFA:'خامس رودریگز',rat:83,pos:'CAM',num:10,club:'Rayo Vallecano'},
+    {name:'L. Díaz',nameFA:'لوئیس دیاز',rat:83,pos:'LW',num:23,club:'Liverpool'},
+    {name:'J. Córdoba',nameFA:'یهون کوردوبا',rat:80,pos:'ST',num:9,club:'Galatasaray'},
+    {name:'Falcao',nameFA:'رائول فالکائو',rat:78,pos:'ST',num:9,club:'Millonarios'},
+  ],
+  'ven':[
+    {name:'Faríñez',nameFA:'ویلکِر فارینِز',rat:79,pos:'GK',num:1,club:'Millonarios'},
+    {name:'R. Hernandez',nameFA:'رونالد هرناندز',rat:77,pos:'RB',num:22,club:'Sampdoria'},
+    {name:'A. González',nameFA:'الکساندر گونزالز',rat:77,pos:'CB',num:5,club:'Independiente Medellín'},
+    {name:'Makoun',nameFA:'کریستیان ماکون',rat:77,pos:'CB',num:4,club:'Qarabag'},
+    {name:'Soteldo',nameFA:'یِفِرسون سوتِلدو',rat:80,pos:'LW',num:11,club:'Santos'},
+    {name:'Rincón',nameFA:'توماس رینکون',rat:78,pos:'CDM',num:8,club:'Sampdoria'},
+    {name:'Savarino',nameFA:'جِفِرسون ساوارینو',rat:79,pos:'RW',num:10,club:'Botafogo'},
+    {name:'Rondón',nameFA:'سالومون روندون',rat:78,pos:'ST',num:9,club:'Everton'}
+  ],
+  'crc':[
+    {name:'K. Navas',nameFA:'کِیلور ناواس',rat:84,pos:'GK',num:1,club:'Napoli'},
+    {name:'Fuller',nameFA:'کِیشِر فولر',rat:77,pos:'RB',num:12,club:'Saprissa'},
+    {name:'F. Calvo',nameFA:'فرانسیسکو کالوو',rat:76,pos:'CB',num:3,club:'FC Cincinnati'},
+    {name:'O. Duarte',nameFA:'اوسکار دوارته',rat:78,pos:'CB',num:5,club:'Rizespor'},
+    {name:'Bryan Ruiz',nameFA:'برایان روئیز',rat:78,pos:'CAM',num:10,club:'Saprissa'},
+    {name:'Borges',nameFA:'چلسو بورخس',rat:77,pos:'CM',num:5,club:'HJK Helsinki'},
+    {name:'Campbell',nameFA:'خوئل کمپبل',rat:79,pos:'RW',num:17,club:'Real Betis'},
+    {name:'Tejeda',nameFA:'یلتسین تخِدا',rat:76,pos:'CDM',num:16,club:'Saprissa'},
+  ],
+  'jam':[
+    {name:'Blake',nameFA:'آندره بِلیک',rat:80,pos:'GK',num:1,club:'Philadelphia Union'},
+    {name:'Lembikisa',nameFA:'دِکستر لِمبیکیسا',rat:76,pos:'RB',num:17,club:'Wolves'},
+    {name:'Lowe',nameFA:'دامیون لوو',rat:76,pos:'CB',num:5,club:'Hibernian'},
+    {name:'Fisher',nameFA:'اونیل فیشر',rat:75,pos:'LB',num:3,club:'Queen's Park Rangers'},
+    {name:'L. Bailey',nameFA:'لئون بِیلی',rat:84,pos:'LW',num:19,club:'Aston Villa',imgId:241626},
+    {name:'D. Gray',nameFA:'دماری گرِی',rat:80,pos:'LW',num:11,club:'Bayer Leverkusen'},
+    {name:'M. Antonio',nameFA:'میچل آنتونیو',rat:80,pos:'ST',num:9,club:'Nottingham Forest'},
+    {name:'Reid',nameFA:'بابی رید',rat:76,pos:'CM',num:8,club:'Fulham'},
+    {name:'Nicholson',nameFA:'شامار نیکلسون',rat:76,pos:'ST',num:18,club:'Charleroi'},
+  ],
+  'pan':[
+    {name:'L. Mejía',nameFA:'لوئیس مخیا',rat:77,pos:'GK',num:1,club:'Olimpia'},
+    {name:'Eric Davis',nameFA:'اِریک دیویس',rat:78,pos:'CB',num:3,club:'Los Angeles FC'},
+    {name:'Escobar',nameFA:'فیدل اسکوبار',rat:77,pos:'CB',num:4,club:'Nashville SC'},
+    {name:'H. Cummings',nameFA:'هارولد کامینگز',rat:77,pos:'CB',num:17,club:'Fuenlabrada'},
+    {name:'Carrasquilla',nameFA:'آدالبرتو کاراسکیلا',rat:78,pos:'CM',num:10,club:'Watford'},
+    {name:'Godoy',nameFA:'آنیبال گودوی',rat:79,pos:'CDM',num:5,club:'San Jose Earthquakes'},
+    {name:'I. Díaz',nameFA:'اسماعیل دیاز',rat:78,pos:'RW',num:7,club:'Fuenlabrada'},
+    {name:'G. Torres',nameFA:'گابریل تورِز',rat:78,pos:'ST',num:9,club:'Villarreal'},
+    {name:'Blackburn',nameFA:'رولاندو بلکبرن',rat:76,pos:'ST',num:11,club:'Los Angeles FC'},
+  ],
+  'hon':[
+    {name:'Luis López',nameFA:'لوئیس لوپز',rat:75,pos:'GK',num:1,club:'CD Olimpia'},
+    {name:'A. Najar',nameFA:'اندی ناخار',rat:74,pos:'RB',num:11,club:'Club Olimpia'},
+    {name:'M. Figueroa',nameFA:'مینور فیگروا',rat:75,pos:'CB',num:3,club:'Wigan Athletic'},
+    {name:'J. Leverón',nameFA:'جانی لورن',rat:74,pos:'CB',num:4,club:'Marathón'},
+    {name:'E. Izaguirre',nameFA:'امیلیو ایزاگیره',rat:73,pos:'LB',num:3,club:'Olimpia'},
+    {name:'Palma',nameFA:'لوئیس پالما',rat:77,pos:'LW',num:11,club:'Celtic'},
+    {name:'Arriaga',nameFA:'کِروین آریاگا',rat:76,pos:'CM',num:8,club:'Zulia FC'},
+    {name:'Bengtson',nameFA:'جونیور بنگتسون',rat:75,pos:'ST',num:9,club:'Marathón'},
+    {name:'Lozano',nameFA:'آنتونی لوزانو',rat:76,pos:'ST',num:19,club:'Deportivo Alavés'},
+  ],
+};
+
+let wcTeam=null,wcConf='all';
+function wcCardCls(rat){if(rat>=94)return'pimg-tots';if(rat>=84)return'pimg-gold';if(rat>=74)return'pimg-silver';return'pimg-bronze';}
+function wcPlayerCardHTML(p,teamFlag){
+  const bg=wcCardCls(p.rat);
+  const img=p.imgId?`<img class="pface" src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
+  return `<div class="wc-pcard">
+    <div class="wc-pcard-upper ${bg}">
+      <div class="pcard-inner">
+        <div class="pcard-info-col">
+          <div class="pci-rat">${p.rat}</div>
+          <div class="pci-pos">${p.pos}</div>
+          <div class="pci-flag">${teamFlag}</div>
+        </div>
+        <div class="pcard-photo">${img}</div>
+        <div class="wc-pnum">${p.num}</div>
+      </div>
+      <div class="pcard-name-band">${p.nameFA}</div>
+    </div>
+    <div class="wc-pcard-body">
+      <div class="wc-pname">${p.nameFA}</div>
+      <div class="wc-club">${p.club||''}</div>
+    </div>
+  </div>`;
+}
+function renderWCTeams(){
+  const confs=['all','CONMEBOL','UEFA','CONCACAF','CAF','AFC','OFC'];
+  const confFA={all:'همه',CONMEBOL:'کونمبول',UEFA:'اروپا',CONCACAF:'کنکاکاف',CAF:'آفریقا',AFC:'آسیا',OFC:'اقیانوسیه'};
+  let filtered=wcConf==='all'?WC26_TEAMS:WC26_TEAMS.filter(t=>t.conf===wcConf);
+  return `<div class="wc-conf-tabs">${confs.map(c=>`<button class="wc-conf-tab${wcConf===c?' active':''}" onclick="wcConf='${c}';renderWC()">${confFA[c]}</button>`).join('')}</div>
+  <div class="wc-team-grid">${filtered.map(t=>`<button class="wc-team-btn${wcTeam===t.id?' sel':''}" onclick="wcTeam='${t.id}';renderWC()">
+    <span class="wc-flag-lg">${t.flag}</span>
+    <span class="wc-team-name">${t.nameFA}</span>
+    <span class="wc-team-ovr">${t.ovr}</span>
+  </button>`).join('')}</div>`;
+}
+function renderWCSquad(teamId){
+  const team=WC26_TEAMS.find(t=>t.id===teamId);
+  if(!team)return'';
+  const squad=WC26_SQUADS[teamId]||[];
+  const sorted=[...squad].sort((a,b)=>{const o={GK:0,CB:1,LB:1,RB:1,CDM:2,CM:2,CAM:3,LW:3,RW:3,CF:4,ST:4};return (o[a.pos]??5)-(o[b.pos]??5)||b.rat-a.rat;});
+  return `<div class="wc-squad-header">
+    <button class="wc-back-btn" onclick="wcTeam=null;renderWC()">← برگشت</button>
+    <span class="wc-squad-flag">${team.flag}</span>
+    <span class="wc-squad-name">${team.nameFA}</span>
+    <span class="wc-squad-ovrbadge">${team.ovr}</span>
+  </div>
+  <div class="wc-player-grid">${sorted.map(p=>wcPlayerCardHTML(p,team.flag)).join('')}</div>`;
+}
+function renderWC(){
+  const el=document.getElementById('wc-content');
+  if(!el)return;
+  el.innerHTML=wcTeam?renderWCSquad(wcTeam):renderWCTeams();
+}
+
 function showSec(sec){
-  ['obj','sbc','players','squad','evo','games'].forEach(s=>{
+  ['obj','sbc','players','squad','evo','games','wc'].forEach(s=>{
     const el=document.getElementById('sec-'+s);
     const bn=document.getElementById('bn-'+s);
     if(el)el.style.display=s===sec?'block':'none';
@@ -2706,6 +3440,7 @@ function showSec(sec){
   if(sec==='squad')renderPitch();
   if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
   if(sec==='games'){renderActiveGame();}
+  if(sec==='wc'){renderWC();}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -2727,6 +3462,15 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 </script>
+
+<!-- ═══ WORLD CUP 2026 ═══ -->
+<main class="main" id="sec-wc" style="display:none">
+  <div class="section-row">
+    <span class="section-title">🌍 جام جهانی ۲۰۲۶</span>
+    <span style="font-size:11px;color:var(--t3)">۴۸ تیم · ۶ قاره</span>
+  </div>
+  <div id="wc-content"></div>
+</main>
 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
@@ -2756,6 +3500,10 @@ document.addEventListener('DOMContentLoaded',init);
   <button class="bnav-btn" id="bn-games" onclick="showSec('games')">
     <span class="bnav-icon">🎲</span>
     <span>بازی</span>
+  </button>
+  <button class="bnav-btn" id="bn-wc" onclick="showSec('wc')">
+    <span class="bnav-icon">🌍</span>
+    <span>جام جهانی</span>
   </button>
 </nav>
 
