@@ -1067,8 +1067,8 @@ function hl(txt,q){
 }
 
 /* ── PLAYER IMAGE MAP ──
-   Images from futbin CDN: https://cdn.futbin.com/content/fifa26/img/players/{id}.png
-   Fallback: https://cdn.fut.gg/fc26/players/portrait/{id}.png
+   Primary: img/players/{id}.png (local, downloaded via GitHub Actions)
+   Fallback chain: futbin FC26 → fut.gg → futbin FC25
 */
 const PIMG={
   'Erling Haaland':239085,'Kylian Mbappé':231747,'Vinicius Jr':238794,
@@ -1325,12 +1325,13 @@ function playerFUT(name,rat,pos,sp,big){
   const cls=cardCls(rat,sp)+(big?' big':'');
   const lastName=name?(name.split(' ').pop()||name):'';
   if(id){
-    return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div></div><div class="fc-photo"><img class="pface" src="https://cdn.futbin.com/content/fifa26/img/players/${id}.png" alt="${name}" loading="lazy" onerror="imgFallback(this,${id})"></div></div><div class="fc-name-band">${lastName}</div></div>`;
+    return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div></div><div class="fc-photo"><img class="pface" src="img/players/${id}.png" alt="${name}" loading="lazy" onerror="imgFallback(this,${id})"></div></div><div class="fc-name-band">${lastName}</div></div>`;
   }
   return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
 function imgFallback(el,id){
   const urls=[
+    `https://cdn.futbin.com/content/fifa26/img/players/${id}.png`,
     `https://cdn.fut.gg/fc26/players/portrait/${id}.png`,
     `https://cdn.futbin.com/content/fifa25/img/players/${id}.png`
   ];
@@ -2137,7 +2138,7 @@ function renderPitch(){
   container.innerHTML=slots.map((slot,i)=>{
     const p=state.squad.slots[i];
     if(p){
-      const img=p.imgId?`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" onerror="imgFallback(this,${p.imgId})" alt="${p.name}">`:'';
+      const img=p.imgId?`<img src="img/players/${p.imgId}.png" onerror="imgFallback(this,${p.imgId})" alt="${p.name}">`:'';
       return `<div class="pitch-slot slot-filled" style="left:${slot.x}%;top:${slot.y}%" onclick="openSquadPicker(${i})">
         <div class="slot-ring">${img}</div>
         <div class="slot-pos">${slot.pos}</div>
@@ -2331,7 +2332,7 @@ function playerCardHTML(p){
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
-  const img=p.imgId?`<img src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
+  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
   const stats=deterministicStats(p);
   const statsHTML=stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
@@ -3380,7 +3381,7 @@ let wcTeam=null,wcConf='all';
 function wcCardCls(rat){if(rat>=94)return'pimg-tots';if(rat>=84)return'pimg-gold';if(rat>=74)return'pimg-silver';return'pimg-bronze';}
 function wcPlayerCardHTML(p,teamFlag){
   const bg=wcCardCls(p.rat);
-  const img=p.imgId?`<img class="pface" src="https://cdn.futbin.com/content/fifa26/img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
+  const img=p.imgId?`<img class="pface" src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
   return `<div class="wc-pcard">
     <div class="wc-pcard-upper ${bg}">
       <div class="pcard-inner">
