@@ -134,24 +134,41 @@
     .reward-box{display:flex;align-items:center;gap:11px;background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:11px;margin-bottom:13px}
 
     /* FUT Card */
-    .fut-card{width:52px;height:64px;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;position:relative;overflow:hidden}
-    .fc-gold{background:linear-gradient(145deg,#C8A230,#F0D050,#B0880A);color:#1A0E00}
-    .fc-silver{background:linear-gradient(145deg,#888,#C4C4C4,#707070);color:#111}
-    .fc-tots{background:linear-gradient(145deg,#145C28,#2A9452,#0E3D1A);color:#A0F0B0}
-    .fc-special{background:linear-gradient(145deg,#3A1468,#7030B8,#280D50);color:#FFD700}
-    .fc-pack{background:linear-gradient(145deg,#0A2040,#1A4080,#081830);color:#80C0FF}
-    .fc-xp{background:linear-gradient(145deg,#1A0830,#4A1080,#100620);color:#E0A0FF}
-    .fc-rat{font-size:17px;z-index:2;position:relative}
-    .fc-pos{font-size:8px;opacity:.8;margin-top:1px;z-index:2;position:relative}
-    .fc-icon{font-size:22px}
-    /* Player face image inside card */
-    .fut-card .pface{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;height:85%;object-fit:contain;object-position:bottom center;filter:drop-shadow(0 -2px 4px rgba(0,0,0,.5))}
-    .fut-card .fc-overlay{position:absolute;top:3px;right:0;left:0;display:flex;flex-direction:column;align-items:center;z-index:3}
+    /* ── FUT CARD — FC26 style ── */
+    .fut-card{width:82px;height:108px;border-radius:10px;display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden;font-weight:900}
+    .fc-gold{background:radial-gradient(ellipse at 65% 30%,#5A3D10,#3A2508 50%,#1A1000)}
+    .fc-silver{background:radial-gradient(ellipse at 65% 30%,#3C3C52,#28283C 50%,#141420)}
+    .fc-tots{background:radial-gradient(ellipse at 65% 30%,#005A2A,#003018 50%,#001008)}
+    .fc-special{background:radial-gradient(ellipse at 65% 30%,#38005A,#200032 50%,#100018)}
+    .fc-pack{background:radial-gradient(ellipse at 65% 30%,#003878,#002044 50%,#001020)}
+    .fc-xp{background:radial-gradient(ellipse at 65% 30%,#1A0830,#4A1080 50%,#100620)}
+    /* FC26 card inner: info col + photo */
+    .fc-inner{display:flex;flex:1;position:relative;overflow:hidden}
+    .fc-info-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 0 0 5px;width:24px;flex-shrink:0;z-index:3}
+    .fc-rat{font-size:16px;font-weight:900;line-height:1;color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.9);z-index:3;position:relative}
+    .fc-pos{font-size:7px;font-weight:800;margin-top:1px;opacity:.9;z-index:3;position:relative;letter-spacing:.3px}
+    .fc-icon{font-size:26px;z-index:3;position:relative}
+    /* Player photo in FUT card */
+    .fc-photo{flex:1;position:relative;overflow:hidden}
+    .fut-card .pface{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:68px;height:95px;object-fit:contain;object-position:bottom center;filter:drop-shadow(-2px 0 5px rgba(0,0,0,.8));z-index:2}
+    /* Name band at bottom of FUT card */
+    .fc-name-band{padding:3px 4px;text-align:center;font-size:8px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.45)}
+    /* Per-type accent colors */
+    .fc-gold .fc-rat,.fc-gold .fc-pos,.fc-gold .fc-name-band{color:#F5D068}
+    .fc-silver .fc-rat,.fc-silver .fc-pos,.fc-silver .fc-name-band{color:#D8D8E8}
+    .fc-tots .fc-rat,.fc-tots .fc-pos,.fc-tots .fc-name-band{color:#40E874}
+    .fc-special .fc-rat,.fc-special .fc-pos,.fc-special .fc-name-band{color:#C070F8}
+    .fc-pack .fc-icon{color:#80C0FF}
+    .fc-xp .fc-icon{color:#E0A0FF}
+    .fut-card::before{content:'';position:absolute;top:0;left:0;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:metalShimmer 8s ease-in-out infinite;pointer-events:none;z-index:5}
     /* Big FUT card for SBC hero */
-    .fut-card.big{width:90px;height:118px;border-radius:10px}
-    .fut-card.big .fc-rat{font-size:26px}
-    .fut-card.big .fc-pos{font-size:10px}
-    .fut-card.big .fc-icon{font-size:32px}
+    .fut-card.big{width:108px;height:142px;border-radius:12px}
+    .fut-card.big .fc-info-col{padding:14px 0 0 6px;width:30px}
+    .fut-card.big .fc-rat{font-size:22px}
+    .fut-card.big .fc-pos{font-size:9px}
+    .fut-card.big .pface{width:88px;height:126px}
+    .fut-card.big .fc-name-band{font-size:10px;padding:4px 6px}
+    .fut-card.big .fc-icon{font-size:34px}
     /* SBC reward hero block */
     .sbc-rew-hero{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px 14px;background:linear-gradient(135deg,var(--bg3),rgba(22,34,53,.9));border:1px solid var(--border);border-radius:12px;margin-bottom:13px;text-align:center;position:relative}
     .sbc-rew-hero::before{content:'جایزه';position:absolute;top:8px;right:12px;font-size:9px;color:var(--t3);letter-spacing:.5px;font-weight:600;text-transform:uppercase}
@@ -1277,20 +1294,11 @@ const PLAYERS_RAW=[
 function playerFUT(name,rat,pos,sp,big){
   const id=PIMG[name];
   const cls=cardCls(rat,sp)+(big?' big':'');
+  const lastName=name?(name.split(' ').pop()||name):'';
   if(id){
-    return `<div class="fut-card ${cls}">
-      <div class="fc-overlay">
-        ${rat?`<div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div>`:''}
-      </div>
-      <img class="pface"
-        src="https://cdn.futbin.com/content/fifa26/img/players/${id}.png"
-        alt="${name}" loading="lazy"
-        onerror="imgFallback(this,${id})">
-    </div>`;
+    return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div></div><div class="fc-photo"><img class="pface" src="https://cdn.futbin.com/content/fifa26/img/players/${id}.png" alt="${name}" loading="lazy" onerror="imgFallback(this,${id})"></div></div><div class="fc-name-band">${lastName}</div></div>`;
   }
-  return `<div class="fut-card ${cls}">
-    ${rat?`<div class="fc-rat">${rat}</div><div class="fc-pos">${pos}</div>`:`<span class="fc-icon">🎁</span>`}
-  </div>`;
+  return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
 function imgFallback(el,id){
   const urls=[
@@ -1605,8 +1613,8 @@ function objCardHTML(o,q){
   const fav=!!state.objFavs[o.id],done=!!state.objDone[o.id];
   const prog=state.objProgs[o.id]??(o.prog?o.prog.cur:null);
   const exp=fmtExp(o.exp),col=OBJ_CAT_COLOR[o.cat]||'#F5B014',r=o.rew;
-  let rewVis=r.type==='xp'?`<div class="fut-card fc-xp"><span class="fc-icon">⚡</span></div>`:
-    r.type==='pack'?`<div class="fut-card fc-pack"><span class="fc-icon">📦</span></div>`:
+  let rewVis=r.type==='xp'?`<div class="fut-card fc-xp"><div class="fc-inner" style="align-items:center;justify-content:center"><span class="fc-icon">⚡</span></div><div class="fc-name-band" style="color:#E0A0FF">XP</div></div>`:
+    r.type==='pack'?`<div class="fut-card fc-pack"><div class="fc-inner" style="align-items:center;justify-content:center"><span class="fc-icon">📦</span></div><div class="fc-name-band" style="color:#80C0FF">Pack</div></div>`:
     playerFUT(r.name,r.rat,r.pos,r.sp);
   let progHTML='';
   if(o.prog||prog!=null){
@@ -1658,7 +1666,7 @@ function sbcCardHTML(s,q){
   const fav=!!state.sbcFavs[s.id],done=!!state.sbcDone[s.id];
   const exp=fmtExp(s.exp),col=SBC_CAT_COLOR[s.cat]||'#A855F7',r=s.rew;
   const bigCard=r.type==='pack'
-    ?`<div class="fut-card fc-pack big"><span class="fc-icon">📦</span></div>`
+    ?`<div class="fut-card fc-pack big"><div class="fc-inner" style="align-items:center;justify-content:center"><span class="fc-icon">📦</span></div><div class="fc-name-band" style="color:#80C0FF">Pack</div></div>`
     :playerFUT(r.name,r.rat,r.pos,r.sp,true);
   const reqs=s.reqs.map(req=>`<div class="sbc-req-row"><span class="sbc-req-label">${hl(req.label,q)}</span><span class="sbc-req-val">${hl(req.val,q)}</span></div>`).join('');
   const gid=`g-${s.id}`;
