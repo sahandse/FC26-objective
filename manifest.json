@@ -1,7 +1,7 @@
 {
-  "name": "FC26 Hub - هاب FC26",
-  "short_name": "FC26 Hub",
-  "description": "اهداف، بازیکنان و چالش‌های FC26",
+  "name": "FC27 Hub - هاب FC27",
+  "short_name": "FC27 Hub",
+  "description": "راهنمای فارسی FC27، بازیکنان و چالش‌ها با تفکیک داده‌های تأییدشده",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#04090F",
