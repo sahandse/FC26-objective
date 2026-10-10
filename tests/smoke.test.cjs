@@ -60,3 +60,13 @@ test('FC27 sourced objectives and SBC feed has real detail URLs',()=>{
   }
  }
 });
+
+test('bilingual FC27 guides and local progress persistence',()=>{
+ assert.match(html,/FC27_EN_GUIDES/);
+ assert.match(html,/FC27_EN_OBJECTIVES/);
+ assert.match(html,/fc27-guide-lang/);
+ assert.match(html,/fc27-guide-progress/);
+ assert.match(html,/aria-pressed/);
+ assert.match(html,/guideFC27\(kind,rec\)/);
+ assert.match(html,/fc27EnglishGuide\(kind,rec\)/);
+});
