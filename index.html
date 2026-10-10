@@ -788,6 +788,14 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 @media(max-width:360px){.hero-mark{display:none}.player-grid{gap:8px}.pcard-body{padding:9px}}
 
 .bottom-nav [hidden]{display:none!important}
+
+.verified-source-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:15px}
+.verified-source-grid a{color:#e8f0e8;background:#1b242a;text-decoration:none;padding:15px 10px;border:1px solid #33464c;border-radius:12px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;gap:5px}
+.verified-source-grid a span{color:#caff38;font-size:10px;white-space:nowrap}
+.official-news-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.official-news-list a{color:#d6e6dc;text-decoration:none;background:#121e25;border:1px solid #293e42;border-radius:11px;padding:11px;font-size:12px;line-height:1.7}
+.official-news-list a:hover,.verified-source-grid a:hover{border-color:#caff38}
+@media(max-width:700px){.verified-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.official-news-list{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -827,6 +835,15 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#caff38;font-weight:800">امتیاز رسمی بازیکنان FC27 ↗</a>
 </div>
 <p style="font-size:12px;margin:13px 0 0;color:#b8c8bd">اطلاعات Objectives، SBC، Evolutions و قیمت بازار تا تأمین منبع معتبر در این سایت نمایش داده نمی‌شوند. لینک‌های بالا به داده‌های رسمی هدایت می‌کنند.</p></section>
+<section class="fc27-source-hub" style="max-width:1120px;margin:14px auto;padding:19px;border-radius:19px;background:#101820;border:1px solid #31434b">
+ <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><strong style="color:#caff38;font-size:16px">مرکز داده‌های واقعی FC27</strong><div style="font-size:11px;color:#afbdc3;margin-top:5px">فقط منابع مشخص؛ اخبار رسمی به‌صورت دوره‌ای به‌روزرسانی می‌شوند.</div></div><span id="officialFeedStamp" style="color:#b8c8d6;font-size:11px">در حال بررسی منبع رسمی…</span></div>
+ <div class="verified-source-grid">
+ <a href="https://www.fut.gg/objectives/" target="_blank" rel="noopener noreferrer">🎯 اهداف فعال <span>FUT.GG ↗</span></a>
+ <a href="https://www.fut.gg/sbcs/" target="_blank" rel="noopener noreferrer">🧩 SBCهای فعال <span>FUT.GG ↗</span></a>
+ <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer">👥 امتیاز بازیکنان <span>EA ↗</span></a>
+ <a href="https://www.fut.gg/evolutions/" target="_blank" rel="noopener noreferrer">🧬 تکامل‌های فعال <span>FUT.GG ↗</span></a>
+ </div><div id="officialNewsList" class="official-news-list" aria-live="polite"><p>در صورت دریافت اخبار تأییدشده، جدیدترین مطالب EA اینجا نمایش داده می‌شوند.</p></div>
+</section>
 <!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stat-chip"><span class="stat-lbl">اهداف</span><span class="stat-val v-gold" id="sTotal">0</span></div>
@@ -2216,6 +2233,26 @@ function showSec(sec){
 }
 
 /* ── INIT ── */
+async function loadOfficialNews(){
+ const stamp=document.getElementById('officialFeedStamp'),list=document.getElementById('officialNewsList');
+ if(!stamp||!list)return;
+ try{
+  const res=await fetch('https://raw.githubusercontent.com/sahandse/FC26-objective/claude/fc26-objectives-page-yAjCT/data/fc27-news.json?t='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(10000)});
+  if(!res.ok)throw new Error('No verified feed');
+  const data=await res.json();
+  if(data.source!=='Electronic Arts'||!Array.isArray(data.items)||!data.items.length)throw new Error('Invalid official feed');
+  list.replaceChildren();
+  for(const item of data.items.slice(0,8)){
+   const u=new URL(item.url);if(u.hostname!=='www.ea.com')continue;
+   const a=document.createElement('a');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title+' ↗';list.appendChild(a);
+  }
+  stamp.textContent='آخرین بررسی خبرها: '+new Date(data.checked_at).toLocaleString('fa-IR');
+ }catch(error){
+  stamp.textContent='فید خودکار هنوز آماده نیست';
+  list.textContent='اخبار را مستقیماً از سایت رسمی EA دنبال کنید.';
+  const a=document.createElement('a');a.href='https://www.ea.com/games/ea-sports-fc/fc-27';a.target='_blank';a.rel='noopener noreferrer';a.textContent='اخبار رسمی FC27 ↗';list.appendChild(a);
+ }
+}
 function init(){
   loadState();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
