@@ -2041,23 +2041,17 @@ function renderWatchlist(){
       return;
     }
     container.innerHTML=wl.map(p=>{
-      const th=hashInt((p.id||'')+'spark');
-      const prices=Array.from({length:7},(_,i)=>{const h2=hashInt(p.id+i);return Math.round(p.price*(0.88+(h2%240)/1000));});
-      const mn=Math.min(...prices),mx=Math.max(...prices);
-      const pts=prices.map((v,i)=>`${i*10},${24-((v-mn)/((mx-mn)||1))*22}`).join(' ');
-      const tdir=th%3===0?'up':th%3===1?'down':'flat';
-      const tpct=3+(th%17);
-      const tCls=tdir==='up'?'trend-up':tdir==='down'?'trend-down':'trend-flat';
-      const tTxt=tdir==='up'?`↑${tpct}%`:tdir==='down'?`↓${tpct}%`:'→';
+      // Real history requires a timestamped, verified price feed.
+      // Until then, never show synthetic price movements.
+      const tCls='trend-flat';
+      const tTxt='روند نامشخص';
       return `<div class="wl-row">
         <div class="wl-rat">${p.rat}</div>
         <div class="wl-info">
           <div class="wl-name">${p.nameFA}</div>
           <div class="wl-sub">${p.flag} ${p.club} · ${p.pos}</div>
         </div>
-        <svg class="wl-spark" viewBox="0 0 60 26" xmlns="http://www.w3.org/2000/svg">
-          <polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-        </svg>
+        <span style="font-size:10px;color:var(--t3)">داده تاریخی موجود نیست</span>
         <div class="wl-price-col">
           <div class="wl-price">${fmtPrice(p.price)}</div>
           <div class="wl-trend ${tCls}">${tTxt}</div>
@@ -2293,7 +2287,7 @@ function showCompModal(){
     <div style="display:flex;align-items:center;color:var(--t3);font-size:18px;font-weight:900">VS</div>
     <div class="comp-pcol"><div class="comp-rat">${p2.rat}</div><div class="comp-pname">${p2.nameFA}</div><div class="comp-ppos">${p2.pos} · ${p2.flag}</div></div>`;
   document.getElementById('compHint').textContent='';
-  document.getElementById('compStats').innerHTML=s1.map((st,i)=>{
+  document.getElementById('compStats').innerHTML=(!s1.length||s1.length!==s2.length)?'<p style="text-align:center;padding:20px;color:var(--t2)">آمار تأییدشده برای مقایسه این بازیکنان موجود نیست.</p>':s1.map((st,i)=>{
     const v1=st.v,v2=s2[i].v,mx=Math.max(v1,v2,1);
     const w1=Math.round(v1/mx*100),w2=Math.round(v2/mx*100);
     const c1=v1>v2?'sv-green':v1<v2?'sv-red':'sv-gold',c2=v2>v1?'sv-green':v2<v1?'sv-red':'sv-gold';
