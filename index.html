@@ -2538,7 +2538,7 @@ function setStatus(m){
   p.className='status-pill '+m;
   t.textContent=m==='online'?'آنلاین':m==='syncing'?'در حال بروزرسانی...':'آفلاین';
 }
-async async function doFetch(){
+async function doFetch(){
   const btn=document.getElementById('refreshBtn');
   btn.disabled=true;btn.classList.add('spinning');setStatus('syncing');
   try{
