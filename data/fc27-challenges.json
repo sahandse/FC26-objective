@@ -1,0 +1,101 @@
+{
+  "source": "FUT.GG",
+  "checked_at": "2026-10-10T00:00:00Z",
+  "sections": {
+    "objectives": [
+      {
+        "name": "Seasonal Objective",
+        "category": "seasonal",
+        "description": "Complete Seasonal Objectives to earn SP!",
+        "reward": "3,000 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
+      },
+      {
+        "name": "Daily Objectives",
+        "category": "daily",
+        "description": "Play, complete and earn SP from daily objective every 24 hours!",
+        "reward": "30 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
+      },
+      {
+        "name": "Weekly Objectives",
+        "category": "weekly",
+        "description": "Complete Weekly Objectives to earn SP!",
+        "reward": "3,000 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
+      },
+      {
+        "name": "Future Stars Celebration",
+        "category": "campaign",
+        "description": "Use young players that are more agile and earn exclusive rewards.",
+        "reward": "200 SP",
+        "url": "https://www.fut.gg/objectives/campaigns/"
+      },
+      {
+        "name": "Back to Basics Bonus Objective",
+        "category": "campaign",
+        "description": "Compete in the Back to Basics Exhibition and earn bonus exclusive rewards.",
+        "reward": "7x 82+ Gold Players Pack",
+        "url": "https://www.fut.gg/objectives/campaigns/"
+      },
+      {
+        "name": "Rising Through the Ranks",
+        "category": "foundation",
+        "description": "Complete foundation maintenance objectives to earn rewards.",
+        "reward": "250 SP",
+        "url": "https://www.fut.gg/objectives/foundations/"
+      }
+    ],
+    "sbc": [
+      {
+        "name": "Weslley Pinto Batista",
+        "category": "players",
+        "price": 11800,
+        "description": "Earn a special Squad Foundations Weslley Pinto Batista",
+        "url": "https://www.fut.gg/sbc/category/players/"
+      },
+      {
+        "name": "Marquee Matchups",
+        "category": "challenges",
+        "price": null,
+        "description": "Complete challenges themed around this week's key matchups.",
+        "url": "https://www.fut.gg/sbc/category/challenges/"
+      },
+      {
+        "name": "Max. 86 Base Hero Upgrade",
+        "category": "upgrades",
+        "price": 85000,
+        "description": "Earn a pack containing 1 Base Hero Player Item, rated 86 or lower.",
+        "url": "https://www.fut.gg/sbc/"
+      },
+      {
+        "name": "5x 80+ Upgrade",
+        "category": "upgrades",
+        "price": 6750,
+        "description": "Earn a pack containing 5 Gold Player Items, rated 80 or higher.",
+        "url": "https://www.fut.gg/sbc/"
+      },
+      {
+        "name": "Tarciane",
+        "category": "players",
+        "price": 18750,
+        "description": "Earn a special Destined for Glory Tarciane.",
+        "url": "https://www.fut.gg/sbc/category/players/"
+      },
+      {
+        "name": "Akliouche",
+        "category": "players",
+        "price": 68000,
+        "description": "Earn a special Destined for Glory Akliouche.",
+        "url": "https://www.fut.gg/sbc/category/players/"
+      },
+      {
+        "name": "TOTW Upgrade",
+        "category": "upgrades",
+        "price": 12000,
+        "description": "Earn a pack containing a TOTW Player Item from TOTW 1 to 3.",
+        "url": "https://www.fut.gg/sbc/"
+      }
+    ]
+  }
+}
