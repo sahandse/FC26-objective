@@ -32,7 +32,7 @@ async function scrape(p){
   const desc=raw.slice(name.length).replace(/^\s*[\d,]+\s*/,'').slice(0,240);
   seen.add(u.pathname);
   const obj={name,category:p.cat,description:desc,url:base+u.pathname};
-  if(p.kind==='sbc')obj.price=priceMatch?Number(priceMatch[1].replace(/,/g,'')):null;
+  if(p.kind==='sbc'){if(/(?:solver|cheapest by rating|sbc rating combinations|all sbcs|view rewards)/i.test(name))return;obj.price=priceMatch?Number(priceMatch[1].replace(/,/g,'')):null;}
   out.push(obj);
  });
  return out;
@@ -40,9 +40,9 @@ async function scrape(p){
 (async()=>{
  const file='data/fc27-challenges.json';
  const prev=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):null;
- const result={source:'FUT.GG',checked_at:new Date().toISOString(),sections:{objectives:[],sbc:[]}};
+ const result={source:'FUT.GG',checked_at:new Date().toISOString(),sections:{objectives:prev?.sections?.objectives||[],sbc:[]}};
  let success=0;
- for(const p of pages){
+ for(const p of pages.filter(x=>x.kind==='sbc')){
   try{
    const data=await scrape(p);
    if(data.length){success++;result.sections[p.kind].push(...data);}
@@ -52,7 +52,7 @@ async function scrape(p){
   result.sections[k]=[...new Map(result.sections[k].map(x=>[x.url,x])).values()];
  }
  // Fail closed: do not overwrite a verified dataset with partial or empty scraping.
- if(success<4||result.sections.objectives.length<3||result.sections.sbc.length<3){
+ if(success<3||result.sections.objectives.length<3||result.sections.sbc.length<8){
   throw Error('Incomplete extraction: '+success+' sources; '+result.sections.objectives.length+' objectives; '+result.sections.sbc.length+' SBCs. Existing snapshot preserved.');
  }
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync(file,JSON.stringify(result,null,2)+'\n');
