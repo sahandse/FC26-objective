@@ -1,35 +1,14 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-10T13:14:56.134Z",
+  "checked_at": "2026-10-10T13:16:50.348Z",
   "sections": {
     "objectives": [
-      {
-        "name": "Seasonal Objective",
-        "category": "seasonal",
-        "description": "Complete Seasonal Objectives to earn SP!",
-        "reward": "3,000 SP total",
-        "url": "https://www.fut.gg/objectives/seasonal/"
-      },
-      {
-        "name": "Daily Objectives",
-        "category": "daily",
-        "description": "Play, complete and earn SP from daily objective every 24 hours!",
-        "reward": "30 SP total",
-        "url": "https://www.fut.gg/objectives/seasonal/"
-      },
       {
         "name": "Weekly Objectives",
         "category": "weekly",
         "description": "Complete Weekly Objectives to earn SP!",
         "reward": "3,000 SP total",
         "url": "https://www.fut.gg/objectives/seasonal/"
-      },
-      {
-        "name": "Future Stars Celebration",
-        "category": "campaign",
-        "description": "Use young players that are more agile and earn exclusive rewards.",
-        "reward": "200 SP",
-        "url": "https://www.fut.gg/objectives/campaigns/"
       },
       {
         "name": "Back to Basics Bonus Objective",
@@ -50,7 +29,7 @@
       {
         "name": "Carlos Espí",
         "category": "players",
-        "description": "spí41,000",
+        "description": "",
         "url": "https://www.fut.gg/sbc/players/27-56-carlos-espi/",
         "price": null
       },
@@ -106,7 +85,7 @@
       {
         "name": "TOTW Upgrade",
         "category": "upgrades",
-        "description": "ade12,000",
+        "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-55-totw-upgrade/",
         "price": null
       },
@@ -216,6 +195,5 @@
         "price": null
       }
     ]
-  },
-  "objectives_snapshot_at": "2026-10-10T00:00:00Z"
+  }
 }
