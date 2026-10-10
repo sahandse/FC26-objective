@@ -1918,7 +1918,7 @@ function playerCardHTML(p){
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
-  const img=portraitHTML(p,36);opacity:.45">⚽</span>';
+  const img=portraitHTML(p,36);
   const stats=deterministicStats(p);
   const statsHTML=stats.length?stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
@@ -2004,7 +2004,7 @@ function renderPlayers(){
   nav.innerHTML='<button type="button" onclick="setPlayerPage('+Math.max(1,playerPage-1)+')" '+(playerPage===1?'disabled':'')+'>قبلی</button><span>صفحه '+playerPage.toLocaleString('fa-IR')+' از '+pageCount.toLocaleString('fa-IR')+'</span><button type="button" onclick="setPlayerPage('+Math.min(pageCount,playerPage+1)+')" '+(playerPage===pageCount?'disabled':'')+'>بعدی</button>';
 }
 function galleryCardHTML(p){
-  const img=portraitHTML(p,34);opacity:.35;line-height:112px">⚽</span>';
+  const img=portraitHTML(p,34);
   const nameShort=(p.nameFA||p.name).split(' ').slice(-1)[0];
   return `<div class="pgal-card" onclick="openPlayerModal('${p.id}')">
     <div class="pgal-img">${img}<span class="pgal-rat">${p.rat}</span><span class="pgal-pos">${p.pos}</span><span class="pgal-flag">${p.flag}</span></div>
