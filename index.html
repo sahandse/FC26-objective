@@ -1195,7 +1195,7 @@ const PIMG={
 };
 
 /* ── PLAYERS DATA ── */
-const PLAYERS_RAW=[]; // Awaiting verified FC27 feed
+const PLAYERS_RAW=[]; // Populated from validated FC27 public-rating snapshot
 
 function playerFUT(name,rat,pos,sp,big){
   const id=PIMG[name];
@@ -1897,6 +1897,7 @@ function pcardImgCls(p){
 }
 const CT_BADGE={tots:['TOTS','pbt-tots'],toty:['TOTY','pbt-toty'],hero:['Hero','pbt-hero'],special:['Special','pbt-special'],fut:['FUT Born','pbt-fut'],ptg:['PTG','pbt-ptg']};
 function fmtPrice(n){
+  if(!Number.isFinite(n))return 'ناموجود';
   if(n>=1000000)return(n/1000000).toFixed(1).replace('.0','')+'M';
   if(n>=1000)return Math.round(n/1000)+'K';
   return n.toLocaleString('fa-IR');
@@ -1908,7 +1909,7 @@ function playerCardHTML(p){
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
-  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
+  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:36px;opacity:.45">⚽</span>';
   const stats=deterministicStats(p);
   const statsHTML=stats.length?stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
@@ -1994,7 +1995,7 @@ function renderPlayers(){
   nav.innerHTML='<button type="button" onclick="setPlayerPage('+Math.max(1,playerPage-1)+')" '+(playerPage===1?'disabled':'')+'>قبلی</button><span>صفحه '+playerPage.toLocaleString('fa-IR')+' از '+pageCount.toLocaleString('fa-IR')+'</span><button type="button" onclick="setPlayerPage('+Math.min(pageCount,playerPage+1)+')" '+(playerPage===pageCount?'disabled':'')+'>بعدی</button>';
 }
 function galleryCardHTML(p){
-  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.25;line-height:112px">⚽</span>';
+  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.35;line-height:112px">⚽</span>';
   const nameShort=(p.nameFA||p.name).split(' ').slice(-1)[0];
   return `<div class="pgal-card" onclick="openPlayerModal('${p.id}')">
     <div class="pgal-img">${img}<span class="pgal-rat">${p.rat}</span><span class="pgal-pos">${p.pos}</span><span class="pgal-flag">${p.flag}</span></div>
@@ -2062,20 +2063,29 @@ function setStatus(m){
 }
 async function doFetch(){
   const btn=document.getElementById('refreshBtn');
-  btn.disabled=true;btn.classList.add('spinning');setStatus('syncing');
+  if(btn){btn.disabled=true;btn.classList.add('spinning');}
+  setStatus('syncing');
   try{
-    // Connectivity checks are not live FC27 objective/SBC data updates.
-    const res=await fetch('./manifest.json?check='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
-    if(!res.ok)throw new Error('offline');
+    const res=await fetch('./data/fc27-players.json?v='+Date.now(),{cache:'no-store'});
+    if(!res.ok)throw Error('Verified dataset unavailable: '+res.status);
+    const feed=await res.json();
+    if(!Array.isArray(feed.players)||feed.players.length<18000||!feed.source||!feed.snapshot_date)throw Error('Invalid FC27 player feed');
+    const clean=feed.players.filter(p=>typeof p.id==='string'&&typeof p.name==='string'&&Number.isFinite(p.rat)&&p.rat>=1&&p.rat<=99&&p.pos);
+    if(clean.length<18000)throw Error('Insufficient validated FC27 records');
+    PLAYERS_RAW.splice(0,PLAYERS_RAW.length,...clean);
+    renderPlayers();updateStats();renderPitch();
     setStatus('online');
-    document.getElementById('lastUpd').textContent='اتصال فعال؛ فید زنده FC27 متصل نیست';
-    toast('اتصال برقرار است؛ داده‌های FC27 هنوز به منبع زنده متصل نیستند','i',5000);
-  }catch(e){
+    const stamp=document.getElementById('lastUpd');
+    if(stamp)stamp.textContent='بازیکنان FC27: '+clean.length.toLocaleString('fa-IR')+' نفر · نسخه داده: '+feed.snapshot_date+' · همگام‌سازی: '+new Date(feed.synced_at).toLocaleDateString('fa-IR');
+    toast('پایگاه امتیازهای واقعی FC27 بارگذاری شد','i');
+  }catch(err){
     setStatus('offline');
-    document.getElementById('lastUpd').textContent='داده زنده: تأیید نشده';
-    toast('اتصال برقرار نشد؛ داده‌های ذخیره‌شده ممکن است قدیمی باشند','e',5000);
+    const stamp=document.getElementById('lastUpd');
+    if(stamp)stamp.textContent='داده FC27 در دسترس نیست؛ اطلاعات ساختگی نمایش داده نمی‌شود';
+    console.warn('FC27 data sync unavailable',err);
+    toast('داده معتبر FC27 قابل دریافت نبود','e',5000);
   }finally{
-    btn.disabled=false;btn.classList.remove('spinning');
+    if(btn){btn.disabled=false;btn.classList.remove('spinning');}
   }
 }
 
@@ -2219,7 +2229,7 @@ function init(){
   updateStats();renderObj();renderSBC();renderPlayers();
   startCountdowns();
   // Legacy mini-games use non-verified player pools; disabled until supported.
-  setTimeout(doFetch,1000);
+  setTimeout(doFetch,100);
 }
 document.addEventListener('DOMContentLoaded',init);
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
