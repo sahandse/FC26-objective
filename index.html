@@ -1098,8 +1098,9 @@
 function daysFromNow(d){return null; /* Relative dates are not verified expiry dates. */}
 function hoursFromNow(h){return null; /* Relative dates are not verified expiry dates. */}
 function fmtExp(iso){
-  if(!iso)return{txt:'تاریخ نامشخص',cls:'exp-permanent',ico:'📅'};
+  if(!iso)return{txt:'تاریخ تأیید نشده',cls:'exp-permanent',ico:'📅'};
   const diff=new Date(iso)-Date.now();
+  if(!Number.isFinite(diff))return{txt:'تاریخ نامعتبر',cls:'exp-permanent',ico:'📅'};
   if(diff<0)return{txt:'منقضی',cls:'exp-gone',ico:'❌'};
   const h=diff/36e5;
   if(h<6) return{txt:`${Math.floor(h)}ساعت ${Math.floor((h%1)*60)}دقیقه`,cls:'exp-crit',ico:'🔥'};
@@ -1415,120 +1416,120 @@ const OBJ_RAW=[
    name:'Festival of Football - Login Reward',nameFA:'جشنواره فوتبال - جایزه ورود',
    rew:{type:'player',name:'Pelé',nameFA:'پِله',rat:93,pos:'ST',nat:'برزیل',flag:'🇧🇷',club:'Icon',sp:true},
    reqs:[{fa:'وارد بازی شو و جایزه خوش‌آمدگویی را دریافت کن'},{fa:'کارت Icon پله ۹۳ قابل ارتقا به ۹۶ با ۳ تکامل در طول رویداد'}],
-   exp:daysFromNow(49),xp:3000,coins:0},
+   exp:null,xp:3000,coins:0},
   /* ── JOURNEY OF NATIONS (5 continental challenges → Maradona) ── */
   {id:'fof02',cat:'event',catFA:'سفر ملل',dif:'medium',difFA:'متوسط',
    name:'Journey of Nations - Europe',nameFA:'سفر ملل - اروپا',
    rew:{type:'pack',name:'UEFA Nations Pack',nameFA:'پاکت ملل اروپا',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۱۰ گل با بازیکنان ملل UEFA بزن'},{fa:'۵ بازی رقبا با ترکیب ۷+ بازیکن اروپایی ببر'},{fa:'۳ بار دروازه بسته با بازیکنان اروپایی داشته باش'}],
-   exp:daysFromNow(49),xp:2500,coins:3000},
+   exp:null,xp:2500,coins:3000},
   {id:'fof03',cat:'event',catFA:'سفر ملل',dif:'medium',difFA:'متوسط',
    name:'Journey of Nations - South America',nameFA:'سفر ملل - آمریکای جنوبی',
    rew:{type:'pack',name:'CONMEBOL Nations Pack',nameFA:'پاکت ملل CONMEBOL',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۱۰ گل با بازیکنان آمریکای جنوبی بزن'},{fa:'۵ بازی با ترکیب ۷+ بازیکن CONMEBOL ببر'},{fa:'۵ پاس گل با بازیکنان برزیلی یا آرژانتینی بده'}],
-   exp:daysFromNow(49),xp:2500,coins:3000},
+   exp:null,xp:2500,coins:3000},
   {id:'fof04',cat:'event',catFA:'سفر ملل',dif:'medium',difFA:'متوسط',
    name:'Journey of Nations - Africa',nameFA:'سفر ملل - آفریقا',
    rew:{type:'pack',name:'CAF Nations Pack',nameFA:'پاکت ملل CAF',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۸ گل با بازیکنان آفریقایی بزن'},{fa:'۴ بازی با ترکیب ۵+ بازیکن CAF ببر'},{fa:'۳ پاس گل با بازیکنان آفریقایی بده'}],
-   exp:daysFromNow(49),xp:2000,coins:2500},
+   exp:null,xp:2000,coins:2500},
   {id:'fof05',cat:'event',catFA:'سفر ملل',dif:'medium',difFA:'متوسط',
    name:'Journey of Nations - Asia',nameFA:'سفر ملل - آسیا',
    rew:{type:'pack',name:'AFC Nations Pack',nameFA:'پاکت ملل AFC',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۶ گل با بازیکنان آسیایی بزن'},{fa:'۴ بازی با ترکیب ۴+ بازیکن AFC ببر'},{fa:'۲ بار دروازه بسته داشته باش'}],
-   exp:daysFromNow(49),xp:2000,coins:2500},
+   exp:null,xp:2000,coins:2500},
   {id:'fof06',cat:'event',catFA:'سفر ملل',dif:'medium',difFA:'متوسط',
    name:'Journey of Nations - North America',nameFA:'سفر ملل - آمریکای شمالی',
    rew:{type:'pack',name:'CONCACAF Nations Pack',nameFA:'پاکت ملل CONCACAF',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۶ گل با بازیکنان CONCACAF بزن'},{fa:'۳ بازی رقبا با بازیکنان آمریکای شمالی ببر'},{fa:'۳ پاس گل با بازیکنان CONCACAF بده'}],
-   exp:daysFromNow(49),xp:2000,coins:2500},
+   exp:null,xp:2000,coins:2500},
   {id:'fof07',cat:'event',catFA:'سفر ملل',dif:'hard',difFA:'سخت',
    name:'Journey of Nations - Complete All',nameFA:'سفر ملل - تکمیل همه قاره‌ها → مارادونا',
    rew:{type:'player',name:'Diego Maradona',nameFA:'دیگو مارادونا',rat:94,pos:'CAM',nat:'آرژانتین',flag:'🇦🇷',club:'Icon',sp:true},
    reqs:[{fa:'همه ۵ چالش قاره‌ای سفر ملل را کامل کن'},{fa:'با ۵ ملیت مختلف از قاره‌های متفاوت ۱۵ گل بزن'},{fa:'در طول رویداد ۵۰۰۰ توکن جشنواره جمع‌آوری کن'}],
-   exp:daysFromNow(49),xp:10000,coins:10000},
+   exp:null,xp:10000,coins:10000},
 
   /* ── PATH TO GLORY CAMPAIGN ── */
   {id:'ptg01',cat:'event',catFA:'Path to Glory',dif:'easy',difFA:'آسان',
    name:'PTG Weekly Challenge I',nameFA:'پث تو گلوری - هفتگی اول',
    rew:{type:'pack',name:'PTG Pack',nameFA:'پاکت Path to Glory',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۵ گل با بازیکنان Path to Glory بزن'},{fa:'۳ بازی با حداقل ۴ بازیکن PTG ببر'}],
-   exp:daysFromNow(49),xp:2000,coins:2000},
+   exp:null,xp:2000,coins:2000},
   {id:'ptg02',cat:'event',catFA:'Path to Glory',dif:'medium',difFA:'متوسط',
    name:'PTG Weekly Challenge II',nameFA:'پث تو گلوری - هفتگی دوم',
    rew:{type:'pack',name:'PTG Upgrade Pack',nameFA:'پاکت ارتقاء PTG',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۸ گل با بازیکنان PTG بزن'},{fa:'۵ بازی رقبا با تیم PTG ببر'},{fa:'۳ پاس گل با بازیکنان PTG بده'}],
-   exp:daysFromNow(42),xp:2500,coins:3000},
+   exp:null,xp:2500,coins:3000},
   {id:'ptg03',cat:'event',catFA:'Path to Glory',dif:'hard',difFA:'سخت',
    name:'PTG Champions',nameFA:'قهرمانان Path to Glory',
    rew:{type:'player',name:'PTG Player Pick 95+',nameFA:'انتخاب بازیکن PTG 95+',rat:95,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۱۵ گل با بازیکنان PTG بزن'},{fa:'۱۰ بازی با تیم کامل PTG ببر'},{fa:'۵ هت‌تریک در هر بخشی کامل کن'}],
-   exp:daysFromNow(35),xp:5000,coins:5000},
+   exp:null,xp:5000,coins:5000},
 
   /* ── GLORY HUNTERS & GREATS OF THE GAME ── */
   {id:'gh01',cat:'event',catFA:'Glory Hunters',dif:'medium',difFA:'متوسط',
    name:'Glory Hunters Weekly',nameFA:'گلوری هانترز - هفتگی',
    rew:{type:'pack',name:'Glory Pack',nameFA:'پاکت گلوری',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۸ گل با بازیکنان Glory Hunters بزن'},{fa:'۴ بازی رقبا با تیم GH ببر'},{fa:'۵۰۰ توکن جشنواره در این هفته کسب کن'}],
-   exp:daysFromNow(7),xp:2000,coins:2500},
+   exp:null,xp:2000,coins:2500},
   {id:'got01',cat:'event',catFA:'بزرگان فوتبال',dif:'medium',difFA:'متوسط',
    name:'Greats of the Game',nameFA:'بزرگان فوتبال - چالش آیکون',
    rew:{type:'pack',name:'Icon Player Pack',nameFA:'پاکت بازیکن آیکون',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۵ بازی رقبا با آیکون در ترکیب ببر'},{fa:'۳ گل با آیکون بزن'},{fa:'آیکون با ملیت آمریکای لاتین استفاده کن'}],
-   exp:daysFromNow(49),xp:2000,coins:2000},
+   exp:null,xp:2000,coins:2000},
 
   /* ── TOTS WEEKLY CHALLENGES ── */
   {id:'tots01',cat:'weekly',catFA:'TOTS هفتگی',dif:'medium',difFA:'متوسط',
    name:'TOTS PL Weekly',nameFA:'چالش هفتگی TOTS لیگ برتر',
    rew:{type:'player',name:'TOTS PL Pick',nameFA:'انتخاب TOTS لیگ برتر',rat:93,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۱۰ گل با بازیکنان لیگ برتر بزن'},{fa:'۵ بازی رقبا با تیم کامل PL ببر'},{fa:'۵ پاس گل با هافبک‌های لیگ برتر بده'}],
-   exp:daysFromNow(7),xp:3000,coins:5000},
+   exp:null,xp:3000,coins:5000},
   {id:'tots02',cat:'weekly',catFA:'TOTS هفتگی',dif:'medium',difFA:'متوسط',
    name:'TOTS Summer Tournament',nameFA:'تورنمنت تابستانی TOTS - انتخاب ۹۱+',
    rew:{type:'player',name:'91+ TOTS Nations Pick',nameFA:'انتخاب ۹۱+ TOTS ملل تابستانی',rat:91,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۸ گل با کارت‌های TOTS بزن'},{fa:'۵ بازی نبرد دسته در سطح بالا ببر'},{fa:'۳ بازی رقبا با تیم TOTS ببر'}],
-   exp:daysFromNow(14),xp:2500,coins:4000},
+   exp:null,xp:2500,coins:4000},
   {id:'tots03',cat:'weekly',catFA:'TOTS',dif:'easy',difFA:'آسان',
    name:'TOTS Discovery',nameFA:'کشف TOTS',
    rew:{type:'pack',name:'TOTS Player Pack',nameFA:'پاکت بازیکن TOTS',rat:0,pos:'',nat:'',flag:'',club:'',sp:true},
    reqs:[{fa:'۵ بازی با حداقل ۳ بازیکن TOTS بازی کن'},{fa:'۱ گل با کارت TOTS در رقبا بزن'}],
-   exp:daysFromNow(7),xp:1500,coins:2000},
+   exp:null,xp:1500,coins:2000},
 
   /* ── DAILY OBJECTIVES ── */
   {id:'d01',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
    name:'Daily Scorer',nameFA:'گلزن روزانه',
    rew:{type:'xp',name:'800 XP + 200 توکن',nameFA:'۸۰۰ امتیاز + ۲۰۰ توکن جشنواره',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۳ گل در هر بخشی بزن'}],exp:hoursFromNow(20),xp:800,coins:0},
+   reqs:[{fa:'۳ گل در هر بخشی بزن'}],exp:null,xp:800,coins:0},
   {id:'d02',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
    name:'Daily Victor',nameFA:'پیروز روزانه',
    rew:{type:'xp',name:'600 XP + 200 توکن',nameFA:'۶۰۰ امتیاز + ۲۰۰ توکن جشنواره',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۱ بازی رقبا را ببر'}],exp:hoursFromNow(20),xp:600,coins:0},
+   reqs:[{fa:'۱ بازی رقبا را ببر'}],exp:null,xp:600,coins:0},
   {id:'d03',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
    name:'Daily Playmaker',nameFA:'بازی‌ساز روزانه',
    rew:{type:'xp',name:'600 XP + 500 سکه',nameFA:'۶۰۰ امتیاز + ۵۰۰ سکه',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۲ پاس گل در هر بخشی بده'}],exp:hoursFromNow(20),xp:600,coins:500},
+   reqs:[{fa:'۲ پاس گل در هر بخشی بده'}],exp:null,xp:600,coins:500},
   {id:'d04',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
    name:'Daily Guardian',nameFA:'نگهبان روزانه',
    rew:{type:'xp',name:'800 XP + 200 توکن',nameFA:'۸۰۰ امتیاز + ۲۰۰ توکن',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۱ بار دروازه بسته در هر بخشی داشته باش'}],exp:hoursFromNow(20),xp:800,coins:0},
+   reqs:[{fa:'۱ بار دروازه بسته در هر بخشی داشته باش'}],exp:null,xp:800,coins:0},
   {id:'d05',cat:'daily',catFA:'روزانه',dif:'easy',difFA:'آسان',
    name:'Squad Battles Daily',nameFA:'نبردهای دسته روزانه',
    rew:{type:'xp',name:'400 XP + 100 توکن',nameFA:'۴۰۰ امتیاز + ۱۰۰ توکن',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۲ بازی نبرد دسته کامل کن'}],exp:hoursFromNow(20),xp:400,coins:0},
+   reqs:[{fa:'۲ بازی نبرد دسته کامل کن'}],exp:null,xp:400,coins:0},
 
   /* ── MILESTONE OBJECTIVES ── */
   {id:'m01',cat:'milestone',catFA:'مایل‌استون',dif:'easy',difFA:'آسان',
    name:'Festival Token I',nameFA:'توکن جشنواره - مرحله ۱',
    rew:{type:'pack',name:'Festival Store Pack',nameFA:'پاکت فروشگاه جشنواره',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۱۰۰۰ توکن جشنواره جمع‌آوری کن (حداکثر ۱۰۰۰/هفته)'}],exp:daysFromNow(49),xp:2000,coins:0,prog:{cur:0,max:1000}},
+   reqs:[{fa:'۱۰۰۰ توکن جشنواره جمع‌آوری کن (حداکثر ۱۰۰۰/هفته)'}],exp:null,xp:2000,coins:0,prog:{cur:0,max:1000}},
   {id:'m02',cat:'milestone',catFA:'مایل‌استون',dif:'medium',difFA:'متوسط',
    name:'Festival Token II',nameFA:'توکن جشنواره - مرحله ۲',
    rew:{type:'player',name:'84+ OVR Special Pick',nameFA:'انتخاب ویژه ۸۴+ رتبه',rat:84,pos:'PICK',nat:'',flag:'',club:'',sp:true},
-   reqs:[{fa:'۳۰۰۰ توکن جشنواره جمع‌آوری کن'}],exp:daysFromNow(49),xp:4000,coins:5000,prog:{cur:0,max:3000}},
+   reqs:[{fa:'۳۰۰۰ توکن جشنواره جمع‌آوری کن'}],exp:null,xp:4000,coins:5000,prog:{cur:0,max:3000}},
   {id:'m03',cat:'milestone',catFA:'مایل‌استون',dif:'hard',difFA:'سخت',
    name:'Festival Token Master',nameFA:'استاد توکن جشنواره - ۵۰۰۰ توکن',
    rew:{type:'player',name:'87+ OVR Special Pick',nameFA:'انتخاب ویژه ۸۷+ رتبه',rat:87,pos:'PICK',nat:'',flag:'',club:'',sp:true},
-   reqs:[{fa:'۵۰۰۰ توکن جشنواره جمع‌آوری کن (کل رویداد)'}],exp:daysFromNow(49),xp:8000,coins:10000,prog:{cur:0,max:5000}},
+   reqs:[{fa:'۵۰۰۰ توکن جشنواره جمع‌آوری کن (کل رویداد)'}],exp:null,xp:8000,coins:10000,prog:{cur:0,max:5000}},
   {id:'m04',cat:'milestone',catFA:'مایل‌استون',dif:'easy',difFA:'آسان',
    name:'Scorer Milestone I',nameFA:'مایل‌استون گلزنی - مرحله ۱',
    rew:{type:'player',name:'85 OVR Pick',nameFA:'انتخاب بازیکن ۸۵ رتبه',rat:85,pos:'PICK',nat:'',flag:'',club:'',sp:false},
@@ -1541,38 +1542,38 @@ const OBJ_RAW=[
    name:'Festival Completionist',nameFA:'تکمیل‌کننده جشنواره - پله ۹۶',
    rew:{type:'player',name:'Pelé 96',nameFA:'پله ارتقایافته ۹۶',rat:96,pos:'ST',nat:'برزیل',flag:'🇧🇷',club:'Icon',sp:true},
    reqs:[{fa:'همه ۵ چالش سفر ملل را کامل کن'},{fa:'۵۰۰۰ توکن جشنواره دریافت کن'},{fa:'۳ تکامل برای پله اعمال کن'}],
-   exp:daysFromNow(49),xp:15000,coins:0},
+   exp:null,xp:15000,coins:0},
 
   /* ── SEASONAL OBJECTIVES ── */
   {id:'s01',cat:'seasonal',catFA:'فصلی',dif:'medium',difFA:'متوسط',
    name:'Season 8 Grinder',nameFA:'فصل ۸ - خستگی‌ناپذیر',
    rew:{type:'xp',name:'5000 Season XP',nameFA:'۵۰۰۰ امتیاز فصلی',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'۲۰ بازی در فصل ۸ کامل کن'}],exp:daysFromNow(30),xp:5000,coins:0,prog:{cur:0,max:20}},
+   reqs:[{fa:'۲۰ بازی در فصل ۸ کامل کن'}],exp:null,xp:5000,coins:0,prog:{cur:0,max:20}},
   {id:'s02',cat:'seasonal',catFA:'فصلی',dif:'easy',difFA:'آسان',
    name:'Season 8 Level 20',nameFA:'فصل ۸ - سطح ۲۰',
    rew:{type:'player',name:'Season Lv.20 Reward',nameFA:'جایزه سطح ۲۰ فصل ۸',rat:86,pos:'PICK',nat:'',flag:'',club:'',sp:false},
-   reqs:[{fa:'به سطح ۲۰ فصل ۸ برس'}],exp:daysFromNow(30),xp:0,coins:0,prog:{cur:0,max:20}},
+   reqs:[{fa:'به سطح ۲۰ فصل ۸ برس'}],exp:null,xp:0,coins:0,prog:{cur:0,max:20}},
   {id:'s03',cat:'seasonal',catFA:'فصلی',dif:'hard',difFA:'سخت',
    name:'Season 8 Max Level',nameFA:'فصل ۸ - سطح حداکثر',
    rew:{type:'player',name:'Season Lv.50 Reward',nameFA:'جایزه سطح ۵۰ فصل ۸',rat:92,pos:'PICK',nat:'',flag:'',club:'',sp:true},
-   reqs:[{fa:'به سطح ۵۰ فصل ۸ برس'}],exp:daysFromNow(30),xp:0,coins:0,prog:{cur:0,max:50}},
+   reqs:[{fa:'به سطح ۵۰ فصل ۸ برس'}],exp:null,xp:0,coins:0,prog:{cur:0,max:50}},
 
   /* ── COMPETITIVE/LEAGUE OBJECTIVES ── */
   {id:'l01',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
    name:'Rivals Champion',nameFA:'قهرمان رقبا',
    rew:{type:'pack',name:'Division Rivals Rewards',nameFA:'جوایز رقبا دیویژن',rat:0,pos:'',nat:'',flag:'',club:'',sp:false},
    reqs:[{fa:'به طلایی ۱ در رقبا دیویژن برس'},{fa:'در یک هفته ۲۰ بازی رقبا ببر'}],
-   exp:daysFromNow(5),xp:5000,coins:15000},
+   exp:null,xp:5000,coins:15000},
   {id:'l02',cat:'league',catFA:'رقابتی',dif:'hard',difFA:'سخت',
    name:'FUT Champions',nameFA:'FUT Champions',
    rew:{type:'player',name:'FUT Champs Reward',nameFA:'جایزه FUT Champions',rat:88,pos:'PICK',nat:'',flag:'',club:'',sp:false},
    reqs:[{fa:'به FUT Champions واجد شرایط شو'},{fa:'۳ بازی FUT Champions را ببر'}],
-   exp:daysFromNow(5),xp:8000,coins:20000},
+   exp:null,xp:8000,coins:20000},
   {id:'l03',cat:'league',catFA:'Rush',dif:'medium',difFA:'متوسط',
    name:'Rush Mode Master',nameFA:'استاد حالت Rush',
    rew:{type:'player',name:'Rush Reward',nameFA:'جایزه Rush',rat:86,pos:'ATT',nat:'',flag:'',club:'',sp:false},
    reqs:[{fa:'۱۰ بازی در حالت Rush ببر'},{fa:'۱۵ گل در حالت Rush بزن'}],
-   exp:daysFromNow(14),xp:2500,coins:5000}
+   exp:null,xp:2500,coins:5000}
 ];
 
 /* ── SBC DATA (June 2026 - futbin/ea fc 26) ── */
@@ -1583,7 +1584,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'Nemanja Vidić',nameFA:'نِمانیا ویدیچ',rat:93,pos:'CB',nat:'صربستان',flag:'🇷🇸',club:'Icon',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۶'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ قهرمانان',val:'حداقل ۱ بازیکن UCL'},{label:'ملیت',val:'حداکثر ۳ ملیت'}],
    guide:'این SBC الهام‌گرفته از عملکرد Anders Vejrgang در eCL است. تیم ۸۶+ از حداکثر ۳ ملیت با یک بازیکن از باشگاه‌های شرکت‌کننده در لیگ قهرمانان بسازید. از پریمیرلیگ یا لالیگا با بازیکنان ۸۶+ استفاده کنید.',
-   cost:780000,costFA:'۷۸۰,۰۰۰ سکه',exp:daysFromNow(28),xp:5000,coins:0},
+   cost:780000,costFA:'۷۸۰,۰۰۰ سکه',exp:null,xp:5000,coins:0},
 
   /* ── Trophy Titans - Buffon (5-match loan) ── */
   {id:'sbc02',cat:'limited',catFA:'وام ۵ بازی',dif:'medium',difFA:'متوسط',
@@ -1591,7 +1592,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'Gianluigi Buffon',nameFA:'جانلویجی بوفون (وام)',rat:91,pos:'GK',nat:'ایتالیا',flag:'🇮🇹',club:'Icon',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۳'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'سری‌آ ایتالیا'},{label:'ملیت',val:'حداقل ۱ بازیکن ایتالیایی'}],
    guide:'برای بوفون وام ۵ بازی، یک تیم سری‌آ با امتیاز ۸۳+ بسازید. از بازیکنان اینتر، میلان یا یوونتوس استفاده کنید. توجه: این کارت تنها ۵ بازی قابل استفاده است.',
-   cost:310000,costFA:'۳۱۰,۰۰۰ سکه',exp:daysFromNow(21),xp:3000,coins:0},
+   cost:310000,costFA:'۳۱۰,۰۰۰ سکه',exp:null,xp:3000,coins:0},
 
   /* ── Salah Legacy ── */
   {id:'sbc03',cat:'iconic',catFA:'لِگِسی',dif:'hard',difFA:'سخت',
@@ -1599,7 +1600,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'Mohamed Salah Legacy',nameFA:'محمد صلاح - لِگِسی',rat:94,pos:'RW',nat:'مصر',flag:'🇪🇬',club:'Liverpool',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۵'},{label:'شیمی',val:'حداقل ۲۳'},{label:'باشگاه',val:'حداقل ۴ بازیکن لیورپول'},{label:'لیگ',val:'لیگ برتر ۱۰۰٪'}],
    guide:'به ۴ بازیکن از لیورپول نیاز دارید (مثلاً آلیسون، فان‌دایک، الکساندر-آرنولد، ژوتا). بقیه تیم از بازیکنان ارزان لیگ برتر. شیمی ۲۳+ با ۸ بازیکن از یک باشگاه/لیگ راحت‌تر می‌شود.',
-   cost:650000,costFA:'۶۵۰,۰۰۰ سکه',exp:daysFromNow(28),xp:4500,coins:0},
+   cost:650000,costFA:'۶۵۰,۰۰۰ سکه',exp:null,xp:4500,coins:0},
 
   /* ── Path to Glory - Martin Ødegaard (منقضی ۲۶ ژوئن) ── */
   {id:'sbc04',cat:'tots',catFA:'Path to Glory',dif:'medium',difFA:'متوسط',
@@ -1615,7 +1616,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'91+ TOTS Summer Nations Pick',nameFA:'انتخاب ۹۱+ TOTS ملل تابستانی',rat:91,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۷'},{label:'شیمی',val:'حداقل ۲۰'},{label:'ملیت',val:'حداقل ۴ ملیت مختلف'},{label:'بازیکن TOTS',val:'حداقل ۱ بازیکن TOTS'}],
    guide:'این SBC یک انتخاب از ۳ بازیکن TOTS ملی ۹۱+ می‌دهد. تیم ۸۷+ با ۴ ملیت مختلف و یک بازیکن TOTS لازم است. از ترکیب لیگ برتر/لالیگا با یک TOTS ارزان شروع کنید.',
-   cost:950000,costFA:'۹۵۰,۰۰۰ سکه',exp:daysFromNow(21),xp:5000,coins:0},
+   cost:950000,costFA:'۹۵۰,۰۰۰ سکه',exp:null,xp:5000,coins:0},
 
   /* ── TOTS PL Challenge ── */
   {id:'sbc06',cat:'tots',catFA:'TOTS',dif:'medium',difFA:'متوسط',
@@ -1623,7 +1624,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'TOTS PL Player Pick',nameFA:'انتخاب بازیکن TOTS لیگ برتر',rat:92,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۳'},{label:'شیمی',val:'حداقل ۲۳'},{label:'لیگ',val:'لیگ برتر ۱۰۰٪'},{label:'TOTS',val:'حداقل ۱ بازیکن TOTS'}],
    guide:'یک بازیکن TOTS PL در تیم بگذارید. بقیه از بازیکنان ارزان PL با امتیاز ۸۳+. باشگاه‌های کوچک لیگ برتر گزینه‌های اقتصادی هستند.',
-   cost:550000,costFA:'۵۵۰,۰۰۰ سکه',exp:daysFromNow(21),xp:3500,coins:2000},
+   cost:550000,costFA:'۵۵۰,۰۰۰ سکه',exp:null,xp:3500,coins:2000},
 
   /* ── Grind Upgrade (10 Rare Gold 84+) ── */
   {id:'sbc07',cat:'foundation',catFA:'ارتقاء',dif:'easy',difFA:'آسان',
@@ -1665,19 +1666,19 @@ const SBC_RAW=[
    rew:{type:'player',name:'Jamal Musiala',nameFA:'جمال موزیالا',rat:88,pos:'CAM',nat:'آلمان',flag:'🇩🇪',club:'Bayern Munich',sp:false},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۲'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'بوندسلیگا ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۱ بازیکن بایرن'}],
    guide:'یک تیم کامل از بوندسلیگا با امتیاز ۸۲+ بسازید. حداقل یک بازیکن از بایرن مونیخ داشته باشید. ترکیب بایرن با دورتموند و لایپزیگ شیمی خوبی می‌دهد.',
-   cost:280000,costFA:'۲۸۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2500,coins:1500},
+   cost:280000,costFA:'۲۸۰,۰۰۰ سکه',exp:null,xp:2500,coins:1500},
   {id:'sbc13',cat:'league',catFA:'لیگ',dif:'medium',difFA:'متوسط',
    name:'Serie A Elite',nameFA:'نخبگان سری‌آ',
    rew:{type:'player',name:'Rafael Leão',nameFA:'رافائل لئائو',rat:88,pos:'LW',nat:'پرتغال',flag:'🇵🇹',club:'AC Milan',sp:false},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۲'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'سری‌آ ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۲ باشگاه مختلف'}],
    guide:'یک تیم کامل از سری‌آ با امتیاز ۸۲+ بسازید. ترکیب اینتر، میلان و یوونتوس گزینه اقتصادی است.',
-   cost:260000,costFA:'۲۶۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2400,coins:1500},
+   cost:260000,costFA:'۲۶۰,۰۰۰ سکه',exp:null,xp:2400,coins:1500},
   {id:'sbc14',cat:'league',catFA:'لیگ',dif:'medium',difFA:'متوسط',
    name:'Ligue 1 Rising',nameFA:'در حال ظهور لیگ ۱',
    rew:{type:'player',name:'Kvaratskhelia',nameFA:'کواراتسخلیا',rat:88,pos:'LW',nat:'گرجستان',flag:'🇬🇪',club:'PSG',sp:false},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۱'},{label:'شیمی',val:'حداقل ۲۲'},{label:'لیگ',val:'لیگ ۱ فرانسه ۱۰۰٪'},{label:'باشگاه',val:'حداقل ۱ بازیکن PSG'}],
    guide:'تیمی از لیگ ۱ فرانسه بسازید. حداقل یک بازیکن از PSG داشته باشید. ترکیب PSG، موناکو، مارسی و لیل بهترین گزینه شیمی است.',
-   cost:210000,costFA:'۲۱۰,۰۰۰ سکه',exp:daysFromNow(21),xp:2200,coins:1500},
+   cost:210000,costFA:'۲۱۰,۰۰۰ سکه',exp:null,xp:2200,coins:1500},
 
   /* ── Limited SBC ── */
   {id:'sbc15',cat:'limited',catFA:'محدود',dif:'hard',difFA:'سخت',
@@ -1685,7 +1686,7 @@ const SBC_RAW=[
    rew:{type:'player',name:'TOTS World XI Pick',nameFA:'انتخاب تیم جهانی TOTS',rat:94,pos:'PICK',nat:'',flag:'',club:'',sp:true},
    reqs:[{label:'تعداد بازیکنان',val:'۱۱ بازیکن'},{label:'امتیاز تیم',val:'حداقل ۸۶'},{label:'شیمی',val:'حداقل ۲۲'},{label:'بازیکن TOTS',val:'حداقل ۱ بازیکن TOTS'},{label:'لیگ',val:'حداکثر ۳ لیگ'}],
    guide:'یک بازیکن TOTS در تیم نیاز دارید. تیمی با امتیاز ۸۶+ از حداکثر ۳ لیگ. بهترین راه ترکیب لیگ برتر + لالیگا + بوندسلیگا با یک بازیکن TOTS ارزان‌تر است.',
-   cost:1500000,costFA:'۱,۵۰۰,۰۰۰ سکه',exp:daysFromNow(14),xp:8000,coins:0},
+   cost:1500000,costFA:'۱,۵۰۰,۰۰۰ سکه',exp:null,xp:8000,coins:0},
 
 ];
 
@@ -1943,23 +1944,14 @@ function renderSBC(){
   e.style.display='none';g.innerHTML=list.map(s=>sbcCardHTML(s,q)).join('');
 }
 
-/* ── DETERMINISTIC STATS ── */
-function hashInt(s){let h=5381;for(let i=0;i<s.length;i++)h=((h*33)^s.charCodeAt(i))>>>0;return h;}
+/* Player attributes must be verified source data; never fabricate stat values. */
 function deterministicStats(p){
-  const h=hashInt(p.id||p.name||'');
-  const r=p.rat,pt=p.posType;
-  function gen(off,base){const v=(((h>>off)&0xFF)/255);return Math.min(99,Math.max(40,Math.round(base+v*14-7)));}
-  if(pt==='GK'){
-    return [{lbl:'DIV',v:gen(0,r-2)},{lbl:'HAN',v:gen(4,r-2)},{lbl:'KIC',v:gen(8,r-12)},{lbl:'REF',v:gen(12,r-2)},{lbl:'SPD',v:gen(16,r-18)},{lbl:'POS',v:gen(20,r-2)}];
-  }
-  const lb=['PAC','SHO','PAS','DRI','DEF','PHY'];
-  let b;
-  if(pt==='ATT')b=[r-2,r-4,r-10,r-7,r-32,r-14];
-  else if(pt==='MID')b=[r-10,r-12,r-4,r-5,r-20,r-14];
-  else b=[r-5,r-32,r-12,r-10,r-2,r-5];
-  return lb.map((lbl,i)=>({lbl,v:gen(i*4,b[i])}));
+  const keys=p.posType==='GK'?['DIV','HAN','KIC','REF','SPD','POS']:['PAC','SHO','PAS','DRI','DEF','PHY'];
+  const source=p.stats;
+  if(!source || typeof source!=='object')return [];
+  return keys.filter(k=>Number.isFinite(Number(source[k])) && Number(source[k])>=0 && Number(source[k])<=99)
+    .map(lbl=>({lbl,v:Number(source[lbl])}));
 }
-
 /* ── FORMATIONS ── */
 const FORMATIONS={
   '4-3-3':[{pos:'GK',x:50,y:90},{pos:'RB',x:81,y:75},{pos:'CB',x:63,y:72},{pos:'CB',x:37,y:72},{pos:'LB',x:19,y:75},{pos:'CM',x:70,y:52},{pos:'CDM',x:50,y:56},{pos:'CM',x:30,y:52},{pos:'RW',x:84,y:25},{pos:'ST',x:50,y:16},{pos:'LW',x:16,y:25}],
@@ -2402,10 +2394,10 @@ function playerCardHTML(p){
   const badge=CT_BADGE[ct];
   const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'';
   const stats=deterministicStats(p);
-  const statsHTML=stats.map(s=>{
+  const statsHTML=stats.length?stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
     return `<div class="pstat"><span class="pstat-val ${cls}">${s.v}</span><span class="pstat-lbl">${s.lbl}</span></div>`;
-  }).join('');
+  }).join(''):'<div class="pstat" style="grid-column:1/-1;padding:9px;font-size:11px;color:var(--t2)">آمار دقیق این کارت تأیید نشده</div>';
   const trendHTML='';
   return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
     <div class="pcard-upper ${bg}">
@@ -2447,6 +2439,7 @@ function renderPlayers(){
     if(q){const hay=[p.nameFA,p.name,p.club,p.nat,p.leagueFA,p.pos].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     if(advActive){
       const stats=deterministicStats(p);
+      if(stats.length!==6)return false;
       const sm={};stats.forEach(s=>sm[s.lbl.toLowerCase()]=s.v);
       for(const k of ADV_STATS){if(advF[k]>0&&(sm[k]||0)<advF[k])return false;}
     }
