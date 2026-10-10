@@ -22,7 +22,7 @@ async function scrape(p){
  $('a[href]').each((_,el)=>{
   let u;try{u=new URL($(el).attr('href'),url)}catch{return}
   if(u.hostname!=='www.fut.gg'||seen.has(u.pathname))return;
-  if(p.kind==='sbc'?!/^\/sbc\/(?!category\/)[^/]+\/?$/.test(u.pathname):!/^\/objectives\/(?!campaigns|seasonal|foundations|milestones|coming-soon|tracker)[^/]+\/?$/.test(u.pathname))return;
+  if(p.kind==='sbc'?(!u.pathname.startsWith('/sbc/')||/^\/sbc\/(?:category|expired|expiring-soon)\//.test(u.pathname)||u.pathname==='/sbc/') : (!u.pathname.startsWith('/objectives/')||/^\/objectives\/(?:campaigns|seasonal|foundations|milestones|coming-soon|tracker)\/?$/.test(u.pathname)))return;
   const raw=$(el).text().replace(/\s+/g,' ').trim();
   if(raw.length<6||raw.length>550)return;
   const heading=$(el).find('h2,h3,h4').first().text().replace(/\s+/g,' ').trim();
