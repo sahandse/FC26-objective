@@ -1212,6 +1212,9 @@ function playerFUT(name,rat,pos,sp,big){
   }
   return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
+const AVAILABLE_PORTRAITS=new Set();
+function portraitHTML(p,size=36){const id=Number(p.imgId||PIMG[p.name]||p.id);return AVAILABLE_PORTRAITS.has(id)?`<img src="img/players/${id}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${id})">`:`<span class="player-photo-empty" style="font-size:${size}px;opacity:.4" role="img" aria-label="تصویر موجود نیست">⚽</span>`;}
+async function loadPortraitIndex(){try{const r=await fetch('./data/available-portraits.json',{cache:'no-store'});if(!r.ok)throw Error('No portrait index');const data=await r.json();if(!Array.isArray(data.ids))throw Error('Invalid portrait index');AVAILABLE_PORTRAITS.clear();for(const id of data.ids)if(Number.isInteger(id))AVAILABLE_PORTRAITS.add(id);renderPlayers();}catch(e){console.warn('Portrait index unavailable',e)}}
 function imgFallback(el,id){
   const urls=[]; // FC26 CDN fallbacks disabled; use verified FC27 assets only when available.
   const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
@@ -1915,8 +1918,7 @@ function playerCardHTML(p){
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
-  const photoId=p.imgId||PIMG[p.name]||p.id;
-  const img=photoId?`<img src="img/players/${photoId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:36px;opacity:.45">⚽</span>';
+  const img=portraitHTML(p,36);opacity:.45">⚽</span>';
   const stats=deterministicStats(p);
   const statsHTML=stats.length?stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
@@ -2002,8 +2004,7 @@ function renderPlayers(){
   nav.innerHTML='<button type="button" onclick="setPlayerPage('+Math.max(1,playerPage-1)+')" '+(playerPage===1?'disabled':'')+'>قبلی</button><span>صفحه '+playerPage.toLocaleString('fa-IR')+' از '+pageCount.toLocaleString('fa-IR')+'</span><button type="button" onclick="setPlayerPage('+Math.min(pageCount,playerPage+1)+')" '+(playerPage===pageCount?'disabled':'')+'>بعدی</button>';
 }
 function galleryCardHTML(p){
-  const photoId=p.imgId||PIMG[p.name]||p.id;
-  const img=photoId?`<img src="img/players/${photoId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.35;line-height:112px">⚽</span>';
+  const img=portraitHTML(p,34);opacity:.35;line-height:112px">⚽</span>';
   const nameShort=(p.nameFA||p.name).split(' ').slice(-1)[0];
   return `<div class="pgal-card" onclick="openPlayerModal('${p.id}')">
     <div class="pgal-img">${img}<span class="pgal-rat">${p.rat}</span><span class="pgal-pos">${p.pos}</span><span class="pgal-flag">${p.flag}</span></div>
@@ -2357,6 +2358,7 @@ async function loadLiveFC27(){
 function init(){
   loadState();
   loadLiveFC27();
+  loadPortraitIndex();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
   if(!state.evoProgs)state.evoProgs={};
