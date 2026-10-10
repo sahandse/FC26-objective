@@ -1,0 +1,199 @@
+{
+  "source": "FUT.GG",
+  "checked_at": "2026-10-10T13:16:50.348Z",
+  "sections": {
+    "objectives": [
+      {
+        "name": "Weekly Objectives",
+        "category": "weekly",
+        "description": "Complete Weekly Objectives to earn SP!",
+        "reward": "3,000 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
+      },
+      {
+        "name": "Back to Basics Bonus Objective",
+        "category": "campaign",
+        "description": "Compete in the Back to Basics Exhibition and earn bonus exclusive rewards.",
+        "reward": "7x 82+ Gold Players Pack",
+        "url": "https://www.fut.gg/objectives/campaigns/"
+      },
+      {
+        "name": "Rising Through the Ranks",
+        "category": "foundation",
+        "description": "Complete foundation maintenance objectives to earn rewards.",
+        "reward": "250 SP",
+        "url": "https://www.fut.gg/objectives/foundations/"
+      }
+    ],
+    "sbc": [
+      {
+        "name": "Carlos Espí",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-56-carlos-espi/",
+        "price": null
+      },
+      {
+        "name": "Weslley Pinto Batista",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-44-weslley-pinto-batista/",
+        "price": null
+      },
+      {
+        "name": "Liga F POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-42-liga-f-potm-september/",
+        "price": null
+      },
+      {
+        "name": "Tarciane",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-37-tarciane/",
+        "price": null
+      },
+      {
+        "name": "LALIGA POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-33-laliga-potm-september/",
+        "price": null
+      },
+      {
+        "name": "Premier League POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-34-premier-league-potm-september/",
+        "price": null
+      },
+      {
+        "name": "Bundesliga POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-39-bundesliga-potm-september/",
+        "price": null
+      },
+      {
+        "name": "Serie A POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-32-serie-a-potm-september/",
+        "price": null
+      },
+      {
+        "name": "TOTW Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-55-totw-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Max. 86 Base Hero Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-43-max-86-base-hero-upgrade/",
+        "price": null
+      },
+      {
+        "name": "5x 80+ Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-48-5x-80-upgrade/",
+        "price": null
+      },
+      {
+        "name": "3x 79+ Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-41-3x-79-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Gold Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-6-gold-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Silver Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-5-silver-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Bronze Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-4-bronze-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Marquee Matchups",
+        "category": "challenges",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/challenges/27-36-marquee-matchups/",
+        "price": null
+      },
+      {
+        "name": "Destined for Glory Challenge 4",
+        "category": "challenges",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/challenges/27-28-destined-for-glory-challenge-4/",
+        "price": null
+      },
+      {
+        "name": "League & Nation Advanced",
+        "category": "challenges",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/challenges/27-10-league-nation-advanced/",
+        "price": null
+      },
+      {
+        "name": "Intro to Player SBCs",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-20-intro-to-player-sbcs/",
+        "price": null
+      },
+      {
+        "name": "Gold Re-Roll",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-9-gold-re-roll/",
+        "price": null
+      },
+      {
+        "name": "Bronze and Silver Re-roll",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-8-bronze-and-silver-re-roll/",
+        "price": null
+      },
+      {
+        "name": "Intro to Streamlined SBCs",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-7-getting-started/",
+        "price": null
+      },
+      {
+        "name": "Intro to Upgrade SBCs",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-3-intro-to-upgrade-sbcs/",
+        "price": null
+      },
+      {
+        "name": "Intro to SBCs",
+        "category": "foundation",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/foundations/27-1-intro-to-sbcs/",
+        "price": null
+      }
+    ]
+  }
+}

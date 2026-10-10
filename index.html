@@ -797,7 +797,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .official-news-list a:hover,.verified-source-grid a:hover{border-color:#caff38}
 @media(max-width:700px){.verified-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.official-news-list{grid-template-columns:1fr}}
 </style>
-</head>
+<style>.fc-feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.fc-feed-card{background:#162027;border:1px solid #31423f;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px;min-height:150px}.fc-feed-card h3{font-size:16px;color:#f0faf0;margin:0}.fc-feed-card p{font-size:12px;color:#bcc6c9;line-height:1.8;margin:0;flex:1}.fc-feed-card a{color:#caff38;text-decoration:none;font-size:12px;font-weight:800}.fc-feed-meta{font-size:11px;color:#a3b9b2}.fc-feed-search{width:100%;background:#121b22;color:white;padding:12px;border-radius:12px;border:1px solid #354b45;font:inherit}@media(max-width:700px){.fc-feed-grid{grid-template-columns:1fr}}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -855,7 +855,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 </div>
 
 <!-- ═══ OBJECTIVES SECTION ═══ -->
-<main class="main" id="sec-obj">
+<main class="main" id="sec-obj"><section><h2 style="color:#caff38;font-size:19px;margin:14px 0">اهداف واقعی FC27</h2><input class="fc-feed-search" id="live-objectives-search" oninput="renderLiveFC27()" placeholder="جستجو…"/><p class="fc-feed-meta" id="live-objectives-status">در حال بررسی داده‌های معتبر…</p><div class="fc-feed-grid" id="live-objectives"></div></section>
   <div class="search-wrap">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="text" class="search-input" id="objSearch" placeholder="جستجو در اهداف، شرایط، جایزه..." oninput="renderObj()" />
@@ -892,7 +892,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 </main>
 
 <!-- ═══ SBC SECTION ═══ -->
-<main class="main" id="sec-sbc" style="display:none">
+<main class="main" id="sec-sbc" style="display:none"><section><h2 style="color:#caff38;font-size:19px;margin:14px 0">SBCهای واقعی FC27</h2><input class="fc-feed-search" id="live-sbc-search" oninput="renderLiveFC27()" placeholder="جستجو…"/><p class="fc-feed-meta" id="live-sbc-status">در حال بررسی داده‌های معتبر…</p><div class="fc-feed-grid" id="live-sbc"></div></section>
   <div class="search-wrap">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="text" class="search-input" id="sbcSearch" placeholder="جستجو در SBC‌ها، شرایط، راهنما..." oninput="renderSBC()" />
@@ -2253,7 +2253,42 @@ async function loadOfficialNews(){
   const a=document.createElement('a');a.href='https://www.ea.com/games/ea-sports-fc/fc-27';a.target='_blank';a.rel='noopener noreferrer';a.textContent='اخبار رسمی FC27 ↗';list.appendChild(a);
  }
 }
+
+let liveFC27={source:'FUT.GG',checked_at:null,sections:{objectives:[],sbc:[]}};
+function renderLiveFC27(){
+ for(const kind of ['objectives','sbc']){
+  const host=document.getElementById('live-'+kind),status=document.getElementById('live-'+kind+'-status');
+  if(!host||!status)continue;
+  const records=liveFC27.sections[kind]||[];
+  const query=(document.getElementById('live-'+kind+'-search')?.value||'').toLowerCase();
+  const visible=records.filter(r=>(r.name+' '+r.description).toLowerCase().includes(query));
+  host.replaceChildren();
+  status.textContent=records.length?'ثبت اطلاعات: '+new Date(liveFC27.checked_at).toLocaleString('fa-IR')+' · قیمت‌ها لحظه‌ای نیستند':'داده معتبر در دسترس نیست';
+  for(const rec of visible){
+   let linkUrl;try{linkUrl=new URL(rec.url)}catch{continue}
+   if(linkUrl.hostname!=='www.fut.gg')continue;
+   const card=document.createElement('article');card.className='fc-feed-card';
+   const title=document.createElement('h3');title.textContent=rec.name;
+   const description=document.createElement('p');description.textContent=rec.description||'';
+   const meta=document.createElement('div');meta.className='fc-feed-meta';meta.textContent=kind==='sbc'?(Number.isFinite(rec.price)?'هزینه تخمینی هنگام ثبت: '+rec.price.toLocaleString('fa-IR'):'هزینه ثبت نشده'):(rec.reward||'جزئیات جایزه در صفحه رویداد');
+   const link=document.createElement('a');link.href=linkUrl.href;link.rel='noopener noreferrer';link.target='_blank';link.textContent='مشاهده جزئیات ↗';
+   card.append(title,description,meta,link);host.appendChild(card);
+  }
+  if(!visible.length){const p=document.createElement('p');p.className='fc-feed-meta';p.textContent='موردی برای نمایش پیدا نشد';host.appendChild(p)}
+ }
+}
+async function loadLiveFC27(){
+ try{
+  const response=await fetch('./data/fc27-challenges.json?updated='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw Error('Data feed unavailable');
+  const data=await response.json();
+  if(data.source!=='FUT.GG'||!Array.isArray(data.sections?.objectives)||!Array.isArray(data.sections?.sbc)||!Number.isFinite(Date.parse(data.checked_at)))throw Error('Invalid data');
+  liveFC27=data;
+ }catch(error){console.warn('FC27 sourced data not available',error)}
+ renderLiveFC27();
+}
 function init(){
+  loadLiveFC27();
   loadState();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
