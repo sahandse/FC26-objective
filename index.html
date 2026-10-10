@@ -840,7 +840,7 @@
 <main class="main" id="sec-players" style="display:none">
   <div class="search-wrap">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" class="search-input" id="plSearch" placeholder="جستجو: نام، باشگاه، ملیت، لیگ..." oninput="renderPlayers()" />
+    <input type="text" class="search-input" id="plSearch" placeholder="جستجو: نام، باشگاه، ملیت، لیگ..." oninput="playerPage=1;renderPlayers()" />
   </div>
   <div class="pos-tabs" id="posTabs">
     <button class="pos-tab active" data-pos="all" onclick="setPos('all')">همه</button>
@@ -868,7 +868,7 @@
     <button class="adv-toggle" onclick="showPlayStyleGuide()" style="border-color:rgba(59,130,246,.4);color:#7EB8FF">🎮 PlayStyle</button>
     <button class="adv-toggle" onclick="openCC()" style="border-color:rgba(245,176,20,.4);color:var(--gold)">🃏 ساخت کارت</button>
     <button class="adv-toggle" id="galToggleBtn" onclick="toggleGallery()" style="border-color:rgba(20,184,166,.4);color:var(--teal)">🖼️ گالری</button>
-    <select class="sort-sel" id="plSort" onchange="renderPlayers()">
+    <select class="sort-sel" id="plSort" onchange="playerPage=1;renderPlayers()">
       <option value="rat">امتیاز: بالاترین</option>
       <option value="price-h">قیمت: بالاترین</option>
       <option value="price-l">قیمت: کمترین</option>
