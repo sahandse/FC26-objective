@@ -1030,18 +1030,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 </main>
 
 <aside role="status" style="max-width:900px;margin:12px auto 0;padding:12px 16px;background:#122233;border:1px solid #38536b;border-radius:12px;color:#dce8f8;font-size:12px;line-height:1.9">⚽ FC27 منتشر شده است. <strong>هشدار اعتبار داده:</strong> اطلاعات بازیکنان، اهداف، SBC و قیمت‌های فعلی از نسخه قدیمی به ارث رسیده‌اند و تا اتصال منبع تأییدشده نباید آن‌ها را اطلاعات زنده FC27 تلقی کنید. <a style="color:#ffcc44" href="https://www.ea.com/games/ea-sports-fc/fc-27" target="_blank" rel="noopener noreferrer">اطلاعات رسمی FC27</a></aside>
-<section aria-label="منابع به‌روز FC27" style="max-width:900px;margin:12px auto;padding:0 12px">
-  <div style="border:1px solid #27405e;border-radius:14px;padding:14px;background:#101928">
-    <strong style="color:#ffcc44">🔗 اطلاعات واقعی و به‌روز FC27</strong>
-    <p style="font-size:12px;color:#9bb0cc;margin:7px 0 11px;line-height:1.9">این منابع مستقل را برای مشاهده آخرین تغییرات بررسی کنید. داده‌های داخل بخش‌های قدیمی سایت هنوز با این منابع همگام نشده‌اند.</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <a href="https://www.fut.gg/players/" target="_blank" rel="noopener noreferrer" style="color:#ffcc44;border:1px solid #40536e;padding:7px 12px;border-radius:9px;text-decoration:none">بازیکنان FC27 ↗</a>
-      <a href="https://www.fut.gg/sbc/" target="_blank" rel="noopener noreferrer" style="color:#ffcc44;border:1px solid #40536e;padding:7px 12px;border-radius:9px;text-decoration:none">SBCهای FC27 ↗</a>
-      <a href="https://www.fut.gg/fc-27/" target="_blank" rel="noopener noreferrer" style="color:#ffcc44;border:1px solid #40536e;padding:7px 12px;border-radius:9px;text-decoration:none">هاب FC27 ↗</a>
-      <a href="https://www.futbin.com/27/players" target="_blank" rel="noopener noreferrer" style="color:#ffcc44;border:1px solid #40536e;padding:7px 12px;border-radius:9px;text-decoration:none">رتبه‌بندی FUTBIN ↗</a>
-    </div>
-  </div>
-</section>
+
 <!-- ═══ EVOLUTION TRACKER ═══ -->
 <main class="main" id="sec-evo" style="display:none">
   <div class="section-row">
@@ -1925,7 +1914,8 @@ function playerCardHTML(p){
   const bg=pcardImgCls(p);
   const ct=realCT(p);
   const badge=CT_BADGE[ct];
-  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:36px;opacity:.45">⚽</span>';
+  const photoId=p.imgId||PIMG[p.name]||p.id;
+  const img=photoId?`<img src="img/players/${photoId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:36px;opacity:.45">⚽</span>';
   const stats=deterministicStats(p);
   const statsHTML=stats.length?stats.map(s=>{
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
@@ -2011,7 +2001,8 @@ function renderPlayers(){
   nav.innerHTML='<button type="button" onclick="setPlayerPage('+Math.max(1,playerPage-1)+')" '+(playerPage===1?'disabled':'')+'>قبلی</button><span>صفحه '+playerPage.toLocaleString('fa-IR')+' از '+pageCount.toLocaleString('fa-IR')+'</span><button type="button" onclick="setPlayerPage('+Math.min(pageCount,playerPage+1)+')" '+(playerPage===pageCount?'disabled':'')+'>بعدی</button>';
 }
 function galleryCardHTML(p){
-  const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.35;line-height:112px">⚽</span>';
+  const photoId=p.imgId||PIMG[p.name]||p.id;
+  const img=photoId?`<img src="img/players/${photoId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.35;line-height:112px">⚽</span>';
   const nameShort=(p.nameFA||p.name).split(' ').slice(-1)[0];
   return `<div class="pgal-card" onclick="openPlayerModal('${p.id}')">
     <div class="pgal-img">${img}<span class="pgal-rat">${p.rat}</span><span class="pgal-pos">${p.pos}</span><span class="pgal-flag">${p.flag}</span></div>
@@ -2263,9 +2254,24 @@ const FC27_OBJECTIVE_GUIDES={
 'Back to Basics Bonus Objective':['به Ultimate Team و بخش Objectives بروید.','مأموریت Back to Basics را باز کنید و حالت مسابقه موردنیاز را بررسی کنید.','شرط‌های مشخص‌شده را انجام دهید و جایزه را Claim کنید.'],
 'Rising Through the Ranks':['در Ultimate Team به Objectives بروید.','هدف Rising Through the Ranks را پیدا کنید و مراحل نمایش‌داده‌شده را بررسی کنید.','هر مرحله را کامل کنید تا پاداش مربوط آزاد شود.']
 };
+const SBC_STEPS={
+'TOTW Upgrade':['در بخش Upgrades چالش تیم منتخب هفته را باز کنید.','جایزه، بازیکن تیم منتخب هفته است؛ شرایط لازم برای ترکیب ارسالی را جداگانه در Requirements بخوانید.','تعداد بازیکنان، Rating و Chemistry خواسته‌شده را دقیقاً مطابق هر بخش تنظیم کنید.','بعد از بررسی بازیکنان مصرفی و هزینه، ارسال را تأیید کنید.'],
+'Max. 86 Base Hero Upgrade':['چالش ارتقای هیرو را باز کنید.','سقف ۸۶ مربوط به کارت جایزه است؛ آن را با امتیاز لازم تیم ارسالی اشتباه نگیرید.','هر بخش ترکیب را جدا باز کنید و محدودیت‌های همان بخش را بررسی کنید.','از کارت‌های تکراری و مازاد شروع کنید و قبل از Submit مجموع هزینه را بسنجید.'],
+'5x 80+ Upgrade':['چالش پنج کارت ۸۰+ را در Upgrades پیدا کنید.','۸۰+ امتیاز پاداش است و به‌خودی‌خود شرط تیم ارسالی نیست.','Requirements را بخوانید و تیم را با کارت‌های واجد شرایط باشگاه تکمیل کنید.','قبل از ارسال، مطمئن شوید کارت‌های مهم یا گران را از دست نمی‌دهید.'],
+'3x 79+ Upgrade':['این چالش را در بخش Upgrades باز کنید.','پاداش سه بازیکن با امتیاز ۷۹+ است؛ شرط تیم را از Requirements بخوانید.','بازیکنان واجد شرایط و ترجیحاً تکراری را انتخاب کنید.','بعد از بررسی ترکیب، تیم را ثبت کنید.'],
+'Gold Upgrade':['Gold Upgrade را باز کنید و تعداد و نوع بازیکنان موردنیاز را ببینید.','بازیکنان مازاد واجد شرایط را قرار دهید.','پس از تکمیل تمام شروط و بررسی جایزه، تیم را ارسال کنید.'],
+'Silver Upgrade':['Silver Upgrade را در بخش Upgrades باز کنید.','نوع و تعداد کارت‌های مجاز را در Requirements کنترل کنید.','تیم را با کارت‌های مازاد تکمیل و پس از بررسی ثبت کنید.'],
+'Bronze Upgrade':['Bronze Upgrade را باز کنید و شروط دقیق ترکیب را ببینید.','از کارت‌های اضافه باشگاه که با شروط سازگارند استفاده کنید.','پس از بررسی ترکیب و جایزه، ثبت کنید.'],
+'Marquee Matchups':['Marquee Matchups را باز کنید و هر مسابقه زیرمجموعه را جدا انتخاب کنید.','محدودیت باشگاه، لیگ، ملیت، Chemistry و امتیاز را برای همان مسابقه بخوانید.','برای هر ترکیب ابتدا کارت‌های موجود واجد شرایط را امتحان کنید.','همه زیرچالش‌ها را تکمیل کنید تا پاداش مجموعه باز شود.'],
+'League & Nation Advanced':['چالش لیگ و ملیت پیشرفته را در SBC باز کنید.','برای هر زیرچالش، ارتباط لیگ‌ها و ملیت‌ها و Chemistry موردنیاز را بررسی کنید.','کارت‌ها را براساس لینک‌های ترکیب جای‌گذاری کنید و شرایط را سبز کنید.','هر زیرچالش را جداگانه ثبت کنید.']
+};
 function guideFC27(kind,rec){
- if(kind==='objectives')return FC27_OBJECTIVE_GUIDES[rec.name]||['وارد بخش Objectives در Ultimate Team شوید.','عنوان این هدف را پیدا کنید و شرط‌های دقیق آن را بخوانید.','مراحل خواسته‌شده را انجام دهید و پاداش را دریافت کنید.'];
- return ['در Ultimate Team وارد Squad Building Challenges شوید.','عنوان چالش را جستجو و بخش Requirements را باز کنید.','با بازیکنان واجد شرایط، تیم را بچینید و میزان Chemistry، امتیاز و محدودیت‌ها را بررسی کنید.','پس از تأیید شرایط، فقط در صورت اطمینان تیم را Submit کنید؛ بازیکنان ارسال‌شده مصرف می‌شوند.'];
+ if(kind==='objectives')return FC27_OBJECTIVE_GUIDES[rec.name]||['عنوان همین هدف را در بخش Objectives پیدا کنید.','حالت بازی، تعداد بازی یا گل و محدودیت‌های موردنیاز را در جزئیات همان هدف بخوانید.','پیشرفت هر مرحله را پس از بازی بررسی کنید و جایزه را دریافت کنید.'];
+ if(SBC_STEPS[rec.name])return SBC_STEPS[rec.name];
+ const title=FC27_FA[rec.name]||rec.name;
+ if(rec.category==='players')return ['در SBC بخش بازیکنان، چالش «'+title+'» را انتخاب کنید.','تمام Squadهای زیرمجموعه را بررسی کنید؛ هرکدام ممکن است امتیاز یا شیمی متفاوتی لازم داشته باشند.','ابتدا کارت‌های تکراری و قابل جایگزینی خود را در جایگاه‌های مجاز قرار دهید و شرط‌های صفحه را بررسی کنید.','بعد از تکمیل همه Squadها، کارت ویژه را دریافت کنید.'];
+ if(rec.category==='foundation')return ['در Foundations چالش «'+title+'» را باز کنید.','شرط‌های تعداد و نوع بازیکنان هر مرحله را بخوانید.','با کارت‌های موجود ترکیب را بسازید و خطاها را برطرف کنید.','مراحل را به‌ترتیب تأیید و پاداش‌ها را دریافت کنید.'];
+ return ['چالش «'+title+'» را در SBC باز کنید.','شرط‌های دقیق Rating و Chemistry و تعداد کارت‌ها را در صفحه Requirements بخوانید؛ این اعداد در داده فعلی تأیید نشده‌اند.','از کارت‌های واجد شرایط و کم‌هزینه‌تر شروع کنید.','قبل از ثبت نهایی، بازیکنان مصرفی و پاداش را کنترل کنید.'];
 }
 let liveFC27={source:'FUT.GG',checked_at:null,sections:{objectives:[],sbc:[]}};
 function renderLiveFC27(){
