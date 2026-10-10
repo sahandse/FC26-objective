@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F5B014" />
   <link rel="manifest" href="manifest.json" />
-  <title>FC26 Hub | اهداف و SBC</title>
+  <title>FC27 Hub | اهداف و SBC</title>
+  <meta name="description" content="هاب فارسی FC27؛ داده‌های نیازمند تأیید به‌وضوح مشخص شده‌اند." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
@@ -134,7 +135,7 @@
     .reward-box{display:flex;align-items:center;gap:11px;background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:11px;margin-bottom:13px}
 
     /* FUT Card */
-    /* ── FUT CARD — FC26 style ── */
+    /* ── FUT CARD — FC27 style ── */
     .fut-card{width:82px;height:108px;border-radius:10px;display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden;font-weight:900}
     .fc-gold{background:radial-gradient(ellipse at 65% 30%,#5A3D10,#3A2508 50%,#1A1000)}
     .fc-silver{background:radial-gradient(ellipse at 65% 30%,#3C3C52,#28283C 50%,#141420)}
@@ -142,7 +143,7 @@
     .fc-special{background:radial-gradient(ellipse at 65% 30%,#38005A,#200032 50%,#100018)}
     .fc-pack{background:radial-gradient(ellipse at 65% 30%,#003878,#002044 50%,#001020)}
     .fc-xp{background:radial-gradient(ellipse at 65% 30%,#1A0830,#4A1080 50%,#100620)}
-    /* FC26 card inner: info col + photo */
+    /* FC27 card inner: info col + photo */
     .fc-inner{display:flex;flex:1;position:relative;overflow:hidden}
     .fc-info-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 0 0 5px;width:24px;flex-shrink:0;z-index:3}
     .fc-rat{font-size:16px;font-weight:900;line-height:1;color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.9);z-index:3;position:relative}
@@ -251,10 +252,10 @@
     .pcard{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .22s;position:relative}
     .pcard:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.6)}
     .pcard.fav{border-color:rgba(245,176,20,.35)}
-    /* ── FC26-STYLE CARD UPPER ── */
+    /* ── FC27-STYLE CARD UPPER ── */
     .pcard-upper{position:relative;height:195px;overflow:hidden;display:flex;flex-direction:column}
     .pcard-inner{display:flex;flex:1;position:relative;overflow:hidden}
-    /* card type backgrounds — authentic FC26 radial gradients */
+    /* card type backgrounds — authentic FC27 radial gradients */
     .pimg-gold{background:radial-gradient(ellipse at 65% 30%,#5A3D10,#3A2508 50%,#1A1000)}
     .pimg-silver{background:radial-gradient(ellipse at 65% 30%,#3C3C52,#28283C 50%,#141420)}
     .pimg-bronze{background:radial-gradient(ellipse at 65% 30%,#4A2010,#301408 50%,#180800)}
@@ -729,7 +730,7 @@
 <header class="app-header">
   <div class="app-header-inner">
     <div class="logo">
-      <span class="logo-fc">FC26</span>
+      <span class="logo-fc">FC27</span>
       <span class="logo-title">Hub</span>
     </div>
     <div class="header-right">
@@ -934,6 +935,7 @@
   </div>
 </main>
 
+<aside role="status" style="max-width:900px;margin:12px auto 0;padding:12px 16px;background:#122233;border:1px solid #38536b;border-radius:12px;color:#dce8f8;font-size:12px;line-height:1.9">⚽ FC27 منتشر شده است. <strong>هشدار اعتبار داده:</strong> اطلاعات بازیکنان، اهداف، SBC و قیمت‌های فعلی از نسخه قدیمی به ارث رسیده‌اند و تا اتصال منبع تأییدشده نباید آن‌ها را اطلاعات زنده FC27 تلقی کنید. <a style="color:#ffcc44" href="https://www.ea.com/games/ea-sports-fc/fc-27" target="_blank" rel="noopener noreferrer">اطلاعات رسمی FC27</a></aside>
 <!-- ═══ EVOLUTION TRACKER ═══ -->
 <main class="main" id="sec-evo" style="display:none">
   <div class="section-row">
@@ -992,7 +994,7 @@
 <!-- PLAYSTYLE GUIDE OVERLAY -->
 <div class="ps-overlay" id="psOverlay">
   <div class="ps-box">
-    <div class="ps-title">🎮 راهنمای PlayStyle+ در FC26</div>
+    <div class="ps-title">🎮 راهنمای PlayStyle+ در FC27</div>
     <div class="ps-sub">PlayStyle+ (طلایی) = ۲ برابر تأثیر | PlayStyle (سبز) = تأثیر عادی</div>
     <div id="psContent"></div>
     <button class="ps-close" onclick="closePlayStyleGuide()">بستن</button>
@@ -1109,7 +1111,7 @@ function hl(txt,q){
 
 /* ── PLAYER IMAGE MAP ──
    Primary: img/players/{id}.png (local, downloaded via GitHub Actions)
-   Fallback chain: futbin FC26 → fut.gg → futbin FC25
+   Fallback chain: futbin FC27 → fut.gg → futbin FC25
 */
 const PIMG={
   'Erling Haaland':239085,'Kylian Mbappé':231747,'Vinicius Jr':238794,
@@ -1685,8 +1687,8 @@ let advF={pac:0,sho:0,pas:0,dri:0,def:0,phy:0};
 let draftState={picks:{},slot:0};
 const DRAFT_SLOTS=[{pos:'GK',type:'GK'},{pos:'RB',type:'DEF'},{pos:'CB',type:'DEF'},{pos:'CB',type:'DEF'},{pos:'LB',type:'DEF'},{pos:'CDM',type:'MID'},{pos:'CM',type:'MID'},{pos:'CAM',type:'MID'},{pos:'RW',type:'ATT'},{pos:'ST',type:'ATT'},{pos:'LW',type:'ATT'}];
 
-function loadState(){try{const s=localStorage.getItem('fc26hub2');if(s)state=JSON.parse(s);}catch(e){}}
-function saveState(){try{localStorage.setItem('fc26hub2',JSON.stringify(state));}catch(e){}}
+function loadState(){try{const s=localStorage.getItem('fc27hub1');if(s)state=JSON.parse(s);}catch(e){}}
+function saveState(){try{localStorage.setItem('fc27hub1',JSON.stringify(state));}catch(e){}}
 
 /* ── OBJECTIVE CARD ── */
 const OBJ_CAT_NAMES={all:'همه اهداف',weekly:'TOTS هفتگی',daily:'اهداف روزانه',milestone:'مایل‌استون‌ها',event:'جشنواره فوتبال',seasonal:'اهداف فصلی',league:'اهداف رقابتی'};
@@ -2528,12 +2530,12 @@ async async function doFetch(){
   const btn=document.getElementById('refreshBtn');
   btn.disabled=true;btn.classList.add('spinning');setStatus('syncing');
   try{
-    // Connectivity checks are not live FC26 objective/SBC data updates.
+    // Connectivity checks are not live FC27 objective/SBC data updates.
     const res=await fetch('./manifest.json?check='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
     if(!res.ok)throw new Error('offline');
     setStatus('online');
     document.getElementById('lastUpd').textContent='ارتباط سایت: '+new Date().toLocaleTimeString('fa-IR');
-    toast('اتصال برقرار است؛ داده‌های FC26 هنوز به منبع زنده متصل نیستند','i',5000);
+    toast('اتصال برقرار است؛ داده‌های FC27 هنوز به منبع زنده متصل نیستند','i',5000);
   }catch(e){
     setStatus('offline');
     document.getElementById('lastUpd').textContent='داده زنده: تأیید نشده';
