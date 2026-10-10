@@ -7,6 +7,9 @@ on:
       - '.github/workflows/fc27-challenges.yml'
   schedule:
     - cron: '19 6,12,18 * * *'
+concurrency:
+  group: fc27-challenges-sync
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -28,5 +31,6 @@ jobs:
           git add data/fc27-challenges.json
           if ! git diff --cached --quiet; then
             git commit -m "data(fc27): update sourced objectives and sbcs"
-            git push
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
           fi
