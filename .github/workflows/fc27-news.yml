@@ -1,5 +1,9 @@
 name: FC27 Official News
 on:
+  push:
+    paths:
+      - '.github/workflows/fc27-news.yml'
+      - 'scripts/sync-fc27-news.cjs'
   workflow_dispatch:
   schedule:
     - cron: '22 8,20 * * *'
