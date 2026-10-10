@@ -4,34 +4,46 @@
   "sections": {
     "objectives": [
       {
-        "name": "Objectives",
-        "category": "milestone",
-        "description": "",
-        "url": "https://www.fut.gg/objectives/"
+        "name": "Seasonal Objective",
+        "category": "seasonal",
+        "description": "Complete Seasonal Objectives to earn SP!",
+        "reward": "3,000 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
       },
       {
-        "name": "1Expiring Soon",
-        "category": "milestone",
-        "description": "",
-        "url": "https://www.fut.gg/objectives/expiring-soon/"
+        "name": "Daily Objectives",
+        "category": "daily",
+        "description": "Play, complete and earn SP from daily objective every 24 hours!",
+        "reward": "30 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
       },
       {
-        "name": "Live Events",
-        "category": "milestone",
-        "description": "",
-        "url": "https://www.fut.gg/objectives/live-events/"
+        "name": "Weekly Objectives",
+        "category": "weekly",
+        "description": "Complete Weekly Objectives to earn SP!",
+        "reward": "3,000 SP total",
+        "url": "https://www.fut.gg/objectives/seasonal/"
       },
       {
-        "name": "Mastery",
-        "category": "milestone",
-        "description": "",
-        "url": "https://www.fut.gg/objectives/mastery/"
+        "name": "Future Stars Celebration",
+        "category": "campaign",
+        "description": "Use young players that are more agile and earn exclusive rewards.",
+        "reward": "200 SP",
+        "url": "https://www.fut.gg/objectives/campaigns/"
       },
       {
-        "name": "FC Pro",
-        "category": "milestone",
-        "description": "",
-        "url": "https://www.fut.gg/objectives/fc-pro/"
+        "name": "Back to Basics Bonus Objective",
+        "category": "campaign",
+        "description": "Compete in the Back to Basics Exhibition and earn bonus exclusive rewards.",
+        "reward": "7x 82+ Gold Players Pack",
+        "url": "https://www.fut.gg/objectives/campaigns/"
+      },
+      {
+        "name": "Rising Through the Ranks",
+        "category": "foundation",
+        "description": "Complete foundation maintenance objectives to earn rewards.",
+        "reward": "250 SP",
+        "url": "https://www.fut.gg/objectives/foundations/"
       }
     ],
     "sbc": [
@@ -204,5 +216,6 @@
         "price": null
       }
     ]
-  }
+  },
+  "objectives_snapshot_at": "2026-10-10T00:00:00Z"
 }
