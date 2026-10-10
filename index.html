@@ -720,6 +720,10 @@
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
     }
+  .player-pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding:20px 5px;color:var(--t2);font-size:12px}
+  .player-pagination button{background:var(--bg2);border:1px solid var(--border2);border-radius:9px;color:var(--gold);font:inherit;padding:9px 18px;cursor:pointer}
+  .player-pagination button:disabled{opacity:.35;cursor:default}
+  #plGrid{scroll-margin-top:100px}
 </style>
 </head>
 <body>
@@ -1401,12 +1405,11 @@ function playerFUT(name,rat,pos,sp,big){
 function imgFallback(el,id){
   const urls=[
     `https://cdn.futbin.com/content/fifa26/img/players/${id}.png`,
-    `https://cdn.fut.gg/fc26/players/portrait/${id}.png`,
-    `https://cdn.futbin.com/content/fifa25/img/players/${id}.png`
+    `https://cdn.fut.gg/fc26/players/portrait/${id}.png`
   ];
   const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
   if(tried<urls.length){el.dataset.tried=tried+1;el.src=urls[tried];}
-  else{el.style.display='none';}
+  else{el.onerror=null;el.removeAttribute('src');el.style.display='none';if(el.parentElement&&!el.parentElement.querySelector('.img-placeholder')){const p=document.createElement('span');p.className='img-placeholder';p.textContent='⚽';p.setAttribute('aria-label','تصویر بازیکن موجود نیست');p.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:.4';el.parentElement.appendChild(p);}}
 }
 
 /* ── OBJECTIVES DATA (Festival of Football - Jun 5 – Jul 24 2026) ── */
@@ -2421,6 +2424,9 @@ function playerCardHTML(p){
 }
 
 /* ── RENDER PLAYERS ── */
+let playerPage=1;
+const PLAYER_PAGE_SIZE=24;
+function setPlayerPage(next){playerPage=next;renderPlayers();document.getElementById('plGrid')?.scrollIntoView({block:'start',behavior:'smooth'});}
 function renderPlayers(){
   const q=document.getElementById('plSearch').value.toLowerCase().trim();
   const srt=document.getElementById('plSort').value;
@@ -2450,15 +2456,23 @@ function renderPlayers(){
   // Watchlist mode: show watchlist section, hide regular grid
   const wlSec=document.getElementById('wlSection');
   if(plFilters.wl){
+    const nav=document.getElementById('playerPagination');if(nav)nav.style.display='none';
     g.innerHTML='';e.style.display='none';
     renderWatchlist();
     return;
   }
   if(wlSec)wlSec.style.display='none';
-  if(!list.length){g.innerHTML='';e.style.display='block';return;}
+  if(!list.length){g.innerHTML='';e.style.display='block';const nav=document.getElementById('playerPagination');if(nav)nav.style.display='none';return;}
   e.style.display='none';
+  const pageCount=Math.max(1,Math.ceil(list.length/PLAYER_PAGE_SIZE));
+  playerPage=Math.min(Math.max(1,playerPage),pageCount);
   g.className=state.galleryMode?'pgal-grid':'player-grid';
-  g.innerHTML=list.map(state.galleryMode?galleryCardHTML:playerCardHTML).join('');
+  const current=list.slice((playerPage-1)*PLAYER_PAGE_SIZE,playerPage*PLAYER_PAGE_SIZE);
+  g.innerHTML=current.map(state.galleryMode?galleryCardHTML:playerCardHTML).join('');
+  let nav=document.getElementById('playerPagination');
+  if(!nav){nav=document.createElement('div');nav.id='playerPagination';nav.className='player-pagination';g.after(nav);}
+  nav.style.display=pageCount>1?'flex':'none';
+  nav.innerHTML='<button type="button" onclick="setPlayerPage('+Math.max(1,playerPage-1)+')" '+(playerPage===1?'disabled':'')+'>قبلی</button><span>صفحه '+playerPage.toLocaleString('fa-IR')+' از '+pageCount.toLocaleString('fa-IR')+'</span><button type="button" onclick="setPlayerPage('+Math.min(pageCount,playerPage+1)+')" '+(playerPage===pageCount?'disabled':'')+'>بعدی</button>';
 }
 function galleryCardHTML(p){
   const img=p.imgId?`<img src="img/players/${p.imgId}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${p.imgId})">`:'<span style="font-size:34px;opacity:.25;line-height:112px">⚽</span>';
@@ -2470,15 +2484,17 @@ function galleryCardHTML(p){
   </div>`;
 }
 function toggleGallery(){
+  playerPage=1;
   state.galleryMode=!state.galleryMode;
   const btn=document.getElementById('galToggleBtn');
   if(btn){btn.classList.toggle('active',state.galleryMode);btn.textContent=state.galleryMode?'🃏 کارت‌ها':'🖼️ گالری';}
   renderPlayers();
 }
 
-function setPos(pos){plPos=pos;document.querySelectorAll('#posTabs .pos-tab').forEach(t=>t.classList.toggle('active',t.dataset.pos===pos));renderPlayers();}
-function setCardType(ct){plCardType=ct;document.querySelectorAll('#cardTypeTabs .ctype-tab').forEach(t=>t.classList.toggle('active',t.dataset.ct===ct));renderPlayers();}
+function setPos(pos){playerPage=1;plPos=pos;document.querySelectorAll('#posTabs .pos-tab').forEach(t=>t.classList.toggle('active',t.dataset.pos===pos));renderPlayers();}
+function setCardType(ct){playerPage=1;plCardType=ct;document.querySelectorAll('#cardTypeTabs .ctype-tab').forEach(t=>t.classList.toggle('active',t.dataset.ct===ct));renderPlayers();}
 function togglePF(f){
+  playerPage=1;
   plFilters[f]=!plFilters[f];
   document.getElementById('pfb-'+f).classList.toggle('active',plFilters[f]);
   renderPlayers();
