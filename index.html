@@ -1135,8 +1135,8 @@ function hl(txt,q){
 }
 
 /* ── PLAYER IMAGE MAP ──
-   Primary: img/players/{id}.png (local, downloaded via GitHub Actions)
-   Fallback chain: futbin FC27 → fut.gg → futbin FC25
+   Primary: locally cached images; legacy portraits may differ from FC27 card art
+   Fallback: neutral placeholder (do not substitute older seasons as FC27 art)
 */
 const PIMG={
   'Erling Haaland':239085,'Kylian Mbappé':231747,'Vinicius Jr':238794,
@@ -1411,10 +1411,7 @@ function playerFUT(name,rat,pos,sp,big){
   return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
 function imgFallback(el,id){
-  const urls=[
-    `https://cdn.futbin.com/content/fifa26/img/players/${id}.png`,
-    `https://cdn.fut.gg/fc26/players/portrait/${id}.png`
-  ];
+  const urls=[]; // FC26 CDN fallbacks disabled; use verified FC27 assets only when available.
   const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
   if(tried<urls.length){el.dataset.tried=tried+1;el.src=urls[tried];}
   else{el.onerror=null;el.removeAttribute('src');el.style.display='none';if(el.parentElement&&!el.parentElement.querySelector('.img-placeholder')){const p=document.createElement('span');p.className='img-placeholder';p.textContent='⚽';p.setAttribute('aria-label','تصویر بازیکن موجود نیست');p.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:.4';el.parentElement.appendChild(p);}}
@@ -3574,8 +3571,8 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 <div class="data-integrity-note" role="status" style="max-width:900px;margin:12px auto;padding:12px 14px;border:1px solid #27405E;border-radius:12px;background:#101928;color:#C1D0E6;line-height:1.8;font-size:12px">
   <strong style="color:#FFCC44">وضعیت منابع اطلاعات</strong>
-  <p>اهداف، SBCها، قیمت‌ها و امتیازهای فهرست داخلی آرشیوی‌اند و لزوماً با وضعیت فعلی بازی مطابقت ندارند. تاریخ یا آمار بدون تأیید به‌عنوان زنده نمایش داده نمی‌شود.</p>
-  <p><a href="https://www.futbin.com/26/objectives" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">مشاهده اهداف FC26 در FUTBIN ↗</a> · <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">رتبه‌بندی بازیکنان در EA ↗</a></p>
+  <p>اهداف، SBCها، کارت‌ها، قیمت‌ها و امتیازهای فهرست داخلی از داده‌های قدیمی‌تر هستند؛ این اطلاعات FC27 تأییدشده یا زنده نیستند. تاریخ یا آمار بدون تأیید به‌عنوان زنده نمایش داده نمی‌شود.</p>
+  <p><a href="https://www.fut.gg/fc-27/" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">هاب اطلاعات FC27 در FUT.GG ↗</a> · <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">رتبه‌بندی بازیکنان در EA ↗</a></p>
 </div>
 <!-- ═══ WORLD CUP 2026 ═══ -->
 <main class="main" id="sec-wc" style="display:none">
