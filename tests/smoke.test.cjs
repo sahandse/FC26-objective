@@ -46,3 +46,16 @@ test('legacy FC26 sample data is not shipped',()=>{
   assert.doesNotMatch(html,/const WC26_SQUADS|function renderWC/);
   assert.ok(html.includes('اطلاعات تأییدشده EA SPORTS FC 27'));
 });
+
+test('FC27 sourced objectives and SBC feed has real detail URLs',()=>{
+ const data=JSON.parse(fs.readFileSync('data/fc27-challenges.json','utf8'));
+ assert.equal(data.source,'FUT.GG');
+ for(const group of ['objectives','sbc']){
+  assert.ok(data.sections[group].length>=3);
+  for(const item of data.sections[group]){
+   assert.ok(item.name.length>=4);
+   assert.equal(new URL(item.url).hostname,'www.fut.gg');
+   assert.ok(!/^(Objectives|Live Events|Streamlined SBC SolverNew|1Expiring Soon)$/.test(item.name));
+  }
+ }
+});
