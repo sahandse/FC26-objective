@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-10T13:14:05.670Z",
+  "checked_at": "2026-10-10T13:14:56.134Z",
   "sections": {
     "objectives": [
       {
@@ -35,13 +35,6 @@
       }
     ],
     "sbc": [
-      {
-        "name": "Streamlined SBC SolverNew",
-        "category": "foundation",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/streamlined-solver/",
-        "price": null
-      },
       {
         "name": "Carlos Espí",
         "category": "players",
