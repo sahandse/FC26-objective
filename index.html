@@ -796,6 +796,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .official-news-list a{color:#d6e6dc;text-decoration:none;background:#121e25;border:1px solid #293e42;border-radius:11px;padding:11px;font-size:12px;line-height:1.7}
 .official-news-list a:hover,.verified-source-grid a:hover{border-color:#caff38}
 @media(max-width:700px){.verified-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.official-news-list{grid-template-columns:1fr}}
+.fc27-lang-control{grid-column:1/-1;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}.fc27-lang-label{font-size:11px;color:#a7b7b9;margin-inline-end:auto}.fc27-lang-btn{font:inherit;font-size:11px;color:#d9e2e2;background:#19232b;border:1px solid #33424a;border-radius:9px;padding:7px 11px;cursor:pointer}.fc27-lang-btn.active{background:#caff38;color:#121b14;border-color:#caff38;font-weight:800}.fc27-original-title{color:#96a8b0;font-size:12px;direction:ltr;text-align:right;line-height:1.6;margin:0}.fc27-card-description{margin:0}.fc27-step{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid #29363c;padding:11px 2px;cursor:pointer}.fc27-step:last-child{border-bottom:0}.fc27-step input{width:17px;height:17px;flex-shrink:0;margin-top:3px;accent-color:#caff38}.fc27-step-text{display:flex;flex-direction:column;gap:5px;line-height:1.85;color:#e3e9e9;font-size:12px}.fc27-step-en{color:#b5c4ca;text-align:left}.fc27-step.completed .fc27-step-text{opacity:.55}.fc-steps summary{padding:8px 0}
 </style>
 <style>.fc-feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.fc-feed-card{background:#162027;border:1px solid #31423f;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px;min-height:150px}.fc-feed-card h3{font-size:16px;color:#f0faf0;margin:0}.fc-feed-card p{font-size:12px;color:#bcc6c9;line-height:1.8;margin:0;flex:1}.fc-feed-card a{color:#caff38;text-decoration:none;font-size:12px;font-weight:800}.fc-feed-meta{font-size:11px;color:#a3b9b2}.fc-feed-search{width:100%;background:#121b22;color:white;padding:12px;border-radius:12px;border:1px solid #354b45;font:inherit}@media(max-width:700px){.fc-feed-grid{grid-template-columns:1fr}}</style><style>
 /* Keep the verified feed, hide controls tied to empty legacy lists. */
@@ -2274,30 +2275,73 @@ function guideFC27(kind,rec){
  return ['چالش «'+title+'» را در SBC باز کنید.','شرط‌های دقیق Rating و Chemistry و تعداد کارت‌ها را در صفحه Requirements بخوانید؛ این اعداد در داده فعلی تأیید نشده‌اند.','از کارت‌های واجد شرایط و کم‌هزینه‌تر شروع کنید.','قبل از ثبت نهایی، بازیکنان مصرفی و پاداش را کنترل کنید.'];
 }
 let liveFC27={source:'FUT.GG',checked_at:null,sections:{objectives:[],sbc:[]}};
+
+const FC27_EN_GUIDES={
+'TOTW Upgrade':['Find TOTW Upgrade in Squad Building Challenges > Upgrades.','The reward is a Team of the Week item; read the actual squad requirements separately.','Meet each displayed rating, chemistry and player requirement with eligible items.','Review the cost and players consumed before submitting.'],
+'Max. 86 Base Hero Upgrade':['Open the Base Hero Upgrade under SBCs.','The 86 rating cap refers to the Hero reward, not necessarily your submitted squad.','Open each segment and meet its own listed squad requirements.','Use spare eligible items first and review the full cost before confirming.'],
+'5x 80+ Upgrade':['Find the 5x 80+ Upgrade under SBCs.','The reward is five 80+ rated items; 80+ is not automatically a squad requirement.','Read the displayed requirements and choose eligible surplus players.','Double-check which cards will be permanently submitted.'],
+'Marquee Matchups':['Open Marquee Matchups and select one individual matchup.','Review its club, nation, league, chemistry and rating restrictions if listed.','Build the eligible squad using available club items first.','Finish the individual segments to unlock the group reward.'],
+'League & Nation Advanced':['Open League & Nation Advanced in SBCs.','Read the league, nationality and chemistry conditions for each segment.','Build links between eligible players and verify all constraints.','Submit the completed segments separately.']
+};
+const FC27_EN_OBJECTIVES={
+'Weekly Objectives':['Open Objectives > Weekly in Ultimate Team.','Check each live task for its exact game mode and actions.','Play the required matches or complete activities, verify progress and claim rewards.'],
+'Back to Basics Bonus Objective':['Open the Back to Basics objective in Ultimate Team.','Check the required Exhibition mode and any squad restrictions on the objective itself.','Complete the listed tasks, then claim the reward.'],
+'Rising Through the Ranks':['Locate Rising Through the Ranks under Objectives.','Review the exact tasks, game mode and any squad conditions.','Finish each task, track progress, and claim the relevant reward.']
+};
+let fc27Lang='fa',fc27Progress={};
+try{fc27Lang=localStorage.getItem('fc27-guide-lang')||'fa';if(!['fa','en','both'].includes(fc27Lang))fc27Lang='fa';fc27Progress=JSON.parse(localStorage.getItem('fc27-guide-progress')||'{}')||{}}catch(e){}
+function setFC27Lang(lang){if(!['fa','en','both'].includes(lang))return;fc27Lang=lang;try{localStorage.setItem('fc27-guide-lang',lang)}catch(e){}renderLiveFC27()}
+function fc27EnglishGuide(kind,rec){
+ if(kind==='objectives')return FC27_EN_OBJECTIVES[rec.name]||['Find this exact objective in Ultimate Team > Objectives.','Check its live game mode, required actions and any squad restrictions.','Finish each required task, confirm its progress and claim the reward.'];
+ if(FC27_EN_GUIDES[rec.name])return FC27_EN_GUIDES[rec.name];
+ if(rec.category==='players')return ['Open the '+rec.name+' challenge in the SBC Players category.','Read the requirements of every squad segment, which may differ in rating and chemistry.','Use eligible spare players first and verify all conditions.','Complete every required squad to unlock the player reward.'];
+ if(rec.category==='foundation')return ['Open '+rec.name+' in SBC Foundations.','Check the exact number and type of required items for each segment.','Complete the squad and resolve unmet requirements.','Submit segments in order and claim the reward.'];
+ return ['Open '+rec.name+' in Squad Building Challenges.','Check each segment’s current rating, chemistry and item requirements; no unverified numbers are shown here.','Choose eligible players while reviewing the total cost.','Review submitted items carefully and claim the reward after completion.'];
+}
+function fc27Node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!=null)el.textContent=String(text);return el}
 function renderLiveFC27(){
  for(const kind of ['objectives','sbc']){
   const host=document.getElementById('live-'+kind),status=document.getElementById('live-'+kind+'-status');
   if(!host||!status)continue;
   const records=liveFC27.sections[kind]||[];
-  const query=(document.getElementById('live-'+kind+'-search')?.value||'').toLowerCase();
-  const visible=records.filter(r=>(r.name+' '+r.description).toLowerCase().includes(query));
+  const query=(document.getElementById('live-'+kind+'-search')?.value||'').trim().toLowerCase();
+  const visible=records.filter(r=>([r.name,FC27_FA[r.name]||'',r.description||''].join(' ')).toLowerCase().includes(query));
   host.replaceChildren();
+  const top=fc27Node('div','fc27-lang-control');
+  const langLabel=fc27Node('span','fc27-lang-label','زبان راهنما / Guide language');
+  top.appendChild(langLabel);
+  for(const [value,label] of [['fa','فارسی'],['en','English'],['both','هر دو']]){
+   const btn=fc27Node('button','fc27-lang-btn'+(fc27Lang===value?' active':''),label);
+   btn.type='button';btn.setAttribute('aria-pressed',String(fc27Lang===value));btn.addEventListener('click',()=>setFC27Lang(value));top.appendChild(btn);
+  }
+  host.appendChild(top);
   const age=liveFC27.checked_at?Math.floor((Date.now()-Date.parse(liveFC27.checked_at))/86400000):Infinity;
-  status.textContent=records.length?records.length.toLocaleString('fa-IR')+' مورد · '+(age>1?'اطلاعات آرشیوی، آخرین دریافت: ':'آخرین بررسی: ')+new Date(liveFC27.checked_at).toLocaleString('fa-IR'):'داده معتبر در دسترس نیست';
+  status.textContent=records.length?records.length.toLocaleString('fa-IR')+' مورد · '+(age>1?'آخرین داده ثبت‌شده: ':'آخرین بررسی: ')+new Date(liveFC27.checked_at).toLocaleString('fa-IR'):'داده معتبر در دسترس نیست';
   for(const rec of visible){
    let linkUrl;try{linkUrl=new URL(rec.url)}catch{continue}
    if(linkUrl.hostname!=='www.fut.gg')continue;
-   const card=document.createElement('article');card.className='fc-feed-card';
-   const title=document.createElement('h3');title.textContent=FC27_FA[rec.name]||rec.name;
-   const description=document.createElement('p');description.textContent=kind==='objectives'?'راهنمای انجام این هدف را باز کنید.':'شرایط دقیق تیم و پاداش را قبل از ارسال بررسی کنید.';
-   const meta=document.createElement('div');meta.className='fc-feed-meta';meta.textContent=kind==='sbc'?(Number.isFinite(rec.price)?'هزینه تخمینی هنگام ثبت: '+rec.price.toLocaleString('fa-IR'):'هزینه ثبت نشده'):(rec.reward||'جزئیات جایزه در صفحه رویداد');
-   const link=document.createElement('a');link.href=linkUrl.href;link.rel='noopener noreferrer';link.target='_blank';link.textContent='مشاهده جزئیات ↗';
-   const steps=document.createElement('details');steps.className='fc-steps';
-   const summary=document.createElement('summary');summary.textContent='راهنمای انجام';steps.appendChild(summary);
-   const ol=document.createElement('ol');for(const step of guideFC27(kind,rec)){const li=document.createElement('li');li.textContent=step;ol.appendChild(li)}steps.appendChild(ol);
-   card.append(title,description,steps,meta,link);host.appendChild(card);
+   const card=fc27Node('article','fc-feed-card');
+   const title=fc27Node('h3','',FC27_FA[rec.name]||rec.name);
+   const englishTitle=fc27Node('p','fc27-original-title',rec.name);
+   const desc=fc27Node('p','fc27-card-description',kind==='objectives'?'جزئیات مأموریت و مراحل تکمیل':'مراحل تکمیل چالش و بررسی ترکیب');
+   const meta=fc27Node('div','fc-feed-meta',kind==='sbc'?(Number.isFinite(rec.price)?'هزینه ثبت‌شده: '+rec.price.toLocaleString('fa-IR'):'هزینه تأییدشده موجود نیست'):(rec.reward||'جایزه در جزئیات هدف'));
+   const details=fc27Node('details','fc-steps');
+   const summary=fc27Node('summary','','راهنمای انجام / Walkthrough');details.appendChild(summary);
+   const fa=guideFC27(kind,rec),en=fc27EnglishGuide(kind,rec);
+   const key=kind+':'+rec.url;const checked=Array.isArray(fc27Progress[key])?fc27Progress[key]:[];
+   for(let i=0;i<Math.max(fa.length,en.length);i++){
+    const row=fc27Node('label','fc27-step');
+    const check=document.createElement('input');check.type='checkbox';check.checked=!!checked[i];check.setAttribute('aria-label','Step '+(i+1));
+    check.addEventListener('change',()=>{const current=Array.isArray(fc27Progress[key])?fc27Progress[key].slice():[];current[i]=check.checked;fc27Progress[key]=current;try{localStorage.setItem('fc27-guide-progress',JSON.stringify(fc27Progress))}catch(e){}row.classList.toggle('completed',check.checked)});
+    const content=fc27Node('span','fc27-step-text');
+    if(fc27Lang!=='en'&&fa[i])content.appendChild(fc27Node('span','fc27-step-fa',fa[i]));
+    if(fc27Lang!=='fa'&&en[i]){const t=fc27Node('span','fc27-step-en',en[i]);t.dir='ltr';content.appendChild(t)}
+    row.classList.toggle('completed',check.checked);row.append(check,content);details.appendChild(row);
+   }
+   const link=fc27Node('a','','جزئیات چالش ↗');link.href=linkUrl.href;link.target='_blank';link.rel='noopener noreferrer';
+   card.append(title,englishTitle,desc,meta,details,link);host.appendChild(card);
   }
-  if(!visible.length){const p=document.createElement('p');p.className='fc-feed-meta';p.textContent='موردی برای نمایش پیدا نشد';host.appendChild(p)}
+  if(!visible.length)host.appendChild(fc27Node('p','fc-feed-meta','موردی برای نمایش پیدا نشد.'));
  }
 }
 async function loadLiveFC27(){
