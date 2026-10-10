@@ -1,11 +1,11 @@
-const CACHE = 'fc26-v3';
+const CACHE = 'fc27-v4';
 const CORE = ['./', './index.html', './manifest.json'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
   event.waitUntil(Promise.all([
-    caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('fc26-') && key !== CACHE).map(key => caches.delete(key)))),
+    caches.keys().then(keys => Promise.all(keys.filter(key => (key.startsWith('fc26-') || key.startsWith('fc27-')) && key !== CACHE).map(key => caches.delete(key)))),
     self.clients.claim()
   ]));
 });
