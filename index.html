@@ -1081,10 +1081,10 @@
 
 <script>
 /* ── UTILS ── */
-function daysFromNow(d){return new Date(Date.now()+d*864e5).toISOString();}
-function hoursFromNow(h){return new Date(Date.now()+h*36e5).toISOString();}
+function daysFromNow(d){return null; /* Relative dates are not verified expiry dates. */}
+function hoursFromNow(h){return null; /* Relative dates are not verified expiry dates. */}
 function fmtExp(iso){
-  if(!iso)return{txt:'دائمی',cls:'exp-permanent',ico:'♾️'};
+  if(!iso)return{txt:'تاریخ نامشخص',cls:'exp-permanent',ico:'📅'};
   const diff=new Date(iso)-Date.now();
   if(diff<0)return{txt:'منقضی',cls:'exp-gone',ico:'❌'};
   const h=diff/36e5;
@@ -2358,7 +2358,7 @@ function startCountdowns(){
 }
 
 /* ── PLAYER CARD HTML ── */
-function resolvedCT(p){return p.cardType||(p.rat>=84?'gold':'p.rat>=64?\'silver\':\'bronze\'');}
+function resolvedCT(p){return p.cardType||(p.rat>=84?'gold':p.rat>=64?'silver':'bronze');}
 function realCT(p){if(p.cardType)return p.cardType;if(p.rat>=84)return'gold';if(p.rat>=64)return'silver';return'bronze';}
 function pcardImgCls(p){
   switch(realCT(p)){
@@ -2392,10 +2392,7 @@ function playerCardHTML(p){
     const cls=s.v>=80?'sv-green':s.v>=65?'sv-gold':'sv-red';
     return `<div class="pstat"><span class="pstat-val ${cls}">${s.v}</span><span class="pstat-lbl">${s.lbl}</span></div>`;
   }).join('');
-  const th=hashInt((p.id||'')+'t');
-  const tdir=th%3===0?'up':th%3===1?'down':'flat';
-  const tpct=3+(th%17);
-  const trendHTML=tdir==='up'?`<span class="trend trend-up">↑${tpct}%</span>`:tdir==='down'?`<span class="trend trend-down">↓${tpct}%</span>`:`<span class="trend trend-flat">→</span>`;
+  const trendHTML='';
   return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
     <div class="pcard-upper ${bg}">
       <div class="pcard-inner">
@@ -2413,7 +2410,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">قیمت تقریبی</div>
+      <div class="pcard-price-lbl">برآورد ثابت · قیمت لحظه‌ای نیست</div>
       <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
@@ -2527,18 +2524,23 @@ function setStatus(m){
   p.className='status-pill '+m;
   t.textContent=m==='online'?'آنلاین':m==='syncing'?'در حال بروزرسانی...':'آفلاین';
 }
-async function doFetch(){
+async async function doFetch(){
   const btn=document.getElementById('refreshBtn');
   btn.disabled=true;btn.classList.add('spinning');setStatus('syncing');
-  let ok=false;
   try{
-    const res=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.fut.gg/sbc/')}`,{signal:AbortSignal.timeout(8000)});
-    const j=await res.json();if((j.contents||'').length>500)ok=true;
-  }catch(e){}
-  document.getElementById('lastUpd').textContent='آخرین: '+new Date().toLocaleTimeString('fa-IR');
-  setStatus('online');
-  toast(ok?'✅ داده‌های جدید دریافت شد':'🔄 بروزرسانی شد (دیتای محلی)','i');
-  btn.disabled=false;btn.classList.remove('spinning');
+    // Connectivity checks are not live FC26 objective/SBC data updates.
+    const res=await fetch('./manifest.json?check='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
+    if(!res.ok)throw new Error('offline');
+    setStatus('online');
+    document.getElementById('lastUpd').textContent='ارتباط سایت: '+new Date().toLocaleTimeString('fa-IR');
+    toast('اتصال برقرار است؛ داده‌های FC26 هنوز به منبع زنده متصل نیستند','i',5000);
+  }catch(e){
+    setStatus('offline');
+    document.getElementById('lastUpd').textContent='داده زنده: تأیید نشده';
+    toast('اتصال برقرار نشد؛ داده‌های ذخیره‌شده ممکن است قدیمی باشند','e',5000);
+  }finally{
+    btn.disabled=false;btn.classList.remove('spinning');
+  }
 }
 
 /* ── TOAST ── */
