@@ -797,7 +797,23 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .official-news-list a:hover,.verified-source-grid a:hover{border-color:#caff38}
 @media(max-width:700px){.verified-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.official-news-list{grid-template-columns:1fr}}
 </style>
-<style>.fc-feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.fc-feed-card{background:#162027;border:1px solid #31423f;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px;min-height:150px}.fc-feed-card h3{font-size:16px;color:#f0faf0;margin:0}.fc-feed-card p{font-size:12px;color:#bcc6c9;line-height:1.8;margin:0;flex:1}.fc-feed-card a{color:#caff38;text-decoration:none;font-size:12px;font-weight:800}.fc-feed-meta{font-size:11px;color:#a3b9b2}.fc-feed-search{width:100%;background:#121b22;color:white;padding:12px;border-radius:12px;border:1px solid #354b45;font:inherit}@media(max-width:700px){.fc-feed-grid{grid-template-columns:1fr}}</style></head>
+<style>.fc-feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.fc-feed-card{background:#162027;border:1px solid #31423f;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px;min-height:150px}.fc-feed-card h3{font-size:16px;color:#f0faf0;margin:0}.fc-feed-card p{font-size:12px;color:#bcc6c9;line-height:1.8;margin:0;flex:1}.fc-feed-card a{color:#caff38;text-decoration:none;font-size:12px;font-weight:800}.fc-feed-meta{font-size:11px;color:#a3b9b2}.fc-feed-search{width:100%;background:#121b22;color:white;padding:12px;border-radius:12px;border:1px solid #354b45;font:inherit}@media(max-width:700px){.fc-feed-grid{grid-template-columns:1fr}}</style><style>
+/* Keep the verified feed, hide controls tied to empty legacy lists. */
+#sec-obj > :not(section:first-child),#sec-sbc > :not(section:first-child){display:none!important}
+#sec-obj,#sec-sbc{padding-top:12px}
+#sec-obj section:first-child,#sec-sbc section:first-child{max-width:100%}
+.fc-feed-card{min-height:0;gap:8px;padding:15px;background:#131a20;border:1px solid #2d3b42}
+.fc-feed-card h3{font-size:15px;line-height:1.6}
+.fc-feed-card p{font-size:12px}
+.fc-feed-meta{font-size:11px}
+.fc-steps{border-top:1px solid #314047;margin-top:3px;padding-top:9px}
+.fc-steps summary{cursor:pointer;color:#caff38;font-size:12px;font-weight:800}
+.fc-steps ol{padding-right:18px;color:#cbd5d2;font-size:12px;line-height:2;margin:8px 0}
+.fc-feed-card a{align-self:flex-start}
+.fc-feed-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:850px){.fc-feed-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.fc-feed-grid{grid-template-columns:1fr}}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -826,15 +842,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 </header>
 
 <section class="app-hero" aria-label="معرفی FC27 Hub"><div><div class="hero-eyebrow">YOUR ULTIMATE TEAM COMPANION</div><h1 class="hero-title">همه‌چیز برای <span style="color:var(--gold)">FC27</span></h1><p class="hero-desc">اهداف، چالش‌ها، بازیکنان و ترکیب‌ساز در یک تجربه ساده‌تر. داده‌های آرشیوی از اطلاعات تأییدشده جدا شده‌اند.</p></div><div class="hero-mark" aria-hidden="true">27<span style="font-size:20px;vertical-align:top;margin-left:3px">FC</span></div></section>
-<section class="fc27-verified" style="max-width:1120px;margin:12px auto;padding:20px;border:1px solid #365037;border-radius:20px;background:#101b16;color:#e8f5e2">
-<div style="font-weight:900;color:#caff38;font-size:12px;margin-bottom:7px">✓ اطلاعات تأییدشده EA SPORTS FC 27</div>
-<h2 style="font-size:18px;margin:0 0 8px">فصل اول: Ones to Watch</h2>
-<p style="line-height:1.9;font-size:13px;margin:0">شروع رسمی: ۱۷ سپتامبر ۲۰۲۶ · پایان: ۲۲ اکتبر ۲۰۲۶. تاریخ‌ها بر اساس اطلاعیه رسمی EA هستند، نه شمارش‌معکوس ساختگی.</p>
-<div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:15px">
-<a href="https://www.ea.com/games/ea-sports-fc/fc-27/news/pitch-notes-fc27-launch-update" target="_blank" rel="noopener noreferrer" style="color:#caff38;font-weight:800">اطلاعیه فصل اول EA ↗</a>
-<a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#caff38;font-weight:800">امتیاز رسمی بازیکنان FC27 ↗</a>
-</div>
-<p style="font-size:12px;margin:13px 0 0;color:#b8c8bd">اطلاعات Objectives، SBC، Evolutions و قیمت بازار تا تأمین منبع معتبر در این سایت نمایش داده نمی‌شوند. لینک‌های بالا به داده‌های رسمی هدایت می‌کنند.</p></section>
+
 <!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stat-chip"><span class="stat-lbl">اهداف</span><span class="stat-val v-gold" id="sTotal">0</span></div>
@@ -2245,6 +2253,20 @@ async function loadOfficialNews(){
  }
 }
 
+const FC27_FA={
+'Weekly Objectives':'اهداف هفتگی','Back to Basics Bonus Objective':'جایزه بازگشت به اصول','Rising Through the Ranks':'پیشرفت در رتبه‌ها',
+'Carlos Espí':'کارلوس اِسپی','Weslley Pinto Batista':'وسلی پینتو باتیستا','Liga F POTM September':'بازیکن ماه سپتامبر لیگ زنان اسپانیا','Tarciane':'تارسیانه','LALIGA POTM September':'بازیکن ماه سپتامبر لالیگا','Premier League POTM September':'بازیکن ماه سپتامبر لیگ برتر انگلیس','Bundesliga POTM September':'بازیکن ماه سپتامبر بوندسلیگا','Serie A POTM September':'بازیکن ماه سپتامبر سری آ',
+'TOTW Upgrade':'ارتقای تیم منتخب هفته','Max. 86 Base Hero Upgrade':'ارتقای هیرو پایه تا امتیاز ۸۶','5x 80+ Upgrade':'پک پنج بازیکن با امتیاز ۸۰ به بالا','3x 79+ Upgrade':'پک سه بازیکن با امتیاز ۷۹ به بالا','Gold Upgrade':'ارتقای طلایی','Silver Upgrade':'ارتقای نقره‌ای','Bronze Upgrade':'ارتقای برنزی','Marquee Matchups':'مسابقات مهم هفته','Destined for Glory Challenge 4':'چالش چهارم در مسیر افتخار','League & Nation Advanced':'لیگ و ملیت پیشرفته','Intro to Player SBCs':'آشنایی با SBC بازیکنان','Gold Re-Roll':'تعویض مجدد طلایی','Bronze and Silver Re-roll':'تعویض مجدد برنزی و نقره‌ای','Intro to Streamlined SBCs':'آشنایی با SBC ساده‌سازی‌شده','Intro to Upgrade SBCs':'آشنایی با SBC ارتقا','Intro to SBCs':'آشنایی با SBC'
+};
+const FC27_OBJECTIVE_GUIDES={
+'Weekly Objectives':['وارد Ultimate Team شوید و منوی Objectives را باز کنید.','بخش Weekly را انتخاب کنید و شرط هر مأموریت را بخوانید.','با انجام مسابقه یا فعالیت موردنیاز، پیشرفت را بررسی و پاداش را دریافت کنید.'],
+'Back to Basics Bonus Objective':['به Ultimate Team و بخش Objectives بروید.','مأموریت Back to Basics را باز کنید و حالت مسابقه موردنیاز را بررسی کنید.','شرط‌های مشخص‌شده را انجام دهید و جایزه را Claim کنید.'],
+'Rising Through the Ranks':['در Ultimate Team به Objectives بروید.','هدف Rising Through the Ranks را پیدا کنید و مراحل نمایش‌داده‌شده را بررسی کنید.','هر مرحله را کامل کنید تا پاداش مربوط آزاد شود.']
+};
+function guideFC27(kind,rec){
+ if(kind==='objectives')return FC27_OBJECTIVE_GUIDES[rec.name]||['وارد بخش Objectives در Ultimate Team شوید.','عنوان این هدف را پیدا کنید و شرط‌های دقیق آن را بخوانید.','مراحل خواسته‌شده را انجام دهید و پاداش را دریافت کنید.'];
+ return ['در Ultimate Team وارد Squad Building Challenges شوید.','عنوان چالش را جستجو و بخش Requirements را باز کنید.','با بازیکنان واجد شرایط، تیم را بچینید و میزان Chemistry، امتیاز و محدودیت‌ها را بررسی کنید.','پس از تأیید شرایط، فقط در صورت اطمینان تیم را Submit کنید؛ بازیکنان ارسال‌شده مصرف می‌شوند.'];
+}
 let liveFC27={source:'FUT.GG',checked_at:null,sections:{objectives:[],sbc:[]}};
 function renderLiveFC27(){
  for(const kind of ['objectives','sbc']){
@@ -2260,11 +2282,14 @@ function renderLiveFC27(){
    let linkUrl;try{linkUrl=new URL(rec.url)}catch{continue}
    if(linkUrl.hostname!=='www.fut.gg')continue;
    const card=document.createElement('article');card.className='fc-feed-card';
-   const title=document.createElement('h3');title.textContent=rec.name;
-   const description=document.createElement('p');description.textContent=rec.description||'';
+   const title=document.createElement('h3');title.textContent=FC27_FA[rec.name]||rec.name;
+   const description=document.createElement('p');description.textContent=kind==='objectives'?'راهنمای انجام این هدف را باز کنید.':'شرایط دقیق تیم و پاداش را قبل از ارسال بررسی کنید.';
    const meta=document.createElement('div');meta.className='fc-feed-meta';meta.textContent=kind==='sbc'?(Number.isFinite(rec.price)?'هزینه تخمینی هنگام ثبت: '+rec.price.toLocaleString('fa-IR'):'هزینه ثبت نشده'):(rec.reward||'جزئیات جایزه در صفحه رویداد');
    const link=document.createElement('a');link.href=linkUrl.href;link.rel='noopener noreferrer';link.target='_blank';link.textContent='مشاهده جزئیات ↗';
-   card.append(title,description,meta,link);host.appendChild(card);
+   const steps=document.createElement('details');steps.className='fc-steps';
+   const summary=document.createElement('summary');summary.textContent='راهنمای انجام';steps.appendChild(summary);
+   const ol=document.createElement('ol');for(const step of guideFC27(kind,rec)){const li=document.createElement('li');li.textContent=step;ol.appendChild(li)}steps.appendChild(ol);
+   card.append(title,description,steps,meta,link);host.appendChild(card);
   }
   if(!visible.length){const p=document.createElement('p');p.className='fc-feed-meta';p.textContent='موردی برای نمایش پیدا نشد';host.appendChild(p)}
  }
