@@ -835,15 +835,6 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#caff38;font-weight:800">امتیاز رسمی بازیکنان FC27 ↗</a>
 </div>
 <p style="font-size:12px;margin:13px 0 0;color:#b8c8bd">اطلاعات Objectives، SBC، Evolutions و قیمت بازار تا تأمین منبع معتبر در این سایت نمایش داده نمی‌شوند. لینک‌های بالا به داده‌های رسمی هدایت می‌کنند.</p></section>
-<section class="fc27-source-hub" style="max-width:1120px;margin:14px auto;padding:19px;border-radius:19px;background:#101820;border:1px solid #31434b">
- <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><strong style="color:#caff38;font-size:16px">مرکز داده‌های واقعی FC27</strong><div style="font-size:11px;color:#afbdc3;margin-top:5px">فقط منابع مشخص؛ اخبار رسمی به‌صورت دوره‌ای به‌روزرسانی می‌شوند.</div></div><span id="officialFeedStamp" style="color:#b8c8d6;font-size:11px">در حال بررسی منبع رسمی…</span></div>
- <div class="verified-source-grid">
- <a href="https://www.fut.gg/objectives/" target="_blank" rel="noopener noreferrer">🎯 اهداف فعال <span>FUT.GG ↗</span></a>
- <a href="https://www.fut.gg/sbcs/" target="_blank" rel="noopener noreferrer">🧩 SBCهای فعال <span>FUT.GG ↗</span></a>
- <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer">👥 امتیاز بازیکنان <span>EA ↗</span></a>
- <a href="https://www.fut.gg/evolutions/" target="_blank" rel="noopener noreferrer">🧬 تکامل‌های فعال <span>FUT.GG ↗</span></a>
- </div><div id="officialNewsList" class="official-news-list" aria-live="polite"><p>در صورت دریافت اخبار تأییدشده، جدیدترین مطالب EA اینجا نمایش داده می‌شوند.</p></div>
-</section>
 <!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stat-chip"><span class="stat-lbl">اهداف</span><span class="stat-val v-gold" id="sTotal">0</span></div>
@@ -2263,7 +2254,8 @@ function renderLiveFC27(){
   const query=(document.getElementById('live-'+kind+'-search')?.value||'').toLowerCase();
   const visible=records.filter(r=>(r.name+' '+r.description).toLowerCase().includes(query));
   host.replaceChildren();
-  status.textContent=records.length?'ثبت اطلاعات: '+new Date(liveFC27.checked_at).toLocaleString('fa-IR')+' · قیمت‌ها لحظه‌ای نیستند':'داده معتبر در دسترس نیست';
+  const age=liveFC27.checked_at?Math.floor((Date.now()-Date.parse(liveFC27.checked_at))/86400000):Infinity;
+  status.textContent=records.length?records.length.toLocaleString('fa-IR')+' مورد · '+(age>1?'اطلاعات آرشیوی، آخرین دریافت: ':'آخرین بررسی: ')+new Date(liveFC27.checked_at).toLocaleString('fa-IR'):'داده معتبر در دسترس نیست';
   for(const rec of visible){
    let linkUrl;try{linkUrl=new URL(rec.url)}catch{continue}
    if(linkUrl.hostname!=='www.fut.gg')continue;
@@ -2288,8 +2280,8 @@ async function loadLiveFC27(){
  renderLiveFC27();
 }
 function init(){
-  loadLiveFC27();
   loadState();
+  loadLiveFC27();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
   if(!state.evoProgs)state.evoProgs={};
@@ -2309,11 +2301,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 }
 </script>
 
-<div class="data-integrity-note" role="status" style="max-width:900px;margin:12px auto;padding:12px 14px;border:1px solid #27405E;border-radius:12px;background:#101928;color:#C1D0E6;line-height:1.8;font-size:12px">
-  <strong style="color:#FFCC44">وضعیت منابع اطلاعات</strong>
-  <p>اهداف، SBCها، کارت‌ها، قیمت‌ها و امتیازهای فهرست داخلی از داده‌های قدیمی‌تر هستند؛ این اطلاعات FC27 تأییدشده یا زنده نیستند. تاریخ یا آمار بدون تأیید به‌عنوان زنده نمایش داده نمی‌شود.</p>
-  <p><a href="https://www.fut.gg/fc-27/" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">هاب اطلاعات FC27 در FUT.GG ↗</a> · <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">رتبه‌بندی بازیکنان در EA ↗</a></p>
-</div>
+
 
 
 <!-- BOTTOM NAV -->
