@@ -787,6 +787,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 @media(max-width:700px){.app-header-inner{height:62px;padding-inline:14px}.logo-fc{font-size:17px}.logo-title{font-size:15px}.btn-refresh{padding:9px 11px}.app-hero{margin:13px 10px 10px;padding:20px 18px;border-radius:18px}.hero-mark{font-size:36px;letter-spacing:-3px}.hero-title{font-size:26px}.hero-desc{font-size:11px}.stats-strip{margin:0 10px 8px;border-radius:13px}.stat-chip{min-width:93px}.main{padding:14px 12px 28px}.grid{grid-template-columns:1fr}.player-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pcard-upper{height:189px}.pcard-photo img{width:115px;height:175px}.bottom-nav{width:calc(100% - 16px);bottom:7px;padding:4px}.bnav-btn{flex:0 0 72px;min-width:72px;min-height:55px;font-size:10px}.section-title{font-size:17px}.card{padding:16px}}
 @media(max-width:360px){.hero-mark{display:none}.player-grid{gap:8px}.pcard-body{padding:9px}}
 
+.bottom-nav [hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -1046,7 +1047,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 </main>
 
 <!-- ═══ GAMES SECTION ═══ -->
-<main class="main" id="sec-games" style="display:none">
+<main class="main" id="sec-games" style="display:none" aria-hidden="true">
   <div class="section-row">
     <span class="section-title">🎲 بازی‌ها و سرگرمی</span>
   </div>
@@ -3655,7 +3656,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   <p><a href="https://www.fut.gg/fc-27/" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">هاب اطلاعات FC27 در FUT.GG ↗</a> · <a href="https://www.ea.com/games/ea-sports-fc/ratings" target="_blank" rel="noopener noreferrer" style="color:#FFCC44">رتبه‌بندی بازیکنان در EA ↗</a></p>
 </div>
 <!-- ═══ WORLD CUP 2026 ═══ -->
-<main class="main" id="sec-wc" style="display:none">
+<main class="main" id="sec-wc" style="display:none" aria-hidden="true">
   <div class="section-row">
     <span class="section-title">🌍 جام جهانی ۲۰۲۶</span>
     <span style="font-size:11px;color:var(--t3)">۴۸ تیم · ۶ قاره</span>
@@ -3688,11 +3689,11 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     <span class="bnav-icon">🧬</span>
     <span>تکامل</span>
   </button>
-  <button class="bnav-btn" id="bn-games" onclick="showSec('games')">
+  <button class="bnav-btn" id="bn-games" hidden aria-hidden="true" onclick="showSec('games')">
     <span class="bnav-icon">🎲</span>
     <span>بازی</span>
   </button>
-  <button class="bnav-btn" id="bn-wc" onclick="showSec('wc')">
+  <button class="bnav-btn" id="bn-wc" hidden aria-hidden="true" onclick="showSec('wc')">
     <span class="bnav-icon">🌍</span>
     <span>جام جهانی</span>
   </button>
