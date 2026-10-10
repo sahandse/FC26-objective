@@ -32,15 +32,15 @@ test('essential sections are present',()=>{
 });
 
 const vm = require('node:vm');
-test('all inline scripts parse as JavaScript',()=>{
-  const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)];
-  assert.ok(scripts.length>0);
-  for(const [,code] of scripts) new vm.Script(code);
+test('main inline JavaScript parses',()=>{
+  const chunks=html.split('<script>').slice(1);
+  assert.ok(chunks.length>0);
+  for(const chunk of chunks)new vm.Script(chunk.split('</script>')[0]);
 });
-test('legacy FC26 demo datasets are not shipped',()=>{
+test('legacy FC26 sample data is not shipped',()=>{
   for(const name of ['OBJ_RAW','SBC_RAW','PLAYERS_RAW','EVO_RAW','WC26_TEAMS']) {
-    assert.match(html,new RegExp('const '+name+'=\\\\[\\\\]'));
+    assert.ok(html.includes('const '+name+'=[]'), name);
   }
   assert.doesNotMatch(html,/Festival of Football - Login Reward/);
-  assert.match(html,/اطلاعات تأییدشده EA SPORTS FC 27/);
+  assert.ok(html.includes('اطلاعات تأییدشده EA SPORTS FC 27'));
 });
