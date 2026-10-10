@@ -1094,7 +1094,7 @@ function fmtExp(iso){
   if(d<3) return{txt:`${d} روز ${rh} ساعت`,cls:'exp-warn',ico:'⚠️'};
   return{txt:`${d} روز دیگر`,cls:'exp-ok',ico:'📅'};
 }
-function isExpiring(o){if(!o.exp)return false;return(new Date(o.exp)-Date.now())<3*864e5;}
+function isExpiring(o){if(!o.exp)return false;const left=new Date(o.exp)-Date.now();return Number.isFinite(left)&&left>0&&left<3*864e5;}
 function cardCls(rat,sp){
   if(rat===0)return'fc-pack';
   if(sp)return'fc-special';
@@ -1889,7 +1889,7 @@ function renderObj(){
     if(objCat!=='all'&&o.cat!==objCat)return false;
     if(objFilters.fav&&!state.objFavs[o.id])return false;
     if(objFilters.inc&&state.objDone[o.id])return false;
-    if(objFilters.exp){if(!o.exp)return false;if(new Date(o.exp)-now>3*864e5)return false;}
+    if(objFilters.exp){const left=o.exp?new Date(o.exp)-now:NaN;if(!Number.isFinite(left)||left<=0||left>3*864e5)return false;}
     if(q){const hay=[o.nameFA,o.name,o.catFA,o.rew.nameFA,o.rew.nat,o.difFA,...o.reqs.map(r=>r.fa)].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
@@ -1913,7 +1913,7 @@ function renderSBC(){
     if(sbcCat!=='all'&&s.cat!==sbcCat)return false;
     if(sbcFilters.fav&&!state.sbcFavs[s.id])return false;
     if(sbcFilters.inc&&state.sbcDone[s.id])return false;
-    if(sbcFilters.exp){if(!s.exp)return false;if(new Date(s.exp)-now>3*864e5)return false;}
+    if(sbcFilters.exp){const left=s.exp?new Date(s.exp)-now:NaN;if(!Number.isFinite(left)||left<=0||left>3*864e5)return false;}
     if(q){const hay=[s.nameFA,s.name,s.catFA,s.rew.nameFA,s.rew.nat,s.difFA,...s.reqs.map(r=>r.label+' '+r.val),s.guide].join(' ').toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
