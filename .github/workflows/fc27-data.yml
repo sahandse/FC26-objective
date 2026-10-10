@@ -1,5 +1,9 @@
 name: FC27 Verified Players
 on:
+  push:
+    paths:
+      - 'scripts/sync-fc27-players.cjs'
+      - '.github/workflows/fc27-data.yml'
   workflow_dispatch:
   schedule:
     - cron: '23 5 * * *'
