@@ -732,6 +732,61 @@
   .slot-prat{font-size:11px}
   .squad-pl-item{min-height:48px}
   @media(max-width:390px){.pitch-wrap .pitch-slot{scale:.85}.pitch-wrap .slot-pname{max-width:65px}}
+
+/* FC27 / APEX redesign: typography, layout, navigation and cards */
+:root{--bg0:#07090d;--bg1:#0e1117;--bg2:#141920;--bg3:#1b222b;--border:#29313c;--border2:#394656;--gold:#caff38;--gold2:#e0ff85;--gold3:#8aae16;--green:#8de88c;--blue:#82baf8;--t1:#f5f7f8;--t2:#acb6c1;--t3:#91a0af;--t4:#657386}
+body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,.15),transparent 76%),var(--bg0);letter-spacing:-.15px}
+.app-header{background:rgba(10,13,17,.86);border-bottom:1px solid rgba(255,255,255,.07)}
+.app-header-inner{max-width:1120px;height:72px;padding-inline:24px}
+.logo{gap:11px}.logo-fc{padding:7px 13px;background:var(--gold);border-radius:11px;font-size:20px;letter-spacing:-1px}
+.logo-title{font-size:18px;font-weight:900;background:none;-webkit-text-fill-color:var(--t1)}
+.header-right{gap:12px}
+.btn-refresh{background:var(--gold);padding:11px 17px;border-radius:12px;box-shadow:none}
+.btn-refresh:hover{box-shadow:0 6px 20px rgba(202,255,56,.17)}
+.stats-strip{max-width:1120px;margin:0 auto 14px;padding:9px 12px;border:1px solid var(--border);border-radius:16px;background:rgba(20,25,32,.76);gap:6px}
+.stat-chip{flex:1;min-width:105px;padding:10px 12px;border:0;border-left:1px solid var(--border)}
+.stat-chip:last-child{border:0}.stat-lbl{font-size:11px;color:var(--t2)}.stat-val{font-size:20px}
+.main{max-width:1120px;padding:20px 18px 38px}
+.app-hero{max-width:1120px;margin:24px auto 14px;padding:27px 30px;display:flex;justify-content:space-between;align-items:center;gap:18px;border:1px solid #354323;border-radius:24px;background:radial-gradient(ellipse at 85% 25%,rgba(202,255,56,.12),transparent 46%),linear-gradient(120deg,#182116,#10161a 65%,#0d1014)}
+.hero-eyebrow{font-size:11px;font-weight:900;color:var(--gold);letter-spacing:3px;direction:ltr;text-align:right}
+.hero-title{font-size:clamp(25px,4vw,40px);line-height:1.5;font-weight:900;margin:3px 0}
+.hero-desc{font-size:13px;color:var(--t2);line-height:1.9}
+.hero-mark{font-size:58px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-5px;opacity:.85;direction:ltr;white-space:nowrap}
+.search-wrap{margin-bottom:17px}
+.search-input{border-radius:14px;padding:15px 47px 15px 16px;background:var(--bg1);border:1px solid var(--border2);font-size:13px}
+.search-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(202,255,56,.09)}
+.cat-tabs,.pos-tabs,.game-tabs{gap:8px;padding-block:3px 10px}
+.cat-tab,.pos-tab,.ctype-tab,.game-tab,.f-btn,.adv-toggle{border-radius:11px;background:var(--bg1);border:1px solid var(--border);min-height:37px}
+.cat-tab.active,.pos-tab.active,.game-tab.active,.ctype-tab.ct-all.active,.f-btn.active{background:var(--gold);color:#0a0e06;border-color:var(--gold)}
+.filter-row{gap:8px;padding:0 0 10px;margin-bottom:12px}.sort-sel{border-radius:10px;padding:9px 12px}
+.section-row{margin:12px 0 17px}.section-title{font-size:19px;font-weight:900;color:var(--t1)}.section-cnt{font-size:12px;color:var(--t2)}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card,.pcard,.evo-card{background:linear-gradient(145deg,#181f27,#11161d);border:1px solid #303b47;border-radius:18px;box-shadow:0 5px 18px rgba(0,0,0,.15)}
+.card{padding:21px}.card::after{opacity:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent 70%)}
+.card:hover,.pcard:hover,.evo-card:hover{border-color:#607846;transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.22)}
+.card-name{font-size:16px;line-height:1.65}.badge{border-radius:7px;padding:4px 8px;font-size:10px}
+.reward-box,.sbc-rew-hero{background:#11181d;border:1px solid #303c42;border-radius:14px}
+.req-item{line-height:1.8;padding:5px 0}.card-foot{gap:8px;flex-wrap:wrap}
+.done-btn,.sbc-guide-btn{border-radius:10px;min-height:38px;padding:9px 12px}
+.player-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.pcard-upper{height:214px}.pcard-photo img{height:195px;width:140px}.pcard-name-band{padding:8px;font-size:12px}
+.pcard-body{padding:14px}.pcard-club{font-size:11px}.pcard-price{font-size:18px}
+.pcard-stats{padding:8px 4px}.pstat-lbl{font-size:9px}.pstat-val{font-size:12px}
+.pcard-fav{background:rgba(6,8,11,.7);width:33px;height:33px;border-radius:10px}
+.pitch-wrap{max-width:640px;margin-inline:auto;border:1px solid #4b7655;background:repeating-linear-gradient(180deg,transparent 0 13%,rgba(255,255,255,.024) 13% 26%),linear-gradient(140deg,#124629,#092c1b);box-shadow:inset 0 0 90px rgba(0,0,0,.24)}
+.slot-ring{box-shadow:0 4px 15px rgba(0,0,0,.28);background:#16261d}
+.squad-picker-box,.comp-box{background:#121820;border:1px solid #3e4b58}
+.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(100% - 32px,850px);bottom:12px;border-radius:18px;border:1px solid #35404d;background:rgba(19,24,30,.97);padding:5px;box-shadow:0 15px 38px rgba(0,0,0,.45);overflow-x:auto;scrollbar-width:none}
+.bottom-nav::-webkit-scrollbar{display:none}
+.bnav-btn{min-width:92px;min-height:61px;padding:8px 7px;font-size:11px;border-radius:12px;flex:1 0 0}
+.bnav-btn.active{background:#283519;color:var(--gold)}.bnav-btn::before{display:none}
+.bnav-icon{font-size:21px}.bnav-badge{background:#35452a;color:var(--gold)}
+#toasts{bottom:106px}
+:focus-visible{outline:2px solid var(--gold)!important;outline-offset:3px}
+@media(max-width:900px){.player-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-mark{font-size:46px}}
+@media(max-width:700px){.app-header-inner{height:62px;padding-inline:14px}.logo-fc{font-size:17px}.logo-title{font-size:15px}.btn-refresh{padding:9px 11px}.app-hero{margin:13px 10px 10px;padding:20px 18px;border-radius:18px}.hero-mark{font-size:36px;letter-spacing:-3px}.hero-title{font-size:26px}.hero-desc{font-size:11px}.stats-strip{margin:0 10px 8px;border-radius:13px}.stat-chip{min-width:93px}.main{padding:14px 12px 28px}.grid{grid-template-columns:1fr}.player-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pcard-upper{height:189px}.pcard-photo img{width:115px;height:175px}.bottom-nav{width:calc(100% - 16px);bottom:7px;padding:4px}.bnav-btn{flex:0 0 72px;min-width:72px;min-height:55px;font-size:10px}.section-title{font-size:17px}.card{padding:16px}}
+@media(max-width:360px){.hero-mark{display:none}.player-grid{gap:8px}.pcard-body{padding:9px}}
+
 </style>
 </head>
 <body>
@@ -761,6 +816,7 @@
   </div>
 </header>
 
+<section class="app-hero" aria-label="معرفی FC27 Hub"><div><div class="hero-eyebrow">YOUR ULTIMATE TEAM COMPANION</div><h1 class="hero-title">همه‌چیز برای <span style="color:var(--gold)">FC27</span></h1><p class="hero-desc">اهداف، چالش‌ها، بازیکنان و ترکیب‌ساز در یک تجربه ساده‌تر. داده‌های آرشیوی از اطلاعات تأییدشده جدا شده‌اند.</p></div><div class="hero-mark" aria-hidden="true">27<span style="font-size:20px;vertical-align:top;margin-left:3px">FC</span></div></section>
 <!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stat-chip"><span class="stat-lbl">اهداف</span><span class="stat-val v-gold" id="sTotal">0</span></div>
