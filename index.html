@@ -691,7 +691,35 @@
       .bnav-icon{font-size:18px}
       .bnav-badge{font-size:8px;transform:translateX(8px)}
     }
-  </style>
+  
+    /* Mobile accessibility and readable football cards */
+    @media(max-width:700px){
+      .app-header-inner{padding-inline:10px}
+      .header-right{min-width:0}
+      .bottom-nav{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+      .bottom-nav::-webkit-scrollbar{display:none}
+      .bnav-btn{flex:0 0 calc(100% / 5);min-width:66px;padding:10px 5px 9px;font-size:10px}
+      .bnav-icon{font-size:20px}
+      .player-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .pcard{min-width:0}
+      .pstat-lbl{font-size:9px}
+      .pstat-val{font-size:12px}
+      .pci-pos,.pci-ctype{font-size:10px}
+      .fc-pos{font-size:9px}
+      .pcard-price-lbl,.pcard-club{font-size:11px}
+      .squad-pl-grid{grid-template-columns:1fr}
+      .squad-picker-box{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+      .comp-box{max-height:calc(100dvh - 32px)}
+    }
+    @media(max-width:360px){
+      .player-grid{gap:7px}
+      .pcard-body{padding:8px}
+      .bnav-btn{min-width:62px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+    }
+</style>
 </head>
 <body>
 
@@ -3505,6 +3533,9 @@ function init(){
   setTimeout(doFetch,1000);
 }
 document.addEventListener('DOMContentLoaded',init);
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker registration failed:', err)));
+}
 </script>
 
 <!-- ═══ WORLD CUP 2026 ═══ -->
