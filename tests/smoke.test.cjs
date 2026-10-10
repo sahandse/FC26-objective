@@ -44,7 +44,8 @@ test('legacy FC26 sample data is not shipped',()=>{
   assert.doesNotMatch(html,/Festival of Football - Login Reward/);
   assert.doesNotMatch(html,/id="sec-games"|id="sec-wc"|id="bn-games"|id="bn-wc"/);
   assert.doesNotMatch(html,/const WC26_SQUADS|function renderWC/);
-  assert.ok(html.includes('اطلاعات تأییدشده EA SPORTS FC 27'));
+  assert.ok(html.includes('راهنمای انجام'));
+  assert.ok(html.includes('FC27_FA'));
 });
 
 test('FC27 sourced objectives and SBC feed has real detail URLs',()=>{
