@@ -1,0 +1,32 @@
+name: FC27 Objectives and SBC Feed
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/sync-fc27-challenges.cjs'
+      - '.github/workflows/fc27-challenges.yml'
+  schedule:
+    - cron: '19 6,12,18 * * *'
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install HTML parser
+        run: npm install --no-save --no-package-lock cheerio@1.0.0
+      - name: Collect verified FC27 objectives and SBCs
+        run: node scripts/sync-fc27-challenges.cjs
+      - name: Commit validated snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fc27-challenges.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(fc27): update sourced objectives and sbcs"
+            git push
+          fi
