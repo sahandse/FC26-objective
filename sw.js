@@ -1,4 +1,4 @@
-const CACHE = 'fc27-v4';
+const CACHE = 'fc27-v5';
 const CORE = ['./', './index.html', './manifest.json'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));
@@ -14,6 +14,10 @@ self.addEventListener('fetch', event => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  if (url.pathname.includes('/data/') || url.pathname.includes('/img/players/')) {
+    event.respondWith(fetch(req).catch(() => caches.match(req)));
+    return;
+  }
   if (req.mode === 'navigate') {
     event.respondWith(fetch(req).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); }
