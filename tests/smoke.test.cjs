@@ -30,3 +30,17 @@ test('squad picking disallows duplicate members',()=>{
 test('essential sections are present',()=>{
  for(const id of ['sec-obj','sec-sbc','sec-players','sec-squad','sec-evo','sec-games','sec-wc']) assert.ok(html.includes('id="'+id+'"'),id);
 });
+
+const vm = require('node:vm');
+test('all inline scripts parse as JavaScript',()=>{
+  const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/g)];
+  assert.ok(scripts.length>0);
+  for(const [,code] of scripts) new vm.Script(code);
+});
+test('legacy FC26 demo datasets are not shipped',()=>{
+  for(const name of ['OBJ_RAW','SBC_RAW','PLAYERS_RAW','EVO_RAW','WC26_TEAMS']) {
+    assert.match(html,new RegExp('const '+name+'=\\\\[\\\\]'));
+  }
+  assert.doesNotMatch(html,/Festival of Football - Login Reward/);
+  assert.match(html,/اطلاعات تأییدشده EA SPORTS FC 27/);
+});
