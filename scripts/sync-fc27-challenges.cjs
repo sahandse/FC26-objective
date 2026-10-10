@@ -29,7 +29,8 @@ async function scrape(p){
   const name=(heading||raw.split(/(?:Earn |Complete |Challenges\d|Expires|Repeatable)/)[0]).trim().replace(/^New\s+/,'').replace(/\s+[\d,]{3,}$/,'').slice(0,110);
   if(name.length<4||/^(View |Image:)/i.test(name))return;
   const priceMatch=p.kind==='sbc'?raw.match(/\s(\d{1,3}(?:,\d{3})+)\b/):null;
-  const desc=raw.slice(name.length).replace(/^\s*[\d,]+\s*/,'').slice(0,240);
+  const descMatch=raw.match(/(?:Earn |Complete |Exchange |Submit |Play |Compete |Use )[A-Za-z\d\s+.,'-]{12,200}/);
+  const desc=descMatch?descMatch[0].trim():'';
   seen.add(u.pathname);
   const obj={name,category:p.cat,description:desc,url:base+u.pathname};
   if(p.kind==='sbc'){if(/(?:solver|cheapest by rating|sbc rating combinations|all sbcs|view rewards)/i.test(name))return;obj.price=priceMatch?Number(priceMatch[1].replace(/,/g,'')):null;}
