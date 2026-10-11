@@ -903,7 +903,7 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 <button onclick="showSec('club')"><span>06 / MY CLUB</span><strong>باشگاه من</strong><small>موارد ذخیره‌شده</small></button>
 </div><section class="fc-home-latest"><h2>جدیدترین‌ها / Latest updates</h2><div id="fcGameFeatured" class="fc-game-tiles" aria-live="polite"></div></section></main>
 <main class="main fc-game-page" id="sec-club" style="display:none"><div class="fc-game-eyebrow">MY CLUB / COLLECTION</div><h1 class="fc-game-title">باشگاه من</h1><p class="fc-game-lead">علاقه‌مندی‌ها و بازیکنان ذخیره‌شده روی همین دستگاه؛ بدون ادعای اتصال به باشگاه داخل بازی.</p><div id="fcClubContents" class="fc-game-tiles"></div></main>
-<main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">نمایش بسته‌های واقعی فقط بعد از اتصال منبع قابل تأیید. این سایت خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
+<main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">این صفحه فقط برای نمایش اطلاعات ثبت‌شده در پروژه است؛ هیچ اتصال جدید، خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
 <main class="main fc-game-page" id="sec-news" style="display:none"><div class="fc-game-eyebrow">EA FC / UPDATES</div><h1 class="fc-game-title">اخبار و رویدادها</h1><div id="fcGameNews" class="fc-game-tiles"><div class="fc-game-empty">در حال دریافت اخبار ثبت‌شده…</div></div></main>
 <main class="main fc-game-page" id="sec-settings" style="display:none"><div class="fc-game-eyebrow">PREFERENCES / FC27</div><h1 class="fc-game-title">تنظیمات</h1><div class="fc-game-settings"><label for="fcGameLang">زبان راهنما / Guide language</label><select id="fcGameLang" onchange="setFC27Lang(this.value)"><option value="fa">فارسی</option><option value="en">English</option><option value="both">فارسی + English</option></select><p>پیشرفت چالش‌ها و علاقه‌مندی‌ها روی این مرورگر ذخیره می‌شوند.</p></div></main>
 
@@ -2342,7 +2342,8 @@ function renderEvoChain(){
 /* ══════════════════════════════════════
    WORLD CUP 2026 DATA & FUNCTIONS
 ══════════════════════════════════════ */
-function showSec(sec){
+function restoreFC27Section(){const sec=location.hash.slice(1);const valid=['home','obj','sbc','players','squad','evo','club','store','news','settings'];showSec(valid.includes(sec)?sec:'home',true)}
+function showSec(sec,fromHistory=false){
  const sections=['home','obj','sbc','players','squad','evo','club','store','news','settings'];
  if(!sections.includes(sec))sec='home';
  for(const key of sections){
@@ -2358,7 +2359,7 @@ function showSec(sec){
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
- try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
+ if(!fromHistory)try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateFCGameHome(){
@@ -2606,7 +2607,7 @@ async function loadLiveFC27(){
 function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
-  showSec(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'home');
+  restoreFC27Section();
   loadLiveFC27();
   loadVerifiedEvolutions();
   loadPortraitIndex();
@@ -2624,8 +2625,8 @@ function init(){
   setTimeout(doFetch,100);
 }
 document.addEventListener('DOMContentLoaded',init);
-window.addEventListener('popstate',()=>showSec(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'home'));
-window.addEventListener('hashchange',()=>{const sec=location.hash.slice(1);if(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(sec))showSec(sec)});
+window.addEventListener('popstate',restoreFC27Section);
+window.addEventListener('hashchange',restoreFC27Section);
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker registration failed:', err)));
 }
