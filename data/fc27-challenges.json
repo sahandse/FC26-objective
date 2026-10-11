@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-10T13:17:18.888Z",
+  "checked_at": "2026-10-11T03:28:49.383Z",
   "sections": {
     "objectives": [
       {
@@ -26,6 +26,13 @@
       }
     ],
     "sbc": [
+      {
+        "name": "EFL Championship Future Stars Pick",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-51-efl-championship-future-stars-pick/",
+        "price": null
+      },
       {
         "name": "Carlos Espí",
         "category": "players",
@@ -141,13 +148,6 @@
         "category": "challenges",
         "description": "",
         "url": "https://www.fut.gg/sbc/challenges/27-36-marquee-matchups/",
-        "price": null
-      },
-      {
-        "name": "Destined for Glory Challenge 4",
-        "category": "challenges",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/challenges/27-28-destined-for-glory-challenge-4/",
         "price": null
       },
       {
