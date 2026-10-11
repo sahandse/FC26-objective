@@ -79,3 +79,19 @@ test('challenge details remain in-site and portrait lookup is lazy',()=>{
  assert.match(html,/Wikimedia unavailable/);
  assert.doesNotMatch(html,/جزئیات چالش ↗/);
 });
+
+test('verified FC27 evolutions contain accurate detailed levels',()=>{
+ const d=JSON.parse(fs.readFileSync('data/fc27-evolutions.json','utf8'));
+ assert.ok(d.evolutions.length>=4);
+ const intro=d.evolutions.find(x=>x.name==='Intro to Evolutions');
+ assert.ok(intro&&intro.levels.length===3);
+ assert.equal(intro.levels.map(l=>l.tasks.length).reduce((a,b)=>a+b,0),3);
+});
+test('verified SBC segments and objective tasks are available in-site',()=>{
+ const d=JSON.parse(fs.readFileSync('data/fc27-challenges.json','utf8'));
+ assert.ok(d.sections.objectives.some(x=>x.tasks?.length>=3));
+ assert.ok(d.sections.sbc.some(x=>x.squads?.length>=3));
+ assert.match(html,/function loadVerifiedEvolutions/);
+ assert.match(html,/مراحل تکامل \/ Evolution levels/);
+ assert.match(html,/مأموریت‌های دقیق \/ Objective tasks/);
+});

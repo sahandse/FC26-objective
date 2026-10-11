@@ -52,9 +52,33 @@ async function scrape(p){
  for(const k of ['objectives','sbc']){
   result.sections[k]=[...new Map(result.sections[k].map(x=>[x.url,x])).values()];
  }
+ // Preserve independently verified squad facts when list snapshots update.
+ if(prev?.sections?.sbc){
+  const stored=new Map(prev.sections.sbc.map(item=>[item.url,item]));
+  for(const rec of result.sections.sbc){
+   const earlier=stored.get(rec.url);
+   if(earlier?.squads?.length){
+    rec.squads=earlier.squads;
+    rec.squads_checked_at=earlier.squads_checked_at;
+   }
+  }
+ }
  // Fail closed: do not overwrite a verified dataset with partial or empty scraping.
  if(success<3||result.sections.objectives.length<3||result.sections.sbc.length<8){
   throw Error('Incomplete extraction: '+success+' sources; '+result.sections.objectives.length+' objectives; '+result.sections.sbc.length+' SBCs. Existing snapshot preserved.');
+ }
+ function parseSquads($){
+  const squads=[];
+  // Detailed challenge lists are grouped under titled h3/h4/h5 headings.
+  $('h3,h4,h5').each((_,node)=>{
+   const name=$(node).text().replace(/\s+/g,' ').trim();
+   if(name.length<3||name.length>90||/^(rewards|overview|requirements|eligible players|related sbcs|cheapest|sbc solutions)$/i.test(name))return;
+   const parent=$(node).parent();
+   const block=parent.next().length?parent.next():parent;
+   const rules=block.find('li').map((_,el)=>$(el).text().replace(/\s+/g,' ').trim()).get().filter(x=>x.length>5&&x.length<130&&/^(quality|rating|chemistry|team rating|team chemistry|players|rare|league|nation|club|position|same |leagues|nations|rarity|gold|silver|bronze)/i.test(x)).slice(0,12);
+   if(rules.length && !squads.some(x=>x.name===name))squads.push({name,requirements:rules});
+  });
+  return squads.slice(0,20);
  }
  // Extract facts only when explicitly labelled in the challenge detail page.
  for(const rec of result.sections.sbc){
@@ -62,6 +86,8 @@ async function scrape(p){
    const res=await fetch(rec.url,{headers:{'User-Agent':'Mozilla/5.0 FC27Hub/1.0','Accept':'text/html'}});
    if(!res.ok)continue;
    const $=cheerio.load(await res.text());
+   const squads=parseSquads($);
+   if(squads.length){rec.squads=squads;rec.squads_checked_at=new Date().toISOString();}
    const body=$('body').text().replace(/\s+/g,' ').trim();
    const begin=body.indexOf('Eligible players');
    const end=begin>=0?body.indexOf(' Solve',begin):-1;
