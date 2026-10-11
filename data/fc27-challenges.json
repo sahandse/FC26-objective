@@ -1,8 +1,38 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-11T04:10:31.750Z",
+  "checked_at": "2026-10-11T04:10:02.177Z",
   "sections": {
     "objectives": [
+      {
+        "name": "Future Stars Celebration",
+        "category": "campaign",
+        "description": "Use young players that are more agile and earn exclusive rewards. All rewards are untradeable.",
+        "url": "https://www.fut.gg/objectives/campaigns/127-future-stars-celebration/",
+        "reward": "200 SP + 2,500 Coins",
+        "tasks": [
+          {
+            "name": "Score in 10",
+            "nameFA": "گلزنی در ۱۰ مسابقه",
+            "description": "Score in 10 separate matches in Squad Battles on min. Semi-pro difficulty (or Rivals/Champions/Live Events/Rush) while using min. 3 players born on October 9, 2003 or after in your starting XI.",
+            "descriptionFA": "در ۱۰ مسابقه جداگانه گل بزنید؛ حالت Squad Battles با سختی حداقل Semi-Pro یا Rivals / Champions / Live Events / Rush. حداقل ۳ بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن باید در ترکیب اصلی باشند.",
+            "reward": "100 SP"
+          },
+          {
+            "name": "Play 7",
+            "nameFA": "انجام ۷ مسابقه",
+            "description": "Play 7 matches in Squad Battles on min. Semi-Pro difficulty (or Rivals/Champions/Live Events/Rush) while using min. 3 players born on October 9, 2003 or after in your starting XI.",
+            "descriptionFA": "۷ مسابقه در حالت‌های مجاز انجام دهید؛ در Squad Battles سختی حداقل Semi-Pro باشد و ۳ بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن در ترکیب اصلی داشته باشید.",
+            "reward": "2,500 Coins"
+          },
+          {
+            "name": "Assist 1",
+            "nameFA": "ثبت یک پاس گل",
+            "description": "Assist in 1 match in Squad Battles on min. Semi-Pro difficulty (or Rivals/Champions/Live Events/Rush) using a player born on October 9, 2003 or after.",
+            "descriptionFA": "در یک مسابقه در حالت‌های مجاز، با بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن یک پاس گل بدهید؛ سختی Squad Battles حداقل Semi-Pro باشد.",
+            "reward": "100 SP"
+          }
+        ]
+      },
       {
         "name": "Weekly Objectives",
         "category": "weekly",
@@ -35,7 +65,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:34.181Z"
+        "requirements_checked_at": "2026-10-11T04:10:05.850Z"
       },
       {
         "name": "Carlos Espí",
@@ -46,7 +76,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:34.565Z"
+        "requirements_checked_at": "2026-10-11T04:10:06.242Z"
       },
       {
         "name": "Weslley Pinto Batista",
@@ -57,7 +87,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:34.993Z"
+        "requirements_checked_at": "2026-10-11T04:10:06.811Z"
       },
       {
         "name": "Liga F POTM September",
@@ -68,7 +98,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:35.526Z"
+        "requirements_checked_at": "2026-10-11T04:10:07.194Z"
       },
       {
         "name": "Tarciane",
@@ -79,7 +109,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:36.003Z"
+        "requirements_checked_at": "2026-10-11T04:10:07.986Z"
       },
       {
         "name": "LALIGA POTM September",
@@ -90,7 +120,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:36.498Z"
+        "requirements_checked_at": "2026-10-11T04:10:08.816Z"
       },
       {
         "name": "Premier League POTM September",
@@ -101,7 +131,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:36.860Z"
+        "requirements_checked_at": "2026-10-11T04:10:09.346Z"
       },
       {
         "name": "Bundesliga POTM September",
@@ -112,7 +142,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:37.252Z"
+        "requirements_checked_at": "2026-10-11T04:10:09.876Z"
       },
       {
         "name": "Serie A POTM September",
@@ -123,7 +153,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:37.734Z"
+        "requirements_checked_at": "2026-10-11T04:10:10.507Z"
       },
       {
         "name": "TOTW Upgrade",
@@ -134,7 +164,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:38.106Z"
+        "requirements_checked_at": "2026-10-11T04:10:11.215Z"
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
@@ -145,7 +175,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:38.523Z"
+        "requirements_checked_at": "2026-10-11T04:10:12.165Z"
       },
       {
         "name": "5x 80+ Upgrade",
@@ -156,7 +186,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:38.912Z"
+        "requirements_checked_at": "2026-10-11T04:10:12.502Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -191,7 +221,62 @@
         "category": "challenges",
         "description": "",
         "url": "https://www.fut.gg/sbc/challenges/27-36-marquee-matchups/",
-        "price": null
+        "price": null,
+        "squads": [
+          {
+            "name": "RB Leipzig v Eintracht Frankfurt",
+            "nameFA": "لایپزیگ مقابل آینتراخت فرانکفورت",
+            "requirements": [
+              "Club: Min. 1 player from RB Leipzig or Frankfurt",
+              "Clubs: Min. 4",
+              "Quality: Min. 1 Silver player",
+              "Quality: Min. Bronze",
+              "Chemistry: Min. 14"
+            ],
+            "reward": "1x Small Gold Pack"
+          },
+          {
+            "name": "Como 1907 v AS Roma",
+            "nameFA": "کومو مقابل آ.اس. رم",
+            "requirements": [
+              "Club: Min. 1 player from Como 1907 or AS Roma",
+              "Nation: Min. 2 players from Italy",
+              "Leagues: Max. 4",
+              "Quality: Min. 1 Gold player",
+              "Quality: Min. Silver",
+              "Chemistry: Min. 18"
+            ],
+            "reward": "1x Small Electrum Players Pack"
+          },
+          {
+            "name": "Real Madrid v Villarreal CF",
+            "nameFA": "رئال مادرید مقابل ویارئال",
+            "requirements": [
+              "Club: Min. 2 players from Real Madrid or Villarreal CF",
+              "League: Min. 3 players from LALIGA EA SPORTS",
+              "Same league: Max. 4 players",
+              "Quality: Min. 1 Gold player",
+              "Quality: Min. Silver",
+              "Chemistry: Min. 22"
+            ],
+            "reward": "1x Gold Pack"
+          },
+          {
+            "name": "Liverpool v Manchester City",
+            "nameFA": "لیورپول مقابل منچسترسیتی",
+            "requirements": [
+              "Club: Min. 2 players from Liverpool or Manchester City",
+              "League: Min. 3 players from Premier League",
+              "Clubs: Min. 3",
+              "Same nation: Max. 4 players",
+              "Team rating: Min. 75",
+              "Chemistry: Min. 26"
+            ],
+            "reward": "1x Large Electrum Players Pack"
+          }
+        ],
+        "squads_checked_at": "2026-10-11T04:20:00Z",
+        "reward": "1x Jumbo Gold Pack"
       },
       {
         "name": "League & Nation Advanced",
@@ -209,7 +294,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:42.404Z"
+        "requirements_checked_at": "2026-10-11T04:10:16.198Z"
       },
       {
         "name": "Gold Re-Roll",
@@ -220,7 +305,7 @@
         "requirements": [
           "Rating: Min. 83"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:42.839Z"
+        "requirements_checked_at": "2026-10-11T04:10:17.901Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
@@ -231,7 +316,7 @@
         "requirements": [
           "Rating: Min. 79"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:44.204Z"
+        "requirements_checked_at": "2026-10-11T04:10:18.340Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
@@ -243,14 +328,44 @@
           "Rating: Min. 641",
           "Rating: 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:44.790Z"
+        "requirements_checked_at": "2026-10-11T04:10:19.346Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-3-intro-to-upgrade-sbcs/",
-        "price": null
+        "price": null,
+        "squads": [
+          {
+            "name": "Room To Grow",
+            "nameFA": "فضای پیشرفت",
+            "requirements": [
+              "Quality: Min. 11 Bronze players",
+              "Team rating: Max. 64"
+            ],
+            "reward": "1x Large Silver Players Pack"
+          },
+          {
+            "name": "Build Up Play",
+            "nameFA": "بازی‌سازی",
+            "requirements": [
+              "Quality: Min. 11 Silver players"
+            ],
+            "reward": "1x Gold Pack"
+          },
+          {
+            "name": "Raw Power",
+            "nameFA": "قدرت خام",
+            "requirements": [
+              "Quality: Min. 11 Gold players",
+              "Team rating: Max. 85",
+              "Chemistry: Min. 10"
+            ],
+            "reward": "1x Large Gold Pack"
+          }
+        ],
+        "squads_checked_at": "2026-10-11T07:00:00Z"
       },
       {
         "name": "Intro to SBCs",

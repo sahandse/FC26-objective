@@ -1919,7 +1919,7 @@ function renderEvo(){
   const grid=document.getElementById('evoGrid');
   const cnt=document.getElementById('evoSecCnt');
   if(!grid)return;
-  if(cnt)cnt.textContent=EVO_RAW.length+' تکامل';
+  if(cnt)cnt.textContent=verifiedEvos.length.toLocaleString('fa-IR')+' تکامل';
   grid.innerHTML=EVO_RAW.map(e=>{
     const used=state.evoProgs[e.id]||0;
     const maxed=used>=e.maxUses;

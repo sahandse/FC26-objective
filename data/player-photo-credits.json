@@ -70,5 +70,69 @@
     "artist": "Bryan Berlin",
     "source": "https://upload.wikimedia.org/wikipedia/commons/8/86/Willian_Pacho_Ecuador_v_Germany_25_June_2026-228.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "extension": "jpg"
+  },
+  {
+    "id": 220901,
+    "name": "David Raya",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/8/8a/David_Raya_Argentina_v_Spain_19_July_2026-003_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 233419,
+    "name": "Raphinha",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Raphinha_Brazil_V_Morocco_13_June_2026-133_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 236479,
+    "name": "Mapi León",
+    "license": "CC BY-SA 4.0",
+    "artist": "Estevoaei",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Deportivo_Abanca_-_FC_Barcelona_083_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 231478,
+    "name": "Lautaro Martínez",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Lautaro_Martinez_Argentina_v_Spain_19_July_2026-049_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 232075,
+    "name": "Rose Lavelle",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/3/31/Rose_Lavelle_USWNT_vs_Italy_Nov_28_2025-186_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 233662,
+    "name": "Sakina Karchaoui",
+    "license": "CC BY 3.0",
+    "artist": "Sport en France",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Sakina_Karchaoui_PSG-ManU.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "png"
+  },
+  {
+    "id": 233746,
+    "name": "Vivianne Miedema",
+    "license": "CC BY-SA 2.0",
+    "artist": "Suzanne Lycett",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Miedemavliverpool.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 247819,
+    "name": "Nico Schlotterbeck",
+    "license": "CC BY-SA 4.0",
+    "artist": "Sandro Halank, Wikimedia Commons",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/ba/2023-08-12_TSV_Schott_Mainz_gegen_Borussia_Dortmund_%28DFB-Pokal_2023-24%29_by_Sandro_Halank%E2%80%93069.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
   }
 ]
