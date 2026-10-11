@@ -15,7 +15,65 @@
         "Pace Max. 80"
       ],
       "upgrades": [],
-      "url": "https://www.fut.gg/evolutions/"
+      "url": "https://www.fut.gg/evolutions/2491-intro-to-evolutions/",
+      "games": 7,
+      "wins": 0,
+      "cost": "Free",
+      "levels": [
+        {
+          "name": "Level 1",
+          "nameFA": "مرحله اول",
+          "tasks": [
+            "Play 3 matches in any mode using your active EVO player in game."
+          ],
+          "tasksFA": [
+            "با بازیکنی که تکامل را روی آن فعال کرده‌اید، ۳ مسابقه در هر حالت بازی انجام دهید."
+          ],
+          "upgrades": [
+            "+34 OVR (cap 79)",
+            "+40 Sprint Speed (cap 80)",
+            "+40 Short Pass (cap 76)",
+            "+40 Balance (cap 77)",
+            "+40 Interceptions (cap 76)",
+            "+40 Sliding Tackle (cap 75)"
+          ]
+        },
+        {
+          "name": "Level 2",
+          "nameFA": "مرحله دوم",
+          "tasks": [
+            "Play 2 matches in any mode using your active EVO player in game."
+          ],
+          "tasksFA": [
+            "با بازیکن فعال تکامل، ۲ مسابقه دیگر در هر حالت بازی انجام دهید."
+          ],
+          "upgrades": [
+            "+40 Vision (cap 75)",
+            "+40 Curve (cap 80)",
+            "+40 Ball Control (cap 80)",
+            "+40 Defensive Awareness (cap 77)",
+            "+40 Stamina (cap 80)"
+          ]
+        },
+        {
+          "name": "Level 3",
+          "nameFA": "مرحله سوم",
+          "tasks": [
+            "Play 2 matches in any mode using your active EVO player in game."
+          ],
+          "tasksFA": [
+            "با بازیکن فعال تکامل، ۲ مسابقه دیگر در هر حالت بازی انجام دهید."
+          ],
+          "upgrades": [
+            "+40 Acceleration (cap 80)",
+            "+40 Crossing (cap 78)",
+            "+40 Agility (cap 78)",
+            "+40 Dribbling (cap 80)",
+            "+40 Standing Tackle (cap 78)",
+            "RB Wingback+"
+          ]
+        }
+      ]
     },
     {
       "name": "Intro to Training Camp EVOs",
