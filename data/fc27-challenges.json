@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-10T13:17:18.888Z",
+  "checked_at": "2026-10-11T03:29:09.232Z",
   "sections": {
     "objectives": [
       {
@@ -26,6 +26,13 @@
       }
     ],
     "sbc": [
+      {
+        "name": "EFL Championship Future Stars Pick",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-51-efl-championship-future-stars-pick/",
+        "price": null
+      },
       {
         "name": "Carlos Espí",
         "category": "players",
@@ -87,12 +94,7 @@
         "category": "upgrades",
         "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-55-totw-upgrade/",
-        "price": null,
-        "requirements": [
-          "Rating: Min. 45"
-        ],
-        "requirements_checked_at": "2026-10-11T00:00:00Z",
-        "reward": "1x TOTW 1-4 Player Pack"
+        "price": null
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
@@ -141,13 +143,6 @@
         "category": "challenges",
         "description": "",
         "url": "https://www.fut.gg/sbc/challenges/27-36-marquee-matchups/",
-        "price": null
-      },
-      {
-        "name": "Destined for Glory Challenge 4",
-        "category": "challenges",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/challenges/27-28-destined-for-glory-challenge-4/",
         "price": null
       },
       {
