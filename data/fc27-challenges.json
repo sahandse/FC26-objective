@@ -221,7 +221,62 @@
         "category": "challenges",
         "description": "",
         "url": "https://www.fut.gg/sbc/challenges/27-36-marquee-matchups/",
-        "price": null
+        "price": null,
+        "squads": [
+          {
+            "name": "RB Leipzig v Eintracht Frankfurt",
+            "nameFA": "لایپزیگ مقابل آینتراخت فرانکفورت",
+            "requirements": [
+              "Club: Min. 1 player from RB Leipzig or Frankfurt",
+              "Clubs: Min. 4",
+              "Quality: Min. 1 Silver player",
+              "Quality: Min. Bronze",
+              "Chemistry: Min. 14"
+            ],
+            "reward": "1x Small Gold Pack"
+          },
+          {
+            "name": "Como 1907 v AS Roma",
+            "nameFA": "کومو مقابل آ.اس. رم",
+            "requirements": [
+              "Club: Min. 1 player from Como 1907 or AS Roma",
+              "Nation: Min. 2 players from Italy",
+              "Leagues: Max. 4",
+              "Quality: Min. 1 Gold player",
+              "Quality: Min. Silver",
+              "Chemistry: Min. 18"
+            ],
+            "reward": "1x Small Electrum Players Pack"
+          },
+          {
+            "name": "Real Madrid v Villarreal CF",
+            "nameFA": "رئال مادرید مقابل ویارئال",
+            "requirements": [
+              "Club: Min. 2 players from Real Madrid or Villarreal CF",
+              "League: Min. 3 players from LALIGA EA SPORTS",
+              "Same league: Max. 4 players",
+              "Quality: Min. 1 Gold player",
+              "Quality: Min. Silver",
+              "Chemistry: Min. 22"
+            ],
+            "reward": "1x Gold Pack"
+          },
+          {
+            "name": "Liverpool v Manchester City",
+            "nameFA": "لیورپول مقابل منچسترسیتی",
+            "requirements": [
+              "Club: Min. 2 players from Liverpool or Manchester City",
+              "League: Min. 3 players from Premier League",
+              "Clubs: Min. 3",
+              "Same nation: Max. 4 players",
+              "Team rating: Min. 75",
+              "Chemistry: Min. 26"
+            ],
+            "reward": "1x Large Electrum Players Pack"
+          }
+        ],
+        "squads_checked_at": "2026-10-11T04:20:00Z",
+        "reward": "1x Jumbo Gold Pack"
       },
       {
         "name": "League & Nation Advanced",
