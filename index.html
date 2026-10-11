@@ -857,7 +857,7 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 .fc-mobile-more button{padding:15px 9px;min-height:50px;border-radius:10px;border:1px solid #445747;background:#223128;color:#effce5;font:inherit;cursor:pointer}
 @media(min-width:800px){.fc-mobile-more,#bn-more{display:none!important}}
 @media(max-width:799px){.bottom-nav{overflow-x:auto;scrollbar-width:none}.bottom-nav .bnav-btn{min-width:57px;flex:1}.fc-mobile-more button:focus-visible,.fc-game-nav button:focus-visible{outline:2px solid #d4ff4c;outline-offset:2px}}
-</style></head>
+</style><style>.fc-game-save{display:inline-flex;justify-content:center;align-items:center;min-height:36px;background:#243128;border:1px solid #536b42;color:#d9f8ba;padding:8px 12px;border-radius:9px;font:inherit;font-size:12px;cursor:pointer}.fc-game-save[aria-pressed=true]{background:#caff38;color:#17211a}.fc-game-save:focus-visible{outline:2px solid #fff}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1970,7 +1970,7 @@ function renderVerifiedEvolutions(){
   for(const req of evo.requirements||[])chip.appendChild(fc27Node('span','fc27-evo-chip',req));
   card.appendChild(chip);
   const open=fc27Node('button','fc27-detail-open','جزئیات تکامل / Evolution details');
-  open.type='button';open.onclick=()=>openFC27Details('evolutions',evo);card.appendChild(open);
+  open.type='button';open.onclick=()=>openFC27Details('evolutions',evo);card.append(open,fc27SaveButton('evolutions',evo));
   host.appendChild(card);
  }
  if(!verifiedEvos.length)host.appendChild(fc27Node('p','fc-feed-meta','اطلاعات تأییدشده تکامل فعلاً در دسترس نیست.'));
@@ -2394,7 +2394,10 @@ function renderFCGameFeatured(){
 function renderFCGameClub(){
  const host=document.getElementById('fcClubContents');if(!host)return;host.replaceChildren();
  const categories=[['بازیکنان محبوب',Object.values(state.plFavs||{}).filter(Boolean).length,'players'],['فهرست پیگیری',Object.values(state.watchlist||{}).filter(Boolean).length,'players'],['تیم ذخیره‌شده',Object.keys(state.squad?.slots||{}).filter(k=>state.squad.slots[k]).length,'squad']];
+ categories.push(['چالش‌ها و تکامل‌های ذخیره‌شده',Object.keys(fc27Saved).length,'sbc']);
  for(const [label,count,section] of categories){const btn=document.createElement('button');const title=document.createElement('strong');title.textContent=label;const sub=document.createElement('small');sub.textContent=count.toLocaleString('fa-IR')+' مورد';btn.append(title,sub);btn.onclick=()=>showSec(section);host.appendChild(btn)}
+ for(const saved of Object.values(fc27Saved)){const card=document.createElement('article');const title=document.createElement('h3');title.textContent=saved.name||'چالش ذخیره‌شده';const meta=document.createElement('small');meta.textContent=saved.kind==='evolutions'?'تکامل':saved.kind==='objectives'?'اهداف':'SBC';card.append(title,meta);
+ const btn=document.createElement('button');btn.className='fc27-detail-open';btn.textContent='نمایش جزئیات';btn.onclick=()=>{const list=saved.kind==='evolutions'?verifiedEvos:(liveFC27.sections[saved.kind]||[]);const rec=list.find(x=>x.url===saved.url);if(rec)openFC27Details(saved.kind,rec);else btn.textContent='جزئیات این مورد فعلاً موجود نیست';};card.appendChild(btn);host.appendChild(card)}
 }
 async function loadFCGameNews(){
  const host=document.getElementById('fcGameNews');if(!host)return;
@@ -2474,7 +2477,10 @@ const FC27_EN_OBJECTIVES={
 'Back to Basics Bonus Objective':['Open the Back to Basics objective in Ultimate Team.','Check the required Exhibition mode and any squad restrictions on the objective itself.','Complete the listed tasks, then claim the reward.'],
 'Rising Through the Ranks':['Locate Rising Through the Ranks under Objectives.','Review the exact tasks, game mode and any squad conditions.','Finish each task, track progress, and claim the relevant reward.']
 };
-let fc27Lang='fa',fc27Progress={};
+let fc27Lang='fa',fc27Progress={},fc27Saved={};
+try{fc27Saved=JSON.parse(localStorage.getItem('fc27-saved-challenges')||'{}')||{}}catch(e){}
+function toggleFC27Saved(kind,rec){const id=kind+':'+rec.url;if(fc27Saved[id])delete fc27Saved[id];else fc27Saved[id]={kind,name:rec.name,url:rec.url};try{localStorage.setItem('fc27-saved-challenges',JSON.stringify(fc27Saved))}catch(e){}if(kind==='evolutions')renderVerifiedEvolutions();else renderLiveFC27()}
+function fc27SaveButton(kind,rec){const btn=document.createElement('button');btn.type='button';btn.className='fc-game-save';const saved=!!fc27Saved[kind+':'+rec.url];btn.textContent=saved?'★ ذخیره‌شده':'☆ ذخیره';btn.setAttribute('aria-pressed',String(saved));btn.addEventListener('click',()=>toggleFC27Saved(kind,rec));return btn}
 try{fc27Lang=localStorage.getItem('fc27-guide-lang')||'fa';if(!['fa','en','both'].includes(fc27Lang))fc27Lang='fa';fc27Progress=JSON.parse(localStorage.getItem('fc27-guide-progress')||'{}')||{}}catch(e){}
 function setFC27Lang(lang){if(!['fa','en','both'].includes(lang))return;fc27Lang=lang;try{localStorage.setItem('fc27-guide-lang',lang)}catch(e){}renderLiveFC27()}
 function fc27EnglishGuide(kind,rec){
@@ -2600,7 +2606,7 @@ function renderLiveFC27(){
    }
    const open=fc27Node('button','fc27-detail-open','جزئیات کامل در همین سایت / Details');
    open.type='button';open.addEventListener('click',()=>openFC27Details(kind,rec));
-   card.append(title,englishTitle,desc,meta,details,open);host.appendChild(card);
+   card.append(title,englishTitle,desc,meta,details,open,fc27SaveButton(kind,rec));host.appendChild(card);
   }
   if(!visible.length)host.appendChild(fc27Node('p','fc-feed-meta','موردی برای نمایش پیدا نشد.'));
  }
