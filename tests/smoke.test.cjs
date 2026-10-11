@@ -70,3 +70,12 @@ test('bilingual FC27 guides and local progress persistence',()=>{
  assert.match(html,/guideFC27\(kind,rec\)/);
  assert.match(html,/fc27EnglishGuide\(kind,rec\)/);
 });
+
+test('challenge details remain in-site and portrait lookup is lazy',()=>{
+ assert.match(html,/function openFC27Details\(kind,rec\)/);
+ assert.match(html,/fc27-detail-overlay/);
+ assert.match(html,/openFC27Details\(kind,rec\)/);
+ assert.match(html,/function observePlayerPortraits\(/);
+ assert.match(html,/Wikimedia unavailable/);
+ assert.doesNotMatch(html,/جزئیات چالش ↗/);
+});
