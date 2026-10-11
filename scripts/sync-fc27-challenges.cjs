@@ -52,6 +52,17 @@ async function scrape(p){
  for(const k of ['objectives','sbc']){
   result.sections[k]=[...new Map(result.sections[k].map(x=>[x.url,x])).values()];
  }
+ // Preserve independently verified squad facts when list snapshots update.
+ if(prev?.sections?.sbc){
+  const stored=new Map(prev.sections.sbc.map(item=>[item.url,item]));
+  for(const rec of result.sections.sbc){
+   const earlier=stored.get(rec.url);
+   if(earlier?.squads?.length){
+    rec.squads=earlier.squads;
+    rec.squads_checked_at=earlier.squads_checked_at;
+   }
+  }
+ }
  // Fail closed: do not overwrite a verified dataset with partial or empty scraping.
  if(success<3||result.sections.objectives.length<3||result.sections.sbc.length<8){
   throw Error('Incomplete extraction: '+success+' sources; '+result.sections.objectives.length+' objectives; '+result.sections.sbc.length+' SBCs. Existing snapshot preserved.');
