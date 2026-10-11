@@ -815,6 +815,17 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .fc-feed-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:850px){.fc-feed-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.fc-feed-grid{grid-template-columns:1fr}}
+</style><style>
+.fc27-detail-open{color:#caff38;background:#243329;border:1px solid #536741;border-radius:10px;padding:10px 14px;cursor:pointer;font:inherit;font-weight:800;font-size:12px}
+.fc27-detail-overlay{position:fixed;inset:0;z-index:99999;background:#030910d9;display:flex;align-items:center;justify-content:center;padding:14px}
+.fc27-detail-panel{max-width:760px;width:100%;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;background:#101a22;border:1px solid #405554;border-radius:20px;padding:22px;color:#f0f6f4;direction:rtl;box-shadow:0 24px 95px #0008}
+.fc27-detail-head{display:flex;align-items:start;justify-content:space-between;gap:20px}.fc27-detail-head h2{font-size:22px;margin:0 0 5px}.fc27-detail-head p{text-align:right!important}
+.fc27-detail-close{background:#28353e;border:1px solid #52616b;border-radius:10px;color:white;font-size:28px;width:40px;min-width:40px;height:40px;cursor:pointer}
+.fc27-detail-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.fc27-detail-fact{background:#1b2932;border:1px solid #334653;border-radius:11px;padding:12px;display:flex;flex-direction:column;gap:5px;font-size:12px}.fc27-detail-fact span{color:#9eb5ba}.fc27-detail-fact strong{color:#eaf5ed;font-weight:700}
+.fc27-detail-subsection{border-top:1px solid #384b51;padding-top:16px;margin-top:17px;line-height:1.9;font-size:13px}.fc27-detail-subsection h3{color:#caff38;font-size:15px}.fc27-detail-subsection li{margin-bottom:8px}.fc27-detail-note{color:#b4c2c3;font-size:12px;line-height:1.9}.fc27-detail-description{line-height:1.9;color:#bccbd0}
+.fc27-detail-squad{background:#1c2930;border-radius:11px;padding:12px;margin:10px 0}
+@media(max-width:600px){.fc27-detail-panel{max-height:96dvh;padding:16px}.fc27-detail-facts{grid-template-columns:1fr}.fc27-detail-head h2{font-size:18px}}
 </style></head>
 <body>
 
@@ -2301,6 +2312,34 @@ function fc27EnglishGuide(kind,rec){
  return ['Open '+rec.name+' in Squad Building Challenges.','Check each segment’s current rating, chemistry and item requirements; no unverified numbers are shown here.','Choose eligible players while reviewing the total cost.','Review submitted items carefully and claim the reward after completion.'];
 }
 function fc27Node(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!=null)el.textContent=String(text);return el}
+
+function openFC27Details(kind,rec){
+ const old=document.getElementById('fc27-detail-dialog');if(old)old.remove();
+ const overlay=fc27Node('div','fc27-detail-overlay');overlay.id='fc27-detail-dialog';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','جزئیات چالش');overlay.tabIndex=-1;
+ const panel=fc27Node('section','fc27-detail-panel');
+ const head=fc27Node('div','fc27-detail-head');const names=fc27Node('div','');
+ names.append(fc27Node('h2','',FC27_FA[rec.name]||rec.name),fc27Node('p','fc27-original-title',rec.name));
+ const close=fc27Node('button','fc27-detail-close','×');close.type='button';close.setAttribute('aria-label','بستن');close.onclick=()=>overlay.remove();head.append(names,close);panel.appendChild(head);
+ const info=fc27Node('div','fc27-detail-facts');
+ const fields=[['بخش / Category',rec.category],['پاداش / Reward',rec.reward],['هزینه ثبت‌شده / Recorded cost',Number.isFinite(rec.price)?rec.price.toLocaleString('fa-IR'):''],['آخرین بروزرسانی / Updated',liveFC27.checked_at?new Date(liveFC27.checked_at).toLocaleString('fa-IR'):'']];
+ for(const [label,val] of fields){if(val!==undefined&&val!==null&&String(val).trim()){const item=fc27Node('div','fc27-detail-fact');item.append(fc27Node('span','',label),fc27Node('strong','',val));info.appendChild(item)}}
+ panel.appendChild(info);
+ if(rec.description){panel.appendChild(fc27Node('p','fc27-detail-description',rec.description))}
+ if(Array.isArray(rec.requirements)&&rec.requirements.length){
+  const block=fc27Node('section','fc27-detail-subsection');
+  block.appendChild(fc27Node('h3','','بازیکنان مجاز / Eligible players'));
+  block.appendChild(fc27Node('p','fc27-detail-note','این موارد محدودیت بازیکنان مجاز هستند؛ ممکن است شرایط کامل Squad نباشند.'));
+  const list=fc27Node('ul','');for(const value of rec.requirements)list.appendChild(fc27Node('li','',value));block.appendChild(list);panel.appendChild(block);
+ }
+ if(Array.isArray(rec.squads)&&rec.squads.length){
+  const squads=fc27Node('section','fc27-detail-subsection');squads.appendChild(fc27Node('h3','','بخش‌های تیم / Squad segments'));
+  for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.name||'Squad'));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}squads.appendChild(part)}panel.appendChild(squads);
+ }else{panel.appendChild(fc27Node('p','fc27-detail-note',kind==='sbc'?'شرایط دقیق تیم هنوز دریافت نشده‌اند. اطلاعات تأییدنشده نمایش داده نمی‌شوند.':'مراحل و شروط دقیق این هدف هنوز به‌صورت ساختاری دریافت نشده‌اند.'))}
+ const walkthrough=fc27Node('section','fc27-detail-subsection');walkthrough.appendChild(fc27Node('h3','','راهنمای انجام / Walkthrough'));
+ const fa=guideFC27(kind,rec),en=fc27EnglishGuide(kind,rec);const ol=fc27Node('ol','');
+ for(let i=0;i<Math.max(fa.length,en.length);i++){const li=fc27Node('li','');if(fc27Lang!=='en'&&fa[i])li.appendChild(fc27Node('p','',fa[i]));if(fc27Lang!=='fa'&&en[i]){const p=fc27Node('p','fc27-step-en',en[i]);p.dir='ltr';li.appendChild(p)}ol.appendChild(li)}walkthrough.appendChild(ol);panel.appendChild(walkthrough);
+ overlay.appendChild(panel);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});const esc=e=>{if(e.key==='Escape'){overlay.remove();document.removeEventListener('keydown',esc)}};document.addEventListener('keydown',esc);document.body.appendChild(overlay);close.focus();
+}
 function renderLiveFC27(){
  for(const kind of ['objectives','sbc']){
   const host=document.getElementById('live-'+kind),status=document.getElementById('live-'+kind+'-status');
@@ -2345,8 +2384,9 @@ function renderLiveFC27(){
     if(fc27Lang!=='fa'&&en[i]){const t=fc27Node('span','fc27-step-en',en[i]);t.dir='ltr';content.appendChild(t)}
     row.classList.toggle('completed',check.checked);row.append(check,content);details.appendChild(row);
    }
-   const link=fc27Node('a','','جزئیات چالش ↗');link.href=linkUrl.href;link.target='_blank';link.rel='noopener noreferrer';
-   card.append(title,englishTitle,desc,meta,details,link);host.appendChild(card);
+   const open=fc27Node('button','fc27-detail-open','جزئیات کامل در همین سایت / Details');
+   open.type='button';open.addEventListener('click',()=>openFC27Details(kind,rec));
+   card.append(title,englishTitle,desc,meta,details,open);host.appendChild(card);
   }
   if(!visible.length)host.appendChild(fc27Node('p','fc-feed-meta','موردی برای نمایش پیدا نشد.'));
  }
