@@ -2329,8 +2329,8 @@ function renderLiveFC27(){
    const meta=fc27Node('div','fc-feed-meta',kind==='sbc'?(Number.isFinite(rec.price)?'هزینه ثبت‌شده: '+rec.price.toLocaleString('fa-IR'):'هزینه تأییدشده موجود نیست'):(rec.reward||'جایزه در جزئیات هدف'));
    if(kind==='sbc'&&Array.isArray(rec.requirements)&&rec.requirements.length){
     const rules=fc27Node('div','fc27-verified-rules');
-    rules.appendChild(fc27Node('strong','',fc27Lang==='en'?'Verified requirements':'شرایط ثبت‌شده / Verified requirements'));
-    const ul=document.createElement('ul');for(const rule of rec.requirements){ul.appendChild(fc27Node('li','',rule))}rules.appendChild(ul);card.appendChild(rules);
+    rules.appendChild(fc27Node('strong','',fc27Lang==='en'?'Eligible player restrictions (not full squad requirements)':fc27Lang==='fa'?'محدودیت بازیکنان مجاز (نه شرایط کامل ترکیب)':'محدودیت بازیکنان مجاز / Eligible players — not full squad requirements'));
+    const ul=document.createElement('ul');for(const rule of rec.requirements){const li=document.createElement('li');if(fc27Lang!=='en'&&/^Rating:\\s*Min\\.\\s*(\\d+)/i.test(rule)){const m=rule.match(/\\d+/);li.appendChild(fc27Node('span','','حداقل امتیاز بازیکن مجاز: '+m[0]));if(fc27Lang==='both')li.appendChild(fc27Node('span','fc27-step-en',rule));}else{li.textContent=rule}ul.appendChild(li)}rules.appendChild(ul);card.appendChild(rules);
    }
    const details=fc27Node('details','fc-steps');
    const summary=fc27Node('summary','','راهنمای انجام / Walkthrough');details.appendChild(summary);
