@@ -38,6 +38,7 @@ async function lookup(p){
    if(!image)continue;
    fs.writeFileSync(path.join(folder,image.id+'.'+image.ext),image.buf);
    index.ids.push(image.id);
+   index.files=index.files||{};index.files[String(image.id)]=image.id+'.'+image.ext;
    attribution.push({id:image.id,name:image.name,license:image.license,artist:image.author,source:image.url,extension:image.ext});
    saved++;console.log('Saved licensed photograph',image.id,image.name,image.license);
   }catch(e){console.warn('Skipping',p.name,e.message)}
