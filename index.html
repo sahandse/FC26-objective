@@ -842,6 +842,11 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 @media(max-width:900px){.fc-game-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-game-nav button{min-width:86px}}
 @media(max-width:600px){.fc-game-page{padding:14px 12px}.fc-game-nav{padding:8px;gap:3px}.fc-game-nav button{min-width:72px;padding:8px 6px;font-size:11px}.fc-game-tiles{grid-template-columns:1fr}.fc-game-feature{min-height:200px}.fc-game-feature:after{font-size:180px;top:-25px}.fc-game-feature>strong{font-size:32px}}
 @media(prefers-reduced-motion:reduce){.fc-game-tiles>button,#sec-obj .fc-feed-card,#sec-sbc .fc-feed-card{transition:none!important}}
+</style><style>
+.fc-game-filter-tabs{display:flex;gap:6px;flex-wrap:wrap;grid-column:1/-1;margin:7px 0 15px}
+.fc-game-filter{border:1px solid #485750;border-radius:8px;background:#192522;color:#c9d9cf;padding:9px 12px;font:inherit;font-size:12px;cursor:pointer}
+.fc-game-filter.active{background:#c9ff44;border-color:#d7ff8b;color:#122015;font-weight:800}
+@media(max-width:600px){.fc-game-filter-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.fc-game-filter{white-space:nowrap}}
 </style></head>
 <body>
 
@@ -2203,7 +2208,7 @@ async function doFetch(){
     const clean=feed.players.filter(p=>typeof p.id==='string'&&typeof p.name==='string'&&Number.isFinite(p.rat)&&p.rat>=1&&p.rat<=99&&p.pos);
     if(clean.length<18000)throw Error('Insufficient validated FC27 records');
     PLAYERS_RAW.splice(0,PLAYERS_RAW.length,...clean);
-    renderPlayers();updateStats();renderPitch();
+    renderPlayers();updateStats();renderPitch();updateFCGameHome();
     setStatus('online');
     const stamp=document.getElementById('lastUpd');
     if(stamp)stamp.textContent='بازیکنان FC27: '+clean.length.toLocaleString('fa-IR')+' نفر · نسخه داده: '+feed.snapshot_date+' · همگام‌سازی: '+new Date(feed.synced_at).toLocaleDateString('fa-IR');
@@ -2512,13 +2517,15 @@ function openFC27Details(kind,rec){
  for(let i=0;i<Math.max(fa.length,en.length);i++){const li=fc27Node('li','');if(fc27Lang!=='en'&&fa[i])li.appendChild(fc27Node('p','',fa[i]));if(fc27Lang!=='fa'&&en[i]){const p=fc27Node('p','fc27-step-en',en[i]);p.dir='ltr';li.appendChild(p)}ol.appendChild(li)}walkthrough.appendChild(ol);panel.appendChild(walkthrough);
  overlay.appendChild(panel);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});const esc=e=>{if(e.key==='Escape'){overlay.remove();document.removeEventListener('keydown',esc)}};document.addEventListener('keydown',esc);document.body.appendChild(overlay);close.focus();
 }
+const fcGameFilters={objectives:'all',sbc:'all'};
+function setFCGameFilter(kind,category){fcGameFilters[kind]=category;renderLiveFC27()}
 function renderLiveFC27(){
  for(const kind of ['objectives','sbc']){
   const host=document.getElementById('live-'+kind),status=document.getElementById('live-'+kind+'-status');
   if(!host||!status)continue;
   const records=liveFC27.sections[kind]||[];
   const query=(document.getElementById('live-'+kind+'-search')?.value||'').trim().toLowerCase();
-  const visible=records.filter(r=>([r.name,FC27_FA[r.name]||'',r.description||''].join(' ')).toLowerCase().includes(query));
+  const visible=records.filter(r=>(fcGameFilters[kind]==='all'||r.category===fcGameFilters[kind])&&([r.name,FC27_FA[r.name]||'',r.description||''].join(' ')).toLowerCase().includes(query));
   host.replaceChildren();
   const top=fc27Node('div','fc27-lang-control');
   const langLabel=fc27Node('span','fc27-lang-label','زبان راهنما / Guide language');
@@ -2528,6 +2535,11 @@ function renderLiveFC27(){
    btn.type='button';btn.setAttribute('aria-pressed',String(fc27Lang===value));btn.addEventListener('click',()=>setFC27Lang(value));top.appendChild(btn);
   }
   host.appendChild(top);
+  const tabs=fc27Node('div','fc-game-filter-tabs');
+  const labels={all:'همه',players:'بازیکنان',upgrades:'ارتقا',challenges:'چالش‌ها',foundation:'آموزشی',weekly:'هفتگی',campaign:'رویداد',seasonal:'فصلی',milestone:'بلندمدت'};
+  const cats=['all',...new Set(records.map(r=>r.category).filter(Boolean))];
+  for(const cat of cats){const btn=fc27Node('button','fc-game-filter'+(fcGameFilters[kind]===cat?' active':''),labels[cat]||cat);btn.type='button';btn.setAttribute('aria-pressed',String(fcGameFilters[kind]===cat));btn.onclick=()=>setFCGameFilter(kind,cat);tabs.appendChild(btn)}
+  host.appendChild(tabs);
   const age=liveFC27.checked_at?Math.floor((Date.now()-Date.parse(liveFC27.checked_at))/86400000):Infinity;
   status.textContent=records.length?records.length.toLocaleString('fa-IR')+' مورد · '+(age>1?'آخرین داده ثبت‌شده: ':'آخرین بررسی: ')+new Date(liveFC27.checked_at).toLocaleString('fa-IR'):'داده معتبر در دسترس نیست';
   for(const rec of visible){
@@ -2572,6 +2584,7 @@ async function loadLiveFC27(){
   liveFC27=data;
  }catch(error){console.warn('FC27 sourced data not available',error)}
  renderLiveFC27();
+ updateFCGameHome();
 }
 function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
