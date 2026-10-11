@@ -6,7 +6,7 @@ on:
       - 'scripts/sync-player-photos.cjs'
       - '.github/workflows/fc27-photos.yml'
   schedule:
-    - cron: '34 4 * * 0'
+    - cron: '34 4 * * *'
 permissions:
   contents: write
 concurrency:
@@ -26,7 +26,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add img/players data/available-portraits.json data/player-photo-credits.json
+          git add img/players data/available-portraits.json data/player-photo-credits.json data/player-photo-attempts.json
           if ! git diff --cached --quiet; then
             git commit -m "images(fc27): add verified freely licensed player portraits"
             git pull --rebase origin "${GITHUB_REF_NAME}"
