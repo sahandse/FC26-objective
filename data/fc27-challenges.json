@@ -94,7 +94,12 @@
         "category": "upgrades",
         "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-55-totw-upgrade/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T00:00:00Z",
+        "reward": "1x TOTW 1-4 Player Pack"
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
