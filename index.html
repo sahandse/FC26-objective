@@ -826,7 +826,23 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .fc27-detail-subsection{border-top:1px solid #384b51;padding-top:16px;margin-top:17px;line-height:1.9;font-size:13px}.fc27-detail-subsection h3{color:#caff38;font-size:15px}.fc27-detail-subsection li{margin-bottom:8px}.fc27-detail-note{color:#b4c2c3;font-size:12px;line-height:1.9}.fc27-detail-description{line-height:1.9;color:#bccbd0}
 .fc27-detail-squad{background:#1c2930;border-radius:11px;padding:12px;margin:10px 0}
 @media(max-width:600px){.fc27-detail-panel{max-height:96dvh;padding:16px}.fc27-detail-facts{grid-template-columns:1fr}.fc27-detail-head h2{font-size:18px}}
-</style><style>.fc27-evo-chips{display:flex;gap:5px;flex-wrap:wrap}.fc27-evo-chip{background:#293b33;color:#d3ffab;border:1px solid #405a40;border-radius:8px;padding:6px 9px;font-size:11px}#evoGrid:empty{display:none}</style></head>
+</style><style>.fc27-evo-chips{display:flex;gap:5px;flex-wrap:wrap}.fc27-evo-chip{background:#293b33;color:#d3ffab;border:1px solid #405a40;border-radius:8px;padding:6px 9px;font-size:11px}#evoGrid:empty{display:none}</style><style>
+:root{--fc-surface:#11191c;--fc-panel:#182224;--fc-neon:#c9f743}
+body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparent 60%),#0a1012;color:#ebf1ea}
+.app-header{background:#101819f5!important;border-bottom:1px solid #35433a!important;backdrop-filter:blur(18px)}
+.fc-game-nav{position:sticky;top:0;z-index:80;display:flex;gap:4px;overflow-x:auto;scrollbar-width:thin;max-width:1300px;margin:0 auto;padding:11px 15px;background:#0e1717f4;border-bottom:1px solid #2e3934}
+.fc-game-nav button{flex:1 0 auto;min-width:82px;border:1px solid transparent;background:none;color:#c5ceca;border-radius:9px;padding:10px 9px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;font:700 12px inherit;cursor:pointer;transition:background .2s,border-color .2s}
+.fc-game-nav button small{font-size:9px;font-weight:400;opacity:.6}.fc-game-nav button.active{background:#d2ff49!important;color:#101a14!important;border-color:#e1ff9e}.fc-game-nav button.active small{opacity:1}
+.fc-game-page{max-width:1200px;margin:18px auto;padding:16px}.fc-game-eyebrow{font-size:10px;letter-spacing:2px;color:#caff38;direction:ltr;text-align:right}.fc-game-title{font-size:clamp(25px,4vw,45px);line-height:1.2;margin:13px 0;color:#f3f8ef}.fc-game-lead{font-size:13px;line-height:2;color:#aebeba;max-width:760px}
+.fc-game-feature{border:1px solid #4e673b;background:linear-gradient(120deg,#243821,#132021 60%,#1d262d);border-radius:16px;padding:clamp(25px,5vw,50px);min-height:235px;margin:23px 0;color:#eafaed;display:flex;flex-direction:column;justify-content:center;gap:10px;position:relative;overflow:hidden}.fc-game-feature:after{content:'27';position:absolute;left:5%;top:-65px;font-size:270px;font-weight:1000;line-height:1;color:#d3ff4a11;pointer-events:none}.fc-game-feature>span{color:#c9fa49;font-size:10px;letter-spacing:3px}.fc-game-feature>strong{font-size:clamp(30px,6vw,72px);line-height:1.08;direction:ltr;text-align:right}.fc-game-feature em{font-style:normal;color:#caff38}.fc-game-feature p{color:#becebf;font-size:13px}
+.fc-game-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.fc-game-tiles>button,.fc-game-tiles>article,.fc-game-empty{border:1px solid #34443c;background:#172123;padding:21px 20px;border-radius:13px;min-height:120px;text-align:right;color:#e6f2e5;font:inherit}.fc-game-tiles>button{cursor:pointer;display:flex;flex-direction:column;gap:9px;transition:.2s}.fc-game-tiles>button:hover{background:#263628;border-color:#b9e949;transform:translateY(-2px)}.fc-game-tiles>button span{font-size:10px;direction:ltr;text-align:right;letter-spacing:1px;color:#a0bb96}.fc-game-tiles>button strong{font-size:19px}.fc-game-tiles>button small{font-size:11px;color:#abbeb5}.fc-game-empty{line-height:2;color:#adc2b7}
+.fc-game-settings{background:#182523;border:1px solid #374a3b;border-radius:13px;padding:22px;max-width:500px;display:grid;gap:13px}.fc-game-settings select{background:#0d1715;color:#f2f8ee;border:1px solid #556c53;border-radius:10px;padding:12px;font:inherit}.fc-game-settings p{font-size:12px;color:#b0c3b5}
+#sec-obj .fc-feed-card,#sec-sbc .fc-feed-card,#verifiedEvoGrid .fc-feed-card{border-radius:14px;background:linear-gradient(150deg,#20302a,#121b1c);border:1px solid #384d3a;transition:border-color .2s,transform .2s}#sec-obj .fc-feed-card:hover,#sec-sbc .fc-feed-card:hover,#verifiedEvoGrid .fc-feed-card:hover{border-color:#a3cb4c;transform:translateY(-2px)}
+#sec-squad,#sec-players,#sec-evo{scroll-margin-top:95px}
+@media(max-width:900px){.fc-game-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.fc-game-nav button{min-width:86px}}
+@media(max-width:600px){.fc-game-page{padding:14px 12px}.fc-game-nav{padding:8px;gap:3px}.fc-game-nav button{min-width:72px;padding:8px 6px;font-size:11px}.fc-game-tiles{grid-template-columns:1fr}.fc-game-feature{min-height:200px}.fc-game-feature:after{font-size:180px;top:-25px}.fc-game-feature>strong{font-size:32px}}
+@media(prefers-reduced-motion:reduce){.fc-game-tiles>button,#sec-obj .fc-feed-card,#sec-sbc .fc-feed-card{transition:none!important}}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -853,6 +869,35 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
     </div>
   </div>
 </header>
+<nav class="fc-game-nav" aria-label="FC27 sections">
+<button data-game-nav="home" onclick="showSec('home')">⌂ <span>خانه</span><small>Home</small></button>
+<button data-game-nav="obj" onclick="showSec('obj')">◎ <span>اهداف</span><small>Objectives</small></button>
+<button data-game-nav="sbc" onclick="showSec('sbc')">◇ <span>چالش‌ها</span><small>SBC</small></button>
+<button data-game-nav="players" onclick="showSec('players')">♙ <span>بازیکنان</span><small>Players</small></button>
+<button data-game-nav="squad" onclick="showSec('squad')">▦ <span>ترکیب</span><small>Squad</small></button>
+<button data-game-nav="evo" onclick="showSec('evo')">⬡ <span>تکامل</span><small>Evolutions</small></button>
+<button data-game-nav="club" onclick="showSec('club')">♧ <span>باشگاه</span><small>Club</small></button>
+<button data-game-nav="store" onclick="showSec('store')">▣ <span>فروشگاه</span><small>Store</small></button>
+<button data-game-nav="news" onclick="showSec('news')">◈ <span>اخبار</span><small>News</small></button>
+<button data-game-nav="settings" onclick="showSec('settings')">⚙ <span>تنظیمات</span><small>Settings</small></button>
+</nav>
+<main class="main fc-game-page" id="sec-home" style="display:none">
+<div class="fc-game-eyebrow">FC27 / Ultimate Team Hub</div><h1 class="fc-game-title">مرکز فرمان تیم تو</h1>
+<p class="fc-game-lead">همه بخش‌های واقعی FC27 در یک فضای نزدیک به منوهای بازی، بدون سکه و اطلاعات ساختگی.</p>
+<div class="fc-game-feature"><span>THE CLUB STARTS HERE</span><strong>FC 27 <em>ULTIMATE TEAM</em></strong><p>چالش‌ها، تکامل و بازیکنان؛ سریع و بدون خروج از سایت.</p></div>
+<div class="fc-game-tiles">
+<button onclick="showSec('obj')"><span>01 / OBJECTIVES</span><strong>اهداف فعال</strong><small id="fcHomeObj">در حال دریافت…</small></button>
+<button onclick="showSec('sbc')"><span>02 / SQUAD BUILDING</span><strong>چالش‌های SBC</strong><small id="fcHomeSbc">در حال دریافت…</small></button>
+<button onclick="showSec('players')"><span>03 / PLAYER DATABASE</span><strong>بازیکنان</strong><small id="fcHomePlayers">جستجو و فیلتر</small></button>
+<button onclick="showSec('evo')"><span>04 / EVOLUTIONS</span><strong>تکامل بازیکن</strong><small id="fcHomeEvos">شرایط و مراحل</small></button>
+<button onclick="showSec('squad')"><span>05 / SQUAD BUILDER</span><strong>تیم‌سازی</strong><small>ترکیب و شیمی</small></button>
+<button onclick="showSec('club')"><span>06 / MY CLUB</span><strong>باشگاه من</strong><small>موارد ذخیره‌شده</small></button>
+</div></main>
+<main class="main fc-game-page" id="sec-club" style="display:none"><div class="fc-game-eyebrow">MY CLUB / COLLECTION</div><h1 class="fc-game-title">باشگاه من</h1><p class="fc-game-lead">علاقه‌مندی‌ها و بازیکنان ذخیره‌شده روی همین دستگاه؛ بدون ادعای اتصال به باشگاه داخل بازی.</p><div id="fcClubContents" class="fc-game-tiles"></div></main>
+<main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">نمایش بسته‌های واقعی فقط بعد از اتصال منبع قابل تأیید. این سایت خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
+<main class="main fc-game-page" id="sec-news" style="display:none"><div class="fc-game-eyebrow">EA FC / UPDATES</div><h1 class="fc-game-title">اخبار و رویدادها</h1><div id="fcGameNews" class="fc-game-tiles"><div class="fc-game-empty">در حال دریافت اخبار ثبت‌شده…</div></div></main>
+<main class="main fc-game-page" id="sec-settings" style="display:none"><div class="fc-game-eyebrow">PREFERENCES / FC27</div><h1 class="fc-game-title">تنظیمات</h1><div class="fc-game-settings"><label for="fcGameLang">زبان راهنما / Guide language</label><select id="fcGameLang" onchange="setFC27Lang(this.value)"><option value="fa">فارسی</option><option value="en">English</option><option value="both">فارسی + English</option></select><p>پیشرفت چالش‌ها و علاقه‌مندی‌ها روی این مرورگر ذخیره می‌شوند.</p></div></main>
+
 
 <section class="app-hero" aria-label="معرفی FC27 Hub"><div><div class="hero-eyebrow">YOUR ULTIMATE TEAM COMPANION</div><h1 class="hero-title">همه‌چیز برای <span style="color:var(--gold)">FC27</span></h1><p class="hero-desc">اهداف، چالش‌ها، بازیکنان و ترکیب‌ساز در یک تجربه ساده‌تر. داده‌های آرشیوی از اطلاعات تأییدشده جدا شده‌اند.</p></div><div class="hero-mark" aria-hidden="true">27<span style="font-size:20px;vertical-align:top;margin-left:3px">FC</span></div></section>
 
@@ -2289,15 +2334,44 @@ function renderEvoChain(){
    WORLD CUP 2026 DATA & FUNCTIONS
 ══════════════════════════════════════ */
 function showSec(sec){
-  ['obj','sbc','players','squad','evo'].forEach(s=>{
-    const el=document.getElementById('sec-'+s);
-    const bn=document.getElementById('bn-'+s);
-    if(el)el.style.display=s===sec?'block':'none';
-    if(bn)bn.classList.toggle('active',s===sec);
-  });
-  if(sec==='squad')renderPitch();
-  if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
-  window.scrollTo({top:0,behavior:'smooth'});
+ const sections=['home','obj','sbc','players','squad','evo','club','store','news','settings'];
+ if(!sections.includes(sec))sec='home';
+ for(const key of sections){
+  const el=document.getElementById('sec-'+key),bn=document.getElementById('bn-'+key);
+  if(el)el.style.display=key===sec?'block':'none';
+  if(bn)bn.classList.toggle('active',key===sec);
+ }
+ document.querySelectorAll('[data-game-nav]').forEach(el=>{const active=el.dataset.gameNav===sec;el.classList.toggle('active',active);el.setAttribute('aria-current',active?'page':'false')});
+ document.querySelectorAll('.app-hero,.stats-strip').forEach(el=>el.style.display=sec==='home'?'':'none');
+ if(sec==='squad')renderPitch();
+ if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
+ if(sec==='home')updateFCGameHome();
+ if(sec==='club')renderFCGameClub();
+ if(sec==='news')loadFCGameNews();
+ if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
+ try{history.replaceState(null,'','#'+sec)}catch(e){}
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function updateFCGameHome(){
+ const info={'fcHomeObj':liveFC27.sections.objectives.length+' هدف ثبت‌شده','fcHomeSbc':liveFC27.sections.sbc.length+' چالش ثبت‌شده','fcHomePlayers':PLAYERS_RAW.length.toLocaleString('fa-IR')+' بازیکن','fcHomeEvos':verifiedEvos.length+' تکامل ثبت‌شده'};
+ for(const [id,val] of Object.entries(info)){const el=document.getElementById(id);if(el)el.textContent=val}
+}
+function renderFCGameClub(){
+ const host=document.getElementById('fcClubContents');if(!host)return;host.replaceChildren();
+ const categories=[['بازیکنان محبوب',Object.values(state.plFavs||{}).filter(Boolean).length,'players'],['فهرست پیگیری',Object.values(state.watchlist||{}).filter(Boolean).length,'players'],['تیم ذخیره‌شده',Object.keys(state.squad?.slots||{}).filter(k=>state.squad.slots[k]).length,'squad']];
+ for(const [label,count,section] of categories){const btn=document.createElement('button');const title=document.createElement('strong');title.textContent=label;const sub=document.createElement('small');sub.textContent=count.toLocaleString('fa-IR')+' مورد';btn.append(title,sub);btn.onclick=()=>showSec(section);host.appendChild(btn)}
+}
+async function loadFCGameNews(){
+ const host=document.getElementById('fcGameNews');if(!host)return;
+ try{
+  const response=await fetch('./data/fc27-news.json',{cache:'no-store'});if(!response.ok)throw Error('News unavailable');
+  const data=await response.json();const entries=Array.isArray(data)?data:(data.articles||data.news||data.items||[]);
+  host.replaceChildren();
+  let count=0;for(const item of entries.slice(0,12)){const url=item.url||item.link;let link;try{link=new URL(url)}catch{continue}if(!['https:'].includes(link.protocol))continue;
+   const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title||item.name||'خبر FC27';a.style.color='#d0ff53';article.appendChild(a);
+   if(item.published_at||item.date){const small=document.createElement('p');small.textContent=item.published_at||item.date;article.appendChild(small)}host.appendChild(article);count++}
+  if(!count)throw Error('No verified articles');
+ }catch(e){host.replaceChildren();const p=document.createElement('div');p.className='fc-game-empty';p.textContent='خبر معتبر برای نمایش موجود نیست.';host.appendChild(p)}
 }
 
 /* ── INIT ── */
@@ -2502,6 +2576,7 @@ async function loadLiveFC27(){
 function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
+  showSec(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'home');
   loadLiveFC27();
   loadVerifiedEvolutions();
   loadPortraitIndex();
