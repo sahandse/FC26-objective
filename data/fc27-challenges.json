@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-11T03:28:49.383Z",
+  "checked_at": "2026-10-11T03:31:52.168Z",
   "sections": {
     "objectives": [
       {
@@ -31,63 +31,99 @@
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-51-efl-championship-future-stars-pick/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:55.412Z"
       },
       {
         "name": "Carlos Espí",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-56-carlos-espi/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:55.889Z"
       },
       {
         "name": "Weslley Pinto Batista",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-44-weslley-pinto-batista/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:56.837Z"
       },
       {
         "name": "Liga F POTM September",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-42-liga-f-potm-september/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:56.901Z"
       },
       {
         "name": "Tarciane",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-37-tarciane/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:57.773Z"
       },
       {
         "name": "LALIGA POTM September",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-33-laliga-potm-september/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:58.414Z"
       },
       {
         "name": "Premier League POTM September",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-34-premier-league-potm-september/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:59.108Z"
       },
       {
         "name": "Bundesliga POTM September",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-39-bundesliga-potm-september/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:31:59.685Z"
       },
       {
         "name": "Serie A POTM September",
         "category": "players",
         "description": "",
         "url": "https://www.fut.gg/sbc/players/27-32-serie-a-potm-september/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:00.221Z"
       },
       {
         "name": "TOTW Upgrade",
@@ -98,22 +134,29 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T00:00:00Z",
-        "reward": "1x TOTW 1-4 Player Pack"
+        "requirements_checked_at": "2026-10-11T03:32:00.865Z"
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
         "category": "upgrades",
         "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-43-max-86-base-hero-upgrade/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:01.277Z"
       },
       {
         "name": "5x 80+ Upgrade",
         "category": "upgrades",
         "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-48-5x-80-upgrade/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:01.833Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -162,28 +205,45 @@
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-20-intro-to-player-sbcs/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:07.280Z"
       },
       {
         "name": "Gold Re-Roll",
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-9-gold-re-roll/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 83"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:07.882Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-8-bronze-and-silver-re-roll/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 79"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:08.416Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-7-getting-started/",
-        "price": null
+        "price": null,
+        "requirements": [
+          "Rating: Min. 641",
+          "Rating: 45"
+        ],
+        "requirements_checked_at": "2026-10-11T03:32:09.130Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
