@@ -1225,7 +1225,40 @@ function playerFUT(name,rat,pos,sp,big){
   return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
 const AVAILABLE_PORTRAITS=new Set();
-function portraitHTML(p,size=36){const id=Number(p.imgId||PIMG[p.name]||p.id);return AVAILABLE_PORTRAITS.has(id)?`<img src="img/players/${id}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${id})">`:`<span class="player-photo-empty" style="font-size:${size}px;opacity:.4" role="img" aria-label="تصویر موجود نیست">⚽</span>`;}
+const PORTRAIT_LOOKUP=new Map();let portraitObserver=null;
+function portraitHTML(p,size=36){
+ const id=Number(p.imgId||PIMG[p.name]||p.id);
+ if(AVAILABLE_PORTRAITS.has(id))return `<img src="img/players/${id}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${id})">`;
+ const name=String(p.name||'').replace(/[&<>"']/g,'');
+ return `<span class="player-photo-empty fc-wiki-portrait" data-player-name="${name}" style="font-size:${size}px;opacity:.45" role="img" aria-label="در حال بررسی تصویر بازیکن">⚽</span>`;
+}
+function observePlayerPortraits(){
+ if(!('IntersectionObserver' in window))return;
+ if(!portraitObserver)portraitObserver=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){portraitObserver.unobserve(e.target);fetchPlayerPortrait(e.target)}}},{rootMargin:'140px'});
+ document.querySelectorAll('.fc-wiki-portrait:not([data-portrait-observed])').forEach(el=>{el.dataset.portraitObserved='1';portraitObserver.observe(el)});
+}
+async function fetchPlayerPortrait(el){
+ const name=el.dataset.playerName;if(!name||!el.isConnected)return;
+ if(!PORTRAIT_LOOKUP.has(name)){
+  const task=(async()=>{
+   const url='https://en.wikipedia.org/w/api.php?'+new URLSearchParams({action:'query',format:'json',origin:'*',prop:'pageimages|extracts',piprop:'thumbnail',pithumbsize:'200',exintro:'1',explaintext:'1',titles:name});
+   const response=await fetch(url,{signal:AbortSignal.timeout(6000)});
+   if(!response.ok)throw Error('Wikimedia unavailable');
+   const data=await response.json();const pages=Object.values(data.query?.pages||{});
+   const page=pages.find(p=>p.thumbnail?.source&&p.extract&&p.title);
+   if(!page||!/(footballer|soccer player|association football|professional football)/i.test(page.extract.slice(0,520)))return null;
+   const normalized=x=>x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+   const expected=normalized(name),actual=normalized(page.title);
+   if(!(actual===expected||actual.startsWith(expected+' (')))return null;
+   const imageURL=new URL(page.thumbnail.source);if(!/^(upload\.wikimedia\.org|commons\.wikimedia\.org)$/.test(imageURL.hostname))return null;
+   return imageURL.href;
+  })().catch(()=>null);
+  PORTRAIT_LOOKUP.set(name,task);
+ }
+ const src=await PORTRAIT_LOOKUP.get(name);
+ if(!src||!el.isConnected)return;
+ const img=document.createElement('img');img.src=src;img.alt=name;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';img.onerror=()=>{img.replaceWith(el);el.setAttribute('aria-label','تصویر بازیکن پیدا نشد')};el.replaceWith(img);
+}
 async function loadPortraitIndex(){try{const r=await fetch('./data/available-portraits.json',{cache:'no-store'});if(!r.ok)throw Error('No portrait index');const data=await r.json();if(!Array.isArray(data.ids))throw Error('Invalid portrait index');AVAILABLE_PORTRAITS.clear();for(const id of data.ids)if(Number.isInteger(id))AVAILABLE_PORTRAITS.add(id);renderPlayers();}catch(e){console.warn('Portrait index unavailable',e)}}
 function imgFallback(el,id){
   const urls=[]; // FC26 CDN fallbacks disabled; use verified FC27 assets only when available.
@@ -2402,6 +2435,7 @@ async function loadLiveFC27(){
  renderLiveFC27();
 }
 function init(){
+  const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
   loadLiveFC27();
   loadPortraitIndex();
