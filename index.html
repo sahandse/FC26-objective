@@ -2400,9 +2400,36 @@ function openFC27Details(kind,rec){
   block.appendChild(fc27Node('p','fc27-detail-note','این موارد محدودیت بازیکنان مجاز هستند؛ ممکن است شرایط کامل Squad نباشند.'));
   const list=fc27Node('ul','');for(const value of rec.requirements)list.appendChild(fc27Node('li','',value));block.appendChild(list);panel.appendChild(block);
  }
+ if(Array.isArray(rec.tasks)&&rec.tasks.length){
+  const section=fc27Node('section','fc27-detail-subsection');section.appendChild(fc27Node('h3','','مأموریت‌های دقیق / Objective tasks'));
+  rec.tasks.forEach((task,i)=>{
+   const part=fc27Node('div','fc27-detail-squad');
+   part.appendChild(fc27Node('strong','',task.nameFA||task.name));
+   part.appendChild(fc27Node('p','fc27-original-title',task.name));
+   if(fc27Lang!=='en'&&task.descriptionFA)part.appendChild(fc27Node('p','',task.descriptionFA));
+   if(fc27Lang!=='fa'&&task.description)part.appendChild(fc27Node('p','fc27-step-en',task.description));
+   if(task.reward)part.appendChild(fc27Node('p','fc27-detail-note','پاداش / Reward: '+task.reward));
+   section.appendChild(part);
+  });panel.appendChild(section);
+ }
+ if(Array.isArray(rec.levels)&&rec.levels.length){
+  const section=fc27Node('section','fc27-detail-subsection');section.appendChild(fc27Node('h3','','مراحل تکامل / Evolution levels'));
+  for(const level of rec.levels){
+   const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',level.nameFA||level.name));
+   if(fc27Lang!=='fa')part.appendChild(fc27Node('p','fc27-original-title',level.name));
+   const steps=fc27Node('ol','');
+   for(let i=0;i<(level.tasks||[]).length;i++){
+    const li=fc27Node('li','');if(fc27Lang!=='en')li.appendChild(fc27Node('span','',level.tasksFA?.[i]||level.tasks[i]));
+    if(fc27Lang!=='fa')li.appendChild(fc27Node('p','fc27-step-en',level.tasks[i]));steps.appendChild(li);
+   }
+   part.appendChild(steps);
+   if(level.upgrades?.length){part.appendChild(fc27Node('b','','ارتقاها / Boosts'));const ul=fc27Node('ul','');for(const value of level.upgrades)ul.appendChild(fc27Node('li','',value));part.appendChild(ul)}
+   section.appendChild(part);
+  }panel.appendChild(section);
+ }
  if(Array.isArray(rec.squads)&&rec.squads.length){
   const squads=fc27Node('section','fc27-detail-subsection');squads.appendChild(fc27Node('h3','','بخش‌های تیم / Squad segments'));
-  for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.name||'Squad'));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}squads.appendChild(part)}panel.appendChild(squads);
+  for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.nameFA||seg.name||'Squad'));if(seg.nameFA)part.appendChild(fc27Node('p','fc27-original-title',seg.name));if(seg.reward)part.appendChild(fc27Node('p','fc27-detail-note','پاداش / Reward: '+seg.reward));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}squads.appendChild(part)}panel.appendChild(squads);
  }else{panel.appendChild(fc27Node('p','fc27-detail-note',kind==='sbc'?'شرایط دقیق تیم هنوز دریافت نشده‌اند. اطلاعات تأییدنشده نمایش داده نمی‌شوند.':'مراحل و شروط دقیق این هدف هنوز به‌صورت ساختاری دریافت نشده‌اند.'))}
  const walkthrough=fc27Node('section','fc27-detail-subsection');walkthrough.appendChild(fc27Node('h3','','راهنمای انجام / Walkthrough'));
  const fa=kind==='evolutions'?['در Ultimate Team وارد Evolutions شوید.','این تکامل را پیدا کنید و شرایط موقعیت، امتیاز و PlayStyles را با کارت بازیکن مقایسه کنید.','قبل از شروع، ارتقاها و مهلت دقیق مراحل را در بازی بررسی کنید.','مراحل مسابقات یا تمرین را انجام دهید و پاداش تکامل را دریافت کنید.']:guideFC27(kind,rec);
