@@ -6,7 +6,7 @@ const data=JSON.parse(fs.readFileSync(path.join(root,'data/fc27-players.json'),'
 const file=path.join(root,'data/available-portraits.json');
 const index=JSON.parse(fs.readFileSync(file,'utf8'));
 const existing=new Set(index.ids.map(Number));const attribution=[];
-const work=data.players.filter(p=>p&&p.id&&p.name&&!existing.has(Number(p.id))).sort((a,b)=>(b.rat||0)-(a.rat||0)).slice(0,90);
+const work=data.players.filter(p=>p&&p.id&&p.name&&!existing.has(Number(p.id))).sort((a,b)=>(b.rat||0)-(a.rat||0)).slice(0,35);
 const delay=ms=>new Promise(ok=>setTimeout(ok,ms));
 const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 async function get(url){const r=await fetch(url,{headers:{'User-Agent':'FC27Hub educational free-license image sync/1.0 (github.com/sahandse/FC26-objective)'},signal:AbortSignal.timeout(9000)});if(!r.ok)throw Error('HTTP '+r.status);return r;}
@@ -19,12 +19,12 @@ async function lookup(p){
  const imgURL=new URL(page.original.source);
  if(imgURL.hostname!=='upload.wikimedia.org'||!imgURL.pathname.startsWith('/wikipedia/commons/'))return null;
  const filename=decodeURIComponent(imgURL.pathname.split('/').at(-1)||'');
- const q2=new URLSearchParams({action:'query',format:'json',prop:'imageinfo',iiprop:'extmetadata|url',titles:'File:'+filename});
+ const q2=new URLSearchParams({action:'query',format:'json',prop:'imageinfo',iiprop:'extmetadata|url',iiurlwidth:'250',titles:'File:'+filename});
  const commons=await(await get('https://commons.wikimedia.org/w/api.php?'+q2)).json();
  const info=Object.values(commons.query?.pages||{})[0]?.imageinfo?.[0];if(!info)return null;
  const md=info.extmetadata||{},license=md.LicenseShortName?.value||'',author=md.Artist?.value||'';
  if(!/^(CC BY(?:-SA)?\s*[234]\.0|CC0|Public domain|PD)$/i.test(license.trim()))return null;
- const img=await get(info.url);const type=img.headers.get('content-type')||'';
+ const img=await get(info.thumburl||info.url);const type=img.headers.get('content-type')||'';
  if(!type.includes('image/jpeg')&&!type.includes('image/png')&&!type.includes('image/webp'))return null;
  const buf=Buffer.from(await img.arrayBuffer());if(buf.byteLength<4000||buf.byteLength>500000)return null;
  let ext=type.includes('png')?'png':type.includes('webp')?'webp':'jpg';
@@ -32,7 +32,7 @@ async function lookup(p){
 }
 (async()=>{
  fs.mkdirSync(folder,{recursive:true});let saved=0;
- for(const p of work){if(saved>=20)break;
+ for(const p of work){if(saved>=12)break;
   try{
    const image=await lookup(p);
    if(!image)continue;
