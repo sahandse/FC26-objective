@@ -857,7 +857,30 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 .fc-mobile-more button{padding:15px 9px;min-height:50px;border-radius:10px;border:1px solid #445747;background:#223128;color:#effce5;font:inherit;cursor:pointer}
 @media(min-width:800px){.fc-mobile-more,#bn-more{display:none!important}}
 @media(max-width:799px){.bottom-nav{overflow-x:auto;scrollbar-width:none}.bottom-nav .bnav-btn{min-width:57px;flex:1}.fc-mobile-more button:focus-visible,.fc-game-nav button:focus-visible{outline:2px solid #d4ff4c;outline-offset:2px}}
-</style><style>.fc-game-save{display:inline-flex;justify-content:center;align-items:center;min-height:36px;background:#243128;border:1px solid #536b42;color:#d9f8ba;padding:8px 12px;border-radius:9px;font:inherit;font-size:12px;cursor:pointer}.fc-game-save[aria-pressed=true]{background:#caff38;color:#17211a}.fc-game-save:focus-visible{outline:2px solid #fff}</style></head>
+</style><style>.fc-game-save{display:inline-flex;justify-content:center;align-items:center;min-height:36px;background:#243128;border:1px solid #536b42;color:#d9f8ba;padding:8px 12px;border-radius:9px;font:inherit;font-size:12px;cursor:pointer}.fc-game-save[aria-pressed=true]{background:#caff38;color:#17211a}.fc-game-save:focus-visible{outline:2px solid #fff}</style><style>
+/* Console mode: 10-foot interface, controller focus rings and safe margins. */
+.bottom-nav,.fc-mobile-more,#fcMobileMore{display:none!important}
+body{padding-bottom:0!important}
+:root{--console-focus:#d2ff4b}
+html.fc-console{font-size:19px;scroll-behavior:smooth}
+.fc-console body{padding:0 4vw!important;max-width:1920px;margin:auto}
+.fc-console .fc-game-nav{position:sticky;top:0;max-width:none;gap:12px;padding:20px 0;scroll-snap-type:x mandatory}
+.fc-console .fc-game-nav button{min-width:158px;min-height:94px;font-size:18px;padding:15px;scroll-snap-align:center}
+.fc-console .fc-game-nav button small{font-size:12px}
+.fc-console .main,.fc-console .fc-game-page{max-width:none;padding:25px 0}
+.fc-console .fc-game-tiles{gap:20px}
+.fc-console .fc-game-tiles>button{min-height:180px;padding:28px}
+.fc-console .fc-game-feature{min-height:315px}
+.fc-console input,.fc-console button,.fc-console select{min-height:45px}
+.fc-console :is(button,a,input,select,textarea,[tabindex]):focus-visible,.fc-console .fc-controller-focused{outline:4px solid var(--console-focus)!important;outline-offset:5px!important;box-shadow:0 0 0 8px #ccff4730!important;position:relative;z-index:4}
+.fc-console .fc27-detail-panel{max-width:950px;max-height:88vh;font-size:18px}
+.fc-console .fc-feed-grid{gap:18px}
+.fc-console .fc-feed-card{padding:24px}
+.fc-console .fc-console-help{display:block}
+.fc-console-help{display:none;position:fixed;bottom:20px;left:5vw;z-index:90;background:#10201de8;color:#d1f4c2;border:1px solid #708d55;border-radius:12px;padding:10px 18px;font-size:13px;pointer-events:none}
+@media(max-width:900px){.fc-console body{padding:0 3vw!important}.fc-console .fc-game-nav button{min-width:125px;min-height:78px;font-size:15px}.fc-console .fc-game-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.fc-console .fc-game-tiles{grid-template-columns:1fr}.fc-console .fc-console-help{font-size:10px}}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -911,7 +934,7 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 <main class="main fc-game-page" id="sec-club" style="display:none"><div class="fc-game-eyebrow">MY CLUB / COLLECTION</div><h1 class="fc-game-title">باشگاه من</h1><p class="fc-game-lead">علاقه‌مندی‌ها و بازیکنان ذخیره‌شده روی همین دستگاه؛ بدون ادعای اتصال به باشگاه داخل بازی.</p><div id="fcClubContents" class="fc-game-tiles"></div></main>
 <main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">این صفحه فقط برای نمایش اطلاعات ثبت‌شده در پروژه است؛ هیچ اتصال جدید، خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
 <main class="main fc-game-page" id="sec-news" style="display:none"><div class="fc-game-eyebrow">EA FC / UPDATES</div><h1 class="fc-game-title">اخبار و رویدادها</h1><div id="fcGameNews" class="fc-game-tiles"><div class="fc-game-empty">در حال دریافت اخبار ثبت‌شده…</div></div></main>
-<main class="main fc-game-page" id="sec-settings" style="display:none"><div class="fc-game-eyebrow">PREFERENCES / FC27</div><h1 class="fc-game-title">تنظیمات</h1><div class="fc-game-settings"><label for="fcGameLang">زبان راهنما / Guide language</label><select id="fcGameLang" onchange="setFC27Lang(this.value)"><option value="fa">فارسی</option><option value="en">English</option><option value="both">فارسی + English</option></select><p>پیشرفت چالش‌ها و علاقه‌مندی‌ها روی این مرورگر ذخیره می‌شوند.</p></div></main>
+<main class="main fc-game-page" id="sec-settings" style="display:none"><div class="fc-game-eyebrow">PREFERENCES / FC27</div><h1 class="fc-game-title">تنظیمات</h1><div class="fc-game-settings"><button id="fcConsoleToggle" type="button" onclick="applyFCConsoleMode(!consoleMode)" aria-pressed="false" style="padding:14px;border-radius:10px;background:#d0fd4d;color:#18211b;font-weight:800;border:0">حالت کنسول / Console</button><label for="fcGameLang">زبان راهنما / Guide language</label><select id="fcGameLang" onchange="setFC27Lang(this.value)"><option value="fa">فارسی</option><option value="en">English</option><option value="both">فارسی + English</option></select><p>پیشرفت چالش‌ها و علاقه‌مندی‌ها روی این مرورگر ذخیره می‌شوند.</p></div></main>
 
 
 <section class="app-hero" aria-label="معرفی FC27 Hub"><div><div class="hero-eyebrow">YOUR ULTIMATE TEAM COMPANION</div><h1 class="hero-title">همه‌چیز برای <span style="color:var(--gold)">FC27</span></h1><p class="hero-desc">اهداف، چالش‌ها، بازیکنان و ترکیب‌ساز در یک تجربه ساده‌تر. داده‌های آرشیوی از اطلاعات تأییدشده جدا شده‌اند.</p></div><div class="hero-mark" aria-hidden="true">27<span style="font-size:20px;vertical-align:top;margin-left:3px">FC</span></div></section>
@@ -2622,7 +2645,58 @@ async function loadLiveFC27(){
  renderLiveFC27();
  updateFCGameHome();renderFCGameFeatured();
 }
+
+let consoleMode=false,consolePadPrev={},consolePadLastMove=0;
+function applyFCConsoleMode(enabled){
+ consoleMode=Boolean(enabled);
+ document.documentElement.classList.toggle('fc-console',consoleMode);
+ try{localStorage.setItem('fc27-console-mode',consoleMode?'1':'0')}catch(e){}
+ const btn=document.getElementById('fcConsoleToggle');if(btn){btn.textContent=consoleMode?'حالت عادی / Standard':'حالت کنسول / Console';btn.setAttribute('aria-pressed',String(consoleMode))}
+ if(consoleMode){const first=document.querySelector('.fc-game-nav button.active')||document.querySelector('.fc-game-nav button');first?.focus({preventScroll:true})}
+}
+function fcConsoleCandidates(){return [...document.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),[tabindex="0"]')].filter(el=>{const r=el.getBoundingClientRect();const cs=getComputedStyle(el);return r.width>1&&r.height>1&&cs.visibility!=='hidden'&&cs.display!=='none'})}
+function fcConsoleMove(dx,dy){
+ const candidates=fcConsoleCandidates(),current=document.activeElement;
+ if(!candidates.length)return;
+ const rect=current?.getBoundingClientRect(),cx=rect?(rect.left+rect.right)/2:innerWidth/2,cy=rect?(rect.top+rect.bottom)/2:innerHeight/2;
+ let best=null,score=Infinity;
+ for(const el of candidates){if(el===current)continue;const r=el.getBoundingClientRect();const x=(r.left+r.right)/2-cx,y=(r.top+r.bottom)/2-cy;
+ const dot=x*dx+y*dy;if(dot<=5)continue;
+ const cross=Math.abs(x*dy-y*dx);const rank=dot+cross*2.7+(r.bottom<0||r.top>innerHeight?300:0);
+ if(rank<score){score=rank;best=el}}
+ if(best){best.focus({preventScroll:true});best.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'})}
+}
+function fcConsoleBack(){
+ const overlay=document.getElementById('fc27-detail-dialog');if(overlay){overlay.remove();return}
+ const more=document.getElementById('fcMobileMore');if(more&&more.getAttribute('aria-hidden')==='false'){toggleFCMobileMore(false);return}
+ if(location.hash&&location.hash!=='#home')showSec('home');
+}
+function fcConsolePoll(){
+ if(consoleMode&&navigator.getGamepads){
+  const pads=navigator.getGamepads();
+  const pad=pads&&[...pads].find(Boolean);
+  if(pad){
+   const pressed=i=>Boolean(pad.buttons[i]?.pressed);
+   const select=pressed(0),back=pressed(1);
+   if(select&&!consolePadPrev.select)document.activeElement?.click();
+   if(back&&!consolePadPrev.back)fcConsoleBack();
+   consolePadPrev.select=select;consolePadPrev.back=back;
+   const x=(pressed(15)?1:0)-(pressed(14)?1:0)+(Math.abs(pad.axes[0]||0)>.65?Math.sign(pad.axes[0]):0);
+   const y=(pressed(13)?1:0)-(pressed(12)?1:0)+(Math.abs(pad.axes[1]||0)>.65?Math.sign(pad.axes[1]):0);
+   const now=performance.now();if((x||y)&&now-consolePadLastMove>190){fcConsoleMove(Math.sign(x),Math.sign(y));consolePadLastMove=now}
+  }
+ }
+ requestAnimationFrame(fcConsolePoll);
+}
+document.addEventListener('keydown',event=>{
+ if(!consoleMode)return;
+ if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key)){const map={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};event.preventDefault();fcConsoleMove(...map[event.key])}
+ if(event.key==='Escape'||event.key==='Backspace'){event.preventDefault();fcConsoleBack()}
+});
+
 function init(){
+  try{applyFCConsoleMode(localStorage.getItem('fc27-console-mode')==='1')}catch(e){}
+  requestAnimationFrame(fcConsolePoll);
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
   restoreFC27Section();
@@ -2653,41 +2727,13 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav" aria-label="ناوبری موبایل">
-  <button class="bnav-btn" id="bn-home" onclick="showSec('home')"><span class="bnav-icon">⌂</span><span>خانه</span></button>
-  <button class="bnav-btn active" id="bn-obj" onclick="showSec('obj')">
-    <span class="bnav-icon">🎯</span>
-    <span>اهداف</span>
-    <span class="bnav-badge" id="sp-obj">0</span>
-  </button>
-  <button class="bnav-btn" id="bn-sbc" onclick="showSec('sbc')">
-    <span class="bnav-icon">⚗️</span>
-    <span>SBC</span>
-    <span class="bnav-badge" id="sp-sbc">0</span>
-  </button>
-  <button class="bnav-btn" id="bn-players" onclick="showSec('players')">
-    <span class="bnav-icon">👥</span>
-    <span>بازیکنان</span>
-    <span class="bnav-badge" id="sp-players">0</span>
-  </button>
-  <button class="bnav-btn" id="bn-squad" onclick="showSec('squad')">
-    <span class="bnav-icon">⚽</span>
-    <span>تیم‌ساز</span>
-  </button>
-  <button class="bnav-btn" id="bn-evo" onclick="showSec('evo')">
-    <span class="bnav-icon">🧬</span>
-    <span>تکامل</span>
-  </button>
-  
-  
-<button class="bnav-btn" id="bn-more" aria-expanded="false" aria-controls="fcMobileMore" onclick="toggleFCMobileMore()"><span class="bnav-icon">☷</span><span>بیشتر</span></button>
-</nav>
+
 <div id="fcMobileMore" class="fc-mobile-more" hidden aria-label="منوهای بیشتر">
 <button onclick="showSec('club')">♧ باشگاه</button>
 <button onclick="showSec('store')">▣ فروشگاه</button>
 <button onclick="showSec('news')">◈ اخبار</button>
 <button onclick="showSec('settings')">⚙ تنظیمات</button>
 </div>
+<div class="fc-console-help" aria-hidden="true">✕ انتخاب / Select &nbsp; ○ بازگشت / Back &nbsp; ◀ ▶ ▲ ▼ جابه‌جایی / Navigate</div>
 </body>
 </html>
