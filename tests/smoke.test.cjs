@@ -99,18 +99,28 @@ test('verified SBC segments and objective tasks are available in-site',()=>{
 test('game navigation and official news are wired to real sections',()=>{
  for(const section of ['home','obj','sbc','players','squad','evo','club','store','news','settings'])assert.ok(html.includes('id="sec-'+section+'"'));
  assert.match(html,/data-game-nav="home"/);
- assert.match(html,/id="bn-home"/);
+ assert.doesNotMatch(html,/<nav class="bottom-nav"/);
  assert.match(html,/data\.items\|\|data\.articles/);
  assert.match(html,/window\.addEventListener\('popstate'/);
  assert.match(html,/fc-game-nav button:focus-visible/);
 });
 
 test('mobile overflow navigation and history restoration are safe',()=>{
- assert.match(html,/id="bn-more"/);
- assert.match(html,/id="fcMobileMore"/);
+ assert.match(html,/function applyFCConsoleMode/);
+ assert.match(html,/function fcConsolePoll/);
  assert.match(html,/function toggleFCMobileMore/);
  assert.match(html,/function restoreFC27Section/);
  assert.match(html,/window\.addEventListener\('hashchange',restoreFC27Section\)/);
  assert.match(html,/if\(!fromHistory\)/);
  assert.doesNotMatch(html,/نمایش بسته‌های واقعی فقط بعد از اتصال منبع/);
+});
+
+test('console mode supports PS4/PS5 navigation and has no bottom bar',()=>{
+ assert.match(html,/fc-console/);
+ assert.match(html,/navigator\.getGamepads/);
+ assert.match(html,/fcConsoleMove/);
+ assert.match(html,/fcConsoleBack/);
+ assert.match(html,/fcConsoleToggle/);
+ assert.doesNotMatch(html,/<nav class="bottom-nav"/);
+ assert.doesNotMatch(html,/id="fcMobileMore"/);
 });
