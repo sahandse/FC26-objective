@@ -4,6 +4,36 @@
   "sections": {
     "objectives": [
       {
+        "name": "Future Stars Celebration",
+        "category": "campaign",
+        "description": "Use young players that are more agile and earn exclusive rewards. All rewards are untradeable.",
+        "url": "https://www.fut.gg/objectives/campaigns/127-future-stars-celebration/",
+        "reward": "200 SP + 2,500 Coins",
+        "tasks": [
+          {
+            "name": "Score in 10",
+            "nameFA": "گلزنی در ۱۰ مسابقه",
+            "description": "Score in 10 separate matches in Squad Battles on min. Semi-pro difficulty (or Rivals/Champions/Live Events/Rush) while using min. 3 players born on October 9, 2003 or after in your starting XI.",
+            "descriptionFA": "در ۱۰ مسابقه جداگانه گل بزنید؛ حالت Squad Battles با سختی حداقل Semi-Pro یا Rivals / Champions / Live Events / Rush. حداقل ۳ بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن باید در ترکیب اصلی باشند.",
+            "reward": "100 SP"
+          },
+          {
+            "name": "Play 7",
+            "nameFA": "انجام ۷ مسابقه",
+            "description": "Play 7 matches in Squad Battles on min. Semi-Pro difficulty (or Rivals/Champions/Live Events/Rush) while using min. 3 players born on October 9, 2003 or after in your starting XI.",
+            "descriptionFA": "۷ مسابقه در حالت‌های مجاز انجام دهید؛ در Squad Battles سختی حداقل Semi-Pro باشد و ۳ بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن در ترکیب اصلی داشته باشید.",
+            "reward": "2,500 Coins"
+          },
+          {
+            "name": "Assist 1",
+            "nameFA": "ثبت یک پاس گل",
+            "description": "Assist in 1 match in Squad Battles on min. Semi-Pro difficulty (or Rivals/Champions/Live Events/Rush) using a player born on October 9, 2003 or after.",
+            "descriptionFA": "در یک مسابقه در حالت‌های مجاز، با بازیکن متولد ۹ اکتبر ۲۰۰۳ یا بعد از آن یک پاس گل بدهید؛ سختی Squad Battles حداقل Semi-Pro باشد.",
+            "reward": "100 SP"
+          }
+        ]
+      },
+      {
         "name": "Weekly Objectives",
         "category": "weekly",
         "description": "Complete Weekly Objectives to earn SP!",
@@ -250,7 +280,37 @@
         "category": "foundation",
         "description": "",
         "url": "https://www.fut.gg/sbc/foundations/27-3-intro-to-upgrade-sbcs/",
-        "price": null
+        "price": null,
+        "squads": [
+          {
+            "name": "Room To Grow",
+            "nameFA": "فضای پیشرفت",
+            "requirements": [
+              "Quality: Min. 11 Bronze players",
+              "Team rating: Max. 64"
+            ],
+            "reward": "1x Large Silver Players Pack"
+          },
+          {
+            "name": "Build Up Play",
+            "nameFA": "بازی‌سازی",
+            "requirements": [
+              "Quality: Min. 11 Silver players"
+            ],
+            "reward": "1x Gold Pack"
+          },
+          {
+            "name": "Raw Power",
+            "nameFA": "قدرت خام",
+            "requirements": [
+              "Quality: Min. 11 Gold players",
+              "Team rating: Max. 85",
+              "Chemistry: Min. 10"
+            ],
+            "reward": "1x Large Gold Pack"
+          }
+        ],
+        "squads_checked_at": "2026-10-11T07:00:00Z"
       },
       {
         "name": "Intro to SBCs",
