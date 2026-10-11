@@ -62,15 +62,17 @@ async function scrape(p){
    const res=await fetch(rec.url,{headers:{'User-Agent':'Mozilla/5.0 FC27Hub/1.0','Accept':'text/html'}});
    if(!res.ok)continue;
    const $=cheerio.load(await res.text());
-   const main=$('main').first();
-   const text=(main.length?main:$('body')).text().replace(/\\s+/g,' ').trim();
-   const section=text.match(/Eligible players\\s*([^]*?)(?:\\bSolve\\b|Streamlined SBC Solver|© 2026)/i);
-   const limits=section?.[1]||'';
+   const body=$('body').text().replace(/\s+/g,' ').trim();
+   const begin=body.indexOf('Eligible players');
+   const end=begin>=0?body.indexOf(' Solve',begin):-1;
+   const limits=begin>=0?body.slice(begin+16,end>begin?end:begin+800):'';
    const requirements=[];
-   for(const match of limits.matchAll(/(?:Rating|Chemistry|Players|Rare Players|Team Overall Rating):?\\s*(?:Min\\.|Max\\.)?\\s*\\d+(?:\\s*\\w+)?/gi))requirements.push(match[0].trim());
+   const rulePattern=/(?:Rating|Chemistry|Players|Rare Players|Team Overall Rating):\s*(?:(?:Min|Max)\.\s*)?\d+/gi;
+   for(const match of limits.matchAll(rulePattern))requirements.push(match[0].trim());
    if(requirements.length){rec.requirements=[...new Set(requirements)].slice(0,15);rec.requirements_checked_at=new Date().toISOString();}
-   const reward=(text.match(/Rewards\\s+(.{5,120}?)(?=\\bEligible players\\b|\\bSolve\\b)/i)||[])[1];
-   if(reward)rec.reward=reward.trim().slice(0,120);
+   // Reward names are recorded only when clearly bracketed by the detail headings.
+   const rewardMatch=body.match(/\bRewards\s+(1x\s+.{4,90}?\s+(?:Pack|Player|Pick))(?:\s|$)/i);
+   if(rewardMatch)rec.reward=rewardMatch[1].trim();
   }catch(e){console.warn('Detail not available',rec.url,e.message)}
  }
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync(file,JSON.stringify(result,null,2)+'\n');
