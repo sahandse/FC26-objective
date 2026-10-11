@@ -826,7 +826,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .fc27-detail-subsection{border-top:1px solid #384b51;padding-top:16px;margin-top:17px;line-height:1.9;font-size:13px}.fc27-detail-subsection h3{color:#caff38;font-size:15px}.fc27-detail-subsection li{margin-bottom:8px}.fc27-detail-note{color:#b4c2c3;font-size:12px;line-height:1.9}.fc27-detail-description{line-height:1.9;color:#bccbd0}
 .fc27-detail-squad{background:#1c2930;border-radius:11px;padding:12px;margin:10px 0}
 @media(max-width:600px){.fc27-detail-panel{max-height:96dvh;padding:16px}.fc27-detail-facts{grid-template-columns:1fr}.fc27-detail-head h2{font-size:18px}}
-</style></head>
+</style><style>.fc27-evo-chips{display:flex;gap:5px;flex-wrap:wrap}.fc27-evo-chip{background:#293b33;color:#d3ffab;border:1px solid #405a40;border-radius:8px;padding:6px 9px;font-size:11px}#evoGrid:empty{display:none}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1050,6 +1050,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
     <span class="section-title">🧬 ردیاب تکامل</span>
     <span class="section-cnt" id="evoSecCnt">0 تکامل</span>
   </div>
+  <div id="verifiedEvoGrid" class="fc-feed-grid" aria-live="polite"></div>
   <div class="evo-grid" id="evoGrid"></div>
   <!-- UPGRADE HUB (N) -->
   <div class="evo-sec-hd">🔄 هاب ارتقاء بازیکنان</div>
@@ -1884,6 +1885,35 @@ function closeComp(){
 }
 
 /* ── EVOLUTION FUNCTIONS ── */
+
+let verifiedEvos=[];
+async function loadVerifiedEvolutions(){
+ try{
+  const res=await fetch('./data/fc27-evolutions.json?v='+Date.now(),{cache:'no-store'});
+  if(!res.ok)throw Error('Evolutions unavailable');
+  const data=await res.json();
+  if(!Array.isArray(data.evolutions)||data.source!=='FUT.GG')throw Error('Invalid evolution data');
+  verifiedEvos=data.evolutions;
+ }catch(error){console.warn('Verified evolutions unavailable',error)}
+ renderVerifiedEvolutions();
+}
+function renderVerifiedEvolutions(){
+ const host=document.getElementById('verifiedEvoGrid');if(!host)return;
+ host.replaceChildren();
+ const counter=document.getElementById('evoSecCnt');if(counter)counter.textContent=verifiedEvos.length.toLocaleString('fa-IR')+' تکامل';
+ for(const evo of verifiedEvos){
+  const card=fc27Node('article','fc-feed-card');
+  card.append(fc27Node('h3','',evo.nameFA||evo.name),fc27Node('p','fc27-original-title',evo.name));
+  card.appendChild(fc27Node('p','',evo.description||''));
+  const chip=fc27Node('div','fc27-evo-chips');
+  for(const req of evo.requirements||[])chip.appendChild(fc27Node('span','fc27-evo-chip',req));
+  card.appendChild(chip);
+  const open=fc27Node('button','fc27-detail-open','جزئیات تکامل / Evolution details');
+  open.type='button';open.onclick=()=>openFC27Details('evolutions',evo);card.appendChild(open);
+  host.appendChild(card);
+ }
+ if(!verifiedEvos.length)host.appendChild(fc27Node('p','fc-feed-meta','اطلاعات تأییدشده تکامل فعلاً در دسترس نیست.'));
+}
 function renderEvo(){
   const grid=document.getElementById('evoGrid');
   const cnt=document.getElementById('evoSecCnt');
@@ -2358,7 +2388,12 @@ function openFC27Details(kind,rec){
  for(const [label,val] of fields){if(val!==undefined&&val!==null&&String(val).trim()){const item=fc27Node('div','fc27-detail-fact');item.append(fc27Node('span','',label),fc27Node('strong','',val));info.appendChild(item)}}
  panel.appendChild(info);
  if(rec.description){panel.appendChild(fc27Node('p','fc27-detail-description',rec.description))}
- if(Array.isArray(rec.requirements)&&rec.requirements.length){
+ if(kind==='evolutions'&&Array.isArray(rec.upgrades)&&rec.upgrades.length){
+  const upgrades=fc27Node('section','fc27-detail-subsection');upgrades.appendChild(fc27Node('h3','','ارتقاها / Upgrades'));
+  const ul=fc27Node('ul','');for(const value of rec.upgrades)ul.appendChild(fc27Node('li','',value));
+  upgrades.appendChild(ul);panel.appendChild(upgrades);
+ }
+  if(Array.isArray(rec.requirements)&&rec.requirements.length){
   const block=fc27Node('section','fc27-detail-subsection');
   block.appendChild(fc27Node('h3','','بازیکنان مجاز / Eligible players'));
   block.appendChild(fc27Node('p','fc27-detail-note','این موارد محدودیت بازیکنان مجاز هستند؛ ممکن است شرایط کامل Squad نباشند.'));
@@ -2369,7 +2404,9 @@ function openFC27Details(kind,rec){
   for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.name||'Squad'));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}squads.appendChild(part)}panel.appendChild(squads);
  }else{panel.appendChild(fc27Node('p','fc27-detail-note',kind==='sbc'?'شرایط دقیق تیم هنوز دریافت نشده‌اند. اطلاعات تأییدنشده نمایش داده نمی‌شوند.':'مراحل و شروط دقیق این هدف هنوز به‌صورت ساختاری دریافت نشده‌اند.'))}
  const walkthrough=fc27Node('section','fc27-detail-subsection');walkthrough.appendChild(fc27Node('h3','','راهنمای انجام / Walkthrough'));
- const fa=guideFC27(kind,rec),en=fc27EnglishGuide(kind,rec);const ol=fc27Node('ol','');
+ const fa=kind==='evolutions'?['در Ultimate Team وارد Evolutions شوید.','این تکامل را پیدا کنید و شرایط موقعیت، امتیاز و PlayStyles را با کارت بازیکن مقایسه کنید.','قبل از شروع، ارتقاها و مهلت دقیق مراحل را در بازی بررسی کنید.','مراحل مسابقات یا تمرین را انجام دهید و پاداش تکامل را دریافت کنید.']:guideFC27(kind,rec);
+ const en=kind==='evolutions'?['Open Evolutions in Ultimate Team.','Find this evolution and match its position, overall and PlayStyle restrictions to your selected item.','Check the exact level upgrades and deadlines in-game before confirming.','Complete the listed match or training tasks and claim each upgrade.']:fc27EnglishGuide(kind,rec);
+ const ol=fc27Node('ol','');
  for(let i=0;i<Math.max(fa.length,en.length);i++){const li=fc27Node('li','');if(fc27Lang!=='en'&&fa[i])li.appendChild(fc27Node('p','',fa[i]));if(fc27Lang!=='fa'&&en[i]){const p=fc27Node('p','fc27-step-en',en[i]);p.dir='ltr';li.appendChild(p)}ol.appendChild(li)}walkthrough.appendChild(ol);panel.appendChild(walkthrough);
  overlay.appendChild(panel);overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});const esc=e=>{if(e.key==='Escape'){overlay.remove();document.removeEventListener('keydown',esc)}};document.addEventListener('keydown',esc);document.body.appendChild(overlay);close.focus();
 }
@@ -2438,6 +2475,7 @@ function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
   loadLiveFC27();
+  loadVerifiedEvolutions();
   loadPortraitIndex();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
