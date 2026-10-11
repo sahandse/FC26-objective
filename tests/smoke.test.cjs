@@ -104,3 +104,13 @@ test('game navigation and official news are wired to real sections',()=>{
  assert.match(html,/window\.addEventListener\('popstate'/);
  assert.match(html,/fc-game-nav button:focus-visible/);
 });
+
+test('mobile overflow navigation and history restoration are safe',()=>{
+ assert.match(html,/id="bn-more"/);
+ assert.match(html,/id="fcMobileMore"/);
+ assert.match(html,/function toggleFCMobileMore/);
+ assert.match(html,/function restoreFC27Section/);
+ assert.match(html,/window\.addEventListener\('hashchange',restoreFC27Section\)/);
+ assert.match(html,/if\(!fromHistory\)/);
+ assert.doesNotMatch(html,/نمایش بسته‌های واقعی فقط بعد از اتصال منبع/);
+});
