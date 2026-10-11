@@ -1,6 +1,10 @@
 name: FC27 Licensed Player Photos
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/sync-player-photos.cjs'
+      - '.github/workflows/fc27-photos.yml'
   schedule:
     - cron: '34 4 * * 0'
 permissions:
