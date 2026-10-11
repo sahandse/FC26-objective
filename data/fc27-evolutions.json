@@ -1,0 +1,64 @@
+{
+  "source": "FUT.GG",
+  "checked_at": "2026-10-11T07:00:00Z",
+  "evolutions": [
+    {
+      "name": "Intro to Evolutions",
+      "nameFA": "آشنایی با تکامل",
+      "description": "Welcome to Evolutions in FC 27! Upgrade a player of your choice and unlock their first attribute boost.",
+      "requirements": [
+        "Max Pos. 2",
+        "Overall Max. 75",
+        "Position RB",
+        "Excluded Position CB",
+        "Max PS 7",
+        "Pace Max. 80"
+      ],
+      "upgrades": [
+        "+34 OVR (example preview)"
+      ],
+      "url": "https://www.fut.gg/evolutions/"
+    },
+    {
+      "name": "Intro to Training Camp EVOs",
+      "nameFA": "آشنایی با تکامل کمپ تمرینی",
+      "description": "Send your players to training camp! Collect their attribute upgrades when the training session concludes.",
+      "requirements": [
+        "Overall Max. 80",
+        "Position RB"
+      ],
+      "upgrades": [
+        "RB Fullback+",
+        "Training Time: 1 hour"
+      ],
+      "url": "https://www.fut.gg/evolutions/"
+    },
+    {
+      "name": "Intro to Repeatable Evolutions",
+      "nameFA": "تکامل تکرارشونده",
+      "description": "Discover Repeatable Evolutions, allowing you to run multiple players through the same upgrade path!",
+      "requirements": [
+        "Overall Max. 79",
+        "Position ST",
+        "Pace Max. 81"
+      ],
+      "upgrades": [
+        "+1 OVR"
+      ],
+      "url": "https://www.fut.gg/evolutions/"
+    },
+    {
+      "name": "Intro to Pathway Evolutions",
+      "nameFA": "آشنایی با تکامل چندمسیره",
+      "description": "Explore Pathway Evolutions, a new type of Evolution that allows you to choose how your player develops and upgrades!",
+      "requirements": [
+        "Overall Max. 80",
+        "Max PS 3"
+      ],
+      "upgrades": [
+        "Pathway A"
+      ],
+      "url": "https://www.fut.gg/evolutions/"
+    }
+  ]
+}
