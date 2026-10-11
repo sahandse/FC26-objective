@@ -847,7 +847,11 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 .fc-game-filter{border:1px solid #485750;border-radius:8px;background:#192522;color:#c9d9cf;padding:9px 12px;font:inherit;font-size:12px;cursor:pointer}
 .fc-game-filter.active{background:#c9ff44;border-color:#d7ff8b;color:#122015;font-weight:800}
 @media(max-width:600px){.fc-game-filter-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.fc-game-filter{white-space:nowrap}}
-</style></head>
+</style><style>
+@media(max-width:750px){.fc-game-nav{top:0;padding-bottom:8px}.bottom-nav{display:flex!important;overflow-x:auto;gap:0;justify-content:space-between}.bottom-nav .bnav-btn{min-width:0;flex:1 1 0;padding:8px 2px}.bottom-nav .bnav-btn span:not(.bnav-icon):not(.bnav-badge){font-size:10px}#sec-home,#sec-obj,#sec-sbc,#sec-players,#sec-squad,#sec-evo,#sec-club,#sec-store,#sec-news,#sec-settings{padding-bottom:95px}}
+.fc-game-tiles article a{display:block;line-height:1.7;text-decoration:none}.fc-game-tiles article a:hover{text-decoration:underline}
+.fc-game-nav button:focus-visible,.bottom-nav button:focus-visible,.fc-game-tiles button:focus-visible{outline:2px solid #d0ff55;outline-offset:3px}
+</style><style>.fc-home-latest{margin:30px 0}.fc-home-latest h2{font-size:19px}.fc-home-latest article h3{color:#e9f6de;font-size:18px;line-height:1.5;margin:12px 0 5px}.fc-home-latest article p{color:#9fb3ac;text-align:right;font-size:11px;margin:5px 0 20px}.fc-home-category{color:#ceff49;letter-spacing:1.3px;font-size:10px}.fc-home-latest .fc27-detail-open{margin-top:auto}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -897,7 +901,7 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 <button onclick="showSec('evo')"><span>04 / EVOLUTIONS</span><strong>تکامل بازیکن</strong><small id="fcHomeEvos">شرایط و مراحل</small></button>
 <button onclick="showSec('squad')"><span>05 / SQUAD BUILDER</span><strong>تیم‌سازی</strong><small>ترکیب و شیمی</small></button>
 <button onclick="showSec('club')"><span>06 / MY CLUB</span><strong>باشگاه من</strong><small>موارد ذخیره‌شده</small></button>
-</div></main>
+</div><section class="fc-home-latest"><h2>جدیدترین‌ها / Latest updates</h2><div id="fcGameFeatured" class="fc-game-tiles" aria-live="polite"></div></section></main>
 <main class="main fc-game-page" id="sec-club" style="display:none"><div class="fc-game-eyebrow">MY CLUB / COLLECTION</div><h1 class="fc-game-title">باشگاه من</h1><p class="fc-game-lead">علاقه‌مندی‌ها و بازیکنان ذخیره‌شده روی همین دستگاه؛ بدون ادعای اتصال به باشگاه داخل بازی.</p><div id="fcClubContents" class="fc-game-tiles"></div></main>
 <main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">نمایش بسته‌های واقعی فقط بعد از اتصال منبع قابل تأیید. این سایت خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
 <main class="main fc-game-page" id="sec-news" style="display:none"><div class="fc-game-eyebrow">EA FC / UPDATES</div><h1 class="fc-game-title">اخبار و رویدادها</h1><div id="fcGameNews" class="fc-game-tiles"><div class="fc-game-empty">در حال دریافت اخبار ثبت‌شده…</div></div></main>
@@ -1946,7 +1950,7 @@ async function loadVerifiedEvolutions(){
   if(!Array.isArray(data.evolutions)||data.source!=='FUT.GG')throw Error('Invalid evolution data');
   verifiedEvos=data.evolutions;
  }catch(error){console.warn('Verified evolutions unavailable',error)}
- renderVerifiedEvolutions();
+ renderVerifiedEvolutions();updateFCGameHome();renderFCGameFeatured();
 }
 function renderVerifiedEvolutions(){
  const host=document.getElementById('verifiedEvoGrid');if(!host)return;
@@ -2350,16 +2354,29 @@ function showSec(sec){
  document.querySelectorAll('.app-hero,.stats-strip').forEach(el=>el.style.display=sec==='home'?'':'none');
  if(sec==='squad')renderPitch();
  if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
- if(sec==='home')updateFCGameHome();
+ if(sec==='home'){updateFCGameHome();renderFCGameFeatured();}
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
- try{history.replaceState(null,'','#'+sec)}catch(e){}
+ try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateFCGameHome(){
  const info={'fcHomeObj':liveFC27.sections.objectives.length+' هدف ثبت‌شده','fcHomeSbc':liveFC27.sections.sbc.length+' چالش ثبت‌شده','fcHomePlayers':PLAYERS_RAW.length.toLocaleString('fa-IR')+' بازیکن','fcHomeEvos':verifiedEvos.length+' تکامل ثبت‌شده'};
  for(const [id,val] of Object.entries(info)){const el=document.getElementById(id);if(el)el.textContent=val}
+}
+function renderFCGameFeatured(){
+ const host=document.getElementById('fcGameFeatured');if(!host)return;host.replaceChildren();
+ const cases=[['sbc',liveFC27.sections.sbc?.[0]],['objectives',liveFC27.sections.objectives?.[0]],['evolutions',verifiedEvos[0]]];
+ for(const [kind,rec] of cases){
+  if(!rec)continue;
+  const article=document.createElement('article');const category=document.createElement('small');category.textContent=kind==='sbc'?'SBC':kind==='objectives'?'OBJECTIVES':'EVOLUTIONS';category.className='fc-home-category';
+  const title=document.createElement('h3');title.textContent=rec.nameFA||FC27_FA[rec.name]||rec.name;
+  const subtitle=document.createElement('p');subtitle.textContent=rec.name;subtitle.dir='ltr';
+  const btn=document.createElement('button');btn.type='button';btn.textContent='نمایش جزئیات / Details';btn.className='fc27-detail-open';btn.onclick=()=>openFC27Details(kind,rec);
+  article.append(category,title,subtitle,btn);host.appendChild(article);
+ }
+ if(!host.children.length){const p=document.createElement('p');p.className='fc-game-empty';p.textContent='داده جدید قابل تأیید برای نمایش موجود نیست.';host.appendChild(p)}
 }
 function renderFCGameClub(){
  const host=document.getElementById('fcClubContents');if(!host)return;host.replaceChildren();
@@ -2370,7 +2387,7 @@ async function loadFCGameNews(){
  const host=document.getElementById('fcGameNews');if(!host)return;
  try{
   const response=await fetch('./data/fc27-news.json',{cache:'no-store'});if(!response.ok)throw Error('News unavailable');
-  const data=await response.json();const entries=Array.isArray(data)?data:(data.articles||data.news||data.items||[]);
+  const data=await response.json();const entries=Array.isArray(data)?data:(data.items||data.articles||data.news||[]);
   host.replaceChildren();
   let count=0;for(const item of entries.slice(0,12)){const url=item.url||item.link;let link;try{link=new URL(url)}catch{continue}if(!['https:'].includes(link.protocol))continue;
    const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title||item.name||'خبر FC27';a.style.color='#d0ff53';article.appendChild(a);
@@ -2584,7 +2601,7 @@ async function loadLiveFC27(){
   liveFC27=data;
  }catch(error){console.warn('FC27 sourced data not available',error)}
  renderLiveFC27();
- updateFCGameHome();
+ updateFCGameHome();renderFCGameFeatured();
 }
 function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
@@ -2607,6 +2624,8 @@ function init(){
   setTimeout(doFetch,100);
 }
 document.addEventListener('DOMContentLoaded',init);
+window.addEventListener('popstate',()=>showSec(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'home'));
+window.addEventListener('hashchange',()=>{const sec=location.hash.slice(1);if(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(sec))showSec(sec)});
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker registration failed:', err)));
 }
@@ -2616,7 +2635,8 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <!-- BOTTOM NAV -->
-<nav class="bottom-nav">
+<nav class="bottom-nav" aria-label="ناوبری موبایل">
+  <button class="bnav-btn" id="bn-home" onclick="showSec('home')"><span class="bnav-icon">⌂</span><span>خانه</span></button>
   <button class="bnav-btn active" id="bn-obj" onclick="showSec('obj')">
     <span class="bnav-icon">🎯</span>
     <span>اهداف</span>
