@@ -1226,10 +1226,11 @@ function playerFUT(name,rat,pos,sp,big){
   return `<div class="fut-card ${cls}"><div class="fc-inner"><div class="fc-info-col"><div class="fc-rat">${rat||''}</div><div class="fc-pos">${pos||''}</div></div><div class="fc-photo"></div></div><div class="fc-name-band">${lastName||pos||''}</div></div>`;
 }
 const AVAILABLE_PORTRAITS=new Set();
+const VERIFIED_PHOTO_FILES=new Map();
 const PORTRAIT_LOOKUP=new Map();let portraitObserver=null;
 function portraitHTML(p,size=36){
  const id=Number(p.imgId||PIMG[p.name]||p.id);
- if(AVAILABLE_PORTRAITS.has(id))return `<img src="img/players/${id}.png" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${id})">`;
+ if(AVAILABLE_PORTRAITS.has(id)){const file=VERIFIED_PHOTO_FILES.get(id)||id+".png";return `<img src="img/players/${file}" alt="${p.name}" loading="lazy" onerror="imgFallback(this,${id})">`;}
  const name=String(p.name||'').replace(/[&<>"']/g,'');
  return `<span class="player-photo-empty fc-wiki-portrait" data-player-name="${name}" style="font-size:${size}px;opacity:.45" role="img" aria-label="در حال بررسی تصویر بازیکن">⚽</span>`;
 }
@@ -1260,7 +1261,7 @@ async function fetchPlayerPortrait(el){
  if(!src||!el.isConnected)return;
  const img=document.createElement('img');img.src=src;img.alt=name;img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';img.onerror=()=>{img.replaceWith(el);el.setAttribute('aria-label','تصویر بازیکن پیدا نشد')};el.replaceWith(img);
 }
-async function loadPortraitIndex(){try{const r=await fetch('./data/available-portraits.json',{cache:'no-store'});if(!r.ok)throw Error('No portrait index');const data=await r.json();if(!Array.isArray(data.ids))throw Error('Invalid portrait index');AVAILABLE_PORTRAITS.clear();for(const id of data.ids)if(Number.isInteger(id))AVAILABLE_PORTRAITS.add(id);renderPlayers();}catch(e){console.warn('Portrait index unavailable',e)}}
+async function loadPortraitIndex(){try{const r=await fetch('./data/available-portraits.json',{cache:'no-store'});if(!r.ok)throw Error('No portrait index');const data=await r.json();if(!Array.isArray(data.ids))throw Error('Invalid portrait index');AVAILABLE_PORTRAITS.clear();VERIFIED_PHOTO_FILES.clear();for(const id of data.ids)if(Number.isInteger(id))AVAILABLE_PORTRAITS.add(id);for(const [id,file] of Object.entries(data.files||{}))if(/^\d+\.(png|jpg|webp)$/.test(file))VERIFIED_PHOTO_FILES.set(Number(id),file);renderPlayers();}catch(e){console.warn('Portrait index unavailable',e)}}
 function imgFallback(el,id){
   const urls=[]; // FC26 CDN fallbacks disabled; use verified FC27 assets only when available.
   const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
