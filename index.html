@@ -797,6 +797,7 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .official-news-list a:hover,.verified-source-grid a:hover{border-color:#caff38}
 @media(max-width:700px){.verified-source-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.official-news-list{grid-template-columns:1fr}}
 .fc27-lang-control{grid-column:1/-1;display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px}.fc27-lang-label{font-size:11px;color:#a7b7b9;margin-inline-end:auto}.fc27-lang-btn{font:inherit;font-size:11px;color:#d9e2e2;background:#19232b;border:1px solid #33424a;border-radius:9px;padding:7px 11px;cursor:pointer}.fc27-lang-btn.active{background:#caff38;color:#121b14;border-color:#caff38;font-weight:800}.fc27-original-title{color:#96a8b0;font-size:12px;direction:ltr;text-align:right;line-height:1.6;margin:0}.fc27-card-description{margin:0}.fc27-step{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid #29363c;padding:11px 2px;cursor:pointer}.fc27-step:last-child{border-bottom:0}.fc27-step input{width:17px;height:17px;flex-shrink:0;margin-top:3px;accent-color:#caff38}.fc27-step-text{display:flex;flex-direction:column;gap:5px;line-height:1.85;color:#e3e9e9;font-size:12px}.fc27-step-en{color:#b5c4ca;text-align:left}.fc27-step.completed .fc27-step-text{opacity:.55}.fc-steps summary{padding:8px 0}
+.fc27-verified-rules{padding:11px;background:#202d28;border:1px solid #46633b;border-radius:11px;font-size:12px;color:#d8f5d2;line-height:1.9}.fc27-verified-rules ul{margin:6px 0 0;padding-right:20px}.fc27-verified-rules li{margin:3px 0}
 </style>
 <style>.fc-feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.fc-feed-card{background:#162027;border:1px solid #31423f;border-radius:14px;padding:17px;display:flex;flex-direction:column;gap:10px;min-height:150px}.fc-feed-card h3{font-size:16px;color:#f0faf0;margin:0}.fc-feed-card p{font-size:12px;color:#bcc6c9;line-height:1.8;margin:0;flex:1}.fc-feed-card a{color:#caff38;text-decoration:none;font-size:12px;font-weight:800}.fc-feed-meta{font-size:11px;color:#a3b9b2}.fc-feed-search{width:100%;background:#121b22;color:white;padding:12px;border-radius:12px;border:1px solid #354b45;font:inherit}@media(max-width:700px){.fc-feed-grid{grid-template-columns:1fr}}</style><style>
 /* Keep the verified feed, hide controls tied to empty legacy lists. */
@@ -2326,6 +2327,11 @@ function renderLiveFC27(){
    const englishTitle=fc27Node('p','fc27-original-title',rec.name);
    const desc=fc27Node('p','fc27-card-description',kind==='objectives'?'جزئیات مأموریت و مراحل تکمیل':'مراحل تکمیل چالش و بررسی ترکیب');
    const meta=fc27Node('div','fc-feed-meta',kind==='sbc'?(Number.isFinite(rec.price)?'هزینه ثبت‌شده: '+rec.price.toLocaleString('fa-IR'):'هزینه تأییدشده موجود نیست'):(rec.reward||'جایزه در جزئیات هدف'));
+   if(kind==='sbc'&&Array.isArray(rec.requirements)&&rec.requirements.length){
+    const rules=fc27Node('div','fc27-verified-rules');
+    rules.appendChild(fc27Node('strong','',fc27Lang==='en'?'Verified requirements':'شرایط ثبت‌شده / Verified requirements'));
+    const ul=document.createElement('ul');for(const rule of rec.requirements){ul.appendChild(fc27Node('li','',rule))}rules.appendChild(ul);card.appendChild(rules);
+   }
    const details=fc27Node('details','fc-steps');
    const summary=fc27Node('summary','','راهنمای انجام / Walkthrough');details.appendChild(summary);
    const fa=guideFC27(kind,rec),en=fc27EnglishGuide(kind,rec);

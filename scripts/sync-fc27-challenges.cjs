@@ -56,6 +56,23 @@ async function scrape(p){
  if(success<3||result.sections.objectives.length<3||result.sections.sbc.length<8){
   throw Error('Incomplete extraction: '+success+' sources; '+result.sections.objectives.length+' objectives; '+result.sections.sbc.length+' SBCs. Existing snapshot preserved.');
  }
+ // Extract facts only when explicitly labelled in the challenge detail page.
+ for(const rec of result.sections.sbc){
+  try{
+   const res=await fetch(rec.url,{headers:{'User-Agent':'Mozilla/5.0 FC27Hub/1.0','Accept':'text/html'}});
+   if(!res.ok)continue;
+   const $=cheerio.load(await res.text());
+   const main=$('main').first();
+   const text=(main.length?main:$('body')).text().replace(/\\s+/g,' ').trim();
+   const section=text.match(/Eligible players\\s*([^]*?)(?:\\bSolve\\b|Streamlined SBC Solver|© 2026)/i);
+   const limits=section?.[1]||'';
+   const requirements=[];
+   for(const match of limits.matchAll(/(?:Rating|Chemistry|Players|Rare Players|Team Overall Rating):?\\s*(?:Min\\.|Max\\.)?\\s*\\d+(?:\\s*\\w+)?/gi))requirements.push(match[0].trim());
+   if(requirements.length){rec.requirements=[...new Set(requirements)].slice(0,15);rec.requirements_checked_at=new Date().toISOString();}
+   const reward=(text.match(/Rewards\\s+(.{5,120}?)(?=\\bEligible players\\b|\\bSolve\\b)/i)||[])[1];
+   if(reward)rec.reward=reward.trim().slice(0,120);
+  }catch(e){console.warn('Detail not available',rec.url,e.message)}
+ }
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync(file,JSON.stringify(result,null,2)+'\n');
  console.log('Updated FC27 listings:',result.sections.objectives.length,result.sections.sbc.length);
 })().catch(e=>{console.error(e);process.exitCode=1});
