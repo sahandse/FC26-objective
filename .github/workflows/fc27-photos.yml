@@ -1,0 +1,34 @@
+name: FC27 Licensed Player Photos
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/sync-player-photos.cjs'
+      - '.github/workflows/fc27-photos.yml'
+  schedule:
+    - cron: '34 4 * * 0'
+permissions:
+  contents: write
+concurrency:
+  group: fc27-portrait-sync
+  cancel-in-progress: false
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch verified free-license photographs
+        run: node scripts/sync-player-photos.cjs
+      - name: Commit images and attribution
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add img/players data/available-portraits.json data/player-photo-credits.json
+          if ! git diff --cached --quiet; then
+            git commit -m "images(fc27): add verified freely licensed player portraits"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi
