@@ -847,6 +847,10 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 .fc-game-filter{border:1px solid #485750;border-radius:8px;background:#192522;color:#c9d9cf;padding:9px 12px;font:inherit;font-size:12px;cursor:pointer}
 .fc-game-filter.active{background:#c9ff44;border-color:#d7ff8b;color:#122015;font-weight:800}
 @media(max-width:600px){.fc-game-filter-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.fc-game-filter{white-space:nowrap}}
+</style><style>
+@media(max-width:750px){.fc-game-nav{top:0;padding-bottom:8px}.bottom-nav{display:flex!important;overflow-x:auto;gap:0;justify-content:space-between}.bottom-nav .bnav-btn{min-width:0;flex:1 1 0;padding:8px 2px}.bottom-nav .bnav-btn span:not(.bnav-icon):not(.bnav-badge){font-size:10px}#sec-home,#sec-obj,#sec-sbc,#sec-players,#sec-squad,#sec-evo,#sec-club,#sec-store,#sec-news,#sec-settings{padding-bottom:95px}}
+.fc-game-tiles article a{display:block;line-height:1.7;text-decoration:none}.fc-game-tiles article a:hover{text-decoration:underline}
+.fc-game-nav button:focus-visible,.bottom-nav button:focus-visible,.fc-game-tiles button:focus-visible{outline:2px solid #d0ff55;outline-offset:3px}
 </style></head>
 <body>
 
@@ -2354,7 +2358,7 @@ function showSec(sec){
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
- try{history.replaceState(null,'','#'+sec)}catch(e){}
+ try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function updateFCGameHome(){
@@ -2370,7 +2374,7 @@ async function loadFCGameNews(){
  const host=document.getElementById('fcGameNews');if(!host)return;
  try{
   const response=await fetch('./data/fc27-news.json',{cache:'no-store'});if(!response.ok)throw Error('News unavailable');
-  const data=await response.json();const entries=Array.isArray(data)?data:(data.articles||data.news||data.items||[]);
+  const data=await response.json();const entries=Array.isArray(data)?data:(data.items||data.articles||data.news||[]);
   host.replaceChildren();
   let count=0;for(const item of entries.slice(0,12)){const url=item.url||item.link;let link;try{link=new URL(url)}catch{continue}if(!['https:'].includes(link.protocol))continue;
    const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title||item.name||'خبر FC27';a.style.color='#d0ff53';article.appendChild(a);
@@ -2607,6 +2611,8 @@ function init(){
   setTimeout(doFetch,100);
 }
 document.addEventListener('DOMContentLoaded',init);
+window.addEventListener('popstate',()=>showSec(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'home'));
+window.addEventListener('hashchange',()=>{const sec=location.hash.slice(1);if(['home','obj','sbc','players','squad','evo','club','store','news','settings'].includes(sec))showSec(sec)});
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker registration failed:', err)));
 }
@@ -2616,7 +2622,8 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <!-- BOTTOM NAV -->
-<nav class="bottom-nav">
+<nav class="bottom-nav" aria-label="ناوبری موبایل">
+  <button class="bnav-btn" id="bn-home" onclick="showSec('home')"><span class="bnav-icon">⌂</span><span>خانه</span></button>
   <button class="bnav-btn active" id="bn-obj" onclick="showSec('obj')">
     <span class="bnav-icon">🎯</span>
     <span>اهداف</span>
