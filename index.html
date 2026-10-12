@@ -2182,12 +2182,12 @@ function playerCardHTML(p){
 
 
 const FC27_VERIFIED_MARKET=new Map();
-function freshMarket(p){const m=FC27_VERIFIED_MARKET.get(String(p.id));if(!m||m.rating!==p.rat)return null;const age=Date.now()-Date.parse(m.checked_at);return Number.isFinite(age)&&age>=0&&age<48*3600000?m:null;}
+function freshMarket(p){const m=FC27_VERIFIED_MARKET.get(String(p.id));if(!m||m.rating!==p.rat)return null;const age=Date.now()-Date.parse(m.verified_at||m.checked_at);return Number.isFinite(age)&&age>=0&&age<48*3600000?m:null;}
 async function loadVerifiedMarket(){
  try{
   const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
   const data=await res.json();if(!Array.isArray(data.cards))return;
-  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&Number.isFinite(item.price_coins)&&item.price_coins>=0)FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,platform:data.platform})}
+  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&Number.isFinite(item.price_coins)&&item.price_coins>=0)FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,verified_at:item.verified_at||data.checked_at,platform:data.platform})}
   renderPlayers();
  }catch(err){console.warn('Verified prices unavailable',err)}
 }
