@@ -19,7 +19,7 @@ for(const r of raw.cards){
  const age=now-Date.parse(r.verified_at);if(!Number.isFinite(age)||age<0||age>24*3600000)throw Error('Stale or future observation refused');
  let u;try{u=new URL(r.url)}catch{throw Error('Invalid evidence URL')}
  if(u.protocol!=='https:'||!/(^|\.)fut\.gg$|(^|\.)futbin\.com$/.test(u.hostname))throw Error('Untrusted evidence host');
- const key=r.player_id+':'+r.platform;if(seen.has(key))throw Error('Duplicate observation');seen.add(key);
+ const key=String(r.player_id);if(seen.has(key))throw Error('Duplicate observation');seen.add(key);
  valid.push({player_id:String(r.player_id),rating:r.rating,position:r.position,price_coins:r.price_coins,platform:r.platform,url:u.href,verified_at:r.verified_at});
 }
 const output={source:'individually reviewed observations',checked_at:stamp,cards:valid};
