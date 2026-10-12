@@ -6,10 +6,13 @@ const data=JSON.parse(fs.readFileSync(path.join(root,'data/fc27-players.json'),'
 const file=path.join(root,'data/available-portraits.json');
 const index=JSON.parse(fs.readFileSync(file,'utf8'));
 const existing=new Set(index.ids.map(Number));const attribution=[];
-const work=data.players.filter(p=>p&&p.id&&p.name&&!existing.has(Number(p.id))).sort((a,b)=>(b.rat||0)-(a.rat||0)).slice(0,35);
+const attemptsFile=path.join(root,'data/player-photo-attempts.json');
+const attempts=fs.existsSync(attemptsFile)?JSON.parse(fs.readFileSync(attemptsFile,'utf8')):{};
+const retryAfter=7*86400000;
+const work=data.players.filter(p=>p&&p.id&&p.name&&!existing.has(Number(p.id))&&(!attempts[p.id]||Date.now()-Date.parse(attempts[p.id])>retryAfter)).sort((a,b)=>(b.rat||0)-(a.rat||0)).slice(0,360);
 const delay=ms=>new Promise(ok=>setTimeout(ok,ms));
 const normalize=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-async function get(url){const r=await fetch(url,{headers:{'User-Agent':'FC27Hub educational free-license image sync/1.0 (github.com/sahandse/FC26-objective)'},signal:AbortSignal.timeout(9000)});if(!r.ok)throw Error('HTTP '+r.status);return r;}
+async function get(url){const r=await fetch(url,{headers:{'User-Agent':'FC27Hub educational free-license image sync/1.0 (github.com/sahandse/FC27)'},signal:AbortSignal.timeout(9000)});if(!r.ok)throw Error('HTTP '+r.status);return r;}
 async function lookup(p){
  const q=new URLSearchParams({action:'query',format:'json',prop:'pageimages|extracts',piprop:'original',exintro:'1',explaintext:'1',titles:p.name});
  const wiki=await(await get('https://en.wikipedia.org/w/api.php?'+q)).json();
@@ -32,7 +35,8 @@ async function lookup(p){
 }
 (async()=>{
  fs.mkdirSync(folder,{recursive:true});let saved=0;
- for(const p of work){if(saved>=12)break;
+ for(const p of work){if(saved>=45)break;
+  attempts[p.id]=new Date().toISOString();
   try{
    const image=await lookup(p);
    if(!image)continue;
@@ -44,6 +48,7 @@ async function lookup(p){
   }catch(e){console.warn('Skipping',p.name,e.message)}
   await delay(250);
  }
+ fs.writeFileSync(attemptsFile,JSON.stringify(attempts,null,2)+'\n');
  index.ids=[...new Set(index.ids)].sort((a,b)=>a-b);
  index.count=index.ids.length;index.updated_at=new Date().toISOString();
  fs.writeFileSync(file,JSON.stringify(index,null,2)+'\n');
