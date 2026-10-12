@@ -297,7 +297,8 @@ function renderSolver(){
   const squad=pool.slice(0,meta.n);
   const ownedCount=squad.filter(p=>state.owned[p.id]).length;
   const buyPlayers=squad.filter(p=>!state.owned[p.id]);
-  const buyCost=buyPlayers.reduce((s,p)=>s+p.price,0);
+  const missingPrices=buyPlayers.some(p=>getFC27CardCoins(p)===null);
+  const buyCost=missingPrices?null:buyPlayers.reduce((sum,p)=>sum+getFC27CardCoins(p),0);
   const chem=calcChem(squad);
   document.getElementById('solverChemLbl').textContent='⚗️ کمیستری: '+chem;
   document.getElementById('solverChemVal').textContent=chem+' / 33';
@@ -305,7 +306,7 @@ function renderSolver(){
   document.getElementById('solverSummary').innerHTML=`
     <div class="slv-stat"><div class="slv-stat-val slv-green">${ownedCount}</div><div class="slv-stat-lbl">دارید</div></div>
     <div class="slv-stat"><div class="slv-stat-val slv-red">${buyPlayers.length}</div><div class="slv-stat-lbl">نیاز خرید</div></div>
-    <div class="slv-stat"><div class="slv-stat-val slv-gold">${fmtPrice(buyCost)}</div><div class="slv-stat-lbl">هزینه تخمینی</div></div>
+    <div class="slv-stat"><div class="slv-stat-val slv-gold">${buyCost===null?'ناموجود':fmtPrice(buyCost)}</div><div class="slv-stat-lbl">هزینه تخمینی</div></div>
     <div class="slv-stat"><div class="slv-stat-val slv-purple">${squad.length}</div><div class="slv-stat-lbl">بازیکن</div></div>`;
   if(!squad.length){
     document.getElementById('solverPlayers').innerHTML=`<div style="text-align:center;padding:30px;color:var(--t3)">بازیکن کافی در دیتابیس یافت نشد</div>`;
@@ -319,7 +320,7 @@ function renderSolver(){
         <div class="slv-name">${p.nameFA}</div>
         <div class="slv-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
       </div>
-      <div class="slv-price ${isOwned?'zero':''}">${isOwned?'✓ موجود':fmtPrice(p.price)}</div>
+      <div class="slv-price ${isOwned?'zero':''}">${isOwned?'✓ موجود':getFC27CardPriceText(p)}</div>
       <button class="own-toggle ${isOwned?'is-owned':''}" onclick="toggleOwned('${p.id}')">${isOwned?'✓ دارم':'دارم؟'}</button>
     </div>`;
   }).join('');
@@ -468,7 +469,7 @@ function renderWatchlist(){
         </div>
         <span style="font-size:10px;color:var(--t3)">داده تاریخی موجود نیست</span>
         <div class="wl-price-col">
-          <div class="wl-price">${fmtPrice(p.price)}</div>
+          <div class="wl-price">${getFC27CardPriceText(p)}</div>
           <div class="wl-trend ${tCls}">${tTxt}</div>
         </div>
         <button class="wl-del" onclick="toggleWatchlist('${p.id}')">✕</button>
@@ -862,7 +863,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">برآورد ثابت · قیمت لحظه‌ای نیست</div>
+      <div class="pcard-price-lbl">قیمت تأییدشده برای نسخه کارت و پلتفرم انتخاب‌شده</div>
       <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
@@ -1488,6 +1489,18 @@ async function loadVerifiedMarketPrices(){
    verifiedMarketPrices.set(key,item);
   }
  }catch(err){console.warn('Verified market price feed unavailable',err)}
+ if(document.getElementById('plGrid'))renderPlayers();
+}
+function getFC27CardCoins(p){
+ const version=String(p.versionId||p.itemId||'');
+ if(!/^\\d+$/.test(version))return null;
+ const platform=document.getElementById('fcPricePlatform')?.value||'ps';
+ const item=verifiedMarketPrices.get(version+':'+platform);
+ return item&&Number.isInteger(item.coins)?item.coins:null;
+}
+function getFC27CardPriceText(p){
+ const value=getFC27CardCoins(p);
+ return value===null?'قیمت معتبر موجود نیست':value.toLocaleString('fa-IR')+' سکه';
 }
 function showVerifiedCardPrice(){
  const output=document.getElementById('fcPriceResult');
@@ -1506,5 +1519,6 @@ function showVerifiedCardPrice(){
 document.addEventListener('DOMContentLoaded',async()=>{
  const trigger=document.getElementById('fcPriceCheck');
  if(trigger)trigger.addEventListener('click',showVerifiedCardPrice);
+ document.getElementById('fcPricePlatform')?.addEventListener('change',()=>{showVerifiedCardPrice();renderPlayers()});
  await loadVerifiedMarketPrices();
 });
