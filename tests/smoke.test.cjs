@@ -1,7 +1,9 @@
 const fs = require('node:fs');
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const html = fs.readFileSync('index.html','utf8');
+const page = fs.readFileSync('index.html','utf8');
+const runtime = fs.readFileSync('src/main.ts','utf8');
+const html = page + '\n' + runtime;
 const sw = fs.readFileSync('sw.js','utf8');
 const manifest = JSON.parse(fs.readFileSync('manifest.json','utf8'));
 test('Persian RTL document and viewport',()=>{
@@ -32,10 +34,9 @@ test('essential sections are present',()=>{
 });
 
 const vm = require('node:vm');
-test('main inline JavaScript parses',()=>{
-  const chunks=html.split('<script>').slice(1);
-  assert.ok(chunks.length>0);
-  for(const chunk of chunks)new vm.Script(chunk.split('</script>')[0]);
+test('TypeScript runtime parses and HTML references its Vite entry',()=>{
+  assert.match(page,/src="\.\/src\/main\.ts"/);
+  new vm.Script(runtime);
 });
 test('legacy FC26 sample data is not shipped',()=>{
   for(const name of ['OBJ_RAW','SBC_RAW','PLAYERS_RAW','EVO_RAW']) {
