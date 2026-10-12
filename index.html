@@ -2221,7 +2221,18 @@ function playerCardHTML(p){
 
 
 const FC27_VERIFIED_MARKET=new Map();
-function marketState(p){const m=FC27_VERIFIED_MARKET.get(String(p.id));if(!m||m.rating!==p.rat||m.position!==p.pos||!Number.isSafeInteger(m.price_coins)||m.price_coins<=0)return {status:'unavailable'};const time=Date.parse(m.verified_at||m.checked_at);if(!Number.isFinite(time)||time>Date.now()+300000)return {status:'unavailable'};const age=Date.now()-time;return {status:age<=24*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.source,at:time};}
+function marketState(p){
+ const m=FC27_VERIFIED_MARKET.get(String(p.id));
+ if(!m||m.rating!==p.rat||m.position!==p.pos||!Number.isSafeInteger(m.price_coins)||m.price_coins<=0)return {status:'unavailable'};
+ const checked=m.verified_at||m.checked_at;
+ // A date without an explicit clock time and timezone is never treated as live.
+ if(typeof checked!=='string'||!/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$/.test(checked))return {status:'stale',price:m.price_coins,source:m.url,at:null};
+ let url;try{url=new URL(m.url)}catch{return {status:'unavailable'}}
+ if(url.protocol!=='https:')return {status:'unavailable'};
+ const time=Date.parse(checked),age=Date.now()-time;
+ if(!Number.isFinite(time)||age< -300000)return {status:'unavailable'};
+ return {status:age<=24*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.url,at:time};
+}
 function freshMarket(p){const m=marketState(p);return m.status==='recent'?FC27_VERIFIED_MARKET.get(String(p.id)):null;}
 async function loadVerifiedMarket(){
  try{
