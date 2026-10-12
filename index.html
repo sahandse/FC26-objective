@@ -915,7 +915,16 @@ body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent
 @media(max-width:650px){.fc-game-nav{top:56px}.fc-game-nav button{min-height:58px}.fc-game-feature{min-height:215px;margin-top:15px}.fc-game-tiles>button{min-height:106px}.fc-game-page{padding-bottom:80px}}
 @media(prefers-reduced-motion:reduce){.fc-game-page{animation:none}.fc-game-nav button,.fc-game-tiles>button,.fc-game-tiles>button::after{transition:none}}
 </style>
-<style>.squad-pl-item{width:100%;display:flex;text-align:right;border:1px solid #334b3d;border-radius:10px;background:#192824;color:#f2f8ee;cursor:pointer;padding:8px;align-items:center}.squad-pl-item:hover,.squad-pl-item:focus-visible{border-color:#caff38;background:#293b2c}.fc27-sbc-player-photo{height:95px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(150deg,#223a2a,#141f1d);border:1px solid #40553d;border-radius:11px}.fc27-sbc-player-photo img{object-fit:contain;max-width:100%;height:94px}</style></head>
+<style>.squad-pl-item{width:100%;display:flex;text-align:right;border:1px solid #334b3d;border-radius:10px;background:#192824;color:#f2f8ee;cursor:pointer;padding:8px;align-items:center}.squad-pl-item:hover,.squad-pl-item:focus-visible{border-color:#caff38;background:#293b2c}.fc27-sbc-player-photo{height:95px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(150deg,#223a2a,#141f1d);border:1px solid #40553d;border-radius:11px}.fc27-sbc-player-photo img{object-fit:contain;max-width:100%;height:94px}</style><style>
+/* FC27 compact competitive panels */
+#live-objectives .fc-feed-card,#live-sbc .fc-feed-card,#verifiedEvoGrid .fc-feed-card{position:relative;overflow:hidden;box-shadow:inset 0 1px 0 #ffffff10,0 6px 22px #0004}
+#live-objectives .fc-feed-card:before,#live-sbc .fc-feed-card:before,#verifiedEvoGrid .fc-feed-card:before{content:'';position:absolute;inset:0 auto 0 0;width:3px;background:#c8ff43}
+#live-objectives .fc-feed-card h3,#live-sbc .fc-feed-card h3,#verifiedEvoGrid .fc-feed-card h3{font-size:17px;font-weight:900}
+.fc27-detail-panel{background:linear-gradient(155deg,#21302b,#101a1c 50%);border-color:#66794c;box-shadow:0 25px 85px #000b}
+.fc27-detail-squad{border:1px solid #3b5644;background:linear-gradient(125deg,#263b2b,#182322)}
+.fc27-detail-squad>strong{color:#d2ff60;font-size:15px}
+.fc27-detail-open{min-height:42px;touch-action:manipulation}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1948,7 +1957,7 @@ function renderSquadPicker(){
     </button>`).join('');
 }
 function selectSquadPlayer(pid){
-  const p=PLAYERS_RAW.find(x=>x.id===pid);
+  const p=PLAYERS_RAW.find(x=>String(x.id)===String(pid));
   if(!p||activeSquadSlot===null||!Number.isInteger(activeSquadSlot))return;
   if(Object.entries(state.squad.slots||{}).some(([slot,used])=>Number(slot)!==activeSquadSlot&&used&&String(used.id)===String(p.id))){toast('این بازیکن در ترکیب حضور دارد','e');return;}
   state.squad.slots[activeSquadSlot]=p;
@@ -2777,6 +2786,8 @@ function init(){
   startCountdowns();
   // Legacy mini-games use non-verified player pools; disabled until supported.
   setTimeout(doFetch,100);
+  setInterval(()=>{if(document.visibilityState==='visible'){loadLiveFC27();loadVerifiedEvolutions();loadFCGameNews()}},15*60*1000);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){loadLiveFC27();loadVerifiedEvolutions()}});
 }
 document.addEventListener('DOMContentLoaded',init);
 window.addEventListener('popstate',restoreFC27Section);
