@@ -31,8 +31,10 @@ async function main(){
  if(edition.size&&!Array.from(edition).some(x=>/27/i.test(x)))throw Error('Source is not FC27');
  const verifiedFile='data/fc27-market-verified.json';
  const market=fs.existsSync(verifiedFile)?JSON.parse(fs.readFileSync(verifiedFile,'utf8')):null;
+ const checked=Date.parse(market?.checked_at||'');
+ const marketRecent=Number.isFinite(checked)&&checked<=Date.now()+86400000&&Date.now()-checked<=7*86400000;
  const verifiedById=new Map();
- if(market?.cards&&Array.isArray(market.cards))for(const card of market.cards){
+ if(marketRecent&&market?.cards&&Array.isArray(market.cards))for(const card of market.cards){
   if(!/^\\d+$/.test(String(card.player_id||''))||!Number.isInteger(card.price_coins)||card.price_coins<0||!Number.isInteger(card.rating))continue;
   verifiedById.set(String(card.player_id),card);
  }
