@@ -889,7 +889,33 @@ html.fc-console{font-size:19px;scroll-behavior:smooth}
 .fc-console #sec-home .fc-game-tiles>button{background:linear-gradient(125deg,#26382e,#142123);border-radius:8px}
 @media(max-width:800px){.fc-console-ribbon{padding:10px 13px;gap:8px}.fc-console-help{display:none}.fc-console-ribbon-brand small{font-size:8px}.fc-console-ribbon-actions{gap:6px}.fc-console-ribbon-actions button{padding:10px;font-size:11px}.fc-console-telegram{padding:9px;font-size:11px}}
 @media(max-width:420px){.fc-console-icon{width:38px;height:40px;font-size:12px}.fc-console-icon span{font-size:17px}.fc-console-ribbon-brand strong{font-size:14px}.fc-console-ribbon-brand small{font-size:7px}.fc-console-ribbon-actions button{max-width:95px;line-height:1.3}.fc-console-telegram{font-size:10px}}
-</style></head>
+</style><style id="fc27-entrance-polish">
+/* Unified, game-inspired graphic language without sacrificing legibility */
+:root{--fc-ink:#090f10;--fc-lime:#d5ff4e;--fc-edge:#405044}
+body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent 80%),radial-gradient(ellipse 65% 40% at 5% 75%,#132925 0%,transparent 80%),#090f10;background-attachment:fixed}
+.fc-game-nav{top:56px;background:linear-gradient(180deg,#121d1bf5,#0c1415f7);padding:9px 12px 11px;scroll-snap-type:x proximity;border-bottom:1px solid #40563c;box-shadow:0 12px 30px #0003}
+.fc-game-nav button{scroll-snap-align:center;position:relative;min-height:64px;transition:background .18s ease,transform .18s ease,border-color .18s ease}
+.fc-game-nav button:hover{transform:translateY(-2px);background:#273b2c;border-color:#536e47}
+.fc-game-nav button.active{box-shadow:0 5px 19px #caff3833,inset 0 0 0 1px #ffffff33}
+.fc-game-nav button:focus-visible,.fc-game-tiles button:focus-visible,.fc27-detail-open:focus-visible{outline:3px solid #dbff81;outline-offset:3px}
+.fc-game-page{animation:fcPageIn .27s ease both}
+@keyframes fcPageIn{from{opacity:.2;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fc-game-feature{background:radial-gradient(ellipse at 10% 85%,#68833a55,transparent 52%),linear-gradient(125deg,#293c25,#0d1b1d 66%,#25352b);border:1px solid #8dae5366;box-shadow:inset 0 1px #e9ffc820,0 18px 60px #0005;isolation:isolate}
+.fc-game-feature::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(120deg,transparent 0,transparent 36px,#c5fe2509 37px,#c5fe2509 38px);pointer-events:none}
+.fc-game-feature>span{font-weight:800;letter-spacing:2px}
+.fc-game-tiles>button{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(140deg,#23322b,#121c1e);box-shadow:0 6px 22px #0002;border-color:#405346}
+.fc-game-tiles>button::after{content:"↗";position:absolute;left:17px;top:15px;color:#caff38;font-size:22px;opacity:.6;transition:transform .2s,opacity .2s}
+.fc-game-tiles>button:hover::after{transform:translate(-3px,-3px);opacity:1}
+.fc-game-tiles>button strong{letter-spacing:-.4px}
+.fc-game-tiles>button span{color:#c8ef8e}
+#sec-obj .fc-feed-card,#sec-sbc .fc-feed-card,#verifiedEvoGrid .fc-feed-card{box-shadow:inset 0 1px #ffffff0c,0 8px 26px #0002}
+.fc27-detail-overlay{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.fc27-detail-panel{box-shadow:0 30px 95px #000b}
+.fc-game-empty{background:#16231e;border-style:dashed}
+@media(max-width:650px){.fc-game-nav{top:56px}.fc-game-nav button{min-height:58px}.fc-game-feature{min-height:215px;margin-top:15px}.fc-game-tiles>button{min-height:106px}.fc-game-page{padding-bottom:80px}}
+@media(prefers-reduced-motion:reduce){.fc-game-page{animation:none}.fc-game-nav button,.fc-game-tiles>button,.fc-game-tiles>button::after{transition:none}}
+</style>
+</head>
 <body>
 
 <div id="toasts"></div>
@@ -2399,7 +2425,7 @@ function showSec(sec,fromHistory=false){
   if(el)el.style.display=key===sec?'block':'none';
   if(bn)bn.classList.toggle('active',key===sec);
  }
- document.querySelectorAll('[data-game-nav]').forEach(el=>{const active=el.dataset.gameNav===sec;el.classList.toggle('active',active);el.setAttribute('aria-current',active?'page':'false')});
+ document.querySelectorAll('[data-game-nav]').forEach(el=>{const active=el.dataset.gameNav===sec;el.classList.toggle('active',active);el.setAttribute('aria-current',active?'page':'false');if(active&&el.scrollIntoView)el.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'})});
  document.querySelectorAll('.app-hero,.stats-strip').forEach(el=>el.style.display=sec==='home'?'':'none');
  if(sec==='squad')renderPitch();
  if(sec==='evo'){renderEvo();renderUpgHub();renderEvoChain();}
@@ -2407,6 +2433,7 @@ function showSec(sec,fromHistory=false){
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
+ document.title='FC27 Hub · '+({home:'خانه',obj:'اهداف',sbc:'چالش‌ها',players:'بازیکنان',squad:'ترکیب',evo:'تکامل',club:'باشگاه',store:'فروشگاه',news:'اخبار',settings:'تنظیمات'}[sec]||'');
  if(!fromHistory)try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -2704,6 +2731,7 @@ function fcConsolePoll(){
 }
 document.addEventListener('keydown',event=>{
  if(!consoleMode)return;
+ if(event.target?.closest?.('input,textarea,select,[contenteditable="true"]'))return;
  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(event.key)){const map={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};event.preventDefault();fcConsoleMove(...map[event.key])}
  if(event.key==='Escape'||event.key==='Backspace'){event.preventDefault();fcConsoleBack()}
 });
