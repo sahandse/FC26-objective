@@ -2155,7 +2155,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">قیمت زنده تأیید نشده</div><div class="price-row"><div class="pcard-price">—</div>${trendHTML}</div>
+      <div class="pcard-price-lbl">${FC27_VERIFIED_MARKET.has(String(p.id))&&FC27_VERIFIED_MARKET.get(String(p.id)).rating===p.rat?'قیمت ثبت‌شده FUTNext':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${FC27_VERIFIED_MARKET.has(String(p.id))&&FC27_VERIFIED_MARKET.get(String(p.id)).rating===p.rat?fmtPrice(FC27_VERIFIED_MARKET.get(String(p.id)).price_coins)+' سکه':'—'}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
@@ -2165,6 +2165,15 @@ function playerCardHTML(p){
 }
 
 
+const FC27_VERIFIED_MARKET=new Map();
+async function loadVerifiedMarket(){
+ try{
+  const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
+  const data=await res.json();if(!Array.isArray(data.cards))return;
+  for(const item of data.cards){if(item.player_id&&item.url&&Number.isFinite(item.price_coins))FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,platform:data.platform})}
+  renderPlayers();
+ }catch(err){console.warn('Verified prices unavailable',err)}
+}
 function openPlayerModal(id){
  const p=PLAYERS_RAW.find(x=>String(x.id)===String(id));if(!p)return;
  document.getElementById('fc-player-detail')?.remove();
@@ -2175,9 +2184,14 @@ function openPlayerModal(id){
  const hero=document.createElement('div');hero.className='fc-player-hero '+pcardImgCls(p);const score=document.createElement('strong');score.textContent=p.rat+' '+p.pos;hero.appendChild(score);
  const imageId=Number(p.imgId||PIMG[p.name]||p.id);const face=document.createElement('div');face.className='fc-player-face';
  if(AVAILABLE_PORTRAITS.has(imageId)){const img=document.createElement('img');img.src='img/players/'+(VERIFIED_PHOTO_FILES.get(imageId)||imageId+'.png');img.alt=p.name;img.onerror=()=>{face.textContent='⚽'};face.appendChild(img)}else face.textContent='⚽';hero.appendChild(face);panel.appendChild(hero);
- const fields=[['باشگاه / Club',p.club],['ملیت / Nation',p.nat],['لیگ / League',p.leagueFA||p.league],['نوع کارت / Card type',p.cardType||'ثبت نشده'],['قیمت لحظه‌ای / Live price','هنوز تأیید نشده']];
+ const market=FC27_VERIFIED_MARKET.get(String(p.id));
+ const verified=market&&Number(p.rat)===market.rating&&p.pos===market.position;
+ const fields=[['باشگاه / Club',p.club],['ملیت / Nation',p.nat],['لیگ / League',p.leagueFA||p.league],['نوع کارت / Card type',p.cardType||'ثبت نشده'],['قیمت / Price',verified?market.price_coins.toLocaleString('en-US')+' coins · '+market.platform:'قیمت تأییدشده موجود نیست']];
  const grid=document.createElement('div');grid.className='fc-player-facts';for(const [label,value] of fields){if(!value)continue;const el=document.createElement('div');const l=document.createElement('small');l.textContent=label;const v=document.createElement('strong');v.textContent=value;el.append(l,v);grid.appendChild(el)}panel.appendChild(grid);
  const stats=deterministicStats(p);if(stats.length){const h=document.createElement('h3');h.textContent='آمار واقعی ثبت‌شده / Card stats';panel.appendChild(h);const items=document.createElement('div');items.className='fc-player-stat-grid';for(const stat of stats){const el=document.createElement('div');const label=document.createElement('small');label.textContent=stat.lbl;const val=document.createElement('strong');val.textContent=stat.v;el.append(label,val);items.appendChild(el)}panel.appendChild(items)}
+ if(verified){
+  const source=document.createElement('a');source.href=market.url;source.target='_blank';source.rel='noopener noreferrer';source.className='fc-player-tg';source.textContent='منبع اطلاعات کارت: FUTNext · '+market.checked_at;panel.appendChild(source);
+ }
  const note=document.createElement('p');note.className='fc-player-note';note.textContent='آمار و امتیاز از دیتابیس FC27 همین سایت است. تصاویر کارت، قیمت بازار یا ویژگی‌های تأییدنشده به‌صورت ساختگی نمایش داده نمی‌شوند.';panel.appendChild(note);
  const telegram=document.createElement('a');telegram.href='https://t.me/sahandse';telegram.target='_blank';telegram.rel='noopener noreferrer';telegram.textContent='ارتباط فقط از تلگرام ↗';telegram.className='fc-player-tg';panel.appendChild(telegram);
  overlay.appendChild(panel);overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};document.body.appendChild(overlay);close.focus();
@@ -2834,6 +2848,7 @@ function init(){
   loadState();
   restoreFC27Section();
   loadLiveFC27();
+  loadVerifiedMarket();
   loadVerifiedEvolutions();
   loadPortraitIndex();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
