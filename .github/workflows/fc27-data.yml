@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'scripts/sync-fc27-players.cjs'
+      - 'data/fc27-market-verified.json'
       - '.github/workflows/fc27-data.yml'
   workflow_dispatch:
   schedule:
