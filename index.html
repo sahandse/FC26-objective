@@ -1105,11 +1105,11 @@ body{padding-bottom:0!important}
 <small id="fcDnsCheckedAt">هنوز استعلامی انجام نشده</small><p class="fc-console-network-note" style="margin-top:12px">بررسی خودکار هنگام ورود به بخش شبکه انجام می‌شود. پاسخ DNS برابر با وضعیت آنلاین PSN نیست؛ برای اعلام قطعی قطعی/وصل بودن، صفحه وضعیت رسمی PlayStation ملاک است.</p>
 </section>
 <div class="fc-dns-status">
-<article><strong>PlayStation Network</strong><small>وضعیت زنده در سایت قابل تأیید نیست</small><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
+<article><strong>PlayStation Network</strong><small>وضعیت PSN فقط از صفحه رسمی تأیید می‌شود</small><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
 <article><strong>EA SPORTS FC / EA Servers</strong><small>آخرین وضعیت را در صفحه رسمی EA ببین</small><a href="https://help.ea.com/en/server-status/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
 </div>
 <div class="fc-console-network-note" role="status"><strong>وضعیت PSN</strong><p>مرورگر کنسول به API رسمی و عمومیِ قابل اتکا برای تشخیص وضعیت PSN دسترسی مستقیم ندارد. آزمایش DNS فقط دسترسی به نام دامنه را نشان می‌دهد، نه فعال‌بودن سرویس PlayStation Network.</p><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">بررسی وضعیت رسمی PlayStation ↗</a></div>
-<div class="fc-console-toolbar"><div><span class="fc-console-kicker">NETWORK CONTROL CENTER</span><h2>انتخاب DNS برای کنسول <span class="fc-dns-count">۱۶ پروفایل</span></h2><p>جهت‌ها برای انتخاب کارت، Enter برای کپی هر دو آدرس؛ امکان انتخاب با کنترلر</p></div><div class="fc-dns-actions"><button type="button" onclick="document.querySelector('.fc-dns-grid .fc-dns-card')?.focus()">شروع انتخاب با دسته ◀</button></div></div>
+<div class="fc-console-toolbar"><div><span class="fc-console-kicker">NETWORK CONTROL CENTER</span><h2>انتخاب DNS برای کنسول <span class="fc-dns-count">۱۰ پروفایل</span></h2><p>جهت‌ها برای انتخاب کارت، Enter برای کپی هر دو آدرس؛ امکان انتخاب با کنترلر</p></div><div class="fc-dns-actions"><button type="button" onclick="document.querySelector('.fc-dns-grid .fc-dns-card')?.focus()">شروع انتخاب با دسته ◀</button></div></div>
 <div class="fc-dns-grid">
 <article class="fc-dns-card"><h2>گوگل <small>Google Public DNS</small></h2><p>حل نام دامنه عمومی؛ تضمین دسترسی به بازی نیست.</p><div class="fc-dns-pair"><code>8.8.8.8</code><button onclick="copyFCDns('8.8.8.8',this)">کپی</button></div><div class="fc-dns-pair"><code>8.8.4.4</code><button onclick="copyFCDns('8.8.4.4',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('8.8.8.8 / 8.8.4.4',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
 <article class="fc-dns-card"><h2>Quad9 <small>Security DNS</small></h2><p>DNS عمومی با قابلیت محافظت در برابر دامنه‌های مخرب.</p><div class="fc-dns-pair"><code>9.9.9.9</code><button onclick="copyFCDns('9.9.9.9',this)">کپی</button></div><div class="fc-dns-pair"><code>149.112.112.112</code><button onclick="copyFCDns('149.112.112.112',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('9.9.9.9 / 149.112.112.112',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
@@ -2621,7 +2621,17 @@ function toggleFCMobileMore(force){
  panel.hidden=!open;trigger.setAttribute('aria-expanded',String(open));
 }
 function restoreFC27Section(){const sec=location.hash.slice(1);const valid=['home','obj','sbc','players','squad','evo','club','dns','news','settings'];showSec(valid.includes(sec)?sec:'home',true)}
-async function copyFCDns(value,btn){try{await navigator.clipboard.writeText(value);const t=btn.textContent;btn.textContent='کپی شد ✓';setTimeout(()=>{btn.textContent=t},1400)}catch(e){const field=document.createElement('textarea');field.value=value;document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();btn.textContent='کپی شد ✓'}}
+async function copyFCDns(value,btn){
+ const original=btn.textContent;
+ const numbers=String(value).match(/(?:\d{1,3}\.){3}\d{1,3}/g)||[];
+ const payload=numbers.length===2?'Primary DNS: '+numbers[0]+'\nSecondary DNS: '+numbers[1]:value;
+ let copied=false;
+ try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(payload);copied=true}}catch(e){}
+ if(!copied){try{const field=document.createElement('textarea');field.value=payload;field.style.cssText='position:fixed;opacity:0;left:0;top:0';document.body.appendChild(field);field.select();copied=document.execCommand('copy');field.remove()}catch(e){}}
+ btn.textContent=copied?'کپی شد ✓':'کپی نشد؛ آدرس را دستی انتخاب کنید';
+ btn.setAttribute('aria-live','polite');
+ setTimeout(()=>{if(btn.isConnected)btn.textContent=original},1800);
+}
 
 const FC27_DNS_TARGETS=[{name:'EA',domain:'ea.com'},{name:'EA Help',domain:'help.ea.com'},{name:'PlayStation Network',domain:'playstation.com'},{name:'Xbox',domain:'xbox.com'},{name:'FUT.GG',domain:'fut.gg'},{name:'GitHub Pages',domain:'github.io'}];
 let fcDnsBusy=false;
