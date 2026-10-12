@@ -2266,7 +2266,7 @@ function marketState(p){
  return {status:age<=3*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.url,at:time};
 }
 function freshMarket(p){const m=marketState(p);return m.status==='recent'?FC27_VERIFIED_MARKET.get(String(p.id)):null;}
-async async function loadVerifiedMarket(){
+async function loadVerifiedMarket(){
  try{
   const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
   const data=await res.json();if(!Array.isArray(data.cards))return;
