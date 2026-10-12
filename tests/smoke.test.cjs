@@ -175,3 +175,11 @@ test('PSN status is not confused with DNS resolution',()=>{
  assert.match(html,/status\.playstation\.com/);
  assert.match(html,/fcDnsCheckedAt/);
 });
+
+test('EA news detail supports console Escape and focus containment',()=>{
+ assert.match(html,/function openFCNewsDetail\(item\)/);
+ assert.match(html,/function dismiss\(\)/);
+ assert.match(html,/e\.key==='Escape'/);
+ assert.match(html,/previousFocus\.focus/);
+ assert.match(html,/e\.key==='Tab'/);
+});
