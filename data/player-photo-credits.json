@@ -150,5 +150,77 @@
     "artist": "Steffen Prößdorf",
     "source": "https://upload.wikimedia.org/wikipedia/commons/d/d0/2023-07-03_Fussball%2C_Frauen%2C_Deutsche_Nationalmannschaft%2C_Media_Day_1DX_6563_by_Stepro-2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "extension": "jpg"
+  },
+  {
+    "id": 237383,
+    "name": "Alessandro Bastoni",
+    "license": "CC BY 4.0",
+    "artist": "MichaelEmilio",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/6/65/Norway_Italy_-_June_2025_A_36_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 241651,
+    "name": "Viktor Gyökeres",
+    "license": "CC BY-SA 4.0",
+    "artist": "Mikael Hervestad",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/7/73/Viktor_Gy%C3%B6keres_2026-06-04_1_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 243404,
+    "name": "Georgia Stanway",
+    "license": "CC BY 4.0",
+    "artist": "Raph_PH",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/c1/England_Lionesses_Bus_Celebration_-_The_Mall%2C_London_-_Tuesday_29th_July_2025_28_%28cropped_-_Stanway%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 245879,
+    "name": "Caroline Weir",
+    "license": "CC BY-SA 4.0",
+    "artist": "Steffen Prößdorf",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/55/2025-04-08_Fussball%2C_UEFA_Women%27s_Nations_League%2C_Deutschland_-_Schottland_STP_2101.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 202811,
+    "name": "Emiliano Martínez",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Emiliano_Martinez_Argentina_v_Spain_19_July_2026-269.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 210008,
+    "name": "Adrien Rabiot",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/6/62/Adrien_Rabiot_France_v_Senegal_16_June_2026-253.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 211110,
+    "name": "Paulo Dybala",
+    "license": "CC BY-SA 4.0",
+    "artist": "Olga Shcherbytska",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/b3/%D0%9C%D0%B0%D1%82%D1%87_%C2%AB%D0%94%D0%B8%D0%BD%D0%B0%D0%BC%D0%BE%C2%BB_-_%C2%AB%D0%AE%D0%B2%D0%B5%D0%BD%D1%82%D1%83%D1%81%C2%BB_0-2._20_%D0%BE%D0%BA%D1%82%D1%8F%D0%B1%D1%80%D1%8F_2020_%D0%B3%D0%BE%D0%B4%D0%B0_%E2%80%94_1153905_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 215441,
+    "name": "Serhou Guirassy",
+    "license": "Public domain",
+    "artist": "feguifoot",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Serhou_Guirassy_2024_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 216393,
+    "name": "Youri Tielemans",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Youri_Tielemans_USMNT_v_Belgium_Mar_28_2026-20_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
   }
 ]
