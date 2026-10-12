@@ -2201,7 +2201,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">${!!freshMarket(p)?'قیمت ثبت‌شده FUTNext':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${!!freshMarket(p)?fmtPrice(FC27_VERIFIED_MARKET.get(String(p.id)).price_coins)+' سکه':'—'}</div>${trendHTML}</div>
+      <div class="pcard-price-lbl">${marketState(p).status==='recent'?'قیمت بررسی‌شده · زنده نیست':marketState(p).status==='stale'?'قیمت قدیمی · فقط آرشیو':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${marketState(p).status==='recent'?fmtPrice(marketState(p).price)+' سکه':marketState(p).status==='stale'?'—':'—'}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
@@ -2212,12 +2212,13 @@ function playerCardHTML(p){
 
 
 const FC27_VERIFIED_MARKET=new Map();
-function freshMarket(p){const m=FC27_VERIFIED_MARKET.get(String(p.id));if(!m||m.rating!==p.rat)return null;const age=Date.now()-Date.parse(m.verified_at||m.checked_at);return Number.isFinite(age)&&age>=0&&age<48*3600000?m:null;}
+function marketState(p){const m=FC27_VERIFIED_MARKET.get(String(p.id));if(!m||m.rating!==p.rat||m.position!==p.pos||!Number.isSafeInteger(m.price_coins)||m.price_coins<=0)return {status:'unavailable'};const time=Date.parse(m.verified_at||m.checked_at);if(!Number.isFinite(time)||time>Date.now()+300000)return {status:'unavailable'};const age=Date.now()-time;return {status:age<=24*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.source,at:time};}
+function freshMarket(p){const m=marketState(p);return m.status==='recent'?FC27_VERIFIED_MARKET.get(String(p.id)):null;}
 async function loadVerifiedMarket(){
  try{
   const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
   const data=await res.json();if(!Array.isArray(data.cards))return;
-  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&Number.isFinite(item.price_coins)&&item.price_coins>=0)FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,verified_at:item.verified_at||data.checked_at,platform:data.platform})}
+  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&Number.isSafeInteger(item.price_coins)&&item.price_coins>0&&item.rating>0&&item.position)FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,verified_at:item.verified_at||data.checked_at,platform:data.platform})}
   renderPlayers();
  }catch(err){console.warn('Verified prices unavailable',err)}
 }
@@ -2233,7 +2234,7 @@ function openPlayerModal(id){
  if(AVAILABLE_PORTRAITS.has(imageId)){const img=document.createElement('img');img.src='img/players/'+(VERIFIED_PHOTO_FILES.get(imageId)||imageId+'.png');img.alt=p.name;img.onerror=()=>{face.textContent='⚽'};face.appendChild(img)}else face.textContent='⚽';hero.appendChild(face);panel.appendChild(hero);
  const market=FC27_VERIFIED_MARKET.get(String(p.id));
  const verified=market&&Number(p.rat)===market.rating&&p.pos===market.position;
- const fields=[['باشگاه / Club',p.club],['ملیت / Nation',p.nat],['لیگ / League',p.leagueFA||p.league],['نوع کارت / Card type',p.cardType||'ثبت نشده'],['قیمت / Price',verified?market.price_coins.toLocaleString('en-US')+' coins · '+market.platform:'قیمت تأییدشده موجود نیست']];
+ const fields=[['باشگاه / Club',p.club],['ملیت / Nation',p.nat],['لیگ / League',p.leagueFA||p.league],['نوع کارت / Card type',p.cardType||'ثبت نشده'],['قیمت / Price',marketState(p).status==='recent'?marketState(p).price.toLocaleString('en-US')+' coins · '+marketState(p).platform+' · قیمت ثبت‌شده، نه زنده':marketState(p).status==='stale'?'قیمت قدیمی (آرشیو)؛ برای خرید قابل اتکا نیست':'قیمت تأییدشده موجود نیست']];
  const grid=document.createElement('div');grid.className='fc-player-facts';for(const [label,value] of fields){if(!value)continue;const el=document.createElement('div');const l=document.createElement('small');l.textContent=label;const v=document.createElement('strong');v.textContent=value;el.append(l,v);grid.appendChild(el)}panel.appendChild(grid);
  const stats=deterministicStats(p);if(stats.length){const h=document.createElement('h3');h.textContent='آمار واقعی ثبت‌شده / Card stats';panel.appendChild(h);const items=document.createElement('div');items.className='fc-player-stat-grid';for(const stat of stats){const el=document.createElement('div');const label=document.createElement('small');label.textContent=stat.lbl;const val=document.createElement('strong');val.textContent=stat.v;el.append(label,val);items.appendChild(el)}panel.appendChild(items)}
  if(verified){
@@ -2372,27 +2373,7 @@ async function doFetch(){
     if(!Array.isArray(feed.players)||feed.players.length<18000||!feed.source||!feed.snapshot_date)throw Error('Invalid FC27 player feed');
     const clean=feed.players.filter(p=>typeof p.id==='string'&&typeof p.name==='string'&&Number.isFinite(p.rat)&&p.rat>=1&&p.rat<=99&&p.pos);
     if(clean.length<18000)throw Error('Insufficient validated FC27 records');
-    // A market snapshot is optional; never manufacture prices or special-card identities.
-    try{
-      const mr=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});
-      if(mr.ok){
-        const verified=await mr.json();
-        const date=Date.parse(verified.checked_at);
-        const recent=Number.isFinite(date)&&Math.abs(Date.now()-date)<=7*86400000;
-        if(recent&&Array.isArray(verified.cards)){
-          const byId=new Map(clean.map(p=>[String(p.id),p]));
-          const normalized=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
-          for(const card of verified.cards){
-            const p=byId.get(String(card.player_id));
-            if(!p||p.rat!==card.rating||p.pos!==card.position||!Number.isSafeInteger(card.price_coins)||card.price_coins<0)continue;
-            const a=normalized(p.name),b=normalized(card.name);
-            if(!(a.includes(b)&&b.length>=4||b.includes(a)&&a.length>=4))continue;
-            p.price=card.price_coins;p.market={price:card.price_coins,platform:verified.platform,source:verified.source,checked_at:verified.checked_at};
-            if(card.card_type&&card.card_type!=='Common')p.verifiedCardType=card.card_type;
-          }
-        }
-      }
-    }catch(error){console.warn('Market snapshot unavailable',error)}
+    // Market data is loaded separately and never inserted as a live player price.
     PLAYERS_RAW.splice(0,PLAYERS_RAW.length,...clean);
     renderPlayers();updateStats();renderPitch();updateFCGameHome();
     setStatus('online');
