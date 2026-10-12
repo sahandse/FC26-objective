@@ -826,7 +826,9 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 .fc27-detail-subsection{border-top:1px solid #384b51;padding-top:16px;margin-top:17px;line-height:1.9;font-size:13px}.fc27-detail-subsection h3{color:#caff38;font-size:15px}.fc27-detail-subsection li{margin-bottom:8px}.fc27-detail-note{color:#b4c2c3;font-size:12px;line-height:1.9}.fc27-detail-description{line-height:1.9;color:#bccbd0}
 .fc27-detail-squad{background:#1c2930;border-radius:11px;padding:12px;margin:10px 0}
 @media(max-width:600px){.fc27-detail-panel{max-height:96dvh;padding:16px}.fc27-detail-facts{grid-template-columns:1fr}.fc27-detail-head h2{font-size:18px}}
-</style><style>.fc27-evo-chips{display:flex;gap:5px;flex-wrap:wrap}.fc27-evo-chip{background:#293b33;color:#d3ffab;border:1px solid #405a40;border-radius:8px;padding:6px 9px;font-size:11px}#evoGrid:empty{display:none}</style>  <script type="module" crossorigin src="./assets/index-3sYACyQN.js"></script>
+</style><style>.fc27-evo-chips{display:flex;gap:5px;flex-wrap:wrap}.fc27-evo-chip{background:#293b33;color:#d3ffab;border:1px solid #405a40;border-radius:8px;padding:6px 9px;font-size:11px}#evoGrid:empty{display:none}</style><style>
+.fc-card-prices{background:#182422;border:1px solid #3a5341;border-radius:16px;padding:18px;margin:10px 0 18px;color:#edf7ed}.fc-card-prices h2{color:#d1fb52;font-size:20px;margin:0 0 9px}.fc-card-prices p{font-size:12px;color:#b9c9be;line-height:1.9}.fc-price-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}.fc-price-controls label{display:flex;flex-direction:column;gap:7px;flex:1 1 150px;font-size:12px}.fc-price-controls input,.fc-price-controls select{min-width:0;background:#0e1715;border:1px solid #566a5d;border-radius:10px;color:white;padding:11px;font:inherit}.fc-price-controls button{background:#d0fd52;border:0;border-radius:10px;color:#142014;font-weight:800;padding:12px 16px;cursor:pointer}#fcPriceResult{margin-top:14px;font-size:13px;line-height:1.9}.fc-price-sourced{color:#b6de89;text-decoration:underline}
+</style>  <script type="module" crossorigin src="./assets/index-3sYACyQN.js"></script>
 </head>
 <body>
 
@@ -942,6 +944,12 @@ body{background:radial-gradient(ellipse 90% 360px at 65% -140px,rgba(202,255,56,
 
 <!-- ═══ PLAYERS SECTION ═══ -->
 <main class="main" id="sec-players" style="display:none">
+<section class="fc-card-prices" aria-label="FC27 card market">
+<h2>قیمت کارت‌ها / Card Prices</h2>
+<p>فقط قیمت تأییدشده همین نسخه کارت و پلتفرم نشان داده می‌شود. داده قدیمی به‌عنوان قیمت زنده نمایش داده نمی‌شود.</p>
+<div class="fc-price-controls"><label>شناسه نسخه کارت / Version ID<input id="fcPriceVersion" inputmode="numeric" placeholder="مثلاً 50563395" /></label><label>پلتفرم / Platform<select id="fcPricePlatform"><option value="ps">PlayStation / Console</option><option value="xbox">Xbox / Console</option><option value="pc">PC</option></select></label><button type="button" id="fcPriceCheck">بررسی قیمت</button></div>
+<div id="fcPriceResult" role="status" aria-live="polite">برای مشاهده قیمت، شناسه دقیق نسخه کارت را وارد کنید.</div>
+</section>
   <div class="search-wrap">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input type="text" class="search-input" id="plSearch" placeholder="جستجو: نام، باشگاه، ملیت، لیگ..." oninput="playerPage=1;renderPlayers()" />
