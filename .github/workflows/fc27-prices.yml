@@ -1,0 +1,33 @@
+name: FC27 Verified Card Prices
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: fc27-verified-prices
+  cancel-in-progress: false
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Validate current market source and refresh
+        env:
+          FC27_PRICE_FEED_URL: ${{ vars.FC27_PRICE_FEED_URL }}
+          FC27_PRICE_FEED_TOKEN: ${{ secrets.FC27_PRICE_FEED_TOKEN }}
+        run: node --experimental-strip-types scripts/sync-fc27-prices.ts
+      - name: Publish only verified data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/fc27-prices.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data(fc27): refresh verified card prices"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi
