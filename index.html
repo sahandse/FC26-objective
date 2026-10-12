@@ -848,7 +848,7 @@ body{background:radial-gradient(ellipse 85% 55% at 100% 0%,#263528 0%,transparen
 .fc-game-filter.active{background:#c9ff44;border-color:#d7ff8b;color:#122015;font-weight:800}
 @media(max-width:600px){.fc-game-filter-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px}.fc-game-filter{white-space:nowrap}}
 </style><style>
-@media(max-width:750px){.fc-game-nav{top:0;padding-bottom:8px}.bottom-nav{display:flex!important;overflow-x:auto;gap:0;justify-content:space-between}.bottom-nav .bnav-btn{min-width:0;flex:1 1 0;padding:8px 2px}.bottom-nav .bnav-btn span:not(.bnav-icon):not(.bnav-badge){font-size:10px}#sec-home,#sec-obj,#sec-sbc,#sec-players,#sec-squad,#sec-evo,#sec-club,#sec-store,#sec-news,#sec-settings{padding-bottom:95px}}
+@media(max-width:750px){.fc-game-nav{top:0;padding-bottom:8px}.bottom-nav{display:flex!important;overflow-x:auto;gap:0;justify-content:space-between}.bottom-nav .bnav-btn{min-width:0;flex:1 1 0;padding:8px 2px}.bottom-nav .bnav-btn span:not(.bnav-icon):not(.bnav-badge){font-size:10px}#sec-home,#sec-obj,#sec-sbc,#sec-players,#sec-squad,#sec-evo,#sec-club,#sec-dns,#sec-news,#sec-settings{padding-bottom:95px}}
 .fc-game-tiles article a{display:block;line-height:1.7;text-decoration:none}.fc-game-tiles article a:hover{text-decoration:underline}
 .fc-game-nav button:focus-visible,.bottom-nav button:focus-visible,.fc-game-tiles button:focus-visible{outline:2px solid #d0ff55;outline-offset:3px}
 </style><style>.fc-home-latest{margin:30px 0}.fc-home-latest h2{font-size:19px}.fc-home-latest article h3{color:#e9f6de;font-size:18px;line-height:1.5;margin:12px 0 5px}.fc-home-latest article p{color:#9fb3ac;text-align:right;font-size:11px;margin:5px 0 20px}.fc-home-category{color:#ceff49;letter-spacing:1.3px;font-size:10px}.fc-home-latest .fc27-detail-open{margin-top:auto}</style><style>
@@ -945,7 +945,7 @@ body{background:#0b1011!important;color:#f1f5ed}.fc-console-ribbon{padding:9px m
 #sec-players .pcard-stats{padding:10px 8px!important}#sec-players .pcard-body{padding:10px!important}#sec-players .pcard-club{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pcard-price-lbl{font-size:10px!important}.pcard-price{color:#d2fc5b!important}
 .fc-feed-card{background:#17211c!important;border:1px solid #344639!important;border-radius:12px!important}.fc-feed-card:hover{border-color:#b4d953!important}
 @media(max-width:650px){.fc-console-ribbon-brand small,.fc-console-ribbon-actions button{display:none!important}.fc-game-nav{gap:1px!important}.fc-game-nav button{min-width:64px!important}#sec-players .pcard-upper{min-height:185px}.fc-game-feature{min-height:178px!important}}
-</style></head>
+</style><style>.fc-dns-status,.fc-dns-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:20px 0}.fc-dns-status article,.fc-dns-card{background:linear-gradient(140deg,#203128,#141e22);border:1px solid #435344;border-radius:15px;padding:20px;color:#ecf6e7;display:flex;flex-direction:column;gap:12px}.fc-dns-status a{color:#caff38;text-decoration:none;font-size:12px}.fc-dns-status small,.fc-dns-card p{font-size:12px;color:#afc0b7;line-height:1.8}.fc-dns-card h2{font-size:23px;margin:0}.fc-dns-card h2 small{font-size:12px;color:#caff38;margin-right:12px}.fc-dns-pair{display:flex;align-items:center;gap:10px;background:#0d1717;border:1px solid #354c3e;border-radius:10px;padding:10px}.fc-dns-pair code{flex:1;direction:ltr;text-align:left;color:#eff9e9;font-size:16px}.fc-dns-pair button{background:#d0ff53;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.fc-dns-help{border:1px solid #455943;border-radius:13px;padding:17px;color:#d8ead1;line-height:2;font-size:13px;background:#192720}.fc-dns-help summary{cursor:pointer;color:#caff38;font-weight:800}@media(max-width:750px){.fc-dns-status,.fc-dns-grid{grid-template-columns:1fr}}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -984,7 +984,7 @@ body{background:#0b1011!important;color:#f1f5ed}.fc-console-ribbon{padding:9px m
 <button data-game-nav="squad" onclick="showSec('squad')">▦ <span>ترکیب</span><small>Squad</small></button>
 <button data-game-nav="evo" onclick="showSec('evo')">⬡ <span>تکامل</span><small>Evolutions</small></button>
 <button data-game-nav="club" onclick="showSec('club')">♧ <span>باشگاه</span><small>Club</small></button>
-<button data-game-nav="store" onclick="showSec('store')">▣ <span>فروشگاه</span><small>Store</small></button>
+<button data-game-nav="dns" onclick="showSec('dns')">▣ <span>DNS</span><small>Console DNS</small></button>
 <button data-game-nav="news" onclick="showSec('news')">◈ <span>اخبار</span><small>News</small></button>
 <button data-game-nav="settings" onclick="showSec('settings')">⚙ <span>تنظیمات</span><small>Settings</small></button>
 </nav>
@@ -1001,7 +1001,22 @@ body{background:#0b1011!important;color:#f1f5ed}.fc-console-ribbon{padding:9px m
 <button onclick="showSec('club')"><span>06 / MY CLUB</span><strong>باشگاه من</strong><small>موارد ذخیره‌شده</small></button>
 </div><section class="fc-home-latest"><h2>جدیدترین‌ها / Latest updates</h2><div id="fcGameFeatured" class="fc-game-tiles" aria-live="polite"></div></section></main>
 <main class="main fc-game-page" id="sec-club" style="display:none"><div class="fc-game-eyebrow">MY CLUB / COLLECTION</div><h1 class="fc-game-title">باشگاه من</h1><p class="fc-game-lead">علاقه‌مندی‌ها و بازیکنان ذخیره‌شده روی همین دستگاه؛ بدون ادعای اتصال به باشگاه داخل بازی.</p><div id="fcClubContents" class="fc-game-tiles"></div></main>
-<main class="main fc-game-page" id="sec-store" style="display:none"><div class="fc-game-eyebrow">ULTIMATE TEAM / STORE</div><h1 class="fc-game-title">فروشگاه</h1><p class="fc-game-lead">این صفحه فقط برای نمایش اطلاعات ثبت‌شده در پروژه است؛ هیچ اتصال جدید، خرید یا موجودی FC Points ندارد.</p><div class="fc-game-empty">بسته فعال با قیمت و محتوای تأییدشده برای نمایش ثبت نشده است.</div></main>
+
+<main class="main fc-game-page" id="sec-dns" style="display:none">
+<div class="fc-game-eyebrow">CONSOLE / NETWORK</div><h1 class="fc-game-title">DNS کنسول</h1>
+<p class="fc-game-lead">DNSهای قابل کپی برای PS5 و Xbox؛ کارکردشان بسته به اپراتور و شبکه متفاوت است.</p>
+<div class="fc-dns-status">
+<article><strong>PlayStation Network</strong><small>وضعیت زنده در سایت قابل تأیید نیست</small><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
+<article><strong>EA SPORTS FC / EA Servers</strong><small>آخرین وضعیت را در صفحه رسمی EA ببین</small><a href="https://help.ea.com/en/server-status/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
+</div>
+<div class="fc-dns-grid">
+<article class="fc-dns-card"><h2>شکن <small>Shecan</small></h2><p>آدرس‌های اعلام‌شده سرویس شکن</p><div class="fc-dns-pair"><code>178.22.122.100</code><button onclick="copyFCDns('178.22.122.100',this)">کپی</button></div><div class="fc-dns-pair"><code>185.51.200.2</code><button onclick="copyFCDns('185.51.200.2',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>بگذر <small>Begzar</small></h2><p>آدرس‌های گزارش‌شده عمومی؛ قبل از استفاده وضعیت‌شان را بررسی کن</p><div class="fc-dns-pair"><code>185.55.226.26</code><button onclick="copyFCDns('185.55.226.26',this)">کپی</button></div><div class="fc-dns-pair"><code>185.55.225.25</code><button onclick="copyFCDns('185.55.225.25',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>رادار گیم <small>Radar Game</small></h2><p>سرویس معرفی‌شده برای بازی</p><div class="fc-dns-pair"><code>10.202.10.10</code><button onclick="copyFCDns('10.202.10.10',this)">کپی</button></div><div class="fc-dns-pair"><code>10.202.10.11</code><button onclick="copyFCDns('10.202.10.11',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>کلودفلر <small>Cloudflare</small></h2><p>DNS عمومی؛ رفع محدودیت بازی را تضمین نمی‌کند</p><div class="fc-dns-pair"><code>1.1.1.1</code><button onclick="copyFCDns('1.1.1.1',this)">کپی</button></div><div class="fc-dns-pair"><code>1.0.0.1</code><button onclick="copyFCDns('1.0.0.1',this)">کپی</button></div></article>
+</div>
+<details class="fc-dns-help"><summary>آموزش تنظیم DNS در کنسول</summary><p>PS5: Settings → Network → Settings → Set Up Internet Connection → Advanced Settings → DNS Settings → Manual</p><p>Xbox: Settings → General → Network Settings → Advanced Settings → DNS Settings → Manual</p><p>آدرس اول و دوم را وارد کن و اتصال را آزمایش کن. در صورت مشکل، تنظیم را روی Automatic برگردان.</p></details>
+</main>
 <main class="main fc-game-page" id="sec-news" style="display:none"><div class="fc-game-eyebrow">EA FC / UPDATES</div><h1 class="fc-game-title">اخبار و رویدادها</h1><div id="fcGameNews" class="fc-game-tiles"><div class="fc-game-empty">در حال دریافت اخبار ثبت‌شده…</div></div></main>
 <main class="main fc-game-page" id="sec-settings" style="display:none"><div class="fc-game-eyebrow">PREFERENCES / FC27</div><h1 class="fc-game-title">تنظیمات</h1><div class="fc-game-settings"><button id="fcConsoleToggle" type="button" onclick="applyFCConsoleMode(!consoleMode)" aria-pressed="false" style="padding:14px;border-radius:10px;background:#d0fd4d;color:#18211b;font-weight:800;border:0">حالت کنسول / Console</button><label for="fcGameLang">زبان راهنما / Guide language</label><select id="fcGameLang" onchange="setFC27Lang(this.value)"><option value="fa">فارسی</option><option value="en">English</option><option value="both">فارسی + English</option></select><p>پیشرفت چالش‌ها و علاقه‌مندی‌ها روی این مرورگر ذخیره می‌شوند.</p><a class="fc-telegram-contact" href="https://t.me/sahandse" target="_blank" rel="noopener noreferrer" aria-label="ارتباط از طریق تلگرام">✈️ ارتباط با ما در تلگرام <span dir="ltr">@sahandse</span></a></div></main>
 
@@ -2499,10 +2514,11 @@ function toggleFCMobileMore(force){
  const open=typeof force==='boolean'?force:panel.hidden;
  panel.hidden=!open;trigger.setAttribute('aria-expanded',String(open));
 }
-function restoreFC27Section(){const sec=location.hash.slice(1);const valid=['home','obj','sbc','players','squad','evo','club','store','news','settings'];showSec(valid.includes(sec)?sec:'home',true)}
+function restoreFC27Section(){const sec=location.hash.slice(1);const valid=['home','obj','sbc','players','squad','evo','club','dns','news','settings'];showSec(valid.includes(sec)?sec:'home',true)}
+async function copyFCDns(value,btn){try{await navigator.clipboard.writeText(value);const t=btn.textContent;btn.textContent='کپی شد ✓';setTimeout(()=>{btn.textContent=t},1400)}catch(e){const field=document.createElement('textarea');field.value=value;document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();btn.textContent='کپی شد ✓'}}
 function showSec(sec,fromHistory=false){
  toggleFCMobileMore(false);
- const sections=['home','obj','sbc','players','squad','evo','club','store','news','settings'];
+ const sections=['home','obj','sbc','players','squad','evo','club','dns','news','settings'];
  if(!sections.includes(sec))sec='home';
  for(const key of sections){
   const el=document.getElementById('sec-'+key),bn=document.getElementById('bn-'+key);
@@ -2517,7 +2533,7 @@ function showSec(sec,fromHistory=false){
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
- document.title='FC27 Hub · '+({home:'خانه',obj:'اهداف',sbc:'چالش‌ها',players:'بازیکنان',squad:'ترکیب',evo:'تکامل',club:'باشگاه',store:'فروشگاه',news:'اخبار',settings:'تنظیمات'}[sec]||'');
+ document.title='FC27 Hub · '+({home:'خانه',obj:'اهداف',sbc:'چالش‌ها',players:'بازیکنان',squad:'ترکیب',evo:'تکامل',club:'باشگاه',dns:'DNS کنسول',news:'اخبار',settings:'تنظیمات'}[sec]||'');
  if(!fromHistory)try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }

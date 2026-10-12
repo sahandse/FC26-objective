@@ -97,7 +97,7 @@ test('verified SBC segments and objective tasks are available in-site',()=>{
 });
 
 test('game navigation and official news are wired to real sections',()=>{
- for(const section of ['home','obj','sbc','players','squad','evo','club','store','news','settings'])assert.ok(html.includes('id="sec-'+section+'"'));
+ for(const section of ['home','obj','sbc','players','squad','evo','club','dns','news','settings'])assert.ok(html.includes('id="sec-'+section+'"'));
  assert.match(html,/data-game-nav="home"/);
  assert.doesNotMatch(html,/<nav class="bottom-nav"/);
  assert.match(html,/data\.items\|\|\[\]/);
@@ -135,4 +135,12 @@ test('FC27 Persian headlines and refresh are wired',()=>{
  assert.match(html,/fc27NewsTitle\(item\)/);
  assert.match(html,/15\*60\*1000/);
  assert.match(html,/fc27-sbc-player-photo/);
+});
+
+test('console DNS page has copy buttons and official service-status links',()=>{
+ assert.match(html,/id="sec-dns"/);
+ assert.match(html,/function copyFCDns/);
+ assert.match(html,/status\.playstation\.com/);
+ assert.match(html,/help\.ea\.com\/en\/server-status/);
+ assert.doesNotMatch(html,/id="sec-store"/);
 });
