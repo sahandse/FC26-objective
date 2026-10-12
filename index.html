@@ -2533,7 +2533,7 @@ function showSec(sec,fromHistory=false){
  if(sec==='club')renderFCGameClub();
  if(sec==='news')loadFCGameNews();
  if(sec==='settings'){const input=document.getElementById('fcGameLang');if(input)input.value=fc27Lang;}
- document.title='FC27 Hub · '+({home:'خانه',obj:'اهداف',sbc:'چالش‌ها',players:'بازیکنان',squad:'ترکیب',evo:'تکامل',club:'باشگاه',store:'فروشگاه',news:'اخبار',settings:'تنظیمات'}[sec]||'');
+ document.title='FC27 Hub · '+({home:'خانه',obj:'اهداف',sbc:'چالش‌ها',players:'بازیکنان',squad:'ترکیب',evo:'تکامل',club:'باشگاه',dns:'DNS کنسول',news:'اخبار',settings:'تنظیمات'}[sec]||'');
  if(!fromHistory)try{if(location.hash!=='#'+sec)history.pushState({fc27Section:sec},'','#'+sec)}catch(e){}
  window.scrollTo({top:0,behavior:'smooth'});
 }
