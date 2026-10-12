@@ -1,5 +1,5 @@
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
-import {validatedPrice,type CardPrice,type Platform} from '../src/prices';
+import {validatedPrice,type CardPrice,type Platform} from '../src/prices.ts';
 const dest='data/fc27-prices.json';
 const current=JSON.parse(readFileSync(dest,'utf8'));
 const endpoint=process.env.FC27_PRICE_FEED_URL;
