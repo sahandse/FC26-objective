@@ -915,7 +915,7 @@ body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent
 @media(max-width:650px){.fc-game-nav{top:56px}.fc-game-nav button{min-height:58px}.fc-game-feature{min-height:215px;margin-top:15px}.fc-game-tiles>button{min-height:106px}.fc-game-page{padding-bottom:80px}}
 @media(prefers-reduced-motion:reduce){.fc-game-page{animation:none}.fc-game-nav button,.fc-game-tiles>button,.fc-game-tiles>button::after{transition:none}}
 </style>
-</head>
+<style>.squad-pl-item{width:100%;display:flex;text-align:right;border:1px solid #334b3d;border-radius:10px;background:#192824;color:#f2f8ee;cursor:pointer;padding:8px;align-items:center}.squad-pl-item:hover,.squad-pl-item:focus-visible{border-color:#caff38;background:#293b2c}.fc27-sbc-player-photo{height:95px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(150deg,#223a2a,#141f1d);border:1px solid #40553d;border-radius:11px}.fc27-sbc-player-photo img{object-fit:contain;max-width:100%;height:94px}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1846,7 +1846,7 @@ function renderDraftSlot(){
     </div>`;
 }
 function pickDraftPlayer(pid){
-  const p=PLAYERS_RAW.find(x=>x.id===pid);
+  const p=PLAYERS_RAW.find(x=>String(x.id)===String(pid));
   if(!p)return;
   draftState.picks[draftState.slot]=p;
   draftState.slot++;
@@ -1887,7 +1887,7 @@ function renderPitch(){
   container.innerHTML=slots.map((slot,i)=>{
     const p=state.squad.slots[i];
     if(p){
-      const img=p.imgId?`<img src="img/players/${p.imgId}.png" onerror="imgFallback(this,${p.imgId})" alt="${p.name}">`:'';
+      const img=portraitHTML(p,28);
       return `<div class="pitch-slot slot-filled" style="left:${slot.x}%;top:${slot.y}%" onclick="openSquadPicker(${i})">
         <div class="slot-ring">${img}</div>
         <div class="slot-pos">${slot.pos}</div>
@@ -1920,41 +1920,42 @@ function openSquadPicker(slotIdx){
   const title=document.getElementById('squadPickerTitle');
   if(title)title.textContent='انتخاب بازیکن - پوزیشن: '+(slot?slot.pos:'');
   document.getElementById('squadSearch').value='';
-  document.getElementById('squadPickerModal').classList.add('open');
+  const dialog=document.getElementById('squadPickerModal');if(!dialog)return;dialog.classList.add('open');
   renderSquadPicker();
 }
 function closeSquadPicker(){
-  document.getElementById('squadPickerModal').classList.remove('open');
+  document.getElementById('squadPickerModal')?.classList.remove('open');
   activeSquadSlot=null;
 }
 function renderSquadPicker(){
-  const q=document.getElementById('squadSearch').value.toLowerCase();
+  const q=(document.getElementById('squadSearch')?.value||'').trim().toLowerCase();
   const currentFormation=FORMATIONS[state.squad.formation]||FORMATIONS['4-3-3'];
   const target=currentFormation[activeSquadSlot]?.pos;
   let list=PLAYERS_RAW.filter(p=>{
-    if(Object.entries(state.squad.slots||{}).some(([slot,used])=>Number(slot)!==activeSquadSlot&&used.id===p.id))return false;
+    if(Object.entries(state.squad.slots||{}).some(([slot,used])=>Number(slot)!==activeSquadSlot&&used&&String(used.id)===String(p.id)))return false;
     if(!q)return true;
-    return [p.nameFA,p.name,p.pos,p.club].join(' ').toLowerCase().includes(q);
+    return [p.nameFA,p.name,p.pos,p.club].filter(Boolean).join(' ').toLowerCase().includes(q);
   }).sort((a,b)=>Number(b.pos===target)-Number(a.pos===target)||b.rat-a.rat);
   const container=document.getElementById('squadPickerList');
   if(!container)return;
   container.innerHTML=list.slice(0,40).map(p=>`
-    <div class="squad-pl-item" onclick="selectSquadPlayer('${p.id}')">
+    <button type="button" class="squad-pl-item" onclick="selectSquadPlayer('${p.id}')">
       <div class="squad-pl-rat">${p.rat}</div>
       <div class="squad-pl-info">
         <div class="squad-pl-name">${p.nameFA}</div>
         <div class="squad-pl-pos">${p.pos} · ${p.flag} ${p.club}</div>
       </div>
-    </div>`).join('');
+    </button>`).join('');
 }
 function selectSquadPlayer(pid){
   const p=PLAYERS_RAW.find(x=>x.id===pid);
-  if(!p||activeSquadSlot===null)return;
-  if(Object.entries(state.squad.slots||{}).some(([slot,used])=>Number(slot)!==activeSquadSlot&&used.id===p.id)){toast('این بازیکن در ترکیب حضور دارد','e');return;}
+  if(!p||activeSquadSlot===null||!Number.isInteger(activeSquadSlot))return;
+  if(Object.entries(state.squad.slots||{}).some(([slot,used])=>Number(slot)!==activeSquadSlot&&used&&String(used.id)===String(p.id))){toast('این بازیکن در ترکیب حضور دارد','e');return;}
   state.squad.slots[activeSquadSlot]=p;
   saveState();
   closeSquadPicker();
   renderPitch();
+  toast('بازیکن به ترکیب اضافه شد','s');
 }
 function clearSquad(){
   if(Object.keys(state.squad.slots||{}).length&&!confirm('همه بازیکنان ترکیب حذف شوند؟'))return;
@@ -2462,6 +2463,21 @@ function renderFCGameClub(){
  for(const saved of Object.values(fc27Saved)){const card=document.createElement('article');const title=document.createElement('h3');title.textContent=saved.name||'چالش ذخیره‌شده';const meta=document.createElement('small');meta.textContent=saved.kind==='evolutions'?'تکامل':saved.kind==='objectives'?'اهداف':'SBC';card.append(title,meta);
  const btn=document.createElement('button');btn.className='fc27-detail-open';btn.textContent='نمایش جزئیات';btn.onclick=()=>{const list=saved.kind==='evolutions'?verifiedEvos:(liveFC27.sections[saved.kind]||[]);const rec=list.find(x=>x.url===saved.url);if(rec)openFC27Details(saved.kind,rec);else btn.textContent='جزئیات این مورد فعلاً موجود نیست';};card.appendChild(btn);host.appendChild(card)}
 }
+const FC27_NEWS_FA={
+'fc-27-future-stars':'ستاره‌های آینده در آلتیمیت تیم FC27',
+'fc27-title-update-v1-0-4':'جزئیات بروزرسانی نسخه ۱.۰.۴ بازی FC27',
+'fc-27-the-grounds-developer-launch-update':'گزارش تیم سازنده درباره حالت The Grounds',
+'title-update-v1-0-3':'جزئیات بروزرسانی نسخه ۱.۰.۳ بازی FC27',
+'fc-27-fut-developer-launch-update':'گزارش سازندگان آلتیمیت تیم پس از انتشار',
+'fc-27-gameplay-developer-launch-update':'گزارش سازندگان از گیم‌پلی FC27',
+'fc-27-career-mode-developer-launch-update':'گزارش سازندگان از حالت Career',
+'fc-27-destined-for-glory':'رویداد در مسیر افتخار در آلتیمیت تیم',
+'football-ultimate-team-for-beginners':'راهنمای شروع آلتیمیت تیم برای تازه‌کارها',
+'which-fc27-mode-is-right-for-you':'کدام حالت بازی FC27 برای شما مناسب‌تر است؟',
+'how-to-get-started-in-the-grounds':'آموزش شروع The Grounds و Clubs',
+'what-are-playstyles':'معرفی و آموزش همه PlayStyleها'
+};
+function fc27NewsTitle(item){try{const key=new URL(item.url||item.link).pathname.split('/').pop();return FC27_NEWS_FA[key]||'خبر رسمی FC27';}catch{return 'خبر رسمی FC27'}}
 async function loadFCGameNews(){
  const host=document.getElementById('fcGameNews');if(!host)return;
  try{
@@ -2469,7 +2485,7 @@ async function loadFCGameNews(){
   const data=await response.json();const entries=Array.isArray(data)?data:(data.items||data.articles||data.news||[]);
   host.replaceChildren();
   let count=0;for(const item of entries.slice(0,12)){const url=item.url||item.link;let link;try{link=new URL(url)}catch{continue}if(!['https:'].includes(link.protocol))continue;
-   const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title||item.name||'خبر FC27';a.style.color='#d0ff53';article.appendChild(a);
+   const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=fc27NewsTitle(item);a.style.color='#d0ff53';article.appendChild(a);
    if(item.published_at||item.date){const small=document.createElement('p');small.textContent=item.published_at||item.date;article.appendChild(small)}host.appendChild(article);count++}
   if(!count)throw Error('No verified articles');
  }catch(e){host.replaceChildren();const p=document.createElement('div');p.className='fc-game-empty';p.textContent='خبر معتبر برای نمایش موجود نیست.';host.appendChild(p)}
@@ -2480,14 +2496,14 @@ async function loadOfficialNews(){
  const stamp=document.getElementById('officialFeedStamp'),list=document.getElementById('officialNewsList');
  if(!stamp||!list)return;
  try{
-  const res=await fetch('https://raw.githubusercontent.com/sahandse/FC26-objective/claude/fc26-objectives-page-yAjCT/data/fc27-news.json?t='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(10000)});
+  const res=await fetch('./data/fc27-news.json?t='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(10000)});
   if(!res.ok)throw new Error('No verified feed');
   const data=await res.json();
   if(data.source!=='Electronic Arts'||!Array.isArray(data.items)||!data.items.length)throw new Error('Invalid official feed');
   list.replaceChildren();
   for(const item of data.items.slice(0,8)){
    const u=new URL(item.url);if(u.hostname!=='www.ea.com')continue;
-   const a=document.createElement('a');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title+' ↗';list.appendChild(a);
+   const a=document.createElement('a');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=fc27NewsTitle(item)+' ↗';list.appendChild(a);
   }
   stamp.textContent='آخرین بررسی خبرها: '+new Date(data.checked_at).toLocaleString('fa-IR');
  }catch(error){
@@ -2647,6 +2663,10 @@ function renderLiveFC27(){
    const card=fc27Node('article','fc-feed-card');
    const title=fc27Node('h3','',FC27_FA[rec.name]||rec.name);
    const englishTitle=fc27Node('p','fc27-original-title',rec.name);
+   if(kind==='sbc'&&rec.category==='players'){
+    const match=PLAYERS_RAW.find(p=>p.name&&rec.name&&p.name.toLowerCase()===rec.name.toLowerCase());
+    if(match){const picture=fc27Node('div','fc27-sbc-player-photo');picture.innerHTML=portraitHTML(match,42);card.appendChild(picture)}
+   }
    const desc=fc27Node('p','fc27-card-description',kind==='objectives'?'جزئیات مأموریت و مراحل تکمیل':'مراحل تکمیل چالش و بررسی ترکیب');
    const meta=fc27Node('div','fc-feed-meta',kind==='sbc'?(Number.isFinite(rec.price)?'هزینه ثبت‌شده: '+rec.price.toLocaleString('fa-IR'):'هزینه تأییدشده موجود نیست'):(rec.reward||'جایزه در جزئیات هدف'));
    if(kind==='sbc'&&Array.isArray(rec.requirements)&&rec.requirements.length){
