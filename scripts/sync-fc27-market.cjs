@@ -40,7 +40,7 @@ async function verify(card){
   try{const result=await verify(c);retained.set(String(c.player_id)+'|'+c.platform,result);verified++;console.log('Verified observation',result.player_id,result.price_coins,result.platform)}
   catch(e){console.warn('No verified price',c.player_id,e.message)}
  }
- if(verified===0){console.log('No fresh verification; timestamps unchanged.');return}
+ if(verified===0){console.log('No prices independently verified; existing snapshot preserved without refreshing timestamps');return}
  const cards=[...retained.values()].filter(c=>Number.isSafeInteger(c.price_coins)&&c.verified_at);
  fs.writeFileSync(dest,JSON.stringify({source:'FUTNext independently verified page observations',checked_at:new Date().toISOString(),cards},null,2)+'\n');
  console.log('Refreshed',verified,'observations; historical values remain timestamped');
