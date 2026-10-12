@@ -144,3 +144,14 @@ test('console DNS page has copy buttons and official service-status links',()=>{
  assert.match(html,/help\.ea\.com\/en\/server-status/);
  assert.doesNotMatch(html,/id="sec-store"/);
 });
+
+test('updated FC27 styling and strictly dated card market',()=>{
+ assert.match(html,/fc27-visual-relaunch/);
+ assert.match(html,/قیمت مشاهده‌شده · زنده نیست/);
+ assert.match(html,/age<=3\*3600000/);
+ const prices=JSON.parse(fs.readFileSync('data/fc27-market-verified.json','utf8'));
+ assert.ok(Array.isArray(prices.cards));
+ assert.ok(prices.cards.every(p=>typeof p.verified_at==='string'&&Number.isSafeInteger(p.price_coins)));
+ const importer=fs.readFileSync('scripts/import-verified-prices.cjs','utf8');
+ assert.match(importer,/Stale or future observation refused/);
+});
