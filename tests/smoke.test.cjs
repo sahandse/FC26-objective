@@ -163,3 +163,23 @@ test('market updater never refreshes timestamp when no observation was verified'
  assert.match(html,/async function loadVerifiedMarket\(/);
  assert.match(html,/www\.futnext\.com/);
 });
+
+test('official EA news extractor uses article title and excludes FC26',()=>{
+ const script=fs.readFileSync('scripts/sync-fc27-news.cjs','utf8');
+ assert.match(script,/meta\[property="og:title"\]/);
+ assert.ok(script.includes('officialTitle'));
+ assert.ok(script.includes('FC\\s*26'));
+});
+test('PSN status is not confused with DNS resolution',()=>{
+ assert.match(html,/آزمایش DNS فقط دسترسی به نام دامنه را نشان می‌دهد/);
+ assert.match(html,/status\.playstation\.com/);
+ assert.match(html,/fcDnsCheckedAt/);
+});
+
+test('EA news detail supports console Escape and focus containment',()=>{
+ assert.match(html,/function openFCNewsDetail\(item\)/);
+ assert.match(html,/function dismiss\(\)/);
+ assert.match(html,/e\.key==='Escape'/);
+ assert.match(html,/previousFocus\.focus/);
+ assert.match(html,/e\.key==='Tab'/);
+});
