@@ -1,3 +1,4 @@
+import {setupVerifiedMarkets,getFC27CardCoins,getFC27CardPriceText} from './market';
 // Migration of the FC27 application runtime to a Vite TypeScript entry point.
 // Legacy handlers are explicitly exposed for existing inline HTML events.
 // @ts-nocheck
@@ -1466,59 +1467,4 @@ loadLiveFC27,
 init
 });
 
-
-type MarketPlatform='pc'|'ps'|'xbox';
-type MarketQuote={cardId:string;versionId:string;platform:MarketPlatform;coins:number|null;checkedAt:string|null;sourceUrl:string|null;status:string};
-let verifiedMarketPrices=new Map<string,MarketQuote>();
-async function loadVerifiedMarketPrices(){
- verifiedMarketPrices.clear();
- try{
-  const response=await fetch('./data/fc27-prices.json',{cache:'no-store'});
-  if(!response.ok)throw Error('No price feed');
-  const data=await response.json();
-  if(!Array.isArray(data.prices))throw Error('Invalid price snapshot');
-  for(const item of data.prices){
-   if(!item||!/^\\d+$/.test(String(item.versionId)))continue;
-   if(!['pc','ps','xbox'].includes(item.platform))continue;
-   if(!Number.isInteger(item.coins)||item.coins<0)continue;
-   if(typeof item.sourceUrl!=='string'||!item.sourceUrl.startsWith('https://'))continue;
-   if(typeof item.checkedAt!=='string')continue;
-   const when=Date.parse(item.checkedAt),now=Date.now();
-   if(!Number.isFinite(when)||when>now||now-when>45*60*1000)continue;
-   const key=item.versionId+':'+item.platform;
-   verifiedMarketPrices.set(key,item);
-  }
- }catch(err){console.warn('Verified market price feed unavailable',err)}
- if(document.getElementById('plGrid'))renderPlayers();
-}
-function getFC27CardCoins(p){
- const version=String(p.versionId||p.itemId||'');
- if(!/^\\d+$/.test(version))return null;
- const platform=document.getElementById('fcPricePlatform')?.value||'ps';
- const item=verifiedMarketPrices.get(version+':'+platform);
- return item&&Number.isInteger(item.coins)?item.coins:null;
-}
-function getFC27CardPriceText(p){
- const value=getFC27CardCoins(p);
- return value===null?'قیمت معتبر موجود نیست':value.toLocaleString('fa-IR')+' سکه';
-}
-function showVerifiedCardPrice(){
- const output=document.getElementById('fcPriceResult');
- if(!output)return;
- const version=String(document.getElementById('fcPriceVersion')?.value||'').trim();
- const platform=document.getElementById('fcPricePlatform')?.value||'ps';
- output.replaceChildren();
- if(!/^\\d+$/.test(version)){output.textContent='شناسه نسخه کارت باید عددی باشد. / Enter an exact numeric version ID.';return}
- const quote=verifiedMarketPrices.get(version+':'+platform);
- if(!quote){output.textContent='برای این نسخه و پلتفرم، قیمت تازه و قابل‌تأیید موجود نیست. / No verified fresh quote for this card version and platform.';return}
- const amount=document.createElement('strong');amount.textContent=quote.coins.toLocaleString('fa-IR')+' Coins';
- const time=document.createElement('span');time.textContent=' · آخرین بررسی: '+new Date(quote.checkedAt).toLocaleString('fa-IR');
- const link=document.createElement('a');link.textContent=' · منبع قیمت ↗';link.href=quote.sourceUrl;link.rel='noopener noreferrer';link.target='_blank';link.className='fc-price-sourced';
- output.append(amount,time,link);
-}
-document.addEventListener('DOMContentLoaded',async()=>{
- const trigger=document.getElementById('fcPriceCheck');
- if(trigger)trigger.addEventListener('click',showVerifiedCardPrice);
- document.getElementById('fcPricePlatform')?.addEventListener('change',()=>{showVerifiedCardPrice();renderPlayers()});
- await loadVerifiedMarketPrices();
-});
+document.addEventListener('DOMContentLoaded',()=>setupVerifiedMarkets(renderPlayers));
