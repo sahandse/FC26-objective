@@ -2325,6 +2325,27 @@ async function doFetch(){
     if(!Array.isArray(feed.players)||feed.players.length<18000||!feed.source||!feed.snapshot_date)throw Error('Invalid FC27 player feed');
     const clean=feed.players.filter(p=>typeof p.id==='string'&&typeof p.name==='string'&&Number.isFinite(p.rat)&&p.rat>=1&&p.rat<=99&&p.pos);
     if(clean.length<18000)throw Error('Insufficient validated FC27 records');
+    // A market snapshot is optional; never manufacture prices or special-card identities.
+    try{
+      const mr=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});
+      if(mr.ok){
+        const verified=await mr.json();
+        const date=Date.parse(verified.checked_at);
+        const recent=Number.isFinite(date)&&Math.abs(Date.now()-date)<=7*86400000;
+        if(recent&&Array.isArray(verified.cards)){
+          const byId=new Map(clean.map(p=>[String(p.id),p]));
+          const normalized=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+          for(const card of verified.cards){
+            const p=byId.get(String(card.player_id));
+            if(!p||p.rat!==card.rating||p.pos!==card.position||!Number.isSafeInteger(card.price_coins)||card.price_coins<0)continue;
+            const a=normalized(p.name),b=normalized(card.name);
+            if(!(a.includes(b)&&b.length>=4||b.includes(a)&&a.length>=4))continue;
+            p.price=card.price_coins;p.market={price:card.price_coins,platform:verified.platform,source:verified.source,checked_at:verified.checked_at};
+            if(card.card_type&&card.card_type!=='Common')p.verifiedCardType=card.card_type;
+          }
+        }
+      }
+    }catch(error){console.warn('Market snapshot unavailable',error)}
     PLAYERS_RAW.splice(0,PLAYERS_RAW.length,...clean);
     renderPlayers();updateStats();renderPitch();updateFCGameHome();
     setStatus('online');
