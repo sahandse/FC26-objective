@@ -1,67 +1,125 @@
 {
   "source": "Electronic Arts",
   "source_url": "https://www.ea.com/games/ea-sports-fc/fc-27",
-  "checked_at": "2026-10-11T23:44:49.742Z",
+  "checked_at": "2026-10-12T08:06:52.706Z",
   "items": [
     {
       "title": "News ArticleOctober 9, 2026Football Ultimate Team™ 27 - Future StarsSee the most exciting Future Stars take over Football Ultimate Team™ and develop your own young talent in the Fu",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-future-stars",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "ستاره‌های آینده به آلتیمیت تیم FC27 رسیدند",
+      "summary_fa": "رویداد Future Stars با بازیکنان جوان و بازگشت آکادمی تکامل آغاز شده است. عملکرد واقعی بازیکنان می‌تواند روی ارتقاهای آیتم‌های ویژه اثر بگذارد.",
+      "paragraphs_fa": [
+        "تیم اول این رویداد با حضور ریو انگوموها معرفی شده و مسیر پیشرفت بازیکنان با توجه به پست و لیگ آنها متفاوت است.",
+        "در Future Stars Academy می‌توان بازیکن واجد شرایط در پست ST یا CAM را وارد مسیر چهارمرحله‌ای تکامل کرد.",
+        "این رویداد شامل SBCهای بازیکنان، چالش‌های مختلف و مسابقات جدید است."
+      ],
+      "image": "https://drop-assets.ea.com/images/1ScbvTyIbraYnipRqLIkJO/eb9513b800740e8427d7e622482f6e83/FC27-future-stars-feat-img-16x9.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-10-09"
     },
     {
       "title": "News ArticleOctober 7, 2026EA SPORTS FC™ 27 | Title Update v1.0.4Find out the latest EA SPORTS FC™ 27 Update details in the Title Update v.1.0.4 Notes.",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc27-title-update-v1-0-4",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "آپدیت ۱.۰.۴ بازی FC27؛ رفع مشکلات آلتیمیت تیم و کریر",
+      "summary_fa": "این به‌روزرسانی روی رفع خطاها و پایداری تمرکز دارد و طبق اعلام EA تغییری در بالانس گیم‌پلی ایجاد نکرده است.",
+      "paragraphs_fa": [
+        "خطای «سرویس در دسترس نیست» پس از بعضی مسابقات FUT و مشکل نمایش برخی آیتم‌های Player Pick اصلاح شده است.",
+        "در حالت Career مشکلاتی در نقل‌وانتقالات، بازیکنان آزاد و زمان‌بندی لیگ مکزیک رفع شده‌اند.",
+        "بخش The Grounds و قسمت‌های صوتی و تصویری هم اصلاحاتی برای رفع خطا دریافت کرده‌اند."
+      ],
+      "image": "https://drop-assets.ea.com/images/5zl7KexxNAVF9mWDZd2dZq/1627580b6061e88ff91567f4ff0f943d/TitleUpdate_104.png?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-10-07"
     },
     {
       "title": "News ArticleOctober 2, 2026EA SPORTS FC™ 27 | The Grounds Developer Launch UpdateHear directly from the The Grounds development team following the launch of EA SPORTS FC™ 27, cover",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-the-grounds-developer-launch-update",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "گزارش سازندگان از حالت The Grounds",
+      "image": "https://drop-assets.ea.com/images/4vkxVGYFdmCBA2WEn063IA/9cc37b2a91b2adce8d0425d7aba2ae6a/fc-27-developer_notes_the-grounds-feat-img.png?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-10-02",
+      "summary_fa": "تیم سازنده The Grounds درباره تجربه آغازین این حالت و بازخوردهای بازیکنان پس از عرضه FC27 توضیح داده است."
     },
     {
       "title": "News ArticleOctober 2, 2026EA SPORTS FC™ 27 | Title Update v1.0.3Find out the latest EA SPORTS FC™ 27 Update details in the Title Update v.1.0.3 Notes.",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/title-update-v1-0-3",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "جزئیات به‌روزرسانی ۱.۰.۳ بازی FC27",
+      "image": "https://drop-assets.ea.com/images/7nBFipZRcOV0ivySEPyGev/cdb69d14a2f2e06ac1eac6f3355b9159/v1.0.3.png?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-10-02",
+      "summary_fa": "EA جزئیات تغییرات و اصلاحات نسخه ۱.۰.۳ بازی FC27 را در یادداشت رسمی این به‌روزرسانی منتشر کرده است."
     },
     {
       "title": "News ArticleOctober 1, 2026EA SPORTS FC™ 27 | FUT Developer Launch UpdateHear directly from the FUT development team following the launch of EA SPORTS FC™ 27, covering early feedba",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-fut-developer-launch-update",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "گزارش سازندگان Ultimate Team پس از انتشار FC27",
+      "image": "https://drop-assets.ea.com/images/wsCGTs12X5KUsFpp9XR3u/69ad7514c0c87a2e1223ccd4286d9248/fc-27-developer_notes_fut-feat-img.png?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-10-01",
+      "summary_fa": "گزارش توسعه‌دهندگان Ultimate Team درباره تجربه روزهای نخست انتشار FC27 و بازخوردهای جامعه بازیکنان است."
     },
     {
       "title": "News ArticleSeptember 30, 2026EA SPORTS FC™ 27 | Gameplay Developer Launch UpdateHear directly from the Gameplay team following the launch of EA SPORTS FC™ 27, covering early feedb",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-gameplay-developer-launch-update",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "گزارش تیم گیم‌پلی FC27",
+      "image": "https://drop-assets.ea.com/images/62nHdeJwQu38X26hbBf4vb/ebc0062c08d22db2d11d43cf62b104eb/fc-27-developer_notes_gameplay-feat-img.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-09-30",
+      "summary_fa": "تیم گیم‌پلی FC27 در گزارشی رسمی به بازخورد بازیکنان و روند بهبود تجربه بازی پس از انتشار پرداخته است."
     },
     {
       "title": "News ArticleSeptember 29, 2026EA SPORTS FC™ 27 | Career Mode Developer Launch Update Hear directly from the Career Mode development team following the launch of EA SPORTS FC™ 27, c",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-career-mode-developer-launch-update",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "گزارش تیم Career Mode پس از انتشار FC27",
+      "image": "https://drop-assets.ea.com/images/7sKOMTGNxspRKEhqi1PK8g/b08417c3297f95c88704a03a7e21e3f6/fc-27-developer_notes_career-feat-img.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-09-29",
+      "summary_fa": "سازندگان Career Mode درباره بازخوردهای اولیه و وضعیت این بخش پس از عرضه FC27 توضیح داده‌اند."
     },
     {
       "title": "News ArticleSeptember 25, 2026Football Ultimate Team™ 27 - Destined for GloryWith the help of votes from the FC community, meet the players set to shine this season in EA SPORTS FC",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/fc-27-destined-for-glory",
-      "source": "Electronic Arts"
-    },
-    {
-      "title": "News ArticleSeptember 25, 2026EA SPORTS FC™ 27 Football Ultimate Team™ for BeginnersLearn how to build your first Football Ultimate Team™ through the Foundations tutorial.",
-      "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/football-ultimate-team-for-beginners",
-      "source": "Electronic Arts"
-    },
-    {
-      "title": "News ArticleSeptember 25, 2026Which EA SPORTS FC™ 27 Mode Is Right For You?Learn more about what’s included in FC 27, including immersive offline experiences, competitive events, a",
-      "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/which-fc27-mode-is-right-for-you",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "title_fa": "رویداد Destined for Glory در آلتیمیت تیم",
+      "image": "https://drop-assets.ea.com/images/5I9lpx4lFDBgUDyHuOwra4/a79c3267b020d82679d2b40829a4440e/FC27_DestinedForGlory_16x9_CreatorSuite.jpg?im=AspectCrop=(16,9),xPosition=0.5,yPosition=0.5",
+      "published_at": "2026-09-25",
+      "summary_fa": "خبر رسمی رویداد Destined for Glory در Football Ultimate Team درباره بازیکنان و محتوای مرتبط با این رویداد است."
     },
     {
       "title": "News ArticleSeptember 25, 2026How to Get Started in The Grounds and ClubsLearn more about your first steps onto The Grounds, including how to access Clubs.",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/how-to-get-started-in-the-grounds",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "image": "https://drop-assets.ea.com/images/5Cjo0D4CbDXHO6NQ9pvyqc/86b7f0163def94f3cb0c2a093d0c0698/FC27_TS_Multi_Clean_16x9.png",
+      "published_at": "2026-09-25",
+      "title_fa": "آموزش شروع The Grounds و Clubs در FC27",
+      "summary_fa": "EA مراحل اولیه ورود به The Grounds و آشنایی با حالت Clubs را معرفی کرده است."
+    },
+    {
+      "title": "News ArticleSeptember 25, 2026Which EA SPORTS FC™ 27 Mode Is Right For You?Learn more about what’s included in FC 27, including immersive offline experiences, competitive events, a",
+      "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/which-fc27-mode-is-right-for-you",
+      "source": "Electronic Arts",
+      "image": "https://drop-assets.ea.com/images/FPESvsaGMlGjbvGdoHVyU/629c738ea7d106e4d2f6657713eb0e49/FC27_Featured-Image-Light_16x9.jpg?im=AspectCrop=(16,9),xPosition=0.13723958333333333,yPosition=0.5175925925925926",
+      "published_at": "2026-09-25",
+      "title_fa": "کدام حالت FC27 برای شما مناسب‌تر است؟",
+      "summary_fa": "آشنایی با حالت‌های مختلف FC27 برای انتخاب شیوه بازی متناسب با علاقه‌تان."
+    },
+    {
+      "title": "News ArticleSeptember 25, 2026EA SPORTS FC™ 27 Football Ultimate Team™ for BeginnersLearn how to build your first Football Ultimate Team™ through the Foundations tutorial.",
+      "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/football-ultimate-team-for-beginners",
+      "source": "Electronic Arts",
+      "image": "https://drop-assets.ea.com/images/5nPcDz27mqYb9iKarzfmyL/4a16b7ecc6fd34d76313476beda53cd1/FC27_FUT_Gallery_Clean_16x9.png",
+      "published_at": "2026-09-25",
+      "title_fa": "راهنمای شروع آلتیمیت تیم FC27 برای تازه‌کارها",
+      "summary_fa": "نکات اولیه ساخت اولین تیم و شروع فعالیت در Football Ultimate Team."
     },
     {
       "title": "News ArticleSeptember 25, 2026PlayStyles: Everything You Need to KnowAll PlayStyles and how they work in EA SPORTS FC 27, all in one place.",
       "url": "https://www.ea.com/games/ea-sports-fc/fc-27/news/what-are-playstyles",
-      "source": "Electronic Arts"
+      "source": "Electronic Arts",
+      "image": "https://drop-assets.ea.com/images/3MguDvv4wciOxcsNT7UIqw/028be9914b75a1a63e510f79c0f6a0be/FC27_REV_BARCOLA_SKILLMOVE_16x9_HIRES_CLEAN.png",
+      "published_at": "2026-09-25",
+      "title_fa": "راهنمای PlayStyles و کاربرد آن‌ها در FC27",
+      "summary_fa": "مروری بر PlayStyleها و نقش آن‌ها در ویژگی‌ها و عملکرد بازیکنان در بازی."
     }
   ]
 }
