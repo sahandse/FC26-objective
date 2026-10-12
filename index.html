@@ -926,7 +926,7 @@ body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent
 .fc27-detail-open{min-height:42px;touch-action:manipulation}
 </style><style>
 #fcGameNews{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.fc-news-card{padding:0!important;overflow:hidden;display:flex;flex-direction:column;min-height:320px!important}.fc-news-card>img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#263329}.fc-news-body{padding:17px;display:flex;flex-direction:column;gap:11px;flex:1}.fc-news-label{font-size:11px;color:#aacc8d;direction:ltr;text-align:right}.fc-news-body h3{font-size:17px;line-height:1.7;color:#f3ffed}.fc-news-body p{font-size:12px;line-height:2;color:#bfd0c6;flex:1}.fc-news-read,.fc-news-share{padding:11px 13px;border:1px solid #83a752;background:#2a3c27;color:#e3ffb1;border-radius:10px;font:inherit;font-weight:700;font-size:12px;cursor:pointer;text-decoration:none;display:inline-block}.fc-news-modal>img{width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin:12px 0}.fc-news-modal h2{line-height:1.6;font-size:22px}.fc-news-article-text{font-size:14px;line-height:2.2;color:#d7e6dc;margin:15px 0}.fc-news-modal>.fc27-detail-close{float:left}@media(max-width:880px){#fcGameNews{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:570px){#fcGameNews{grid-template-columns:1fr}}
-</style></head>
+</style><style>.fc27-task-check{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px;background:#22332a;border:1px solid #405943;border-radius:9px;color:#dbefdf;font-size:12px;cursor:pointer}.fc27-task-check input{accent-color:#caff38;width:18px;height:18px}.fc27-task-check.done span{text-decoration:line-through;opacity:.65}.fc27-solution-pending{margin-top:12px;padding:10px;background:#202a2c;border:1px dashed #536064;border-radius:9px;font-size:12px;color:#afc1c3}.fc27-verified-solution{margin:10px 0}.fc27-solution-entry{padding:12px;background:#22362c;border-radius:9px}.fc27-solution-entry ol{columns:2;line-height:1.8}@media(max-width:580px){.fc27-solution-entry ol{columns:1}}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -2631,6 +2631,13 @@ function openFC27Details(kind,rec){
    if(fc27Lang!=='en'&&task.descriptionFA)part.appendChild(fc27Node('p','',task.descriptionFA));
    if(fc27Lang!=='fa'&&task.description)part.appendChild(fc27Node('p','fc27-step-en',task.description));
    if(task.reward)part.appendChild(fc27Node('p','fc27-detail-note','پاداش / Reward: '+task.reward));
+   const taskKey='fc27:objective:'+rec.url+':'+i;
+   const checkRow=fc27Node('label','fc27-task-check');
+   const check=document.createElement('input');check.type='checkbox';
+   try{check.checked=localStorage.getItem(taskKey)==='1'}catch(e){}
+   const caption=fc27Node('span','',fc27Lang==='en'?'Completed on this device':'انجام‌شده روی این دستگاه / Completed locally');
+   check.onchange=()=>{try{localStorage.setItem(taskKey,check.checked?'1':'0')}catch(e){}checkRow.classList.toggle('done',check.checked)};
+   checkRow.classList.toggle('done',check.checked);checkRow.append(check,caption);part.appendChild(checkRow);
    section.appendChild(part);
   });panel.appendChild(section);
  }
@@ -2651,7 +2658,23 @@ function openFC27Details(kind,rec){
  }
  if(Array.isArray(rec.squads)&&rec.squads.length){
   const squads=fc27Node('section','fc27-detail-subsection');squads.appendChild(fc27Node('h3','','بخش‌های تیم / Squad segments'));
-  for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.nameFA||seg.name||'Squad'));if(seg.nameFA)part.appendChild(fc27Node('p','fc27-original-title',seg.name));if(seg.reward)part.appendChild(fc27Node('p','fc27-detail-note','پاداش / Reward: '+seg.reward));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}squads.appendChild(part)}panel.appendChild(squads);
+  for(const seg of rec.squads){const part=fc27Node('div','fc27-detail-squad');part.appendChild(fc27Node('strong','',seg.nameFA||seg.name||'Squad'));if(seg.nameFA)part.appendChild(fc27Node('p','fc27-original-title',seg.name));if(seg.reward)part.appendChild(fc27Node('p','fc27-detail-note','پاداش / Reward: '+seg.reward));if(Array.isArray(seg.requirements)){const ul=fc27Node('ul','');for(const rule of seg.requirements)ul.appendChild(fc27Node('li','',rule));part.appendChild(ul)}if(Array.isArray(seg.solutions)&&seg.solutions.length){
+ const wrap=fc27Node('div','fc27-verified-solution');
+ wrap.appendChild(fc27Node('h4','','ترکیب‌های تأییدشده / Verified squads'));
+ for(const sol of seg.solutions){
+  if(!Array.isArray(sol.players)||sol.players.length!==11||!sol.players.every(p=>p&&p.id&&p.name))continue;
+  const box=fc27Node('div','fc27-solution-entry');
+  box.appendChild(fc27Node('strong','',sol.name||'Verified XI'));
+  const roster=fc27Node('ol','');for(const p of sol.players)roster.appendChild(fc27Node('li','',p.name+' · '+(p.position||'—')));
+  box.appendChild(roster);
+  if(sol.verified_at)box.appendChild(fc27Node('small','',String(sol.verified_at)));
+  wrap.appendChild(box);
+ }
+ if(wrap.querySelector('.fc27-solution-entry'))part.appendChild(wrap);
+ }else{
+  part.appendChild(fc27Node('p','fc27-solution-pending',fc27Lang==='en'?'No verified 11-player solution available yet. Requirements are shown above.':'ترکیب ۱۱ بازیکنِ تأییدشده هنوز موجود نیست؛ شرط‌های واقعی همین بخش در بالا نمایش داده شده‌اند.'));
+ }
+ squads.appendChild(part)}panel.appendChild(squads);
  }else{panel.appendChild(fc27Node('p','fc27-detail-note',kind==='sbc'?'شرایط دقیق تیم هنوز دریافت نشده‌اند. اطلاعات تأییدنشده نمایش داده نمی‌شوند.':'مراحل و شروط دقیق این هدف هنوز به‌صورت ساختاری دریافت نشده‌اند.'))}
  const walkthrough=fc27Node('section','fc27-detail-subsection');walkthrough.appendChild(fc27Node('h3','','راهنمای انجام / Walkthrough'));
  const fa=kind==='evolutions'?['در Ultimate Team وارد Evolutions شوید.','این تکامل را پیدا کنید و شرایط موقعیت، امتیاز و PlayStyles را با کارت بازیکن مقایسه کنید.','قبل از شروع، ارتقاها و مهلت دقیق مراحل را در بازی بررسی کنید.','مراحل مسابقات یا تمرین را انجام دهید و پاداش تکامل را دریافت کنید.']:guideFC27(kind,rec);
