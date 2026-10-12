@@ -2242,7 +2242,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">${marketState(p).status==='recent'?'قیمت بررسی‌شده · زنده نیست':marketState(p).status==='stale'?'قیمت قدیمی · فقط آرشیو':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${marketState(p).status==='recent'?fmtPrice(marketState(p).price)+' سکه':marketState(p).status==='stale'?'—':'—'}</div>${trendHTML}</div>
+      <div class="pcard-price-lbl">${marketState(p).status==='recent'?'قیمت مشاهده‌شده · زنده نیست · '+(marketState(p).platform||''):marketState(p).status==='stale'?'قیمت قدیمی · فقط آرشیو':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${marketState(p).status==='recent'?fmtPrice(marketState(p).price)+' سکه':marketState(p).status==='stale'?'—':'—'}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
@@ -2263,14 +2263,14 @@ function marketState(p){
  if(url.protocol!=='https:')return {status:'unavailable'};
  const time=Date.parse(checked),age=Date.now()-time;
  if(!Number.isFinite(time)||age< -300000)return {status:'unavailable'};
- return {status:age<=24*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.url,at:time};
+ return {status:age<=3*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.url,at:time};
 }
 function freshMarket(p){const m=marketState(p);return m.status==='recent'?FC27_VERIFIED_MARKET.get(String(p.id)):null;}
 async function loadVerifiedMarket(){
  try{
   const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
   const data=await res.json();if(!Array.isArray(data.cards))return;
-  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&Number.isSafeInteger(item.price_coins)&&item.price_coins>0&&item.rating>0&&item.position)FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,verified_at:item.verified_at||data.checked_at,platform:data.platform})}
+  FC27_VERIFIED_MARKET.clear();for(const item of data.cards){if(item.player_id&&item.url&&/^https:\/\//.test(item.url)&&Number.isSafeInteger(item.price_coins)&&item.price_coins>0&&item.rating>0&&item.position&&['PC','PS','Xbox','Console'].includes(item.platform)&&typeof(item.verified_at||data.checked_at)==='string')FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,verified_at:item.verified_at||data.checked_at,platform:item.platform})}
   renderPlayers();
  }catch(err){console.warn('Verified prices unavailable',err)}
 }
