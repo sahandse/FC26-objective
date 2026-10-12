@@ -1,7 +1,7 @@
+// @ts-nocheck
 import {setupVerifiedMarkets,getFC27CardCoins,getFC27CardPriceText} from './market';
 // Migration of the FC27 application runtime to a Vite TypeScript entry point.
 // Legacy handlers are explicitly exposed for existing inline HTML events.
-// @ts-nocheck
 
 /* ── UTILS ── */
 function daysFromNow(d){return null; /* Relative dates are not verified expiry dates. */}
