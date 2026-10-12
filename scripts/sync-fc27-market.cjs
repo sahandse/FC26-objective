@@ -23,9 +23,9 @@ for(const card of old.cards){
   const body=html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' ');
   const area=body.slice(0,Math.min(body.length,9000));
   const pricePart=area.match(/(?:Price\s+)(\d+(?:\.\d+)?\s*[MK]|\d{3,8})(?:\s|$)/i);
-  const price=pricePart?( /[MK]/i.test(pricePart[1])?parsePrice(' '+pricePart[1]+' '):Number(pricePart[1])):parsePrice(' '+area.slice(0,1600)+' ');
+  const price=pricePart?( /[MK]/i.test(pricePart[1])?parsePrice(' '+pricePart[1]+' '):Number(pricePart[1])):null;
   const ratingText=area.match(new RegExp('(?:^|\\s)'+Number(card.rating)+'\\s+'+card.position+'(?:\\s|$)','i'));
-  if(!Number.isFinite(price)||price<100||price>1e9||!ratingText)throw Error('Price/rating not verified');
+  if(!Number.isSafeInteger(price)||price<100||price>1e9||!ratingText)throw Error('Price/rating not verified');
   const type=area.match(/\b(Common|Rare|Hero|Icon|TOTW|TOTS|TOTY)\b/i)?.[1];
   cards.push({...card,price_coins:price,card_type:type||card.card_type,verified_at:new Date().toISOString()});
   successes++;
