@@ -1,6 +1,11 @@
 name: FC27 Verified Card Prices
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/probe-fc27-price-sources.mjs'
+      - 'scripts/sync-fc27-prices.ts'
+      - '.github/workflows/fc27-prices.yml'
   schedule:
     - cron: '7 * * * *'
 permissions:
@@ -17,6 +22,8 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
+      - name: Probe public market catalogue reachability
+        run: node scripts/probe-fc27-price-sources.mjs
       - name: Validate current market source and refresh
         env:
           FC27_PRICE_FEED_URL: ${{ vars.FC27_PRICE_FEED_URL }}
