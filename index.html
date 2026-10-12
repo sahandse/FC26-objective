@@ -2352,7 +2352,13 @@ function openPlayerModal(id){
  }
  const note=document.createElement('p');note.className='fc-player-note';note.textContent='آمار و امتیاز از دیتابیس FC27 همین سایت است. تصاویر کارت، قیمت بازار یا ویژگی‌های تأییدنشده به‌صورت ساختگی نمایش داده نمی‌شوند.';panel.appendChild(note);
  const telegram=document.createElement('a');telegram.href='https://t.me/sahandse';telegram.target='_blank';telegram.rel='noopener noreferrer';telegram.textContent='ارتباط فقط از تلگرام ↗';telegram.className='fc-player-tg';panel.appendChild(telegram);
- overlay.appendChild(panel);overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};document.body.appendChild(overlay);close.focus();
+ overlay.appendChild(panel);
+ const previousFocus=document.activeElement;
+ function dismiss(){document.removeEventListener('keydown',keyboard);overlay.remove();if(previousFocus?.isConnected)previousFocus.focus({preventScroll:true})}
+ function keyboard(e){if(e.key==='Escape'){e.preventDefault();dismiss()}else if(e.key==='Tab'){const nodes=[...panel.querySelectorAll('button,a[href],[tabindex]:not([tabindex="-1"])')].filter(x=>!x.disabled);if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}
+ close.onclick=dismiss;overlay.onclick=e=>{if(e.target===overlay)dismiss()};
+ document.addEventListener('keydown',keyboard);
+ document.body.appendChild(overlay);close.focus();
 }
 /* ── RENDER PLAYERS ── */
 let playerPage=1;
@@ -2745,7 +2751,7 @@ async function loadFCGameNews(){
 }
 function openFCNewsDetail(item){
  const old=document.getElementById('fc27-news-dialog');if(old)old.remove();
- const overlay=document.createElement('div');overlay.className='fc27-detail-overlay';overlay.id='fc27-news-dialog';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');
+ const overlay=document.createElement('div');overlay.className='fc27-detail-overlay';overlay.id='fc27-news-dialog';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','متن فارسی خبر EA');
  const panel=document.createElement('section');panel.className='fc27-detail-panel fc-news-modal';const close=document.createElement('button');close.className='fc27-detail-close';close.textContent='×';close.setAttribute('aria-label','بستن');close.onclick=()=>overlay.remove();panel.appendChild(close);
  if(item.image){try{const u=new URL(item.image);if(u.protocol==='https:'&&(/\.ea\.com$/.test(u.hostname)||u.hostname==='drop-assets.ea.com')){const img=document.createElement('img');img.src=u.href;img.alt=item.title_fa||fc27NewsTitle(item);panel.appendChild(img)}}catch(e){}}
  const title=document.createElement('h2');title.textContent=item.title_fa||fc27NewsTitle(item);const time=document.createElement('p');time.className='fc-news-label';time.textContent=item.published_at||'';const body=document.createElement('p');body.className='fc-news-article-text';body.textContent=item.summary_fa||'متن فارسی تأییدشده در دسترس نیست.';panel.append(title,time,body);
