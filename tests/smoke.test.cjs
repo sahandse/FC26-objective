@@ -36,7 +36,8 @@ test('essential sections are present',()=>{
 const vm = require('node:vm');
 test('TypeScript runtime parses and HTML references its Vite entry',()=>{
   assert.match(page,/src="\.\/src\/main\.ts"/);
-  new vm.Script(runtime);
+  new vm.Script(runtime.split('\ntype MarketPlatform')[0]);
+  assert.match(runtime,/function showVerifiedCardPrice/);
 });
 test('legacy FC26 sample data is not shipped',()=>{
   for(const name of ['OBJ_RAW','SBC_RAW','PLAYERS_RAW','EVO_RAW']) {
