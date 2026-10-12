@@ -29,6 +29,26 @@ async function main(){
  if(players.length<18000)throw Error('Invalid player schema '+players.length);
  const edition=new Set(rows.map(p=>p.edition).filter(Boolean));
  if(edition.size&&!Array.from(edition).some(x=>/27/i.test(x)))throw Error('Source is not FC27');
+ const verifiedFile='data/fc27-market-verified.json';
+ const market=fs.existsSync(verifiedFile)?JSON.parse(fs.readFileSync(verifiedFile,'utf8')):null;
+ const checked=Date.parse(market?.checked_at||'');
+ const marketRecent=Number.isFinite(checked)&&checked<=Date.now()+86400000&&Date.now()-checked<=7*86400000;
+ const verifiedById=new Map();
+ if(marketRecent&&market?.cards&&Array.isArray(market.cards))for(const card of market.cards){
+  if(!/^\\d+$/.test(String(card.player_id||''))||!Number.isInteger(card.price_coins)||card.price_coins<0||!Number.isInteger(card.rating))continue;
+  verifiedById.set(String(card.player_id),card);
+ }
+ let matched=0;
+ for(const p of players){const card=verifiedById.get(p.id);if(!card)continue;
+  if(p.rat!==card.rating||p.pos!==card.position)continue;
+  const compact=x=>String(x||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const a=compact(p.name),b=compact(card.name);if(!(a.includes(b)&&b.length>=4||b.includes(a)&&a.length>=4))continue;
+  p.market={price:card.price_coins,platform:market.platform||'',source:market.source||'',checked_at:market.checked_at||'',url:card.url||''};
+  p.price=card.price_coins;
+  if(card.card_type&&card.card_type!=='Common')p.verifiedCardType=card.card_type;
+  matched++;
+ }
+ console.log('Matched verified market records:',matched);
  const payload={source:'EA SPORTS FC 27 public ratings via LakshmiKanth11/EA_FC_ANALYSIS',source_url:url,snapshot_date:'2026-09-12',synced_at:new Date().toISOString(),live_market_prices:false,players};
  fs.mkdirSync('data',{recursive:true});fs.writeFileSync('data/fc27-players.json',JSON.stringify(payload));
  console.log('Verified FC27 base player records:',players.length);
