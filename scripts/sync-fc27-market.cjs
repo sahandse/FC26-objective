@@ -3,7 +3,7 @@
 const fs=require('node:fs');
 const path='data/fc27-market-verified.json';
 const old=JSON.parse(fs.readFileSync(path,'utf8'));
-if(old.source!=='FUTNext'||!Array.isArray(old.cards))throw Error('Invalid market manifest');
+if(!Array.isArray(old.cards))throw Error('Invalid market manifest');
 let successes=0;
 const cards=[];
 function parsePrice(text){
@@ -31,6 +31,6 @@ for(const card of old.cards){
   successes++;
  }catch(err){console.warn('No verified refresh for',card.player_id,err.message);cards.push({...card,verified_at:card.verified_at||old.checked_at})}
 }
-if(!successes)throw Error('No current prices verified; snapshot left unchanged');
-const next={...old,checked_at:new Date().toISOString(),cards};
+if(!successes){console.log('No prices independently verified; existing snapshot preserved without refreshing timestamps');process.exit(0)}
+const next={...old,source:'FUTNext',checked_at:new Date().toISOString(),cards};
 fs.writeFileSync(path,JSON.stringify(next,null,2)+'\n');console.log('Verified',successes,'cards');

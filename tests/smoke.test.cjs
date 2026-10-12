@@ -155,3 +155,11 @@ test('updated FC27 styling and strictly dated card market',()=>{
  const importer=fs.readFileSync('scripts/import-verified-prices.cjs','utf8');
  assert.match(importer,/Stale or future observation refused/);
 });
+
+test('market updater never refreshes timestamp when no observation was verified',()=>{
+ const script=fs.readFileSync('scripts/sync-fc27-market.cjs','utf8');
+ assert.match(script,/No prices independently verified/);
+ assert.match(script,/verified_at:new Date\(\)\.toISOString\(\)/);
+ assert.match(html,/async function loadVerifiedMarket\(/);
+ assert.match(html,/www\.futnext\.com/);
+});
