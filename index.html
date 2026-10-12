@@ -1003,6 +1003,18 @@ body{padding-bottom:0!important}
 .fc-dns-card:hover,.fc-dns-card:focus-within{border-color:#caff38;transform:translateY(-2px)}
 @media(max-width:720px){.fc-game-nav{justify-content:flex-start;overflow-x:auto}.fc-game-nav button{min-width:80px;min-height:60px}body{padding-bottom:8px!important}}
 @media(prefers-reduced-motion:reduce){.fc-dns-card{transition:none!important}}
+</style><style>
+/* Console-first navigation: no legacy fixed bottom bar at any viewport. */
+.bottom-nav,.fc-bottom-nav,.bnav-btn{display:none!important}
+body{padding-bottom:0!important}
+.fc-console-sync-label{font-size:11px;color:#b3c9ad;text-align:right;padding:4px 14px}
+.fc-game-nav button:focus-visible,.fc-dns-pair button:focus-visible,.fc-news-read:focus-visible,.fc-dns-monitor button:focus-visible{outline:3px solid #d0ff46;outline-offset:3px}
+.fc-console .fc-game-nav{max-width:100%;padding-inline:28px;gap:9px}
+.fc-console .fc-game-nav button{min-height:69px;font-size:15px}
+.fc-console .fc-dns-pair button,.fc-console .fc-news-read,.fc-console .fc-detail-open{min-height:46px;min-width:95px}
+.fc-news-modal .fc-news-article-text{font-size:clamp(15px,1.45vw,20px);line-height:2.15}
+.fc-news-modal{max-width:980px!important}
+@media(max-width:800px){.fc-console .fc-game-nav{padding-inline:8px;gap:4px}.fc-console .fc-game-nav button{min-height:52px;font-size:12px}}
 </style></head>
 <body>
 
@@ -1020,7 +1032,7 @@ body{padding-bottom:0!important}
         <div class="dot"></div>
         <span id="statusTxt">آفلاین</span>
       </div>
-      <button class="btn-refresh" id="refreshBtn" onclick="doFetch()">
+      <button class="btn-refresh" id="refreshBtn" onclick="refreshFCConsole()">
         <svg id="refreshIco" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M23 4v6h-6M1 20v-6h6"/>
           <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
@@ -1029,6 +1041,7 @@ body{padding-bottom:0!important}
       </button>
     </div>
   </div>
+<div class="fc-console-sync-label" id="fcConsoleSyncState" aria-live="polite">بروزرسانی خودکار هنگام ورود فعال است</div>
 </header>
 <div class="fc-console-ribbon" role="region" aria-label="حالت کنسول FC27">
  <div class="fc-console-ribbon-brand"><span class="fc-console-icon">FC<span>27</span></span><div><strong>حالت کنسول</strong><small>CONSOLE EXPERIENCE · ULTIMATE TEAM</small></div></div>
@@ -2989,6 +3002,22 @@ document.addEventListener('keydown',event=>{
  if(event.key==='Escape'||event.key==='Backspace'){event.preventDefault();fcConsoleBack()}
 });
 
+function refreshFCConsole(){
+ const label=document.getElementById('fcConsoleSyncState');
+ if(label)label.textContent='در حال دریافت تازه‌ترین اطلاعات ثبت‌شده…';
+ const operations=[
+  Promise.resolve().then(()=>doFetch()),
+  Promise.resolve().then(()=>loadLiveFC27()),
+  Promise.resolve().then(()=>loadVerifiedEvolutions()),
+  Promise.resolve().then(()=>loadVerifiedMarket()),
+  Promise.resolve().then(()=>loadFCGameNews())
+ ];
+ if(location.hash==='#dns')operations.push(Promise.resolve().then(()=>checkFC27Dns()));
+ Promise.allSettled(operations).then(results=>{
+  const failed=results.filter(x=>x.status==='rejected').length;
+  if(label)label.textContent=(failed?'بعضی منابع در دسترس نبودند · ':'آخرین دریافت: ')+new Date().toLocaleString('fa-IR');
+ }).catch(()=>{if(label)label.textContent='اتصال برای دریافت اطلاعات برقرار نشد'});
+}
 function init(){
   try{const chosen=localStorage.getItem('fc27-console-mode');applyFCConsoleMode(chosen===null?true:chosen==='1')}catch(e){applyFCConsoleMode(true)}
   requestAnimationFrame(fcConsolePoll);
