@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-11T04:10:02.177Z",
+  "checked_at": "2026-10-12T11:16:18.854Z",
   "sections": {
     "objectives": [
       {
@@ -57,6 +57,17 @@
     ],
     "sbc": [
       {
+        "name": "Base Hero Matchday Player Pick",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-52-base-hero-matchday-player-pick/",
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-12T11:16:21.593Z"
+      },
+      {
         "name": "EFL Championship Future Stars Pick",
         "category": "players",
         "description": "",
@@ -65,7 +76,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:05.850Z"
+        "requirements_checked_at": "2026-10-12T11:16:22.053Z"
       },
       {
         "name": "Carlos Espí",
@@ -76,7 +87,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:06.242Z"
+        "requirements_checked_at": "2026-10-12T11:16:23.687Z"
       },
       {
         "name": "Weslley Pinto Batista",
@@ -87,7 +98,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:06.811Z"
+        "requirements_checked_at": "2026-10-12T11:16:24.150Z"
       },
       {
         "name": "Liga F POTM September",
@@ -98,18 +109,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:07.194Z"
-      },
-      {
-        "name": "Tarciane",
-        "category": "players",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/players/27-37-tarciane/",
-        "price": null,
-        "requirements": [
-          "Rating: Min. 45"
-        ],
-        "requirements_checked_at": "2026-10-11T04:10:07.986Z"
+        "requirements_checked_at": "2026-10-12T11:16:24.430Z"
       },
       {
         "name": "LALIGA POTM September",
@@ -120,7 +120,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:08.816Z"
+        "requirements_checked_at": "2026-10-12T11:16:24.836Z"
       },
       {
         "name": "Premier League POTM September",
@@ -131,7 +131,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:09.346Z"
+        "requirements_checked_at": "2026-10-12T11:16:25.294Z"
       },
       {
         "name": "Bundesliga POTM September",
@@ -142,7 +142,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:09.876Z"
+        "requirements_checked_at": "2026-10-12T11:16:25.697Z"
       },
       {
         "name": "Serie A POTM September",
@@ -153,7 +153,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:10.507Z"
+        "requirements_checked_at": "2026-10-12T11:16:26.150Z"
       },
       {
         "name": "TOTW Upgrade",
@@ -164,7 +164,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:11.215Z"
+        "requirements_checked_at": "2026-10-12T11:16:26.680Z"
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
@@ -175,7 +175,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:12.165Z"
+        "requirements_checked_at": "2026-10-12T11:16:27.012Z"
       },
       {
         "name": "5x 80+ Upgrade",
@@ -186,7 +186,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:12.502Z"
+        "requirements_checked_at": "2026-10-12T11:16:27.964Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -214,6 +214,13 @@
         "category": "upgrades",
         "description": "",
         "url": "https://www.fut.gg/sbc/upgrades/27-4-bronze-upgrade/",
+        "price": null
+      },
+      {
+        "name": "Future Stars Challenge 1",
+        "category": "challenges",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/challenges/27-46-future-stars-challenge-1/",
         "price": null
       },
       {
@@ -275,8 +282,7 @@
             "reward": "1x Large Electrum Players Pack"
           }
         ],
-        "squads_checked_at": "2026-10-11T04:20:00Z",
-        "reward": "1x Jumbo Gold Pack"
+        "squads_checked_at": "2026-10-11T04:20:00Z"
       },
       {
         "name": "League & Nation Advanced",
@@ -294,7 +300,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:16.198Z"
+        "requirements_checked_at": "2026-10-12T11:16:31.107Z"
       },
       {
         "name": "Gold Re-Roll",
@@ -305,7 +311,7 @@
         "requirements": [
           "Rating: Min. 83"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:17.901Z"
+        "requirements_checked_at": "2026-10-12T11:16:31.434Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
@@ -316,7 +322,7 @@
         "requirements": [
           "Rating: Min. 79"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:18.340Z"
+        "requirements_checked_at": "2026-10-12T11:16:31.858Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
@@ -328,7 +334,7 @@
           "Rating: Min. 641",
           "Rating: 45"
         ],
-        "requirements_checked_at": "2026-10-11T04:10:19.346Z"
+        "requirements_checked_at": "2026-10-12T11:16:32.453Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
