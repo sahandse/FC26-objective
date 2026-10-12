@@ -1,0 +1,15 @@
+{
+  "name": "fc27-hub",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build && node scripts/copy-static.mjs",
+    "check": "tsc --noEmit",
+    "test": "node --test tests/smoke.test.cjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.0"
+  }
+}
