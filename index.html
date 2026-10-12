@@ -960,7 +960,7 @@ body{background:#0b1011!important;color:#f1f5ed}.fc-console-ribbon{padding:9px m
 .fc-feed-card:focus-within,.pcard:focus-visible,.fc-dns-pair button:focus-visible{outline:2px solid #d5ff62;outline-offset:3px}
 @media(max-width:600px){.fc-feed-card,.pcard,.pgal-card,.evo-card{transition:none}.fc-dns-status,.fc-dns-grid{margin-block:12px}.fc-dns-pair button{min-height:42px}}
 @media(prefers-reduced-motion:reduce){.fc-feed-card,.pcard,.pgal-card,.evo-card,.fc-game-tiles>button{transition:none!important;transform:none!important}}
-</style></head>
+</style><style>.fc-dns-monitor{border:1px solid #52673c;background:linear-gradient(145deg,#202d26,#101b20);padding:18px;border-radius:15px;margin:16px 0}.fc-dns-monitor-head{display:flex;align-items:center;justify-content:space-between;gap:14px}.fc-dns-monitor-head strong{font-size:17px;color:#d9ff79}.fc-dns-monitor-head p{font-size:12px;line-height:1.9;color:#b5c8bb;margin:6px 0}.fc-dns-monitor-head button{flex-shrink:0;background:#cefb55;color:#172019;border:0;border-radius:9px;padding:11px 14px;font:inherit;font-weight:800;cursor:pointer}.fc-dns-monitor-head button:disabled{opacity:.5;cursor:wait}.fc-dns-monitor-result{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0}.fc-dns-check-item{display:flex;flex-direction:column;gap:5px;background:#121f21;border:1px solid #395149;border-radius:9px;padding:12px;min-width:0}.fc-dns-check-item strong{color:#e8f5e8}.fc-dns-check-item small{color:#9cb0a7;overflow-wrap:anywhere;font-size:11px}.fc-dns-check-status{font-size:12px;line-height:1.7}.fc-dns-check-status.ok{color:#c1f47a}.fc-dns-check-status.failed{color:#ffba95}#fcDnsCheckedAt{color:#a6b4ad;font-size:11px}@media(max-width:760px){.fc-dns-monitor-result{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.fc-dns-monitor-head{align-items:stretch;flex-direction:column}.fc-dns-monitor-result{grid-template-columns:1fr}}</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1020,11 +1020,20 @@ body{background:#0b1011!important;color:#f1f5ed}.fc-console-ribbon{padding:9px m
 <main class="main fc-game-page" id="sec-dns" style="display:none">
 <div class="fc-game-eyebrow">CONSOLE / NETWORK</div><h1 class="fc-game-title">DNS کنسول</h1>
 <p class="fc-game-lead">DNSهای قابل کپی برای PS5 و Xbox؛ کارکردشان بسته به اپراتور و شبکه متفاوت است.</p>
+<section class="fc-dns-monitor" aria-label="استعلام شبکه">
+<div class="fc-dns-monitor-head"><div><strong>استعلام مستقیم شبکه</strong><p>نتیجه واقعی پاسخ DNS از سرویس عمومی Google؛ این آزمایش نشان‌دهنده سالم‌بودن سرور EA یا کیفیت اتصال کنسول نیست.</p></div><button type="button" id="fcDnsCheckButton" onclick="checkFC27Dns()">بررسی وضعیت ↻</button></div>
+<div class="fc-dns-monitor-result" id="fcDnsChecks" aria-live="polite"><p>برای دریافت وضعیت فعلی، «بررسی وضعیت» را انتخاب کنید.</p></div>
+<small id="fcDnsCheckedAt">هنوز استعلامی انجام نشده</small>
+</section>
 <div class="fc-dns-status">
 <article><strong>PlayStation Network</strong><small>وضعیت زنده در سایت قابل تأیید نیست</small><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
 <article><strong>EA SPORTS FC / EA Servers</strong><small>آخرین وضعیت را در صفحه رسمی EA ببین</small><a href="https://help.ea.com/en/server-status/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
 </div>
 <div class="fc-dns-grid">
+<article class="fc-dns-card"><h2>گوگل <small>Google Public DNS</small></h2><p>حل نام دامنه عمومی؛ تضمین دسترسی به بازی نیست.</p><div class="fc-dns-pair"><code>8.8.8.8</code><button onclick="copyFCDns('8.8.8.8',this)">کپی</button></div><div class="fc-dns-pair"><code>8.8.4.4</code><button onclick="copyFCDns('8.8.4.4',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>Quad9 <small>Security DNS</small></h2><p>DNS عمومی با قابلیت محافظت در برابر دامنه‌های مخرب.</p><div class="fc-dns-pair"><code>9.9.9.9</code><button onclick="copyFCDns('9.9.9.9',this)">کپی</button></div><div class="fc-dns-pair"><code>149.112.112.112</code><button onclick="copyFCDns('149.112.112.112',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>OpenDNS <small>Cisco</small></h2><p>سرویس عمومی DNS؛ نتیجه بسته به اینترنت شما متفاوت است.</p><div class="fc-dns-pair"><code>208.67.222.222</code><button onclick="copyFCDns('208.67.222.222',this)">کپی</button></div><div class="fc-dns-pair"><code>208.67.220.220</code><button onclick="copyFCDns('208.67.220.220',this)">کپی</button></div></article>
+
 <article class="fc-dns-card"><h2>شکن <small>Shecan</small></h2><p>آدرس‌های اعلام‌شده سرویس شکن</p><div class="fc-dns-pair"><code>178.22.122.100</code><button onclick="copyFCDns('178.22.122.100',this)">کپی</button></div><div class="fc-dns-pair"><code>185.51.200.2</code><button onclick="copyFCDns('185.51.200.2',this)">کپی</button></div></article>
 <article class="fc-dns-card"><h2>بگذر <small>Begzar</small></h2><p>آدرس‌های گزارش‌شده عمومی؛ قبل از استفاده وضعیت‌شان را بررسی کن</p><div class="fc-dns-pair"><code>185.55.226.26</code><button onclick="copyFCDns('185.55.226.26',this)">کپی</button></div><div class="fc-dns-pair"><code>185.55.225.25</code><button onclick="copyFCDns('185.55.225.25',this)">کپی</button></div></article>
 <article class="fc-dns-card"><h2>رادار گیم <small>Radar Game</small></h2><p>سرویس معرفی‌شده برای بازی</p><div class="fc-dns-pair"><code>10.202.10.10</code><button onclick="copyFCDns('10.202.10.10',this)">کپی</button></div><div class="fc-dns-pair"><code>10.202.10.11</code><button onclick="copyFCDns('10.202.10.11',this)">کپی</button></div></article>
@@ -2512,6 +2521,36 @@ function toggleFCMobileMore(force){
 }
 function restoreFC27Section(){const sec=location.hash.slice(1);const valid=['home','obj','sbc','players','squad','evo','club','dns','news','settings'];showSec(valid.includes(sec)?sec:'home',true)}
 async function copyFCDns(value,btn){try{await navigator.clipboard.writeText(value);const t=btn.textContent;btn.textContent='کپی شد ✓';setTimeout(()=>{btn.textContent=t},1400)}catch(e){const field=document.createElement('textarea');field.value=value;document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();btn.textContent='کپی شد ✓'}}
+
+const FC27_DNS_TARGETS=[{name:'EA',domain:'ea.com'},{name:'EA Help',domain:'help.ea.com'},{name:'PlayStation Network',domain:'playstation.com'},{name:'Xbox',domain:'xbox.com'},{name:'FUT.GG',domain:'fut.gg'},{name:'GitHub Pages',domain:'github.io'}];
+let fcDnsBusy=false;
+async function checkFC27Dns(){
+ if(fcDnsBusy)return;
+ const host=document.getElementById('fcDnsChecks'),button=document.getElementById('fcDnsCheckButton'),stamp=document.getElementById('fcDnsCheckedAt');if(!host)return;
+ fcDnsBusy=true;if(button)button.disabled=true;host.replaceChildren();
+ const results=await Promise.all(FC27_DNS_TARGETS.map(async target=>{
+  const start=performance.now();
+  try{
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
+   let response;try{response=await fetch('https://dns.google/resolve?'+new URLSearchParams({name:target.domain,type:'A'}),{cache:'no-store',signal:controller.signal})}finally{clearTimeout(timer)}
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const data=await response.json(),answers=Array.isArray(data.Answer)?data.Answer.filter(a=>a.type===1&&typeof a.data==='string').map(a=>a.data):[];
+   return {target,latency:Math.round(performance.now()-start),ok:data.Status===0&&answers.length>0,answers,status:data.Status};
+  }catch(err){return {target,error:err.name==='AbortError'?'مهلت استعلام تمام شد':'استعلام از مرورگر ممکن نشد'}}
+ }));
+ for(const item of results){
+  const card=document.createElement('article');card.className='fc-dns-check-item';
+  const title=document.createElement('strong');title.textContent=item.target.name;
+  const address=document.createElement('small');address.textContent=item.target.domain;
+  const status=document.createElement('span');status.className='fc-dns-check-status '+(item.ok?'ok':'failed');
+  status.textContent=item.ok?'DNS پاسخ داد · '+item.latency+' ms':(item.error||'پاسخ DNS ناموفق · کد '+item.status);
+  card.append(title,address,status);
+  if(item.answers?.length){const ips=document.createElement('small');ips.textContent=item.answers.slice(0,2).join(' · ');card.appendChild(ips)}
+  host.appendChild(card);
+ }
+ if(stamp)stamp.textContent='آخرین بررسی DNS: '+new Date().toLocaleString('fa-IR')+' · نتیجه از مرورگر شما دریافت شد';
+ if(button)button.disabled=false;fcDnsBusy=false;
+}
 function showSec(sec,fromHistory=false){
  toggleFCMobileMore(false);
  const sections=['home','obj','sbc','players','squad','evo','club','dns','news','settings'];
