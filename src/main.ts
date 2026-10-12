@@ -864,7 +864,7 @@ function playerCardHTML(p){
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
       <div class="pcard-price-lbl">قیمت تأییدشده برای نسخه کارت و پلتفرم انتخاب‌شده</div>
-      <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
+      <div class="price-row"><div class="pcard-price">${getFC27CardPriceText(p)}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
