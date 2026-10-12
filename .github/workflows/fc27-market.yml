@@ -1,6 +1,11 @@
 name: FC27 Verified Market
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/sync-fc27-market.cjs'
+      - 'data/fc27-market-candidates.json'
+      - '.github/workflows/fc27-market.yml'
   schedule:
     - cron: '17 */6 * * *'
 permissions:
