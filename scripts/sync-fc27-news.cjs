@@ -13,7 +13,7 @@ async function main(){
    let link;try{link=new URL(raw,url)}catch{return}
    if(link.hostname!=='www.ea.com'||!link.pathname.includes('/fc-27/')||!link.pathname.includes('/news/')||/fc[- ]?26/i.test(link.pathname))return;
    const title=$(node).find('h2,h3,h4').first().text().replace(/\s+/g,' ').trim().slice(0,180)||$(node).text().replace(/\s+/g,' ').trim().slice(0,180);
-   if(title.length<16||/FC\\s*26/i.test(title)||seen.has(link.pathname))return;
+   if(title.length<16||/FC\s*26/i.test(title)||seen.has(link.pathname))return;
    seen.add(link.pathname);
    items.push({title,url:link.origin+link.pathname,source:'Electronic Arts'});
  });
