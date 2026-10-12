@@ -310,5 +310,29 @@
     "artist": "Lear 21",
     "source": "https://upload.wikimedia.org/wikipedia/commons/d/db/4_-_2023_Union_Berlin_%28Danilho_Doekhi%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "extension": "jpg"
+  },
+  {
+    "id": 262458,
+    "name": "Maite Oroz",
+    "license": "CC BY-SA 4.0",
+    "artist": "Katie Chan",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/cb/20241006-Maite_Oroz_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 262745,
+    "name": "Neil El Aynaoui",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/3/37/Neil_El_Aynaoui_Neil_El_Aynaoui_Morocco_v_Norway_7_June_2026-13_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 262866,
+    "name": "Kyra Cooney-Cross",
+    "license": "CC BY 4.0",
+    "artist": "EL Loko Foto",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Kyra_Cooney-Cross_20191106.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
   }
 ]
