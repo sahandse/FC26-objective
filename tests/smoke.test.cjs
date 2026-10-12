@@ -124,3 +124,15 @@ test('console mode supports PS4/PS5 navigation and has no bottom bar',()=>{
  assert.doesNotMatch(html,/<nav class="bottom-nav"/);
  assert.doesNotMatch(html,/id="fcMobileMore"/);
 });
+
+test('squad picker supports string and numeric player IDs',()=>{
+ assert.match(html,/String\(x\.id\)===String\(pid\)/);
+ assert.match(html,/class="squad-pl-item"/);
+ assert.match(html,/function renderPitch\(/);
+});
+test('FC27 Persian headlines and refresh are wired',()=>{
+ assert.match(html,/FC27_NEWS_FA/);
+ assert.match(html,/fc27NewsTitle\(item\)/);
+ assert.match(html,/15\*60\*1000/);
+ assert.match(html,/fc27-sbc-player-photo/);
+});
