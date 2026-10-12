@@ -100,7 +100,7 @@ test('game navigation and official news are wired to real sections',()=>{
  for(const section of ['home','obj','sbc','players','squad','evo','club','store','news','settings'])assert.ok(html.includes('id="sec-'+section+'"'));
  assert.match(html,/data-game-nav="home"/);
  assert.doesNotMatch(html,/<nav class="bottom-nav"/);
- assert.match(html,/data\.items\|\|data\.articles/);
+ assert.match(html,/data\.items\|\|\[\]/);
  assert.match(html,/window\.addEventListener\('popstate'/);
  assert.match(html,/fc-game-nav button:focus-visible/);
 });
