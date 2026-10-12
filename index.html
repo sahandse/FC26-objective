@@ -2242,7 +2242,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">${marketState(p).status==='recent'?'قیمت مشاهده‌شده · زنده نیست · '+(marketState(p).platform||''):marketState(p).status==='stale'?'قیمت قدیمی · فقط آرشیو':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${marketState(p).status==='recent'?fmtPrice(marketState(p).price)+' سکه':marketState(p).status==='stale'?'—':'—'}</div>${trendHTML}</div>
+      <div class="pcard-price-lbl">${marketState(p).status==='recent'?'قیمت مشاهده‌شده · زنده نیست · '+(marketState(p).platform||'')+' · '+new Date(marketState(p).at).toLocaleString('fa-IR'):marketState(p).status==='stale'?'قیمت قدیمی · فقط آرشیو':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${marketState(p).status==='recent'?fmtPrice(marketState(p).price)+' سکه':marketState(p).status==='stale'?'—':'—'}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
@@ -2260,7 +2260,7 @@ function marketState(p){
  // A date without an explicit clock time and timezone is never treated as live.
  if(typeof checked!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(checked))return {status:'stale',price:m.price_coins,source:m.url,at:null};
  let url;try{url=new URL(m.url)}catch{return {status:'unavailable'}}
- if(url.protocol!=='https:')return {status:'unavailable'};
+ if(url.protocol!=='https:'||!/(^|\\.)(fut\\.gg|futbin\\.com)$/.test(url.hostname))return {status:'unavailable'};
  const time=Date.parse(checked),age=Date.now()-time;
  if(!Number.isFinite(time)||age< -300000)return {status:'unavailable'};
  return {status:age<=3*3600000?'recent':'stale',price:m.price_coins,platform:m.platform,source:m.url,at:time};
