@@ -1015,6 +1015,12 @@ body{padding-bottom:0!important}
 .fc-news-modal .fc-news-article-text{font-size:clamp(15px,1.45vw,20px);line-height:2.15}
 .fc-news-modal{max-width:980px!important}
 @media(max-width:800px){.fc-console .fc-game-nav{padding-inline:8px;gap:4px}.fc-console .fc-game-nav button{min-height:52px;font-size:12px}}
+</style><style>
+/* Console-first controller friendly DNS quick actions */
+.fc-dns-copy-both{display:block;width:100%;margin-top:11px;border:1px solid #afda54;border-radius:9px;background:#293b2b;color:#d9ff9a;padding:12px;font:inherit;font-weight:750;cursor:pointer}
+.fc-dns-copy-both:focus-visible{outline:3px solid #d9ff70;outline-offset:3px}
+.fc-console .fc-dns-copy-both{min-height:49px}
+@media(max-width:700px){.fc-dns-copy-both{padding:14px 10px}}
 </style></head>
 <body>
 
@@ -1087,17 +1093,17 @@ body{padding-bottom:0!important}
 </div>
 <div class="fc-console-network-note" role="status"><strong>وضعیت PSN</strong><p>مرورگر کنسول به API رسمی و عمومیِ قابل اتکا برای تشخیص وضعیت PSN دسترسی مستقیم ندارد. آزمایش DNS فقط دسترسی به نام دامنه را نشان می‌دهد، نه فعال‌بودن سرویس PlayStation Network.</p><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">بررسی وضعیت رسمی PlayStation ↗</a></div>
 <div class="fc-dns-grid">
-<article class="fc-dns-card"><h2>گوگل <small>Google Public DNS</small></h2><p>حل نام دامنه عمومی؛ تضمین دسترسی به بازی نیست.</p><div class="fc-dns-pair"><code>8.8.8.8</code><button onclick="copyFCDns('8.8.8.8',this)">کپی</button></div><div class="fc-dns-pair"><code>8.8.4.4</code><button onclick="copyFCDns('8.8.4.4',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>Quad9 <small>Security DNS</small></h2><p>DNS عمومی با قابلیت محافظت در برابر دامنه‌های مخرب.</p><div class="fc-dns-pair"><code>9.9.9.9</code><button onclick="copyFCDns('9.9.9.9',this)">کپی</button></div><div class="fc-dns-pair"><code>149.112.112.112</code><button onclick="copyFCDns('149.112.112.112',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>OpenDNS <small>Cisco</small></h2><p>سرویس عمومی DNS؛ نتیجه بسته به اینترنت شما متفاوت است.</p><div class="fc-dns-pair"><code>208.67.222.222</code><button onclick="copyFCDns('208.67.222.222',this)">کپی</button></div><div class="fc-dns-pair"><code>208.67.220.220</code><button onclick="copyFCDns('208.67.220.220',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>گوگل <small>Google Public DNS</small></h2><p>حل نام دامنه عمومی؛ تضمین دسترسی به بازی نیست.</p><div class="fc-dns-pair"><code>8.8.8.8</code><button onclick="copyFCDns('8.8.8.8',this)">کپی</button></div><div class="fc-dns-pair"><code>8.8.4.4</code><button onclick="copyFCDns('8.8.4.4',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('8.8.8.8 / 8.8.4.4',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>Quad9 <small>Security DNS</small></h2><p>DNS عمومی با قابلیت محافظت در برابر دامنه‌های مخرب.</p><div class="fc-dns-pair"><code>9.9.9.9</code><button onclick="copyFCDns('9.9.9.9',this)">کپی</button></div><div class="fc-dns-pair"><code>149.112.112.112</code><button onclick="copyFCDns('149.112.112.112',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('9.9.9.9 / 149.112.112.112',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>OpenDNS <small>Cisco</small></h2><p>سرویس عمومی DNS؛ نتیجه بسته به اینترنت شما متفاوت است.</p><div class="fc-dns-pair"><code>208.67.222.222</code><button onclick="copyFCDns('208.67.222.222',this)">کپی</button></div><div class="fc-dns-pair"><code>208.67.220.220</code><button onclick="copyFCDns('208.67.220.220',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('208.67.222.222 / 208.67.220.220',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
 
-<article class="fc-dns-card"><h2>شکن <small>Shecan</small></h2><p>آدرس‌های اعلام‌شده سرویس شکن</p><div class="fc-dns-pair"><code>178.22.122.100</code><button onclick="copyFCDns('178.22.122.100',this)">کپی</button></div><div class="fc-dns-pair"><code>185.51.200.2</code><button onclick="copyFCDns('185.51.200.2',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>بگذر <small>Begzar</small></h2><p>آدرس‌های گزارش‌شده عمومی؛ قبل از استفاده وضعیت‌شان را بررسی کن</p><div class="fc-dns-pair"><code>185.55.226.26</code><button onclick="copyFCDns('185.55.226.26',this)">کپی</button></div><div class="fc-dns-pair"><code>185.55.225.25</code><button onclick="copyFCDns('185.55.225.25',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>رادار گیم <small>Radar Game</small></h2><p>سرویس معرفی‌شده برای بازی</p><div class="fc-dns-pair"><code>10.202.10.10</code><button onclick="copyFCDns('10.202.10.10',this)">کپی</button></div><div class="fc-dns-pair"><code>10.202.10.11</code><button onclick="copyFCDns('10.202.10.11',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>کلودفلر <small>Cloudflare</small></h2><p>DNS عمومی؛ رفع محدودیت بازی را تضمین نمی‌کند</p><div class="fc-dns-pair"><code>1.1.1.1</code><button onclick="copyFCDns('1.1.1.1',this)">کپی</button></div><div class="fc-dns-pair"><code>1.0.0.1</code><button onclick="copyFCDns('1.0.0.1',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>AdGuard <small>Public DNS</small></h2><p>فیلتر تبلیغات و ردیاب‌ها؛ ممکن است بعضی سرویس‌ها با فیلتر سازگار نباشند.</p><div class="fc-dns-pair"><code>94.140.14.14</code><button onclick="copyFCDns('94.140.14.14',this)">کپی</button></div><div class="fc-dns-pair"><code>94.140.15.15</code><button onclick="copyFCDns('94.140.15.15',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>CleanBrowsing <small>Security</small></h2><p>فیلتر دامنه‌های مخرب و فیشینگ؛ بدون ادعای افزایش سرعت بازی.</p><div class="fc-dns-pair"><code>185.228.168.9</code><button onclick="copyFCDns('185.228.168.9',this)">کپی</button></div><div class="fc-dns-pair"><code>185.228.169.9</code><button onclick="copyFCDns('185.228.169.9',this)">کپی</button></div></article>
-<article class="fc-dns-card"><h2>CleanBrowsing <small>Family</small></h2><p>فیلتر محافظتی خانوادگی و SafeSearch.</p><div class="fc-dns-pair"><code>185.228.168.168</code><button onclick="copyFCDns('185.228.168.168',this)">کپی</button></div><div class="fc-dns-pair"><code>185.228.169.168</code><button onclick="copyFCDns('185.228.169.168',this)">کپی</button></div></article>
+<article class="fc-dns-card"><h2>شکن <small>Shecan</small></h2><p>آدرس‌های اعلام‌شده سرویس شکن</p><div class="fc-dns-pair"><code>178.22.122.100</code><button onclick="copyFCDns('178.22.122.100',this)">کپی</button></div><div class="fc-dns-pair"><code>185.51.200.2</code><button onclick="copyFCDns('185.51.200.2',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('178.22.122.100 / 185.51.200.2',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>بگذر <small>Begzar</small></h2><p>آدرس‌های گزارش‌شده عمومی؛ قبل از استفاده وضعیت‌شان را بررسی کن</p><div class="fc-dns-pair"><code>185.55.226.26</code><button onclick="copyFCDns('185.55.226.26',this)">کپی</button></div><div class="fc-dns-pair"><code>185.55.225.25</code><button onclick="copyFCDns('185.55.225.25',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('185.55.226.26 / 185.55.225.25',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>رادار گیم <small>Radar Game</small></h2><p>سرویس معرفی‌شده برای بازی</p><div class="fc-dns-pair"><code>10.202.10.10</code><button onclick="copyFCDns('10.202.10.10',this)">کپی</button></div><div class="fc-dns-pair"><code>10.202.10.11</code><button onclick="copyFCDns('10.202.10.11',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('10.202.10.10 / 10.202.10.11',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>کلودفلر <small>Cloudflare</small></h2><p>DNS عمومی؛ رفع محدودیت بازی را تضمین نمی‌کند</p><div class="fc-dns-pair"><code>1.1.1.1</code><button onclick="copyFCDns('1.1.1.1',this)">کپی</button></div><div class="fc-dns-pair"><code>1.0.0.1</code><button onclick="copyFCDns('1.0.0.1',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('1.1.1.1 / 1.0.0.1',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>AdGuard <small>Public DNS</small></h2><p>فیلتر تبلیغات و ردیاب‌ها؛ ممکن است بعضی سرویس‌ها با فیلتر سازگار نباشند.</p><div class="fc-dns-pair"><code>94.140.14.14</code><button onclick="copyFCDns('94.140.14.14',this)">کپی</button></div><div class="fc-dns-pair"><code>94.140.15.15</code><button onclick="copyFCDns('94.140.15.15',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('94.140.14.14 / 94.140.15.15',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>CleanBrowsing <small>Security</small></h2><p>فیلتر دامنه‌های مخرب و فیشینگ؛ بدون ادعای افزایش سرعت بازی.</p><div class="fc-dns-pair"><code>185.228.168.9</code><button onclick="copyFCDns('185.228.168.9',this)">کپی</button></div><div class="fc-dns-pair"><code>185.228.169.9</code><button onclick="copyFCDns('185.228.169.9',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('185.228.168.9 / 185.228.169.9',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
+<article class="fc-dns-card"><h2>CleanBrowsing <small>Family</small></h2><p>فیلتر محافظتی خانوادگی و SafeSearch.</p><div class="fc-dns-pair"><code>185.228.168.168</code><button onclick="copyFCDns('185.228.168.168',this)">کپی</button></div><div class="fc-dns-pair"><code>185.228.169.168</code><button onclick="copyFCDns('185.228.169.168',this)">کپی</button></div><button class="fc-dns-copy-both" type="button" onclick="copyFCDns('185.228.168.168 / 185.228.169.168',this)">کپی DNS اصلی و جایگزین ⧉</button></article>
 </div>
 <details class="fc-dns-help"><summary>آموزش تنظیم DNS در کنسول</summary><p>PS5: Settings → Network → Settings → Set Up Internet Connection → Advanced Settings → DNS Settings → Manual</p><p>Xbox: Settings → General → Network Settings → Advanced Settings → DNS Settings → Manual</p><p>آدرس اول و دوم را وارد کن و اتصال را آزمایش کن. در صورت مشکل، تنظیم را روی Automatic برگردان.</p></details>
 </main>
@@ -3024,12 +3030,9 @@ function init(){
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
   restoreFC27Section();
-  loadLiveFC27();
-  loadVerifiedMarket();
-  loadVerifiedEvolutions();
+  // All live feeds refresh together once on every app launch.
+  refreshFCConsole();
   loadPortraitIndex();
-  loadFCGameNews();
-  if(location.hash==='#dns')checkFC27Dns();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
   if(!state.compSel)state.compSel=[];
   if(!state.evoProgs)state.evoProgs={};
@@ -3041,7 +3044,6 @@ function init(){
   updateStats();renderObj();renderSBC();renderPlayers();
   startCountdowns();
   // Legacy mini-games use non-verified player pools; disabled until supported.
-  setTimeout(doFetch,100);
   setInterval(()=>{if(document.visibilityState==='visible'){loadLiveFC27();loadVerifiedEvolutions();loadFCGameNews()}},15*60*1000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){loadLiveFC27();loadVerifiedEvolutions()}});
 }
