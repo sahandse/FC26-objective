@@ -1,0 +1,14 @@
+{
+  "description": "Verified FC27 base-card URL candidates; prices are NEVER seeded, only fetched and checked.",
+  "cards": [
+    {
+      "player_id": "231747",
+      "name": "Kylian Mbappé",
+      "rating": 91,
+      "position": "ST",
+      "card_type": "Gold Rare",
+      "platform": "Console",
+      "url": "https://www.futnext.com/pl/players/mbappe/231747"
+    }
+  ]
+}
