@@ -37,7 +37,7 @@ test('main inline JavaScript parses',()=>{
   assert.ok(chunks.length>0);
   for(const chunk of chunks)new vm.Script(chunk.split('</script>')[0]);
 });
-test('legacy FC26 sample data is not shipped',()=>{
+test('legacy sample data is not shipped',()=>{
   for(const name of ['OBJ_RAW','SBC_RAW','PLAYERS_RAW','EVO_RAW']) {
     assert.ok(html.includes('const '+name+'=[]'), name);
   }

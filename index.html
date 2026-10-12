@@ -1454,7 +1454,7 @@ async function fetchPlayerPortrait(el){
 }
 async function loadPortraitIndex(){try{const r=await fetch('./data/available-portraits.json',{cache:'no-store'});if(!r.ok)throw Error('No portrait index');const data=await r.json();if(!Array.isArray(data.ids))throw Error('Invalid portrait index');AVAILABLE_PORTRAITS.clear();VERIFIED_PHOTO_FILES.clear();for(const id of data.ids)if(Number.isInteger(id))AVAILABLE_PORTRAITS.add(id);for(const [id,file] of Object.entries(data.files||{}))if(/^\d+\.(png|jpg|webp)$/.test(file))VERIFIED_PHOTO_FILES.set(Number(id),file);renderPlayers();}catch(e){console.warn('Portrait index unavailable',e)}}
 function imgFallback(el,id){
-  const urls=[]; // FC26 CDN fallbacks disabled; use verified FC27 assets only when available.
+  const urls=[]; // Only verified FC27 portraits are used as local assets.
   const tried=el.dataset.tried?parseInt(el.dataset.tried):0;
   if(tried<urls.length){el.dataset.tried=tried+1;el.src=urls[tried];}
   else{el.onerror=null;el.removeAttribute('src');el.style.display='none';if(el.parentElement&&!el.parentElement.querySelector('.img-placeholder')){const p=document.createElement('span');p.className='img-placeholder';p.textContent='⚽';p.setAttribute('aria-label','تصویر بازیکن موجود نیست');p.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;opacity:.4';el.parentElement.appendChild(p);}}
