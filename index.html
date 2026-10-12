@@ -2662,7 +2662,7 @@ function openFC27Details(kind,rec){
  const wrap=fc27Node('div','fc27-verified-solution');
  wrap.appendChild(fc27Node('h4','','ترکیب‌های تأییدشده / Verified squads'));
  for(const sol of seg.solutions){
-  if(!Array.isArray(sol.players)||sol.players.length!==11||!sol.players.every(p=>p&&p.id&&p.name))continue;
+  if(!Array.isArray(sol.players)||sol.players.length!==11||!sol.players.every(p=>p&&p.id&&p.name)||new Set(sol.players.map(p=>String(p.id))).size!==11||!sol.verified_at||typeof sol.source_url!=='string'||!/^https:\/\//.test(sol.source_url))continue;
   const box=fc27Node('div','fc27-solution-entry');
   box.appendChild(fc27Node('strong','',sol.name||'Verified XI'));
   const roster=fc27Node('ol','');for(const p of sol.players)roster.appendChild(fc27Node('li','',p.name+' · '+(p.position||'—')));
