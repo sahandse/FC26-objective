@@ -924,6 +924,8 @@ body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent
 .fc27-detail-squad{border:1px solid #3b5644;background:linear-gradient(125deg,#263b2b,#182322)}
 .fc27-detail-squad>strong{color:#d2ff60;font-size:15px}
 .fc27-detail-open{min-height:42px;touch-action:manipulation}
+</style><style>
+#fcGameNews{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.fc-news-card{padding:0!important;overflow:hidden;display:flex;flex-direction:column;min-height:320px!important}.fc-news-card>img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#263329}.fc-news-body{padding:17px;display:flex;flex-direction:column;gap:11px;flex:1}.fc-news-label{font-size:11px;color:#aacc8d;direction:ltr;text-align:right}.fc-news-body h3{font-size:17px;line-height:1.7;color:#f3ffed}.fc-news-body p{font-size:12px;line-height:2;color:#bfd0c6;flex:1}.fc-news-read,.fc-news-share{padding:11px 13px;border:1px solid #83a752;background:#2a3c27;color:#e3ffb1;border-radius:10px;font:inherit;font-weight:700;font-size:12px;cursor:pointer;text-decoration:none;display:inline-block}.fc-news-modal>img{width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin:12px 0}.fc-news-modal h2{line-height:1.6;font-size:22px}.fc-news-article-text{font-size:14px;line-height:2.2;color:#d7e6dc;margin:15px 0}.fc-news-modal>.fc27-detail-close{float:left}@media(max-width:880px){#fcGameNews{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:570px){#fcGameNews{grid-template-columns:1fr}}
 </style></head>
 <body>
 
@@ -2491,13 +2493,30 @@ async function loadFCGameNews(){
  const host=document.getElementById('fcGameNews');if(!host)return;
  try{
   const response=await fetch('./data/fc27-news.json',{cache:'no-store'});if(!response.ok)throw Error('News unavailable');
-  const data=await response.json();const entries=Array.isArray(data)?data:(data.items||data.articles||data.news||[]);
-  host.replaceChildren();
-  let count=0;for(const item of entries.slice(0,12)){const url=item.url||item.link;let link;try{link=new URL(url)}catch{continue}if(!['https:'].includes(link.protocol))continue;
-   const article=document.createElement('article');const a=document.createElement('a');a.href=link.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=fc27NewsTitle(item);a.style.color='#d0ff53';article.appendChild(a);
-   if(item.published_at||item.date){const small=document.createElement('p');small.textContent=item.published_at||item.date;article.appendChild(small)}host.appendChild(article);count++}
+  const data=await response.json(),entries=data.items||[];host.replaceChildren();let count=0;
+  for(const item of entries.slice(0,15)){
+   let link;try{link=new URL(item.url)}catch{continue}if(link.protocol!=='https:'||link.hostname!=='www.ea.com')continue;
+   const article=document.createElement('article');article.className='fc-news-card';
+   if(item.image){try{const u=new URL(item.image);if(u.protocol==='https:'&&(/\\.ea\\.com$/.test(u.hostname)||u.hostname==='drop-assets.ea.com')){const img=document.createElement('img');img.src=u.href;img.alt=item.title_fa||fc27NewsTitle(item);img.loading='lazy';img.decoding='async';article.appendChild(img)}}catch(e){}}
+   const contents=document.createElement('div');contents.className='fc-news-body';
+   const category=document.createElement('span');category.className='fc-news-label';category.textContent='EA SPORTS FC • '+(item.published_at||'');
+   const heading=document.createElement('h3');heading.textContent=item.title_fa||fc27NewsTitle(item);
+   const summary=document.createElement('p');summary.textContent=item.summary_fa||'جزئیات این خبر هنوز به فارسی ثبت نشده است.';
+   const btn=document.createElement('button');btn.type='button';btn.className='fc-news-read';btn.textContent='خواندن خبر / Read more';btn.onclick=()=>openFCNewsDetail(item);
+   contents.append(category,heading,summary,btn);article.appendChild(contents);host.appendChild(article);count++;
+  }
   if(!count)throw Error('No verified articles');
- }catch(e){host.replaceChildren();const p=document.createElement('div');p.className='fc-game-empty';p.textContent='خبر معتبر برای نمایش موجود نیست.';host.appendChild(p)}
+ }catch(e){host.replaceChildren();const el=document.createElement('div');el.className='fc-game-empty';el.textContent='خبر رسمی قابل دریافت نیست.';host.appendChild(el)}
+}
+function openFCNewsDetail(item){
+ const old=document.getElementById('fc27-news-dialog');if(old)old.remove();
+ const overlay=document.createElement('div');overlay.className='fc27-detail-overlay';overlay.id='fc27-news-dialog';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');
+ const panel=document.createElement('section');panel.className='fc27-detail-panel fc-news-modal';const close=document.createElement('button');close.className='fc27-detail-close';close.textContent='×';close.setAttribute('aria-label','بستن');close.onclick=()=>overlay.remove();panel.appendChild(close);
+ if(item.image){try{const u=new URL(item.image);if(u.protocol==='https:'&&(/\\.ea\\.com$/.test(u.hostname)||u.hostname==='drop-assets.ea.com')){const img=document.createElement('img');img.src=u.href;img.alt=item.title_fa||fc27NewsTitle(item);panel.appendChild(img)}}catch(e){}}
+ const title=document.createElement('h2');title.textContent=item.title_fa||fc27NewsTitle(item);const time=document.createElement('p');time.className='fc-news-label';time.textContent=item.published_at||'';const body=document.createElement('p');body.className='fc-news-article-text';body.textContent=item.summary_fa||'متن فارسی تأییدشده در دسترس نیست.';panel.append(title,time,body);
+ if(Array.isArray(item.paragraphs_fa))for(const value of item.paragraphs_fa){const p=document.createElement('p');p.className='fc-news-article-text';p.textContent=value;panel.appendChild(p)}
+ const telegram=document.createElement('a');telegram.href='https://t.me/share/url?url='+encodeURIComponent(item.url)+'&text='+encodeURIComponent(item.title_fa||title.textContent);telegram.target='_blank';telegram.rel='noopener noreferrer';telegram.className='fc-news-share';telegram.textContent='اشتراک‌گذاری در تلگرام ↗';panel.appendChild(telegram);
+ overlay.appendChild(panel);overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};document.body.appendChild(overlay);close.focus();
 }
 
 /* ── INIT ── */
