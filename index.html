@@ -992,7 +992,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:700px){.fc-game-nav{gap:3px!important;padding:7px!important;border-radius:0 0 10px 10px!important}.fc-game-nav button{min-width:72px!important;padding:10px 5px!important}.fc-game-feature{min-height:210px!important}.fc-game-tiles>button{min-height:110px!important;padding:17px!important}.fc-game-tiles>button strong{font-size:18px!important}.fc-feed-card{padding:14px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
-<style>.fc-console-network-note{margin:15px 0;background:#1b2925;border:1px solid #415f48;border-radius:16px;padding:20px;color:#dde8e0;line-height:1.9}.fc-console-network-note strong{color:#d3fc70}.fc-console-network-note p{font-size:13px;color:#b7c6be}.fc-console-network-note a{display:inline-flex;padding:10px 14px;border-radius:10px;border:1px solid #75965b;color:#d8fa92;text-decoration:none;font-weight:700}@media(min-width:900px){.fc-dns-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}.fc-dns-pair button:focus-visible,.fc-dns-status a:focus-visible,.fc-console-network-note a:focus-visible{outline:3px solid #d2ff54;outline-offset:3px}</style></head>
+<style>.fc-console-network-note{margin:15px 0;background:#1b2925;border:1px solid #415f48;border-radius:16px;padding:20px;color:#dde8e0;line-height:1.9}.fc-console-network-note strong{color:#d3fc70}.fc-console-network-note p{font-size:13px;color:#b7c6be}.fc-console-network-note a{display:inline-flex;padding:10px 14px;border-radius:10px;border:1px solid #75965b;color:#d8fa92;text-decoration:none;font-weight:700}@media(min-width:900px){.fc-dns-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}.fc-dns-pair button:focus-visible,.fc-dns-status a:focus-visible,.fc-console-network-note a:focus-visible{outline:3px solid #d2ff54;outline-offset:3px}</style><style>
+/* Console-first: always use the top ribbon, never an overlapping bottom dock. */
+.bottom-nav,.fc-mobile-more,.fc-mobile-bottom,.bnav-btn{display:none!important}
+body{padding-bottom:0!important}
+.fc-game-nav{position:sticky;top:0;z-index:180;max-width:none;justify-content:center;box-shadow:0 10px 35px #0008}
+.fc-game-nav button{min-height:65px;min-width:95px;font-size:13px}
+.fc-game-nav button:focus-visible,.fc-dns-card button:focus-visible,.fc-news-read:focus-visible{outline:3px solid #ccfa4b;outline-offset:3px}
+.fc-dns-card,.fc-dns-status article{transition:transform .2s,border-color .2s}
+.fc-dns-card:hover,.fc-dns-card:focus-within{border-color:#caff38;transform:translateY(-2px)}
+@media(max-width:720px){.fc-game-nav{justify-content:flex-start;overflow-x:auto}.fc-game-nav button{min-width:80px;min-height:60px}body{padding-bottom:8px!important}}
+@media(prefers-reduced-motion:reduce){.fc-dns-card{transition:none!important}}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -1055,7 +1066,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <section class="fc-dns-monitor" aria-label="استعلام شبکه">
 <div class="fc-dns-monitor-head"><div><strong>استعلام مستقیم شبکه</strong><p>نتیجه واقعی پاسخ DNS از سرویس عمومی Google؛ این آزمایش نشان‌دهنده سالم‌بودن سرور EA یا کیفیت اتصال کنسول نیست.</p></div><button type="button" id="fcDnsCheckButton" onclick="checkFC27Dns()">بررسی وضعیت ↻</button></div>
 <div class="fc-dns-monitor-result" id="fcDnsChecks" aria-live="polite"><p>برای دریافت وضعیت فعلی، «بررسی وضعیت» را انتخاب کنید.</p></div>
-<small id="fcDnsCheckedAt">هنوز استعلامی انجام نشده</small>
+<small id="fcDnsCheckedAt">هنوز استعلامی انجام نشده</small><p class="fc-console-network-note" style="margin-top:12px">بررسی خودکار هنگام ورود به بخش شبکه انجام می‌شود. پاسخ DNS برابر با وضعیت آنلاین PSN نیست؛ برای اعلام قطعی قطعی/وصل بودن، صفحه وضعیت رسمی PlayStation ملاک است.</p>
 </section>
 <div class="fc-dns-status">
 <article><strong>PlayStation Network</strong><small>وضعیت زنده در سایت قابل تأیید نیست</small><a href="https://status.playstation.com/" target="_blank" rel="noopener noreferrer">وضعیت رسمی ↗</a></article>
@@ -2979,7 +2990,7 @@ document.addEventListener('keydown',event=>{
 });
 
 function init(){
-  try{const chosen=localStorage.getItem('fc27-console-mode');applyFCConsoleMode(chosen===null?window.matchMedia('(min-width: 960px)').matches:chosen==='1')}catch(e){applyFCConsoleMode(false)}
+  try{const chosen=localStorage.getItem('fc27-console-mode');applyFCConsoleMode(chosen===null?true:chosen==='1')}catch(e){applyFCConsoleMode(true)}
   requestAnimationFrame(fcConsolePoll);
   const photoWatcher=new MutationObserver(()=>observePlayerPortraits());photoWatcher.observe(document.body,{childList:true,subtree:true});
   loadState();
