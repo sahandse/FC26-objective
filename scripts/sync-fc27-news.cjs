@@ -12,7 +12,7 @@ async function main(){
    const raw=$(node).attr('href')||'';
    let link;try{link=new URL(raw,url)}catch{return}
    if(link.hostname!=='www.ea.com'||!link.pathname.includes('/fc-27/')||!link.pathname.includes('/news/')||/fc[- ]?26/i.test(link.pathname))return;
-   const title=$(node).text().replace(/\s+/g,' ').trim().slice(0,180);
+   const title=$(node).find('h2,h3,h4').first().text().replace(/\s+/g,' ').trim().slice(0,180)||$(node).text().replace(/\s+/g,' ').trim().slice(0,180);
    if(title.length<16||/FC\\s*26/i.test(title)||seen.has(link.pathname))return;
    seen.add(link.pathname);
    items.push({title,url:link.origin+link.pathname,source:'Electronic Arts'});
@@ -31,6 +31,8 @@ async function main(){
        const article=require('cheerio').load(await response.text());
        const image=article('meta[property="og:image"]').attr('content')||article('meta[name="twitter:image"]').attr('content');
        if(image){const imageUrl=new URL(image,item.url);if(imageUrl.protocol==='https:'&&(imageUrl.hostname==='drop-assets.ea.com'||imageUrl.hostname.endsWith('.ea.com')))item.image=imageUrl.href;}
+       const officialTitle=article('meta[property="og:title"]').attr('content')||article('h1').first().text();
+       if(officialTitle&&officialTitle.trim().length>=12)item.title=officialTitle.replace(/\\s+/g,' ').trim().slice(0,180);
        const date=article('meta[property="article:published_time"]').attr('content');
        if(date)item.published_at=date.slice(0,10);
      }
