@@ -926,7 +926,10 @@ body{background:radial-gradient(ellipse 65% 35% at 85% 0%,#293b25 0%,transparent
 .fc27-detail-open{min-height:42px;touch-action:manipulation}
 </style><style>
 #fcGameNews{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.fc-news-card{padding:0!important;overflow:hidden;display:flex;flex-direction:column;min-height:320px!important}.fc-news-card>img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#263329}.fc-news-body{padding:17px;display:flex;flex-direction:column;gap:11px;flex:1}.fc-news-label{font-size:11px;color:#aacc8d;direction:ltr;text-align:right}.fc-news-body h3{font-size:17px;line-height:1.7;color:#f3ffed}.fc-news-body p{font-size:12px;line-height:2;color:#bfd0c6;flex:1}.fc-news-read,.fc-news-share{padding:11px 13px;border:1px solid #83a752;background:#2a3c27;color:#e3ffb1;border-radius:10px;font:inherit;font-weight:700;font-size:12px;cursor:pointer;text-decoration:none;display:inline-block}.fc-news-modal>img{width:100%;max-height:300px;object-fit:cover;border-radius:12px;margin:12px 0}.fc-news-modal h2{line-height:1.6;font-size:22px}.fc-news-article-text{font-size:14px;line-height:2.2;color:#d7e6dc;margin:15px 0}.fc-news-modal>.fc27-detail-close{float:left}@media(max-width:880px){#fcGameNews{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:570px){#fcGameNews{grid-template-columns:1fr}}
-</style><style>.fc27-task-check{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px;background:#22332a;border:1px solid #405943;border-radius:9px;color:#dbefdf;font-size:12px;cursor:pointer}.fc27-task-check input{accent-color:#caff38;width:18px;height:18px}.fc27-task-check.done span{text-decoration:line-through;opacity:.65}.fc27-solution-pending{margin-top:12px;padding:10px;background:#202a2c;border:1px dashed #536064;border-radius:9px;font-size:12px;color:#afc1c3}.fc27-verified-solution{margin:10px 0}.fc27-solution-entry{padding:12px;background:#22362c;border-radius:9px}.fc27-solution-entry ol{columns:2;line-height:1.8}@media(max-width:580px){.fc27-solution-entry ol{columns:1}}</style></head>
+</style><style>.fc27-task-check{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px;background:#22332a;border:1px solid #405943;border-radius:9px;color:#dbefdf;font-size:12px;cursor:pointer}.fc27-task-check input{accent-color:#caff38;width:18px;height:18px}.fc27-task-check.done span{text-decoration:line-through;opacity:.65}.fc27-solution-pending{margin-top:12px;padding:10px;background:#202a2c;border:1px dashed #536064;border-radius:9px;font-size:12px;color:#afc1c3}.fc27-verified-solution{margin:10px 0}.fc27-solution-entry{padding:12px;background:#22362c;border-radius:9px}.fc27-solution-entry ol{columns:2;line-height:1.8}@media(max-width:580px){.fc27-solution-entry ol{columns:1}}</style><style>
+.pcard{cursor:pointer}.pcard:focus-visible,.pgal-card:focus-visible{outline:3px solid #caff38;outline-offset:2px}
+.fc-player-overlay{position:fixed;inset:0;background:#020807dd;z-index:99999;display:flex;align-items:center;justify-content:center;padding:12px}.fc-player-panel{background:#142021;color:#edf5ec;border:1px solid #526943;box-shadow:0 20px 90px #000a;border-radius:18px;max-width:680px;width:100%;max-height:94dvh;overflow:auto;padding:22px}.fc-player-head{display:flex;align-items:start;justify-content:space-between}.fc-player-head h2{margin:0;font-size:25px}.fc-player-head p{direction:ltr;text-align:right;color:#a5b9aa;font-size:12px}.fc-player-head button{font-size:27px;background:#293b32;border:1px solid #587050;border-radius:9px;color:white;width:40px;height:40px;cursor:pointer}.fc-player-hero{display:flex;align-items:center;justify-content:space-around;background:linear-gradient(125deg,#30452b,#162827);border-radius:14px;padding:19px;margin:18px 0;min-height:150px}.fc-player-hero>strong{font-size:38px;color:#ccff47}.fc-player-face{font-size:64px}.fc-player-face img{max-height:170px;max-width:180px;object-fit:contain}.fc-player-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.fc-player-facts>div{padding:12px;background:#22312c;border-radius:10px;display:flex;flex-direction:column;gap:6px}.fc-player-facts small{color:#abc2ad}.fc-player-stat-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.fc-player-stat-grid>div{background:#24382b;border-radius:9px;padding:8px;text-align:center;display:grid}.fc-player-stat-grid strong{color:#ceff4e;font-size:20px}.fc-player-note{font-size:12px;color:#b5c5b8;line-height:2;margin:20px 0}.fc-player-tg{color:#d3ff4b;text-decoration:none}@media(max-width:570px){.fc-player-facts{grid-template-columns:1fr}.fc-player-stat-grid{grid-template-columns:repeat(3,1fr)}.fc-player-panel{padding:15px}}
+</style></head>
 <body>
 
 <div id="toasts"></div>
@@ -2135,7 +2138,7 @@ function playerCardHTML(p){
     return `<div class="pstat"><span class="pstat-val ${cls}">${s.v}</span><span class="pstat-lbl">${s.lbl}</span></div>`;
   }).join(''):'<div class="pstat" style="grid-column:1/-1;padding:9px;font-size:11px;color:var(--t2)">آمار دقیق این کارت تأیید نشده</div>';
   const trendHTML='';
-  return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}">
+  return `<div class="pcard${fav?' fav':''}" id="pc-${p.id}" role="button" tabindex="0" onclick="if(!event.target.closest('button'))openPlayerModal('${p.id}')" onkeydown="if(event.key==='Enter')openPlayerModal('${p.id}')">
     <div class="pcard-upper ${bg}">
       <div class="pcard-inner">
         <div class="pcard-info-col">
@@ -2152,8 +2155,7 @@ function playerCardHTML(p){
     <div class="pcard-stats">${statsHTML}</div>
     <div class="pcard-body">
       <div class="pcard-club">${p.flag} ${p.club} · ${p.leagueFA}</div>
-      <div class="pcard-price-lbl">برآورد ثابت · قیمت لحظه‌ای نیست</div>
-      <div class="price-row"><div class="pcard-price">${fmtPrice(p.price)} سکه</div>${trendHTML}</div>
+      <div class="pcard-price-lbl">${FC27_VERIFIED_MARKET.has(String(p.id))&&FC27_VERIFIED_MARKET.get(String(p.id)).rating===p.rat?'قیمت ثبت‌شده FUTNext':'قیمت تأییدشده موجود نیست'}</div><div class="price-row"><div class="pcard-price">${FC27_VERIFIED_MARKET.has(String(p.id))&&FC27_VERIFIED_MARKET.get(String(p.id)).rating===p.rat?fmtPrice(FC27_VERIFIED_MARKET.get(String(p.id)).price_coins)+' سکه':'—'}</div>${trendHTML}</div>
       <div style="display:flex;gap:5px;margin-top:6px">
         <button class="pcard-compare${inComp?' sel':''}" style="flex:1" onclick="toggleCompare('${p.id}')">${inComp?'✓ انتخاب':'⚖️ مقایسه'}</button>
         <button class="wl-btn-card${inWl?' in-wl':''}" style="flex:1" onclick="toggleWatchlist('${p.id}')">${inWl?'👁️ در لیست':'👁️ دنبال'}</button>
@@ -2162,6 +2164,38 @@ function playerCardHTML(p){
   </div>`;
 }
 
+
+const FC27_VERIFIED_MARKET=new Map();
+async function loadVerifiedMarket(){
+ try{
+  const res=await fetch('./data/fc27-market-verified.json',{cache:'no-store'});if(!res.ok)return;
+  const data=await res.json();if(!Array.isArray(data.cards))return;
+  for(const item of data.cards){if(item.player_id&&item.url&&Number.isFinite(item.price_coins))FC27_VERIFIED_MARKET.set(String(item.player_id),{...item,checked_at:data.checked_at,platform:data.platform})}
+  renderPlayers();
+ }catch(err){console.warn('Verified prices unavailable',err)}
+}
+function openPlayerModal(id){
+ const p=PLAYERS_RAW.find(x=>String(x.id)===String(id));if(!p)return;
+ document.getElementById('fc-player-detail')?.remove();
+ const overlay=document.createElement('div');overlay.id='fc-player-detail';overlay.className='fc-player-overlay';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');
+ const panel=document.createElement('section');panel.className='fc-player-panel';panel.setAttribute('aria-label','جزئیات بازیکن '+p.name);
+ const head=document.createElement('header');head.className='fc-player-head';const names=document.createElement('div');const title=document.createElement('h2');title.textContent=p.nameFA||p.name;const en=document.createElement('p');en.textContent=p.name;names.append(title,en);
+ const close=document.createElement('button');close.type='button';close.textContent='×';close.setAttribute('aria-label','بستن');close.onclick=()=>overlay.remove();head.append(names,close);panel.appendChild(head);
+ const hero=document.createElement('div');hero.className='fc-player-hero '+pcardImgCls(p);const score=document.createElement('strong');score.textContent=p.rat+' '+p.pos;hero.appendChild(score);
+ const imageId=Number(p.imgId||PIMG[p.name]||p.id);const face=document.createElement('div');face.className='fc-player-face';
+ if(AVAILABLE_PORTRAITS.has(imageId)){const img=document.createElement('img');img.src='img/players/'+(VERIFIED_PHOTO_FILES.get(imageId)||imageId+'.png');img.alt=p.name;img.onerror=()=>{face.textContent='⚽'};face.appendChild(img)}else face.textContent='⚽';hero.appendChild(face);panel.appendChild(hero);
+ const market=FC27_VERIFIED_MARKET.get(String(p.id));
+ const verified=market&&Number(p.rat)===market.rating&&p.pos===market.position;
+ const fields=[['باشگاه / Club',p.club],['ملیت / Nation',p.nat],['لیگ / League',p.leagueFA||p.league],['نوع کارت / Card type',p.cardType||'ثبت نشده'],['قیمت / Price',verified?market.price_coins.toLocaleString('en-US')+' coins · '+market.platform:'قیمت تأییدشده موجود نیست']];
+ const grid=document.createElement('div');grid.className='fc-player-facts';for(const [label,value] of fields){if(!value)continue;const el=document.createElement('div');const l=document.createElement('small');l.textContent=label;const v=document.createElement('strong');v.textContent=value;el.append(l,v);grid.appendChild(el)}panel.appendChild(grid);
+ const stats=deterministicStats(p);if(stats.length){const h=document.createElement('h3');h.textContent='آمار واقعی ثبت‌شده / Card stats';panel.appendChild(h);const items=document.createElement('div');items.className='fc-player-stat-grid';for(const stat of stats){const el=document.createElement('div');const label=document.createElement('small');label.textContent=stat.lbl;const val=document.createElement('strong');val.textContent=stat.v;el.append(label,val);items.appendChild(el)}panel.appendChild(items)}
+ if(verified){
+  const source=document.createElement('a');source.href=market.url;source.target='_blank';source.rel='noopener noreferrer';source.className='fc-player-tg';source.textContent='منبع اطلاعات کارت: FUTNext · '+market.checked_at;panel.appendChild(source);
+ }
+ const note=document.createElement('p');note.className='fc-player-note';note.textContent='آمار و امتیاز از دیتابیس FC27 همین سایت است. تصاویر کارت، قیمت بازار یا ویژگی‌های تأییدنشده به‌صورت ساختگی نمایش داده نمی‌شوند.';panel.appendChild(note);
+ const telegram=document.createElement('a');telegram.href='https://t.me/sahandse';telegram.target='_blank';telegram.rel='noopener noreferrer';telegram.textContent='ارتباط فقط از تلگرام ↗';telegram.className='fc-player-tg';panel.appendChild(telegram);
+ overlay.appendChild(panel);overlay.onclick=e=>{if(e.target===overlay)overlay.remove()};document.body.appendChild(overlay);close.focus();
+}
 /* ── RENDER PLAYERS ── */
 let playerPage=1;
 const PLAYER_PAGE_SIZE=24;
@@ -2814,6 +2848,7 @@ function init(){
   loadState();
   restoreFC27Section();
   loadLiveFC27();
+  loadVerifiedMarket();
   loadVerifiedEvolutions();
   loadPortraitIndex();
   if(!state.squad)state.squad={formation:'4-3-3',slots:{}};
