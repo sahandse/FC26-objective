@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-13T14:13:12.153Z",
+  "checked_at": "2026-10-13T22:46:09.182Z",
   "sections": {
     "objectives": [
       {
@@ -57,6 +57,28 @@
     ],
     "sbc": [
       {
+        "name": "Xavi Espart",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-50-xavi-espart/",
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-13T22:46:10.129Z"
+      },
+      {
+        "name": "Ligue 1 POTM September",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-58-ligue-1-potm-september/",
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-13T22:46:10.725Z"
+      },
+      {
         "name": "Süper Lig Future Stars Pick",
         "category": "players",
         "description": "",
@@ -65,7 +87,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:14.725Z"
+        "requirements_checked_at": "2026-10-13T22:46:11.220Z"
       },
       {
         "name": "Base Hero Matchday Player Pick",
@@ -76,7 +98,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:15.390Z"
+        "requirements_checked_at": "2026-10-13T22:46:11.844Z"
       },
       {
         "name": "EFL Championship Future Stars Pick",
@@ -87,7 +109,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:15.946Z"
+        "requirements_checked_at": "2026-10-13T22:46:12.280Z"
       },
       {
         "name": "Carlos Espí",
@@ -98,7 +120,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:16.512Z"
+        "requirements_checked_at": "2026-10-13T22:46:12.667Z"
       },
       {
         "name": "Weslley Pinto Batista",
@@ -109,7 +131,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:17.004Z"
+        "requirements_checked_at": "2026-10-13T22:46:13.041Z"
       },
       {
         "name": "Liga F POTM September",
@@ -120,7 +142,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:17.622Z"
+        "requirements_checked_at": "2026-10-13T22:46:13.546Z"
       },
       {
         "name": "LALIGA POTM September",
@@ -131,7 +153,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:18.632Z"
+        "requirements_checked_at": "2026-10-13T22:46:14.054Z"
       },
       {
         "name": "Premier League POTM September",
@@ -142,7 +164,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:19.051Z"
+        "requirements_checked_at": "2026-10-13T22:46:14.655Z"
       },
       {
         "name": "Bundesliga POTM September",
@@ -153,7 +175,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:19.430Z"
+        "requirements_checked_at": "2026-10-13T22:46:15.742Z"
       },
       {
         "name": "Serie A POTM September",
@@ -164,7 +186,18 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:19.926Z"
+        "requirements_checked_at": "2026-10-13T22:46:16.224Z"
+      },
+      {
+        "name": "5x 80+ Upgrade",
+        "category": "upgrades",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/upgrades/27-57-5x-80-upgrade/",
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-13T22:46:16.463Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -182,7 +215,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:20.830Z"
+        "requirements_checked_at": "2026-10-13T22:46:17.203Z"
       },
       {
         "name": "Max. 86 Base Hero Upgrade",
@@ -193,18 +226,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:21.173Z"
-      },
-      {
-        "name": "5x 80+ Upgrade",
-        "category": "upgrades",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/upgrades/27-48-5x-80-upgrade/",
-        "price": null,
-        "requirements": [
-          "Rating: Min. 45"
-        ],
-        "requirements_checked_at": "2026-10-13T14:13:21.793Z"
+        "requirements_checked_at": "2026-10-13T22:46:17.616Z"
       },
       {
         "name": "Gold Upgrade",
@@ -257,7 +279,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:24.482Z"
+        "requirements_checked_at": "2026-10-13T22:46:19.850Z"
       },
       {
         "name": "Gold Re-Roll",
@@ -268,7 +290,7 @@
         "requirements": [
           "Rating: Min. 83"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:25.124Z"
+        "requirements_checked_at": "2026-10-13T22:46:20.294Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
@@ -279,7 +301,7 @@
         "requirements": [
           "Rating: Min. 79"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:25.593Z"
+        "requirements_checked_at": "2026-10-13T22:46:20.678Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
@@ -291,7 +313,7 @@
           "Rating: Min. 641",
           "Rating: 45"
         ],
-        "requirements_checked_at": "2026-10-13T14:13:26.993Z"
+        "requirements_checked_at": "2026-10-13T22:46:21.281Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
