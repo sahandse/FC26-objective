@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-17T15:36:15.689Z",
+  "checked_at": "2026-10-17T20:37:24.520Z",
   "sections": {
     "objectives": [
       {
@@ -57,6 +57,17 @@
     ],
     "sbc": [
       {
+        "name": "Liga Portugal Future Stars Player Pick",
+        "category": "players",
+        "description": "",
+        "url": "https://www.fut.gg/sbc/players/27-62-liga-portugal-future-stars-player-pick/",
+        "price": null,
+        "requirements": [
+          "Rating: Min. 45"
+        ],
+        "requirements_checked_at": "2026-10-17T20:37:25.997Z"
+      },
+      {
         "name": "Johan Manzambi",
         "category": "players",
         "description": "",
@@ -65,7 +76,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:17.522Z"
+        "requirements_checked_at": "2026-10-17T20:37:26.376Z"
       },
       {
         "name": "Cora Zicai",
@@ -76,7 +87,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:17.807Z"
+        "requirements_checked_at": "2026-10-17T20:37:26.779Z"
       },
       {
         "name": "Xavi Espart",
@@ -87,7 +98,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:18.218Z"
+        "requirements_checked_at": "2026-10-17T20:37:27.091Z"
       },
       {
         "name": "Ligue 1 POTM September",
@@ -98,7 +109,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:18.703Z"
+        "requirements_checked_at": "2026-10-17T20:37:27.639Z"
       },
       {
         "name": "Süper Lig Future Stars Pick",
@@ -109,7 +120,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:19.187Z"
+        "requirements_checked_at": "2026-10-17T20:37:28.079Z"
       },
       {
         "name": "Base Hero Matchday Player Pick",
@@ -120,18 +131,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:19.769Z"
-      },
-      {
-        "name": "EFL Championship Future Stars Pick",
-        "category": "players",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/players/27-51-efl-championship-future-stars-pick/",
-        "price": null,
-        "requirements": [
-          "Rating: Min. 45"
-        ],
-        "requirements_checked_at": "2026-10-17T15:36:19.978Z"
+        "requirements_checked_at": "2026-10-17T20:37:28.400Z"
       },
       {
         "name": "Liga F POTM September",
@@ -142,7 +142,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:20.317Z"
+        "requirements_checked_at": "2026-10-17T20:37:28.764Z"
       },
       {
         "name": "LALIGA POTM September",
@@ -153,7 +153,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:20.675Z"
+        "requirements_checked_at": "2026-10-17T20:37:29.096Z"
       },
       {
         "name": "Premier League POTM September",
@@ -164,7 +164,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:21.103Z"
+        "requirements_checked_at": "2026-10-17T20:37:29.474Z"
       },
       {
         "name": "Bundesliga POTM September",
@@ -175,7 +175,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:21.342Z"
+        "requirements_checked_at": "2026-10-17T20:37:29.845Z"
       },
       {
         "name": "Serie A POTM September",
@@ -186,7 +186,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:21.825Z"
+        "requirements_checked_at": "2026-10-17T20:37:30.228Z"
       },
       {
         "name": "TOTW Upgrade",
@@ -197,7 +197,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:22.046Z"
+        "requirements_checked_at": "2026-10-17T20:37:30.502Z"
       },
       {
         "name": "5x 80+ Upgrade",
@@ -208,7 +208,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:22.618Z"
+        "requirements_checked_at": "2026-10-17T20:37:30.692Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -246,13 +246,6 @@
         "price": null
       },
       {
-        "name": "Future Stars Challenge 2",
-        "category": "challenges",
-        "description": "",
-        "url": "https://www.fut.gg/sbc/challenges/27-47-future-stars-challenge-2/",
-        "price": null
-      },
-      {
         "name": "League & Nation Advanced",
         "category": "challenges",
         "description": "",
@@ -268,7 +261,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:24.905Z"
+        "requirements_checked_at": "2026-10-17T20:37:33.102Z"
       },
       {
         "name": "Gold Re-Roll",
@@ -279,7 +272,7 @@
         "requirements": [
           "Rating: Min. 83"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:25.226Z"
+        "requirements_checked_at": "2026-10-17T20:37:33.456Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
@@ -290,7 +283,7 @@
         "requirements": [
           "Rating: Min. 79"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:25.825Z"
+        "requirements_checked_at": "2026-10-17T20:37:33.789Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
@@ -302,7 +295,7 @@
           "Rating: Min. 641",
           "Rating: 45"
         ],
-        "requirements_checked_at": "2026-10-17T15:36:26.219Z"
+        "requirements_checked_at": "2026-10-17T20:37:34.413Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
