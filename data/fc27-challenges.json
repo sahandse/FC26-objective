@@ -1,6 +1,6 @@
 {
   "source": "FUT.GG",
-  "checked_at": "2026-10-16T21:09:53.268Z",
+  "checked_at": "2026-10-17T10:45:23.695Z",
   "sections": {
     "objectives": [
       {
@@ -65,7 +65,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:54.790Z"
+        "requirements_checked_at": "2026-10-17T10:45:27.243Z"
       },
       {
         "name": "Cora Zicai",
@@ -76,7 +76,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:55.141Z"
+        "requirements_checked_at": "2026-10-17T10:45:27.873Z"
       },
       {
         "name": "Xavi Espart",
@@ -87,7 +87,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:55.553Z"
+        "requirements_checked_at": "2026-10-17T10:45:28.472Z"
       },
       {
         "name": "Ligue 1 POTM September",
@@ -98,7 +98,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:55.650Z"
+        "requirements_checked_at": "2026-10-17T10:45:29.068Z"
       },
       {
         "name": "Süper Lig Future Stars Pick",
@@ -109,7 +109,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:55.718Z"
+        "requirements_checked_at": "2026-10-17T10:45:29.641Z"
       },
       {
         "name": "Base Hero Matchday Player Pick",
@@ -120,7 +120,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:55.788Z"
+        "requirements_checked_at": "2026-10-17T10:45:30.234Z"
       },
       {
         "name": "EFL Championship Future Stars Pick",
@@ -131,7 +131,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:56.105Z"
+        "requirements_checked_at": "2026-10-17T10:45:30.787Z"
       },
       {
         "name": "Liga F POTM September",
@@ -142,7 +142,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:56.455Z"
+        "requirements_checked_at": "2026-10-17T10:45:31.294Z"
       },
       {
         "name": "LALIGA POTM September",
@@ -153,7 +153,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:56.718Z"
+        "requirements_checked_at": "2026-10-17T10:45:31.991Z"
       },
       {
         "name": "Premier League POTM September",
@@ -164,7 +164,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:57.143Z"
+        "requirements_checked_at": "2026-10-17T10:45:32.758Z"
       },
       {
         "name": "Bundesliga POTM September",
@@ -175,7 +175,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:57.454Z"
+        "requirements_checked_at": "2026-10-17T10:45:33.317Z"
       },
       {
         "name": "Serie A POTM September",
@@ -186,7 +186,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:57.855Z"
+        "requirements_checked_at": "2026-10-17T10:45:33.827Z"
       },
       {
         "name": "TOTW Upgrade",
@@ -197,7 +197,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:58.191Z"
+        "requirements_checked_at": "2026-10-17T10:45:34.406Z"
       },
       {
         "name": "5x 80+ Upgrade",
@@ -208,7 +208,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:09:58.624Z"
+        "requirements_checked_at": "2026-10-17T10:45:35.058Z"
       },
       {
         "name": "3x 79+ Upgrade",
@@ -268,7 +268,7 @@
         "requirements": [
           "Rating: Min. 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:10:00.151Z"
+        "requirements_checked_at": "2026-10-17T10:45:39.143Z"
       },
       {
         "name": "Gold Re-Roll",
@@ -279,7 +279,7 @@
         "requirements": [
           "Rating: Min. 83"
         ],
-        "requirements_checked_at": "2026-10-16T21:10:00.546Z"
+        "requirements_checked_at": "2026-10-17T10:45:39.628Z"
       },
       {
         "name": "Bronze and Silver Re-roll",
@@ -290,7 +290,7 @@
         "requirements": [
           "Rating: Min. 79"
         ],
-        "requirements_checked_at": "2026-10-16T21:10:00.644Z"
+        "requirements_checked_at": "2026-10-17T10:45:40.152Z"
       },
       {
         "name": "Intro to Streamlined SBCs",
@@ -302,7 +302,7 @@
           "Rating: Min. 641",
           "Rating: 45"
         ],
-        "requirements_checked_at": "2026-10-16T21:10:01.546Z"
+        "requirements_checked_at": "2026-10-17T10:45:40.906Z"
       },
       {
         "name": "Intro to Upgrade SBCs",
