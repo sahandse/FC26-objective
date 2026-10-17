@@ -550,5 +550,61 @@
     "artist": "EL Loko Foto",
     "source": "https://upload.wikimedia.org/wikipedia/commons/c/cb/2020_Eileen_Campbell_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "extension": "jpg"
+  },
+  {
+    "id": 219848,
+    "name": "David Costas",
+    "license": "CC BY-SA 4.0",
+    "artist": "Harpagornis",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/8/8f/XXIII_Memorial_Quinocho_%28RC_Celta_vs_Mainz_05%29_-_66_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 220581,
+    "name": "Rafael Ratão",
+    "license": "CC BY-SA 4.0",
+    "artist": "Gaillac",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/6/68/Ratao_2022-01-19_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 220820,
+    "name": "Mory Diaw",
+    "license": "CC BY-SA 4.0",
+    "artist": "Liondartois",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Mory_Diaw_2015_%28cropped_2%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 225263,
+    "name": "Duje Ćaleta-Car",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Duje_Caleta-Car_Croatia_v_Portugal_2_July_2026-019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 225403,
+    "name": "İrfan Can Kahveci",
+    "license": "CC BY-SA 4.0",
+    "artist": "User:Zafer",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/1/13/%C4%B0rfan_Can_Kahveci_17_Fenerbah%C3%A7e_20260805_%283%29_%28cropped%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 226012,
+    "name": "Ryan Manning",
+    "license": "CC BY-SA 4.0",
+    "artist": "YantsImages",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Kamo_Hovhannisyan%2C_Ryan_Manning_YantsImages_-_Asatur_Yesayants_686_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
+  },
+  {
+    "id": 260477,
+    "name": "Nathan Harriel",
+    "license": "CC BY-SA 4.0",
+    "artist": "Bryan Berlin",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Nathan_Harriel_Philadelphia_Union_New_York_City_FC_Nov_23_2025-026_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "extension": "jpg"
   }
 ]
